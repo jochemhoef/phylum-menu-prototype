@@ -1075,7 +1075,11 @@
     }
 
     group.appendChild(sub);
-    parent.addEventListener('click', () => group.classList.toggle('open'));
+    parent.addEventListener('click', () => {
+      const isOpen = group.classList.contains('open');
+      panel.querySelectorAll('.m-group.open').forEach(g => g.classList.remove('open'));
+      if (!isOpen) group.classList.add('open');
+    });
     panel.appendChild(group);
   });
 
