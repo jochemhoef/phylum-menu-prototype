@@ -311,6 +311,8 @@
 
     .header { z-index: 201; }
 
+    body.menu-open .header { border-bottom: none; }
+
     .bar {
       padding: 0 16px;
       display: grid;
@@ -382,9 +384,9 @@
         opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
         visibility 0s linear 0.62s;
       padding:
-        calc(var(--nav-h) + 16px)
+        calc(var(--nav-h) + 40px)
         0
-        calc(32px + env(safe-area-inset-bottom, 0px));
+        calc(40px + env(safe-area-inset-bottom, 0px));
     }
 
     body.menu-open .mobile-panel {
@@ -402,6 +404,7 @@
 
     .m-group {
       border: none;
+      background: var(--paper);
       opacity: 0;
       transform: translateY(-14px);
       transition:
@@ -425,25 +428,24 @@
     .m-parent {
       width: 100%;
       text-align: left;
-      background: none;
+      background: var(--paper);
       border: none;
       font-family: inherit;
       font-size: 20px;
       font-weight: 400;
       color: var(--ink);
-      padding: 18px 24px;
-      min-height: 56px;
+      padding: 22px 24px;
+      min-height: 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
-      transition: background 0.25s ease;
     }
 
     .m-group.open .m-parent {
-      background: rgba(232, 227, 213, 0.45);
+      padding-bottom: 16px;
     }
 
     .m-toggle {
@@ -467,25 +469,25 @@
     }
 
     .m-group.open .m-sub { max-height: 2400px; }
-    .m-sub-inner { padding: 0 24px 8px; }
+    .m-sub-inner { padding: 4px 24px 24px; background: var(--paper); }
 
     .m-sub-label {
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--clay);
-      margin: 14px 0 8px;
+      margin: 24px 0 12px;
       display: block;
     }
 
-    .m-sub-label:first-child { margin-top: 0; }
+    .m-sub-label:first-child { margin-top: 8px; }
 
     .m-sub a {
       display: block;
-      padding: 11px 0;
+      padding: 13px 0;
       color: var(--ink-soft);
       font-size: 18px;
-      line-height: 1.4;
+      line-height: 1.45;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -494,7 +496,7 @@
     .m-feature {
       display: block;
       position: relative;
-      margin: 18px 24px 22px;
+      margin: 28px 24px 32px;
       min-height: 220px;
       border-radius: 8px;
       overflow: hidden;
@@ -502,6 +504,7 @@
       text-decoration: none;
       color: inherit;
       width: auto;
+      background: var(--paper);
     }
 
     .m-feature .feature-img {
