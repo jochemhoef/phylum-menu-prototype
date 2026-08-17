@@ -894,6 +894,7 @@
 <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
 <!-- Mobile drawer -->
+<div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
 <div class="mobile-panel" id="mobilePanel"></div>
 
 <section class="hero">
@@ -927,7 +928,7 @@
     document.body.classList.contains('menu-open') ? closeMobileMenu() : openMobileMenu();
   });
 
-  mobileOverlay.addEventListener('click', closeMobileMenu);
+  if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
 
   // ---- Desktop mega menu: hover + keyboard ----
   const items = document.querySelectorAll('.nav-item[data-menu]');
