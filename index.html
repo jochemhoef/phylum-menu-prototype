@@ -311,7 +311,17 @@
 
     .header { z-index: 201; }
 
-    body.menu-open .header { border-bottom: none; }
+    body.menu-open .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 201;
+      border-bottom: none;
+      background: var(--paper);
+    }
+
+    body.menu-open .announce { display: none; }
 
     .bar {
       padding: 0 16px;
@@ -367,14 +377,13 @@
     }
 
     .mobile-panel {
-      display: block;
+      display: flex;
+      flex-direction: column;
       position: fixed;
       inset: 0;
       z-index: 150;
       background: var(--paper);
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
+      overflow: hidden;
       transform: translateY(-100%);
       opacity: 0;
       visibility: hidden;
@@ -383,10 +392,20 @@
         transform 0.62s cubic-bezier(0.16, 1, 0.3, 1),
         opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
         visibility 0s linear 0.62s;
-      padding:
-        calc(var(--nav-h) + 40px)
-        0
-        calc(40px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .mobile-panel-spacer {
+      flex-shrink: 0;
+      height: calc(var(--nav-h) + 32px);
+      background: var(--paper);
+    }
+
+    .mobile-panel-scroll {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
     }
 
     body.menu-open .mobile-panel {
@@ -950,7 +969,10 @@
 <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
 <!-- Mobile full-page menu -->
-<div class="mobile-panel" id="mobilePanel"></div>
+<div class="mobile-panel" id="mobilePanel">
+  <div class="mobile-panel-spacer" aria-hidden="true"></div>
+  <div class="mobile-panel-scroll" id="mobilePanelScroll"></div>
+</div>
 
 <section class="hero">
   <div>
@@ -966,6 +988,7 @@
   // ---- Mobile menu ----
   const hb = document.getElementById('hamburger');
   const mobilePanel = document.getElementById('mobilePanel');
+  const mobilePanelScroll = document.getElementById('mobilePanelScroll');
   let menuCloseTimer;
 
   const closeMobileMenu = () => {
@@ -974,7 +997,8 @@
     hb.setAttribute('aria-label', 'Open menu');
     clearTimeout(menuCloseTimer);
     menuCloseTimer = setTimeout(() => {
-      mobilePanel.querySelectorAll('.m-group.open').forEach(g => g.classList.remove('open'));
+      mobilePanelScroll.querySelectorAll('.m-group.open').forEach(g => g.classList.remove('open'));
+      mobilePanelScroll.scrollTop = 0;
     }, 620);
   };
 
@@ -983,6 +1007,7 @@
     document.body.classList.add('menu-open');
     hb.setAttribute('aria-expanded', 'true');
     hb.setAttribute('aria-label', 'Close menu');
+    mobilePanelScroll.scrollTop = 0;
   };
 
   hb.addEventListener('click', () => {
@@ -1044,7 +1069,7 @@
   });
 
   // ---- Build mobile accordion from the same markup ----
-  const panel = document.getElementById('mobilePanel');
+  const panel = document.getElementById('mobilePanelScroll');
   items.forEach(item => {
     const label = item.querySelector('.nav-link').textContent;
     const cols = item.querySelectorAll('.mega-col');
