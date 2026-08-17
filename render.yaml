@@ -2,6 +2,9 @@ services:
   - type: web
     name: phylum-menu
     runtime: static
+    plan: free
+    repo: https://github.com/jochemhoef/phylum-menu-prototype
+    branch: main
     buildCommand: echo "Static site — no build step"
     staticPublishPath: .
     routes:
