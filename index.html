@@ -402,53 +402,102 @@
     body.menu-open .mobile-panel { transform: translateX(0); }
     body.menu-open { overflow: hidden; }
 
-    .m-group { border-bottom: 1px solid var(--line); }
+    .m-group { border: none; }
+
     .m-parent {
       width: 100%;
       text-align: left;
       background: none;
       border: none;
       font-family: inherit;
-      font-size: 17px;
+      font-size: 20px;
+      font-weight: 400;
       color: var(--ink);
-      padding: 16px 20px;
-      min-height: 52px;
+      padding: 18px 20px;
+      min-height: 56px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
 
-    .m-parent .chev {
-      transition: transform 0.25s ease;
+    .m-toggle {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--ink-soft);
-      font-size: 14px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
     }
 
-    .m-group.open .m-parent .chev { transform: rotate(180deg); }
-    .m-sub { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-    .m-group.open .m-sub { max-height: 1200px; }
-    .m-sub-inner { padding: 2px 20px 16px; }
+    .m-toggle svg { width: 18px; height: 18px; }
+    .m-group.open .m-parent .m-toggle { transform: rotate(45deg); color: var(--clay); }
+
+    .m-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .m-group.open .m-sub { max-height: 2400px; }
+    .m-sub-inner { padding: 0 20px 8px; }
+
     .m-sub-label {
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--clay);
-      margin: 10px 0 6px;
+      margin: 14px 0 8px;
       display: block;
     }
 
+    .m-sub-label:first-child { margin-top: 0; }
+
     .m-sub a {
       display: block;
-      padding: 10px 0;
+      padding: 11px 0;
       color: var(--ink-soft);
-      font-size: 15px;
-      line-height: 1.35;
+      font-size: 18px;
+      line-height: 1.4;
       -webkit-tap-highlight-color: transparent;
     }
 
     .m-sub a:active { color: var(--ink); }
+
+    .m-feature {
+      display: block;
+      position: relative;
+      margin: 18px 20px 22px;
+      min-height: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      width: auto;
+    }
+
+    .m-feature .feature-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .m-feature .feature-body {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 48px 22px 22px;
+      background: linear-gradient(to top,
+        rgba(18, 15, 11, 0.92) 0%,
+        rgba(18, 15, 11, 0.72) 40%,
+        rgba(18, 15, 11, 0) 100%);
+      color: var(--paper);
+    }
+
+    .m-feature .feature-title { font-size: 22px; }
+    .m-feature .feature-cta { font-size: 14px; }
   }
 
   @media (max-width: 480px) {
@@ -944,7 +993,7 @@
 
     const parent = document.createElement('button');
     parent.className = 'm-parent';
-    parent.innerHTML = `<span>${label}</span><span class="chev">▾</span>`;
+    parent.innerHTML = `<span>${label}</span><span class="m-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>`;
     group.appendChild(parent);
 
     const sub = document.createElement('div');
@@ -960,6 +1009,14 @@
       });
     });
     sub.appendChild(inner);
+
+    const feature = item.querySelector('.mega-feature');
+    if (feature) {
+      const featClone = feature.cloneNode(true);
+      featClone.classList.add('m-feature');
+      sub.appendChild(featClone);
+    }
+
     group.appendChild(sub);
     parent.addEventListener('click', () => group.classList.toggle('open'));
     panel.appendChild(group);
