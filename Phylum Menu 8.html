@@ -93,21 +93,6 @@
     font-family: inherit;
   }
 
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0;
-    bottom: -7px;
-    height: 1px;
-    background: var(--ink-soft);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.19,1,0.22,1);
-  }
-
-  .nav-item:hover .nav-link::after,
-  .nav-item:focus-within .nav-link::after { transform: scaleX(1); }
-
   /* Utility icons */
   .utils { display: flex; align-items: center; gap: 22px; }
   .icon-btn {
