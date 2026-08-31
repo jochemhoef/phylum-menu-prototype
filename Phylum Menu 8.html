@@ -91,6 +91,66 @@
     background: none;
     border: none;
     font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .nav-soon-badge {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    pointer-events: none;
+  }
+
+  html[data-nav-version="promo"] [data-menswear] .nav-soon-badge {
+    display: inline-flex;
+  }
+
+  .nav-soon-dot {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--clay) 0%, #d4743f 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 1px 5px rgba(192, 90, 40, 0.28);
+    animation: soon-glow 3.2s ease-in-out infinite;
+  }
+
+  @keyframes soon-glow {
+    0%, 100% { box-shadow: 0 1px 4px rgba(192, 90, 40, 0.22); transform: scale(1); }
+    50% { box-shadow: 0 2px 10px rgba(192, 90, 40, 0.36); transform: scale(1.04); }
+  }
+
+  .nav-soon-dot svg {
+    width: 7px;
+    height: 7px;
+    color: var(--paper);
+    display: block;
+  }
+
+  .nav-soon-label {
+    font-size: 9px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--clay);
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .m-parent-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .m-soon-badge {
+    display: inline-flex;
   }
 
   /* Utility icons */
@@ -699,16 +759,16 @@
   .mega-inner.mega-promo {
     display: grid;
     grid-auto-flow: row;
-    grid-template-columns: 42% 58%;
-    width: 680px;
-    min-height: 300px;
+    grid-template-columns: 38% 62%;
+    width: 820px;
+    min-height: 320px;
     align-items: stretch;
   }
 
   .mega-promo-visual {
     position: relative;
     overflow: hidden;
-    min-height: 300px;
+    min-height: 320px;
   }
 
   .mega-promo-visual .feature-img {
@@ -717,18 +777,19 @@
   }
 
   .mega-promo-content {
-    padding: 40px 44px 36px;
+    padding: 44px 48px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: var(--paper);
+    background: linear-gradient(165deg, #2a2722 0%, #1a1815 100%);
+    color: var(--paper);
   }
 
   .mega-promo-eyebrow {
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--clay);
+    color: #e8a06a;
     margin-bottom: 10px;
   }
 
@@ -737,16 +798,51 @@
     font-weight: 500;
     line-height: 1.15;
     letter-spacing: -0.02em;
-    color: var(--ink);
+    color: var(--paper);
     margin-bottom: 14px;
   }
 
   .mega-promo-copy {
     font-size: 14px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    margin-bottom: 24px;
-    max-width: 32ch;
+    line-height: 1.65;
+    color: rgba(241, 238, 228, 0.78);
+    margin-bottom: 26px;
+    max-width: 38ch;
+  }
+
+  .mega-promo-content .waitlist-form {
+    flex-direction: column;
+    gap: 10px;
+    border: none;
+    background: transparent;
+    overflow: visible;
+  }
+
+  .mega-promo-content .waitlist-form input[type="email"] {
+    border: 1px solid rgba(241, 238, 228, 0.22);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--paper);
+    padding: 15px 16px;
+  }
+
+  .mega-promo-content .waitlist-form input[type="email"]::placeholder {
+    color: rgba(241, 238, 228, 0.42);
+  }
+
+  .mega-promo-content .waitlist-form button {
+    width: 100%;
+    border-radius: 4px;
+    background: var(--clay);
+    padding: 15px 20px;
+  }
+
+  .mega-promo-content .waitlist-form button:hover {
+    background: var(--clay-deep);
+  }
+
+  .mega-promo-content .waitlist-success {
+    color: #b8c4a0;
   }
 
   .waitlist-form {
@@ -807,11 +903,17 @@
     margin-bottom: 20px;
   }
   .m-promo-visual .feature-img { position: absolute; inset: 0; }
+  .m-promo-body {
+    padding: 24px;
+    border-radius: 6px;
+    background: linear-gradient(165deg, #2a2722 0%, #1a1815 100%);
+    color: var(--paper);
+  }
   .m-promo-eyebrow {
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--clay);
+    color: #e8a06a;
     margin-bottom: 8px;
     display: block;
   }
@@ -820,11 +922,12 @@
     font-weight: 500;
     line-height: 1.15;
     margin-bottom: 12px;
+    color: var(--paper);
   }
   .m-promo-copy {
     font-size: 15px;
     line-height: 1.55;
-    color: var(--ink-soft);
+    color: rgba(241, 238, 228, 0.78);
     margin-bottom: 20px;
   }
   .m-promo .waitlist-form {
@@ -834,14 +937,22 @@
     background: transparent;
   }
   .m-promo .waitlist-form input[type="email"] {
-    border: 1px solid var(--line);
+    border: 1px solid rgba(241, 238, 228, 0.22);
     border-radius: 4px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--paper);
+  }
+  .m-promo .waitlist-form input[type="email"]::placeholder {
+    color: rgba(241, 238, 228, 0.42);
   }
   .m-promo .waitlist-form button {
     border-radius: 4px;
     width: 100%;
     padding: 16px;
+    background: var(--clay);
+  }
+  .m-promo .waitlist-success {
+    color: #b8c4a0;
   }
 </style>
 </head>
@@ -1046,7 +1157,15 @@
 
       <!-- MENSWEAR -->
       <div class="nav-item" data-menu data-menswear>
-        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Menswear</button>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">
+          <span class="nav-link-text">Menswear</span>
+          <span class="nav-soon-badge" aria-hidden="true">
+            <span class="nav-soon-dot">
+              <svg viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><path d="M4 0.5L4.6 3.4L7.5 4L4.6 4.6L4 7.5L3.4 4.6L0.5 4L3.4 3.4L4 0.5Z"/></svg>
+            </span>
+            <span class="nav-soon-label">Coming Soon</span>
+          </span>
+        </button>
         <div class="mega" role="region">
           <div class="mega-inner nav-version-current">
             <div class="mega-col">
@@ -1094,9 +1213,9 @@
               <div class="feature-img" data-feat="menswear" aria-hidden="true"></div>
             </div>
             <div class="mega-promo-content">
-              <span class="mega-promo-eyebrow">Coming Soon</span>
-              <h3 class="mega-promo-title">Menswear is on its way</h3>
-              <p class="mega-promo-copy">A curated edit of shirts, outerwear, and everyday essentials — launching soon at PHYLUM with makers like Original Madras Trading Co.</p>
+              <span class="mega-promo-eyebrow">Coming Soon Online</span>
+              <h3 class="mega-promo-title">Menswear is on its way online</h3>
+              <p class="mega-promo-copy">Available now in our Palm Springs &amp; Solana Beach stores. Join the waitlist for first access when menswear launches online — curated shirts, outerwear, and essentials from makers like Original Madras Trading Co.</p>
               <div class="waitlist-wrap">
                 <form class="waitlist-form" action="#" novalidate>
                   <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
@@ -1392,17 +1511,21 @@
     });
   };
 
+  const soonBadgeHTML = `<span class="nav-soon-badge m-soon-badge" aria-hidden="true"><span class="nav-soon-dot"><svg viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><path d="M4 0.5L4.6 3.4L7.5 4L4.6 4.6L4 7.5L3.4 4.6L0.5 4L3.4 3.4L4 0.5Z"/></svg></span><span class="nav-soon-label">Coming Soon</span></span>`;
+
   const buildMobileMenu = () => {
     panel.innerHTML = '';
     items.forEach(item => {
-      const label = item.querySelector('.nav-link').textContent;
+      const labelEl = item.querySelector('.nav-link-text');
+      const label = labelEl ? labelEl.textContent : item.querySelector('.nav-link').textContent.trim();
       const megaContent = getMegaContent(item);
       const group = document.createElement('div');
       group.className = 'm-group';
 
       const parent = document.createElement('button');
       parent.className = 'm-parent';
-      parent.innerHTML = `<span>${label}</span><span class="m-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>`;
+      const showSoon = getNavVersion() === 'promo' && item.hasAttribute('data-menswear');
+      parent.innerHTML = `<span class="m-parent-label"><span>${label}</span>${showSoon ? soonBadgeHTML : ''}</span><span class="m-toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>`;
       group.appendChild(parent);
 
       const sub = document.createElement('div');
@@ -1413,15 +1536,17 @@
         promo.className = 'm-promo';
         promo.innerHTML = `
           <div class="m-promo-visual"><div class="feature-img" data-feat="menswear"></div></div>
-          <span class="m-promo-eyebrow">Coming Soon</span>
-          <div class="m-promo-title">Menswear is on its way</div>
-          <p class="m-promo-copy">A curated edit of shirts, outerwear, and everyday essentials — launching soon at PHYLUM with makers like Original Madras Trading Co.</p>
-          <div class="waitlist-wrap">
-            <form class="waitlist-form" action="#" novalidate>
-              <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
-              <button type="submit">Join the waitlist</button>
-            </form>
-            <p class="waitlist-success" role="status">You&rsquo;re on the list — we&rsquo;ll be in touch.</p>
+          <div class="m-promo-body">
+            <span class="m-promo-eyebrow">Coming Soon Online</span>
+            <div class="m-promo-title">Menswear is on its way online</div>
+            <p class="m-promo-copy">Available now in our Palm Springs &amp; Solana Beach stores. Join the waitlist for first access when menswear launches online — curated shirts, outerwear, and essentials from makers like Original Madras Trading Co.</p>
+            <div class="waitlist-wrap">
+              <form class="waitlist-form" action="#" novalidate>
+                <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
+                <button type="submit">Join the waitlist</button>
+              </form>
+              <p class="waitlist-success" role="status">You&rsquo;re on the list — we&rsquo;ll be in touch.</p>
+            </div>
           </div>`;
         sub.appendChild(promo);
       } else {
