@@ -14,7 +14,7 @@
     --clay: #C05A28;
     --sage: #7C8360;
     --yellow: #f2a900;
-    --brands-max: 1520px;
+    --nav-gutter: 40px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,26 +32,22 @@
   a { color: inherit; text-decoration: none; }
 
   .page {
-    max-width: var(--brands-max);
-    margin: 0 auto;
-    padding: 56px 48px 96px;
+    width: 100%;
+    padding: 56px var(--nav-gutter) 96px;
   }
 
   .page-intro {
-    display: grid;
-    grid-template-columns: minmax(0, 460px) 1fr;
-    gap: 48px;
-    align-items: end;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
 
   .page-intro h1 {
-    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-family: "Helvetica Neue", Arial, sans-serif;
     font-size: clamp(42px, 5vw, 58px);
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.02;
     letter-spacing: -0.02em;
     color: var(--sage);
+    margin-bottom: 16px;
   }
 
   .page-intro p {
@@ -62,20 +58,17 @@
   }
 
   .toolbar {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 22px 0;
+    padding: 0 0 40px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px 20px;
+    gap: 16px;
     align-items: center;
     margin-bottom: 56px;
   }
 
   .search-wrap {
     position: relative;
-    flex: 0 1 280px;
-    min-width: 220px;
+    flex: 0 0 240px;
+    min-width: 200px;
   }
 
   .search-wrap svg {
@@ -106,11 +99,22 @@
     background: #fff;
   }
 
+  .filters-scroll {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .filters-scroll::-webkit-scrollbar { display: none; }
+
   .filters {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
-    flex: 1;
+    width: max-content;
+    padding-bottom: 2px;
   }
 
   .filter-btn {
@@ -123,6 +127,8 @@
     font-size: 12px;
     letter-spacing: 0.04em;
     cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   }
 
@@ -134,43 +140,34 @@
     color: var(--paper);
   }
 
-  .result-count {
-    margin-left: auto;
-    font-size: 13px;
-    color: var(--ink-soft);
-    white-space: nowrap;
-  }
-
   .section { margin-bottom: 72px; }
 
   .section-head {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 24px;
-    align-items: baseline;
-    justify-content: space-between;
     margin-bottom: 28px;
   }
 
   .section-head h2 {
-    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-family: "Helvetica Neue", Arial, sans-serif;
     font-size: clamp(28px, 3vw, 36px);
     font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
     color: var(--sage);
+    margin-bottom: 10px;
   }
 
   .section-head p {
-    flex: 1;
-    min-width: 240px;
     font-size: 15px;
+    line-height: 1.6;
     color: var(--ink-soft);
     max-width: 52ch;
   }
 
   .section-count {
+    display: block;
+    margin-top: 10px;
     font-size: 13px;
     color: var(--ink-soft);
-    white-space: nowrap;
   }
 
   .featured-grid {
@@ -182,7 +179,8 @@
   .featured-card { display: flex; flex-direction: column; }
 
   .featured-card .card-image,
-  .online-card .card-image {
+  .online-card .card-image,
+  .instore-card .card-image {
     aspect-ratio: 1.05;
     border-radius: 4px;
     overflow: hidden;
@@ -190,13 +188,20 @@
     margin-bottom: 18px;
   }
 
-  .online-card .card-image {
+  .online-card .card-image,
+  .instore-card .card-image {
     aspect-ratio: 1;
     margin-bottom: 14px;
   }
 
+  .instore-card .card-image {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
   .featured-card img,
-  .online-card img {
+  .online-card img,
+  .instore-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -212,7 +217,8 @@
   }
 
   .featured-card h3,
-  .online-card h3 {
+  .online-card h3,
+  .instore-card h3 {
     font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
     font-weight: 400;
     line-height: 1.1;
@@ -220,7 +226,8 @@
   }
 
   .featured-card h3 { font-size: 28px; margin-bottom: 12px; }
-  .online-card h3 { font-size: 22px; margin-bottom: 6px; }
+  .online-card h3,
+  .instore-card h3 { font-size: 22px; margin-bottom: 6px; }
 
   .card-copy {
     font-size: 14px;
@@ -242,7 +249,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ink-soft);
-    border: 1px solid var(--line);
+    border: none;
     border-radius: 999px;
     padding: 6px 10px;
     background: rgba(255,255,255,0.35);
@@ -253,7 +260,7 @@
     width: 100%;
     text-align: center;
     border: none;
-    border-radius: 4px;
+    border-radius: 999px;
     background: var(--sage);
     color: var(--paper);
     padding: 14px 18px;
@@ -267,7 +274,8 @@
 
   .btn-shop:hover { background: #6a7256; }
 
-  .online-grid {
+  .online-grid,
+  .instore-grid {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 24px;
@@ -298,25 +306,68 @@
 
   .online-card:hover .online-meta svg { transform: translateX(3px); }
 
+  .instore-note {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 22px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    background: rgba(255,255,255,0.28);
+  }
+
+  .instore-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(241, 238, 228, 0.94);
+    color: var(--ink);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+  }
+
+  .visit-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--clay);
+    border-bottom: 1px solid rgba(192, 90, 40, 0.35);
+    padding-bottom: 2px;
+  }
+
+  .visit-link:hover { color: var(--ink); border-color: var(--ink); }
+
   .hidden { display: none !important; }
 
   @media (max-width: 1280px) {
-    .online-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .online-grid,
+    .instore-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
 
   @media (max-width: 1024px) {
     .featured-grid { grid-template-columns: 1fr 1fr; }
-    .online-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .page-intro { grid-template-columns: 1fr; gap: 18px; }
+    .online-grid,
+    .instore-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .page { padding: 48px 32px 80px; }
   }
 
   @media (max-width: 720px) {
     .page { padding: 40px 20px 72px; }
     .toolbar { flex-direction: column; align-items: stretch; }
-    .result-count { margin-left: 0; }
-    .featured-grid, .online-grid { grid-template-columns: 1fr; }
-    .section-head { flex-direction: column; align-items: flex-start; }
+    .search-wrap { flex: 1 1 auto; width: 100%; }
+    .featured-grid,
+    .online-grid,
+    .instore-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .page { padding-left: 14px; padding-right: 14px; }
   }
 </style>
 </head>
@@ -335,21 +386,22 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
       <input type="search" id="brandSearch" placeholder="Search brands" aria-label="Search brands">
     </label>
-    <div class="filters" id="filters">
-      <button type="button" class="filter-btn active" data-filter="all">All</button>
-      <button type="button" class="filter-btn" data-filter="Tabletop">Tabletop</button>
-      <button type="button" class="filter-btn" data-filter="Glassware">Glassware</button>
-      <button type="button" class="filter-btn" data-filter="Kitchen &amp; Dining">Kitchen &amp; Dining</button>
-      <button type="button" class="filter-btn" data-filter="Cutlery">Cutlery</button>
-      <button type="button" class="filter-btn" data-filter="Home Decor">Home Decor</button>
-      <button type="button" class="filter-btn" data-filter="Textiles">Textiles</button>
-      <button type="button" class="filter-btn" data-filter="Accessories">Accessories</button>
-      <button type="button" class="filter-btn" data-filter="Apothecary">Apothecary</button>
-      <button type="button" class="filter-btn" data-filter="Candles">Candles</button>
-      <button type="button" class="filter-btn" data-filter="Barware">Barware</button>
-      <button type="button" class="filter-btn" data-filter="Lighting">Lighting</button>
+    <div class="filters-scroll">
+      <div class="filters" id="filters">
+        <button type="button" class="filter-btn active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="Tabletop">Tabletop</button>
+        <button type="button" class="filter-btn" data-filter="Glassware">Glassware</button>
+        <button type="button" class="filter-btn" data-filter="Kitchen &amp; Dining">Kitchen &amp; Dining</button>
+        <button type="button" class="filter-btn" data-filter="Cutlery">Cutlery</button>
+        <button type="button" class="filter-btn" data-filter="Home Decor">Home Decor</button>
+        <button type="button" class="filter-btn" data-filter="Textiles">Textiles</button>
+        <button type="button" class="filter-btn" data-filter="Accessories">Accessories</button>
+        <button type="button" class="filter-btn" data-filter="Apothecary">Apothecary</button>
+        <button type="button" class="filter-btn" data-filter="Candles">Candles</button>
+        <button type="button" class="filter-btn" data-filter="Barware">Barware</button>
+        <button type="button" class="filter-btn" data-filter="Lighting">Lighting</button>
+      </div>
     </div>
-    <span class="result-count" id="resultCount">28 results</span>
   </div>
 
   <section class="section" id="featuredSection">
@@ -364,10 +416,20 @@
   <section class="section" id="onlineSection">
     <div class="section-head">
       <h2>All Brands</h2>
-      <p>Every designer and maker available at PHYLUM, matching our live shop directory.</p>
-      <span class="section-count" id="onlineCount">25 brands</span>
+      <p>Every designer and maker available to shop online at PHYLUM.</p>
+      <span class="section-count" id="onlineCount">15 brands</span>
     </div>
     <div class="online-grid" id="onlineGrid"></div>
+  </section>
+
+  <section class="section" id="instoreSection">
+    <div class="section-head">
+      <h2>In-Store Only</h2>
+      <p>Carried in our Palm Springs and Solana Beach shops but not yet available online.</p>
+      <span class="section-count" id="instoreCount">10 brands</span>
+    </div>
+    <div class="instore-note">These brands are stocked at our storefronts and are not available to purchase online. Visit us Tue to Sun, 10am to 6pm.</div>
+    <div class="instore-grid" id="instoreGrid"></div>
   </section>
 </main>
 
@@ -433,7 +495,7 @@
       name: 'DEEP BLACK',
       location: 'Portland, USA',
       categories: ['Home Decor', 'Tabletop'],
-      online: true,
+      instore: true,
       image: shopImg('Deep_Black_Brand_Collection_Hero.jpg'),
       url: shopUrl('deep-black')
     },
@@ -478,7 +540,7 @@
       name: 'Holcomb Studio',
       location: 'Los Angeles, USA',
       categories: ['Home Decor', 'Lighting'],
-      online: true,
+      instore: true,
       image: shopImg('Holcomb_Brand_Collection_hero.jpg'),
       url: shopUrl('holcomb-studio')
     },
@@ -487,7 +549,7 @@
       name: 'Hoptimist',
       location: 'Denmark',
       categories: ['Home Decor'],
-      online: true,
+      instore: true,
       image: shopImg('Hoptimist_Brand_Collection_Hero.jpg'),
       url: shopUrl('hoptimist')
     },
@@ -496,7 +558,7 @@
       name: 'Hudsonest',
       location: 'New York, USA',
       categories: ['Home Decor'],
-      online: true,
+      instore: true,
       image: shopImg('Hudsonest_Brand_Collection_Hero.jpg'),
       url: shopUrl('hudson-nest')
     },
@@ -532,7 +594,7 @@
       name: 'Lemnos',
       location: 'Tokyo, Japan',
       categories: ['Home Decor', 'Lighting'],
-      online: true,
+      instore: true,
       image: shopImg('Lemnos_Brand_Collection_Hero.jpg'),
       url: shopUrl('lemnos')
     },
@@ -559,7 +621,7 @@
       name: 'Multitudes',
       location: 'Los Angeles, USA',
       categories: ['Home Decor', 'Textiles'],
-      online: true,
+      instore: true,
       image: shopImg('MultitudesClaudiaOchreModel_2048x2048_4cb97091-41b9-4044-bba2-73dc1d69d7b2.webp'),
       url: shopUrl('multitudes')
     },
@@ -577,7 +639,7 @@
       name: 'Original Duckhead',
       location: 'London, England',
       categories: ['Accessories'],
-      online: true,
+      instore: true,
       image: shopImg('Original_Duckhead_Brand_Collection_Preview.jpg'),
       url: shopUrl('original-duckhead')
     },
@@ -595,7 +657,7 @@
       name: 'ROYCE',
       location: 'New York, USA',
       categories: ['Accessories'],
-      online: true,
+      instore: true,
       image: shopImg('DARK-GREEN-750x628.jpg'),
       url: shopUrl('royce')
     },
@@ -622,7 +684,7 @@
       name: 'Studio Arhoj',
       location: 'Copenhagen, Denmark',
       categories: ['Home Decor', 'Tabletop'],
-      online: true,
+      instore: true,
       image: shopImg('phylum-april24-2_4b68b9c0-8fc5-41b0-be36-6a18314a4ea3.jpg'),
       url: shopUrl('studio-arhoj')
     },
@@ -631,7 +693,7 @@
       name: 'Zone Denmark',
       location: 'Denmark',
       categories: ['Kitchen & Dining', 'Tabletop'],
-      online: true,
+      instore: true,
       image: shopImg('Zone_Denmark_Brand_Collection_Preview.jpg'),
       url: shopUrl('zone-denmark')
     }
@@ -639,9 +701,10 @@
 
   const featuredGrid = document.getElementById('featuredGrid');
   const onlineGrid = document.getElementById('onlineGrid');
-  const resultCount = document.getElementById('resultCount');
+  const instoreGrid = document.getElementById('instoreGrid');
   const onlineCount = document.getElementById('onlineCount');
   const featuredCount = document.getElementById('featuredCount');
+  const instoreCount = document.getElementById('instoreCount');
   const searchInput = document.getElementById('brandSearch');
   const filterButtons = document.querySelectorAll('.filter-btn');
 
@@ -687,23 +750,42 @@
     return card;
   }
 
+  function renderInstore(brand) {
+    const card = document.createElement('article');
+    card.className = 'instore-card';
+    card.dataset.categories = brand.categories.join('|');
+    card.innerHTML = `
+      <div class="card-image">
+        <span class="instore-badge">In-store only</span>
+        <img src="${brand.image}" alt="${brand.name}" loading="lazy">
+      </div>
+      <div class="card-location">${brand.location}</div>
+      <h3>${brand.name}</h3>
+      <a href="#" class="visit-link">Visit us to shop</a>`;
+    return card;
+  }
+
   function render() {
     featuredGrid.innerHTML = '';
     onlineGrid.innerHTML = '';
+    instoreGrid.innerHTML = '';
 
     const visible = brands.filter(matchesFilters);
     const featured = visible.filter(b => b.featured);
     const online = visible.filter(b => b.online && !b.featured);
+    const instore = visible.filter(b => b.instore);
 
     featured.forEach(b => featuredGrid.appendChild(renderFeatured(b)));
     online.forEach(b => onlineGrid.appendChild(renderOnline(b)));
+    instore.forEach(b => instoreGrid.appendChild(renderInstore(b)));
 
     document.getElementById('featuredSection').classList.toggle('hidden', featured.length === 0);
     document.getElementById('onlineSection').classList.toggle('hidden', online.length === 0);
+    document.getElementById('instoreSection').classList.toggle('hidden', instore.length === 0);
 
-    resultCount.textContent = `${visible.length} result${visible.length === 1 ? '' : 's'}`;
     featuredCount.textContent = `${featured.length} brand${featured.length === 1 ? '' : 's'}`;
     onlineCount.textContent = `${online.length} brand${online.length === 1 ? '' : 's'}`;
+    instoreCount.textContent = `${instore.length} brand${instore.length === 1 ? '' : 's'}`;
   }
 
   filterButtons.forEach(btn => {

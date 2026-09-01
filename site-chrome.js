@@ -143,13 +143,15 @@
             <div class="m-promo-body">
               <span class="m-promo-eyebrow">Coming Soon Online</span>
               <div class="m-promo-title">Menswear is on its way online</div>
-              <p class="m-promo-copy">Available now in our Palm Springs &amp; Solana Beach stores. Join the waitlist for first access when menswear launches online, with curated shirts, outerwear, and essentials from makers like Original Madras Trading Co.</p>
-              <div class="waitlist-wrap">
-                <form class="waitlist-form" action="#" novalidate>
-                  <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
-                  <button type="submit">Join the waitlist</button>
-                </form>
-                <p class="waitlist-success" role="status">You&rsquo;re on the list. We&rsquo;ll be in touch.</p>
+              <div class="m-promo-form-block">
+                <p class="m-promo-copy">Available now in our Palm Springs &amp; Solana Beach stores. Join the waitlist for first access when menswear launches online, with curated shirts, outerwear, and essentials from makers like Original Madras Trading Co.</p>
+                <div class="waitlist-wrap">
+                  <form class="waitlist-form" action="#" novalidate>
+                    <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
+                    <button type="submit">Join the waitlist</button>
+                  </form>
+                  <p class="waitlist-success" role="status">You&rsquo;re on the list. We&rsquo;ll be in touch.</p>
+                </div>
               </div>
             </div>`;
           sub.appendChild(promo);
