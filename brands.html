@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-nav-version="current">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,7 @@
     --clay: #C05A28;
     --sage: #7C8360;
     --yellow: #f2a900;
+    --brands-max: 1520px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,63 +27,20 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  body.chrome-loading .page { visibility: hidden; }
+
   a { color: inherit; text-decoration: none; }
 
-  .announce {
-    background: var(--yellow);
-    color: var(--ink);
-    text-align: center;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 9px 16px;
-  }
-
-  .topbar {
-    border-bottom: 1px solid var(--line);
-    background: var(--paper);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .topbar-inner {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 22px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
-  .wordmark {
-    font-size: 22px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    font-weight: 300;
-  }
-
-  .back-link {
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    transition: color 0.2s ease;
-  }
-
-  .back-link:hover { color: var(--ink); }
-
   .page {
-    max-width: 1240px;
+    max-width: var(--brands-max);
     margin: 0 auto;
-    padding: 56px 40px 96px;
+    padding: 56px 48px 96px;
   }
 
   .page-intro {
     display: grid;
-    grid-template-columns: minmax(0, 420px) 1fr;
-    gap: 40px;
+    grid-template-columns: minmax(0, 460px) 1fr;
+    gap: 48px;
     align-items: end;
     margin-bottom: 48px;
   }
@@ -97,7 +55,7 @@
   }
 
   .page-intro p {
-    max-width: 52ch;
+    max-width: 56ch;
     font-size: 16px;
     line-height: 1.65;
     color: var(--ink-soft);
@@ -116,8 +74,8 @@
 
   .search-wrap {
     position: relative;
-    flex: 0 1 240px;
-    min-width: 200px;
+    flex: 0 1 280px;
+    min-width: 220px;
   }
 
   .search-wrap svg {
@@ -183,9 +141,7 @@
     white-space: nowrap;
   }
 
-  .section {
-    margin-bottom: 72px;
-  }
+  .section { margin-bottom: 72px; }
 
   .section-head {
     display: flex;
@@ -208,7 +164,7 @@
     min-width: 240px;
     font-size: 15px;
     color: var(--ink-soft);
-    max-width: 48ch;
+    max-width: 52ch;
   }
 
   .section-count {
@@ -223,12 +179,10 @@
     gap: 28px;
   }
 
-  .featured-card {
-    display: flex;
-    flex-direction: column;
-  }
+  .featured-card { display: flex; flex-direction: column; }
 
-  .featured-card .card-image {
+  .featured-card .card-image,
+  .online-card .card-image {
     aspect-ratio: 1.05;
     border-radius: 4px;
     overflow: hidden;
@@ -236,7 +190,13 @@
     margin-bottom: 18px;
   }
 
-  .featured-card img {
+  .online-card .card-image {
+    aspect-ratio: 1;
+    margin-bottom: 14px;
+  }
+
+  .featured-card img,
+  .online-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -251,13 +211,16 @@
     margin-bottom: 8px;
   }
 
-  .featured-card h3 {
+  .featured-card h3,
+  .online-card h3 {
     font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-    font-size: 28px;
     font-weight: 400;
     line-height: 1.1;
     margin-bottom: 12px;
   }
+
+  .featured-card h3 { font-size: 28px; margin-bottom: 12px; }
+  .online-card h3 { font-size: 22px; margin-bottom: 6px; }
 
   .card-copy {
     font-size: 14px;
@@ -306,7 +269,7 @@
 
   .online-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 24px;
   }
 
@@ -316,28 +279,6 @@
   }
 
   .online-card:hover { transform: translateY(-3px); }
-
-  .online-card .card-image {
-    aspect-ratio: 1;
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--paper-deep);
-    margin-bottom: 14px;
-  }
-
-  .online-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .online-card h3 {
-    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 6px;
-  }
 
   .online-meta {
     display: flex;
@@ -357,100 +298,31 @@
 
   .online-card:hover .online-meta svg { transform: translateX(3px); }
 
-  .instore-note {
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 18px 22px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    margin-bottom: 28px;
-    background: rgba(255,255,255,0.28);
-  }
-
-  .instore-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
-  }
-
-  .instore-card .card-image {
-    position: relative;
-    aspect-ratio: 1.05;
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--paper-deep);
-    margin-bottom: 16px;
-  }
-
-  .instore-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .instore-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: rgba(241, 238, 228, 0.94);
-    color: var(--ink);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-  }
-
-  .instore-card h3 {
-    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 6px;
-  }
-
-  .visit-link {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    color: var(--clay);
-    border-bottom: 1px solid rgba(192, 90, 40, 0.35);
-    padding-bottom: 2px;
-  }
-
-  .visit-link:hover { color: var(--ink); border-color: var(--ink); }
-
   .hidden { display: none !important; }
 
+  @media (max-width: 1280px) {
+    .online-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+
   @media (max-width: 1024px) {
-    .featured-grid, .instore-grid { grid-template-columns: 1fr 1fr; }
+    .featured-grid { grid-template-columns: 1fr 1fr; }
     .online-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .page-intro { grid-template-columns: 1fr; gap: 18px; }
+    .page { padding: 48px 32px 80px; }
   }
 
   @media (max-width: 720px) {
     .page { padding: 40px 20px 72px; }
-    .topbar-inner { padding: 18px 20px; }
     .toolbar { flex-direction: column; align-items: stretch; }
     .result-count { margin-left: 0; }
-    .featured-grid, .online-grid, .instore-grid { grid-template-columns: 1fr; }
+    .featured-grid, .online-grid { grid-template-columns: 1fr; }
     .section-head { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
-<body>
+<body class="brands-page">
 
-<div class="announce">Complimentary shipping on orders over $150 — Palm Springs &amp; Solana Beach pickup available</div>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="wordmark" aria-label="PHYLUM home">PHYLUM</a>
-    <a href="index.html" class="back-link">← Back to shop</a>
-  </div>
-</header>
+<div id="site-chrome"></div>
 
 <main class="page">
   <div class="page-intro">
@@ -475,40 +347,35 @@
       <button type="button" class="filter-btn" data-filter="Apothecary">Apothecary</button>
       <button type="button" class="filter-btn" data-filter="Candles">Candles</button>
       <button type="button" class="filter-btn" data-filter="Barware">Barware</button>
+      <button type="button" class="filter-btn" data-filter="Lighting">Lighting</button>
     </div>
-    <span class="result-count" id="resultCount">12 results</span>
+    <span class="result-count" id="resultCount">28 results</span>
   </div>
 
   <section class="section" id="featuredSection">
     <div class="section-head">
       <h2>Featured</h2>
       <p>Brands we’re spotlighting this season, chosen for craft and story.</p>
-      <span class="section-count">3 brands</span>
+      <span class="section-count" id="featuredCount">3 brands</span>
     </div>
     <div class="featured-grid" id="featuredGrid"></div>
   </section>
 
   <section class="section" id="onlineSection">
     <div class="section-head">
-      <h2>Shop Online</h2>
-      <p>Available to order and ship anywhere. Hover a brand for the quick story.</p>
-      <span class="section-count" id="onlineCount">6 brands</span>
+      <h2>All Brands</h2>
+      <p>Every designer and maker available at PHYLUM, matching our live shop directory.</p>
+      <span class="section-count" id="onlineCount">25 brands</span>
     </div>
     <div class="online-grid" id="onlineGrid"></div>
   </section>
-
-  <section class="section" id="instoreSection">
-    <div class="section-head">
-      <h2>In-Store Only</h2>
-      <p>Carried in our shops but not yet online. Come see them in person.</p>
-      <span class="section-count">3 brands</span>
-    </div>
-    <div class="instore-note">These brands are stocked at our Palm Springs &amp; Solana Beach storefronts and are not available to purchase online. Visit us Tue to Sun, 10am to 6pm.</div>
-    <div class="instore-grid" id="instoreGrid"></div>
-  </section>
 </main>
 
+<script src="site-chrome.js"></script>
 <script>
+  const shopImg = (file) => `https://shopphylum.com/cdn/shop/collections/${file}?width=600`;
+  const shopUrl = (slug) => `https://shopphylum.com/collections/${slug}`;
+
   const brands = [
     {
       id: 'aaron-probyn',
@@ -518,7 +385,8 @@
       categories: ['Tabletop', 'Glassware'],
       featured: true,
       online: true,
-      image: 'assets/brands/aaron-probyn.jpg'
+      image: shopImg('Aaron_Probyn_Brand_Collection_Hero.jpg'),
+      url: shopUrl('aaron-probyn')
     },
     {
       id: 'david-mellor',
@@ -528,7 +396,8 @@
       categories: ['Kitchen & Dining', 'Cutlery'],
       featured: true,
       online: true,
-      image: 'assets/brands/david-mellor.jpg'
+      image: shopImg('4803342.jpg'),
+      url: shopUrl('david-mellor')
     },
     {
       id: 'chilewich',
@@ -538,7 +407,8 @@
       categories: ['Home Decor', 'Textiles'],
       featured: true,
       online: true,
-      image: 'assets/brands/chilewich.jpg'
+      image: shopImg('2022-10-19-yarns_shag_fade_apricot_1872-jf.jpg'),
+      url: shopUrl('chilewich')
     },
     {
       id: 'billybelt',
@@ -546,7 +416,8 @@
       location: 'Paris, France',
       categories: ['Accessories'],
       online: true,
-      image: 'assets/brands/billybelt.jpg'
+      image: shopImg('Billybelt_Brand_Collection_Hero3.jpg'),
+      url: shopUrl('billybelt')
     },
     {
       id: 'dorsay',
@@ -554,7 +425,17 @@
       location: 'Paris, France',
       categories: ['Apothecary', 'Candles'],
       online: true,
-      image: 'assets/brands/dorsay.jpg'
+      image: shopImg('D_Orsay_Brand_Collection_Hero.jpg'),
+      url: shopUrl('d-orsay')
+    },
+    {
+      id: 'deep-black',
+      name: 'DEEP BLACK',
+      location: 'Portland, USA',
+      categories: ['Home Decor', 'Tabletop'],
+      online: true,
+      image: shopImg('Deep_Black_Brand_Collection_Hero.jpg'),
+      url: shopUrl('deep-black')
     },
     {
       id: 'ekobo',
@@ -562,15 +443,8 @@
       location: 'Paris, France',
       categories: ['Kitchen & Dining', 'Tabletop'],
       online: true,
-      image: 'assets/brands/ekobo.jpg'
-    },
-    {
-      id: 'geometry',
-      name: 'Geometry',
-      location: 'Los Angeles, USA',
-      categories: ['Home Decor'],
-      online: true,
-      image: 'assets/brands/geometry.jpg'
+      image: shopImg('color.jpg'),
+      url: shopUrl('ekobo')
     },
     {
       id: 'garza-marfa',
@@ -578,7 +452,17 @@
       location: 'Marfa, USA',
       categories: ['Home Decor', 'Barware'],
       online: true,
-      image: 'assets/brands/garza-marfa.jpg'
+      image: shopImg('Garza_Marfa_Brand_Collection_Hero.jpg'),
+      url: shopUrl('garza-marfa')
+    },
+    {
+      id: 'geometry',
+      name: 'Geometry',
+      location: 'Los Angeles, USA',
+      categories: ['Home Decor'],
+      online: true,
+      image: shopImg('Geometry_Brand_Collection_Hero.jpg'),
+      url: shopUrl('geometry')
     },
     {
       id: 'georg-jensen',
@@ -586,39 +470,178 @@
       location: 'Copenhagen, Denmark',
       categories: ['Barware', 'Tabletop'],
       online: true,
-      image: 'assets/brands/aaron-probyn.jpg'
+      image: shopImg('Georg_Jensen_Brand_Collection_Hero.jpg'),
+      url: shopUrl('georg-jensen')
     },
     {
-      id: 'deep-black',
-      name: 'DEEP BLACK',
-      location: 'Portland, USA',
-      categories: ['Home Decor', 'Tabletop'],
-      instore: true,
-      image: 'assets/brands/deep-black.jpg'
+      id: 'holcomb-studio',
+      name: 'Holcomb Studio',
+      location: 'Los Angeles, USA',
+      categories: ['Home Decor', 'Lighting'],
+      online: true,
+      image: shopImg('Holcomb_Brand_Collection_hero.jpg'),
+      url: shopUrl('holcomb-studio')
+    },
+    {
+      id: 'hoptimist',
+      name: 'Hoptimist',
+      location: 'Denmark',
+      categories: ['Home Decor'],
+      online: true,
+      image: shopImg('Hoptimist_Brand_Collection_Hero.jpg'),
+      url: shopUrl('hoptimist')
+    },
+    {
+      id: 'hudsonest',
+      name: 'Hudsonest',
+      location: 'New York, USA',
+      categories: ['Home Decor'],
+      online: true,
+      image: shopImg('Hudsonest_Brand_Collection_Hero.jpg'),
+      url: shopUrl('hudson-nest')
+    },
+    {
+      id: 'iittala',
+      name: 'Iittala',
+      location: 'Helsinki, Finland',
+      categories: ['Tabletop', 'Glassware'],
+      online: true,
+      image: shopImg('Iittala_Brand_Collection_Hero.jpg'),
+      url: shopUrl('iittala')
+    },
+    {
+      id: 'johanna-gullichsen',
+      name: 'Johanna Gullichsen',
+      location: 'Helsinki, Finland',
+      categories: ['Textiles', 'Home Decor'],
+      online: true,
+      image: shopImg('Johanna_Gullichsen_Brand_Collection_Hero.jpg'),
+      url: shopUrl('johanna-gullichsen')
+    },
+    {
+      id: 'koziol',
+      name: 'Koziol',
+      location: 'Erbach, Germany',
+      categories: ['Kitchen & Dining'],
+      online: true,
+      image: shopImg('Koziol_Brand_Collection_Hero.jpg'),
+      url: shopUrl('koziol')
+    },
+    {
+      id: 'lemnos',
+      name: 'Lemnos',
+      location: 'Tokyo, Japan',
+      categories: ['Home Decor', 'Lighting'],
+      online: true,
+      image: shopImg('Lemnos_Brand_Collection_Hero.jpg'),
+      url: shopUrl('lemnos')
+    },
+    {
+      id: 'liga',
+      name: 'LIGA',
+      location: 'Cornwall, England',
+      categories: ['Kitchen & Dining', 'Textiles'],
+      online: true,
+      image: shopImg('LIGA_Brand_Collection_Hero.jpg'),
+      url: shopUrl('liga')
+    },
+    {
+      id: 'los-poblanos',
+      name: 'Los Poblanos',
+      location: 'Albuquerque, USA',
+      categories: ['Apothecary', 'Home Decor'],
+      online: true,
+      image: shopImg('Los_Poblanos_Brand_Collection_Hero.jpg'),
+      url: shopUrl('los-poblanos')
+    },
+    {
+      id: 'multitudes',
+      name: 'Multitudes',
+      location: 'Los Angeles, USA',
+      categories: ['Home Decor', 'Textiles'],
+      online: true,
+      image: shopImg('MultitudesClaudiaOchreModel_2048x2048_4cb97091-41b9-4044-bba2-73dc1d69d7b2.webp'),
+      url: shopUrl('multitudes')
+    },
+    {
+      id: 'octaevo',
+      name: 'OCTAEVO',
+      location: 'Barcelona, Spain',
+      categories: ['Home Decor', 'Accessories'],
+      online: true,
+      image: shopImg('54Celsius_Brand_Collection_Hero.jpg'),
+      url: shopUrl('54celsius')
+    },
+    {
+      id: 'original-duckhead',
+      name: 'Original Duckhead',
+      location: 'London, England',
+      categories: ['Accessories'],
+      online: true,
+      image: shopImg('Original_Duckhead_Brand_Collection_Preview.jpg'),
+      url: shopUrl('original-duckhead')
+    },
+    {
+      id: 'pablo-designs',
+      name: 'Pablo Designs',
+      location: 'California, USA',
+      categories: ['Lighting', 'Home Decor'],
+      online: true,
+      image: shopImg('color_e78daa59-c18e-43e2-97f7-de028209122a.jpg'),
+      url: shopUrl('pablo-designs')
+    },
+    {
+      id: 'royce',
+      name: 'ROYCE',
+      location: 'New York, USA',
+      categories: ['Accessories'],
+      online: true,
+      image: shopImg('DARK-GREEN-750x628.jpg'),
+      url: shopUrl('royce')
+    },
+    {
+      id: 'sabre',
+      name: 'Sabre Paris',
+      location: 'Paris, France',
+      categories: ['Cutlery', 'Tabletop'],
+      online: true,
+      image: shopImg('Sabre_Brand_Collection_Hero.jpg'),
+      url: shopUrl('sabre')
+    },
+    {
+      id: 'sardine',
+      name: 'SARDINE',
+      location: 'Los Angeles, USA',
+      categories: ['Accessories'],
+      online: true,
+      image: shopImg('Sardine_banner.png'),
+      url: shopUrl('sardine')
     },
     {
       id: 'studio-arhoj',
       name: 'Studio Arhoj',
       location: 'Copenhagen, Denmark',
       categories: ['Home Decor', 'Tabletop'],
-      instore: true,
-      image: 'assets/brands/studio-arhoj.jpg'
+      online: true,
+      image: shopImg('phylum-april24-2_4b68b9c0-8fc5-41b0-be36-6a18314a4ea3.jpg'),
+      url: shopUrl('studio-arhoj')
     },
     {
-      id: 'hasami',
-      name: 'Hasami Porcelain',
-      location: 'Nagasaki, Japan',
-      categories: ['Tabletop', 'Kitchen & Dining'],
-      instore: true,
-      image: 'assets/brands/hasami.jpg'
+      id: 'zone-denmark',
+      name: 'Zone Denmark',
+      location: 'Denmark',
+      categories: ['Kitchen & Dining', 'Tabletop'],
+      online: true,
+      image: shopImg('Zone_Denmark_Brand_Collection_Preview.jpg'),
+      url: shopUrl('zone-denmark')
     }
   ];
 
   const featuredGrid = document.getElementById('featuredGrid');
   const onlineGrid = document.getElementById('onlineGrid');
-  const instoreGrid = document.getElementById('instoreGrid');
   const resultCount = document.getElementById('resultCount');
   const onlineCount = document.getElementById('onlineCount');
+  const featuredCount = document.getElementById('featuredCount');
   const searchInput = document.getElementById('brandSearch');
   const filterButtons = document.querySelectorAll('.filter-btn');
 
@@ -626,7 +649,9 @@
 
   function matchesFilters(brand) {
     const query = searchInput.value.trim().toLowerCase();
-    const matchesQuery = !query || brand.name.toLowerCase().includes(query) || brand.location.toLowerCase().includes(query);
+    const matchesQuery = !query ||
+      brand.name.toLowerCase().includes(query) ||
+      (brand.location && brand.location.toLowerCase().includes(query));
     const matchesCategory = activeFilter === 'all' || brand.categories.includes(activeFilter);
     return matchesQuery && matchesCategory;
   }
@@ -636,22 +661,24 @@
     card.className = 'featured-card';
     card.dataset.categories = brand.categories.join('|');
     card.innerHTML = `
-      <div class="card-image"><img src="${brand.image}" alt="${brand.name}"></div>
+      <div class="card-image"><img src="${brand.image}" alt="${brand.name}" loading="lazy"></div>
       <div class="card-location">${brand.location}</div>
       <h3>${brand.name}</h3>
       <p class="card-copy">${brand.copy}</p>
       <div class="tags">${brand.categories.map(c => `<span class="tag">${c}</span>`).join('')}</div>
-      <button type="button" class="btn-shop">Shop ${brand.name}</button>`;
+      <a href="${brand.url}" class="btn-shop" target="_blank" rel="noopener">Shop ${brand.name}</a>`;
     return card;
   }
 
   function renderOnline(brand) {
     const card = document.createElement('a');
-    card.href = '#';
+    card.href = brand.url;
     card.className = 'online-card';
+    card.target = '_blank';
+    card.rel = 'noopener';
     card.dataset.categories = brand.categories.join('|');
     card.innerHTML = `
-      <div class="card-image"><img src="${brand.image}" alt="${brand.name}"></div>
+      <div class="card-image"><img src="${brand.image}" alt="${brand.name}" loading="lazy"></div>
       <h3>${brand.name}</h3>
       <div class="online-meta">
         <span>${brand.location} · ${brand.categories[0]}</span>
@@ -660,40 +687,22 @@
     return card;
   }
 
-  function renderInstore(brand) {
-    const card = document.createElement('article');
-    card.className = 'instore-card';
-    card.dataset.categories = brand.categories.join('|');
-    card.innerHTML = `
-      <div class="card-image">
-        <span class="instore-badge">In-store only</span>
-        <img src="${brand.image}" alt="${brand.name}">
-      </div>
-      <div class="card-location">${brand.location}</div>
-      <h3>${brand.name}</h3>
-      <a href="#" class="visit-link">Visit us to shop</a>`;
-    return card;
-  }
-
   function render() {
     featuredGrid.innerHTML = '';
     onlineGrid.innerHTML = '';
-    instoreGrid.innerHTML = '';
 
     const visible = brands.filter(matchesFilters);
     const featured = visible.filter(b => b.featured);
     const online = visible.filter(b => b.online && !b.featured);
-    const instore = visible.filter(b => b.instore);
 
     featured.forEach(b => featuredGrid.appendChild(renderFeatured(b)));
     online.forEach(b => onlineGrid.appendChild(renderOnline(b)));
-    instore.forEach(b => instoreGrid.appendChild(renderInstore(b)));
 
     document.getElementById('featuredSection').classList.toggle('hidden', featured.length === 0);
     document.getElementById('onlineSection').classList.toggle('hidden', online.length === 0);
-    document.getElementById('instoreSection').classList.toggle('hidden', instore.length === 0);
 
     resultCount.textContent = `${visible.length} result${visible.length === 1 ? '' : 's'}`;
+    featuredCount.textContent = `${featured.length} brand${featured.length === 1 ? '' : 's'}`;
     onlineCount.textContent = `${online.length} brand${online.length === 1 ? '' : 's'}`;
   }
 

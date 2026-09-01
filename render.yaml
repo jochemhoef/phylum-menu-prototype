@@ -9,5 +9,8 @@ services:
     staticPublishPath: .
     routes:
       - type: rewrite
+        source: /brands.html
+        destination: /brands.html
+      - type: rewrite
         source: /*
         destination: /index.html
