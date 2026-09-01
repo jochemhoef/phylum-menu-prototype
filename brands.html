@@ -51,10 +51,10 @@
   }
 
   .page-intro p {
-    max-width: 56ch;
     font-size: 16px;
     line-height: 1.65;
     color: var(--ink-soft);
+    white-space: nowrap;
   }
 
   .toolbar {
@@ -84,7 +84,7 @@
 
   .search-wrap input {
     width: 100%;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(207, 200, 182, 0.45);
     border-radius: 999px;
     background: rgba(255,255,255,0.45);
     padding: 11px 16px 11px 40px;
@@ -95,7 +95,7 @@
 
   .search-wrap input:focus {
     outline: none;
-    border-color: var(--ink-soft);
+    border-color: rgba(90, 85, 74, 0.35);
     background: #fff;
   }
 
@@ -156,24 +156,34 @@
     margin-bottom: 10px;
   }
 
+  .section-head-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
   .section-head p {
     font-size: 15px;
     line-height: 1.6;
     color: var(--ink-soft);
-    max-width: 52ch;
+    white-space: nowrap;
+    min-width: 0;
   }
 
   .section-count {
-    display: block;
-    margin-top: 10px;
+    flex-shrink: 0;
+    margin-left: auto;
     font-size: 13px;
     color: var(--ink-soft);
+    white-space: nowrap;
+    text-align: right;
   }
 
   .featured-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
   }
 
   .featured-card { display: flex; flex-direction: column; }
@@ -256,14 +266,15 @@
   }
 
   .btn-shop {
-    display: block;
-    width: 100%;
+    display: inline-block;
+    width: auto;
+    align-self: flex-start;
     text-align: center;
     border: none;
     border-radius: 999px;
     background: var(--sage);
     color: var(--paper);
-    padding: 14px 18px;
+    padding: 14px 22px;
     font: inherit;
     font-size: 12px;
     letter-spacing: 0.12em;
@@ -307,14 +318,14 @@
   .online-card:hover .online-meta svg { transform: translateX(3px); }
 
   .instore-note {
-    border: 1px solid var(--line);
+    border: none;
     border-radius: 4px;
     padding: 18px 22px;
     font-size: 14px;
     line-height: 1.6;
-    color: var(--ink-soft);
+    color: rgba(241, 238, 228, 0.88);
     margin-bottom: 28px;
-    background: rgba(255,255,255,0.28);
+    background: var(--sage);
   }
 
   .instore-badge {
@@ -348,6 +359,7 @@
   @media (max-width: 1280px) {
     .online-grid,
     .instore-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .featured-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   @media (max-width: 1024px) {
@@ -364,6 +376,10 @@
     .featured-grid,
     .online-grid,
     .instore-grid { grid-template-columns: 1fr; }
+    .page-intro p,
+    .section-head p { white-space: normal; }
+    .section-head-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .section-count { margin-left: 0; text-align: left; }
   }
 
   @media (max-width: 480px) {
@@ -407,8 +423,10 @@
   <section class="section" id="featuredSection">
     <div class="section-head">
       <h2>Featured</h2>
-      <p>Brands we’re spotlighting this season, chosen for craft and story.</p>
-      <span class="section-count" id="featuredCount">3 brands</span>
+      <div class="section-head-meta">
+        <p>Brands we’re spotlighting this season, chosen for craft and story.</p>
+        <span class="section-count" id="featuredCount">4 brands</span>
+      </div>
     </div>
     <div class="featured-grid" id="featuredGrid"></div>
   </section>
@@ -416,8 +434,10 @@
   <section class="section" id="onlineSection">
     <div class="section-head">
       <h2>All Brands</h2>
-      <p>Every designer and maker available to shop online at PHYLUM.</p>
-      <span class="section-count" id="onlineCount">15 brands</span>
+      <div class="section-head-meta">
+        <p>Every designer and maker available to shop online at PHYLUM.</p>
+        <span class="section-count" id="onlineCount">14 brands</span>
+      </div>
     </div>
     <div class="online-grid" id="onlineGrid"></div>
   </section>
@@ -425,8 +445,10 @@
   <section class="section" id="instoreSection">
     <div class="section-head">
       <h2>In-Store Only</h2>
-      <p>Carried in our Palm Springs and Solana Beach shops but not yet available online.</p>
-      <span class="section-count" id="instoreCount">10 brands</span>
+      <div class="section-head-meta">
+        <p>Carried in our Palm Springs and Solana Beach shops but not yet available online.</p>
+        <span class="section-count" id="instoreCount">10 brands</span>
+      </div>
     </div>
     <div class="instore-note">These brands are stocked at our storefronts and are not available to purchase online. Visit us Tue to Sun, 10am to 6pm.</div>
     <div class="instore-grid" id="instoreGrid"></div>
@@ -530,7 +552,9 @@
       id: 'georg-jensen',
       name: 'Georg Jensen',
       location: 'Copenhagen, Denmark',
+      copy: 'Sculptural Danish silver and barware from a heritage house defined by craft and timeless form.',
       categories: ['Barware', 'Tabletop'],
+      featured: true,
       online: true,
       image: shopImg('Georg_Jensen_Brand_Collection_Hero.jpg'),
       url: shopUrl('georg-jensen')
