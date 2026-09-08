@@ -773,9 +773,10 @@
     card.dataset.categories = brand.categories.join('|');
     card.innerHTML = `
       <div class="card-image"><img src="${brand.image}" alt="${brand.name}" loading="lazy"></div>
+      <div class="card-location">${brand.location}</div>
       <h3>${brand.name}</h3>
       <div class="online-meta">
-        <span>${brand.location} · ${brand.categories[0]}</span>
+        <span>${brand.categories[0]}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
       </div>`;
     return card;
