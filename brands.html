@@ -432,7 +432,6 @@
       <h2>Featured</h2>
       <div class="section-head-meta">
         <p>Brands we’re spotlighting this season, chosen for craft and story.</p>
-        <span class="section-count" id="featuredCount">4 brands</span>
       </div>
     </div>
     <div class="featured-grid" id="featuredGrid"></div>
@@ -734,7 +733,6 @@
   const onlineGrid = document.getElementById('onlineGrid');
   const instoreGrid = document.getElementById('instoreGrid');
   const onlineCount = document.getElementById('onlineCount');
-  const featuredCount = document.getElementById('featuredCount');
   const instoreCount = document.getElementById('instoreCount');
   const searchInput = document.getElementById('brandSearch');
   const filterButtons = document.querySelectorAll('.filter-btn');
@@ -815,7 +813,6 @@
     document.getElementById('onlineSection').classList.toggle('hidden', online.length === 0);
     document.getElementById('instoreSection').classList.toggle('hidden', instore.length === 0);
 
-    featuredCount.textContent = `${featured.length} brand${featured.length === 1 ? '' : 's'}`;
     onlineCount.textContent = `${online.length} brand${online.length === 1 ? '' : 's'}`;
     instoreCount.textContent = `${instore.length} brand${instore.length === 1 ? '' : 's'}`;
   }
