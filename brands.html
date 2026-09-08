@@ -306,10 +306,15 @@
     display: block;
   }
 
+  .online-card .tags,
+  .instore-card .tags {
+    margin-bottom: 12px;
+  }
+
   .online-meta {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 12px;
     font-size: 13px;
     color: var(--ink-soft);
@@ -748,6 +753,10 @@
     return matchesQuery && matchesCategory;
   }
 
+  function renderTags(categories) {
+    return `<div class="tags">${categories.map(c => `<span class="tag">${c}</span>`).join('')}</div>`;
+  }
+
   function renderFeatured(brand) {
     const card = document.createElement('article');
     card.className = 'featured-card';
@@ -757,7 +766,7 @@
       <div class="card-location">${brand.location}</div>
       <h3>${brand.name}</h3>
       <p class="card-copy">${brand.copy}</p>
-      <div class="tags">${brand.categories.map(c => `<span class="tag">${c}</span>`).join('')}</div>
+      ${renderTags(brand.categories)}
       <a href="${brand.url}" class="btn-shop" target="_blank" rel="noopener">Shop ${brand.name}</a>`;
     return card;
   }
@@ -773,8 +782,8 @@
       <div class="card-image"><img src="${brand.image}" alt="${brand.name}" loading="lazy"></div>
       <div class="card-location">${brand.location}</div>
       <h3>${brand.name}</h3>
+      ${renderTags(brand.categories)}
       <div class="online-meta">
-        <span>${brand.categories[0]}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
       </div>`;
     return card;
@@ -791,6 +800,7 @@
       </div>
       <div class="card-location">${brand.location}</div>
       <h3>${brand.name}</h3>
+      ${renderTags(brand.categories)}
       <a href="#" class="visit-link">Visit us to shop</a>`;
     return card;
   }
