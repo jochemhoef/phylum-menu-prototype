@@ -55,13 +55,17 @@
 
   .bar {
     height: var(--nav-h);
-    display: flex;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
+    gap: clamp(16px, 2vw, 32px);
     padding: 0 40px;
     position: relative;
     z-index: 3;
   }
+
+  .logo { flex-shrink: 0; justify-self: start; }
+  .utils { flex-shrink: 0; justify-self: end; }
 
   /* Signature wordmark logo image */
   .logo { display: inline-flex; align-items: center; }
@@ -75,8 +79,12 @@
   .nav {
     display: flex;
     align-items: center;
-    gap: 34px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: clamp(18px, 2.2vw, 34px);
     height: 100%;
+    min-width: 0;
+    justify-self: center;
   }
 
   .nav-item { height: 100%; display: flex; align-items: center; position: relative; }
@@ -94,6 +102,8 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .nav-soon-badge {
@@ -321,10 +331,27 @@
   }
   .note strong { color: var(--ink); }
 
+/* ---------- Tablet / compact desktop ---------- */
+  @media (max-width: 1440px) {
+    .bar { padding: 0 28px; gap: 16px; }
+    .nav { gap: 16px; }
+    .nav-link { font-size: 14px; }
+    .utils { gap: 16px; }
+    .soon-pill { font-size: 8px; padding: 4px 8px; }
+  }
+
+  @media (max-width: 1320px) {
+    .bar { padding: 0 22px; gap: 12px; }
+    .nav { gap: 12px; }
+    .nav-link { font-size: 13px; letter-spacing: 0; }
+    .utils { gap: 12px; }
+    .utils .icon-btn svg { width: 20px; height: 20px; }
+  }
+
 /* ---------- Mobile ---------- */
   .hamburger, .mobile-panel { display: none; }
 
-  @media (max-width: 1080px) {
+  @media (max-width: 1200px) {
     :root {
       --nav-h: 64px;
     }
