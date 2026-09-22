@@ -1,0 +1,434 @@
+{% comment %}
+  PHYLUM mega menu — Promo Nav (menswear coming soon panel).
+  Paste into backup theme; wire links to collections/menus over time.
+{% endcomment %}
+<header class="header">
+  <div class="bar">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="hb-bar hb-top" aria-hidden="true"></span>
+      <span class="hb-bar hb-mid" aria-hidden="true"></span>
+      <span class="hb-bar hb-bot" aria-hidden="true"></span>
+    </button>
+
+    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name | escape }} home"><img src="{{ 'phylum-wordmark.png' | asset_url }}" width="296" height="102" alt="{{ shop.name | escape }}"></a>
+
+    <nav class="nav" aria-label="Primary">
+
+      <!-- HOME DECOR -->
+      <div class="nav-item" data-menu>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Home Decor</button>
+        <div class="mega" role="region">
+          <div class="mega-inner">
+            <div class="mega-col">
+              <span class="col-label">Decorate</span>
+              <ul class="col-list">
+                <li><a href="#">Vases</a></li>
+                <li><a href="#">Decorative Objects</a></li>
+                <li><a href="#">Trays</a></li>
+                <li><a href="#">Clocks</a></li>
+                <li><a href="#">Wall Art</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Layer</span>
+              <ul class="col-list">
+                <li><a href="#">Indoor Pillows &amp; Throws</a></li>
+                <li><a href="#">Area Rugs</a></li>
+                <li><a href="#">Runners</a></li>
+                <li><a href="#">Floor Mats</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Refresh</span>
+              <ul class="col-list">
+                <li><a href="#">Bath Accessories</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Illuminate</span>
+              <ul class="col-list">
+                <li><a href="#">Candles &amp; Candleholders</a></li>
+                <li><a href="#">Lighting</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="home"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Brand Spotlight</span>
+                <div class="feature-title">Dinosaur Designs</div>
+                <span class="feature-cta">Shop the brand</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- KITCHEN & DINING -->
+      <div class="nav-item" data-menu>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Kitchen &amp; Dining</button>
+        <div class="mega" role="region">
+          <div class="mega-inner">
+            <div class="mega-col">
+              <span class="col-label">Cook &amp; Prep</span>
+              <ul class="col-list">
+                <li><a href="#">Utensils &amp; Gadgets</a></li>
+                <li><a href="#">Salt &amp; Pepper Mills and Cellars</a></li>
+                <li><a href="#">Provisions</a></li>
+                <li><a href="#">Kitchen Towels</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Serve &amp; Dine</span>
+              <ul class="col-list">
+                <li><a href="#">Dinnerware</a></li>
+                <li><a href="#">Serveware</a></li>
+                <li><a href="#">Drinkware</a></li>
+                <li><a href="#">Placemats</a></li>
+                <li><a href="#">Napkins</a></li>
+                <li><a href="#">Runners &amp; Tablecloths</a></li>
+                <li><a href="#">Coasters &amp; Trivets</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Entertain</span>
+              <ul class="col-list">
+                <li><a href="#">Bar Tools &amp; Accessories</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="kitchen"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Brand Spotlight</span>
+                <div class="feature-title">Mud Australia</div>
+                <span class="feature-cta">Shop the brand</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- APOTHECARY -->
+      <div class="nav-item" data-menu>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Apothecary</button>
+        <div class="mega" role="region">
+          <div class="mega-inner slim">
+            <div class="mega-col">
+              <span class="col-label">Nourish</span>
+              <ul class="col-list">
+                <li><a href="#">Body &amp; Skin Care</a></li>
+                <li><a href="#">Grooming</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Scent</span>
+              <ul class="col-list">
+                <li><a href="#">Personal Fragrance</a></li>
+                <li><a href="#">Home Fragrance</a></li>
+                <li><a href="#">Auto Fragrance</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="apothecary"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Brand Spotlight</span>
+                <div class="feature-title">D&#x27;ORSAY</div>
+                <span class="feature-cta">Shop the brand</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTDOOR -->
+      <div class="nav-item" data-menu>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Outdoor</button>
+        <div class="mega" role="region">
+          <div class="mega-inner slim">
+            <div class="mega-col">
+              <span class="col-label">Gather</span>
+              <ul class="col-list">
+                <li><a href="#">Outdoor Towels</a></li>
+                <li><a href="#">Outdoor Dining &amp; Entertaining</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="outdoor"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Brand Spotlight</span>
+                <div class="feature-title">Ekobo</div>
+                <span class="feature-cta">Shop the brand</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCESSORIES -->
+      <div class="nav-item" data-menu>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Accessories</button>
+        <div class="mega" role="region">
+          <div class="mega-inner">
+            <div class="mega-col">
+              <span class="col-label">Wear</span>
+              <ul class="col-list">
+                <li><a href="#">Bags &amp; Totes</a></li>
+                <li><a href="#">Scarves</a></li>
+                <li><a href="#">Robes</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Adorn</span>
+              <ul class="col-list">
+                <li><a href="#">Sunglasses</a></li>
+                <li><a href="#">Jewelry</a></li>
+                <li><a href="#">Watches</a></li>
+                <li><a href="#">Wallets</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Create</span>
+              <ul class="col-list">
+                <li><a href="#">Greeting Cards</a></li>
+                <li><a href="#">Notepads &amp; Notebooks</a></li>
+                <li><a href="#">Pens &amp; Pencils</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="accessories"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Brand Spotlight</span>
+                <div class="feature-title">SARDINE</div>
+                <span class="feature-cta">Shop the brand</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MENSWEAR -->
+      <div class="nav-item" data-menu data-menswear>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">
+          <span class="nav-link-text">Menswear</span>
+          <span class="nav-soon-badge" aria-hidden="true">
+            <span class="nav-soon-label soon-pill">Coming Soon</span>
+          </span>
+        </button>
+        <div class="mega" role="region">
+          <div class="mega-inner nav-version-current">
+            <div class="mega-col">
+              <span class="col-label">Tops</span>
+              <ul class="col-list">
+                <li><a href="#">Short Sleeve Shirts</a></li>
+                <li><a href="#">Long Sleeve Shirts</a></li>
+                <li><a href="#">T-Shirts &amp; Tank Tops</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Bottoms</span>
+              <ul class="col-list">
+                <li><a href="#">Pants</a></li>
+                <li><a href="#">Shorts</a></li>
+                <li><a href="#">Swim</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Outerwear</span>
+              <ul class="col-list">
+                <li><a href="#">Sweatshirts &amp; Hoodies</a></li>
+                <li><a href="#">Casual Jackets</a></li>
+                <li><a href="#">Blazers</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Accessories</span>
+              <ul class="col-list">
+                <li><a href="#">Belts</a></li>
+                <li><a href="#">Socks</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="menswear"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Brand Spotlight</span>
+                <div class="feature-title">Original Madras Trading Co.</div>
+                <span class="feature-cta">Shop the brand</span>
+              </div>
+            </a>
+          </div>
+          <div class="mega-inner mega-promo nav-version-promo">
+            <div class="mega-promo-visual">
+              <div class="feature-img" data-feat="menswear-promo" aria-hidden="true"></div>
+            </div>
+            <div class="mega-promo-content">
+              <span class="mega-promo-eyebrow">Coming Soon Online</span>
+              <h3 class="mega-promo-title">Menswear is on its way online</h3>
+              <div class="mega-promo-form-block">
+                <p class="mega-promo-copy">Available now in our Palm Springs &amp; Solana Beach stores. Join the waitlist for first access when menswear launches online, with curated shirts, outerwear, and essentials from makers like Original Madras Trading Co.</p>
+                <div class="waitlist-wrap">
+                  <form class="waitlist-form" action="#" novalidate>
+                    <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
+                    <button type="submit">Join the waitlist</button>
+                  </form>
+                  <p class="waitlist-success" role="status">You&rsquo;re on the list. We&rsquo;ll be in touch.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KIDS -->
+      <div class="nav-item" data-menu>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Kids</button>
+        <div class="mega" role="region">
+          <div class="mega-inner">
+            <div class="mega-col">
+              <span class="col-label">Play</span>
+              <ul class="col-list">
+                <li><a href="#">Games &amp; Puzzles</a></li>
+                <li><a href="#">Toys &amp; Stuffed Animals</a></li>
+                <li><a href="#">Art &amp; Craft Kits</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Munch</span>
+              <ul class="col-list">
+                <li><a href="#">Mealtime</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">Wear</span>
+              <ul class="col-list">
+                <li><a href="#">Sunglasses</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="kids"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Brand Spotlight</span>
+                <div class="feature-title">Londji</div>
+                <span class="feature-cta">Shop the brand</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GIFTS -->
+      <div class="nav-item" data-menu>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Gifts</button>
+        <div class="mega" role="region">
+          <div class="mega-inner slim">
+            <div class="mega-col">
+              <span class="col-label">Shop by Tier</span>
+              <ul class="col-list">
+                <li><a href="#">Thoughtful: Under $50</a></li>
+                <li><a href="#">Delightful: $50 – $150</a></li>
+                <li><a href="#">Memorable: $150 – $300</a></li>
+                <li><a href="#">Exceptional: $300+</a></li>
+                <li><a href="#">Gift Cards</a></li>
+              </ul>
+            </div>
+            <a href="#" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="gifts"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Gift Guide</span>
+                <div class="feature-title">Thoughtful to exceptional</div>
+                <span class="feature-cta">Shop gifts</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRANDS -->
+      <div class="nav-item" data-menu>
+        <button class="nav-link" aria-haspopup="true" aria-expanded="false">Brands</button>
+        <div class="mega" role="region">
+          <div class="mega-inner">
+            <div class="mega-col">
+              <span class="col-label">A – E</span>
+              <ul class="col-list">
+                <li><a href="#">Aaron Probyn</a></li>
+                <li><a href="#">Billybelt</a></li>
+                <li><a href="#">Chilewich</a></li>
+                <li><a href="#">D&#x27;ORSAY</a></li>
+                <li><a href="#">David Mellor</a></li>
+                <li><a href="#">DEEP BLACK</a></li>
+                <li><a href="#">EKOBO</a></li>
+                <li><a href="#">Eight &amp; Bob</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">G – I</span>
+              <ul class="col-list">
+                <li><a href="#">Garza Marfa</a></li>
+                <li><a href="#">Geometry</a></li>
+                <li><a href="#">Georg Jensen</a></li>
+                <li><a href="#">Histoires de Parfum</a></li>
+                <li><a href="#">Holcomb Studio</a></li>
+                <li><a href="#">Hoptimist</a></li>
+                <li><a href="#">Hudsonest</a></li>
+                <li><a href="#">Iittala</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">J – M</span>
+              <ul class="col-list">
+                <li><a href="#">Johanna Gullichsen</a></li>
+                <li><a href="#">Kat &amp; Roger</a></li>
+                <li><a href="#">Koziol</a></li>
+                <li><a href="#">LIGA</a></li>
+                <li><a href="#">Lemnos</a></li>
+                <li><a href="#">Los Poblanos</a></li>
+                <li><a href="#">Moglea Cards</a></li>
+                <li><a href="#">Multitudes</a></li>
+              </ul>
+            </div>
+            <div class="mega-col">
+              <span class="col-label">O – Z</span>
+              <ul class="col-list">
+                <li><a href="#">OCTAEVO</a></li>
+                <li><a href="#">Original Duckhead</a></li>
+                <li><a href="#">ROYCE</a></li>
+                <li><a href="#">SARDINE</a></li>
+                <li><a href="#">Sabre Paris</a></li>
+                <li><a href="#">Studio Arhoj</a></li>
+                <li><a href="#">Zone Denmark</a></li>
+              </ul>
+            </div>
+            <a href="/pages/brands" class="mega-feature has-photo">
+              <div class="feature-img" data-feat="brands"></div>
+              <div class="feature-body">
+                <span class="feature-eyebrow">Every Maker</span>
+                <div class="feature-title">Shop all brands</div>
+                <span class="feature-cta">View directory</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+
+    <div class="utils">
+      <button class="icon-btn desktop-only" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      </button>
+      <button class="icon-btn desktop-only" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+<!-- Mobile full-page menu -->
+<div class="mobile-panel" id="mobilePanel">
+  <div class="mobile-panel-spacer" aria-hidden="true"></div>
+  <div class="mobile-panel-scroll" id="mobilePanelScroll"></div>
+</div>

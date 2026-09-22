@@ -1,0 +1,551 @@
+{% comment %}
+  PHYLUM Mega Menu — merchant-editable via Theme Customizer.
+  Each block = one top-level item. Columns use Navigation link lists (Online Store → Navigation).
+{% endcomment %}
+<div
+  class="phylum-mega-nav-root"
+  data-phylum-mega-nav
+  data-nav-version="{{ section.settings.nav_version | escape }}"
+>
+  <header class="header">
+    <div class="bar">
+      <button type="button" class="hamburger" id="phylum-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span class="hb-bar hb-top" aria-hidden="true"></span>
+        <span class="hb-bar hb-mid" aria-hidden="true"></span>
+        <span class="hb-bar hb-bot" aria-hidden="true"></span>
+      </button>
+
+      <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name | escape }} home">
+        {%- if section.settings.logo != blank -%}
+          {{
+            section.settings.logo
+            | image_url: width: 600
+            | image_tag:
+              widths: '148, 296, 444',
+              sizes: '(max-width: 1200px) 148px, 296px',
+              alt: shop.name,
+              loading: 'eager',
+              class: 'phylum-logo-img'
+          }}
+        {%- else -%}
+          <span class="phylum-logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        {%- for block in section.blocks -%}
+          {%- if block.type != 'mega_menu_item' -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          {%- assign is_menswear = block.settings.is_menswear -%}
+          {%- assign panel_layout = block.settings.panel_layout -%}
+
+          <div
+            class="nav-item"
+            data-menu
+            {% if is_menswear %}data-menswear{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <button type="button" class="nav-link" aria-haspopup="true" aria-expanded="false">
+              <span class="nav-link-text">{{ block.settings.title | escape }}</span>
+              {%- if is_menswear and block.settings.show_coming_soon_badge -%}
+                <span class="nav-soon-badge" aria-hidden="true">
+                  <span class="nav-soon-label soon-pill">{{ block.settings.coming_soon_label | escape }}</span>
+                </span>
+              {%- endif -%}
+            </button>
+
+            <div class="mega" role="region" aria-label="{{ block.settings.title | escape }}">
+              {%- unless is_menswear and block.settings.menswear_panel == 'promo_only' -%}
+                <div class="mega-inner {% if panel_layout == 'slim' %}slim{% endif %} nav-version-current">
+                  {%- for col_index in (1..4) -%}
+                    {%- case col_index -%}
+                      {%- when 1 -%}
+                        {%- assign col_label = block.settings.column_1_label -%}
+                        {%- assign col_menu_handle = block.settings.column_1_menu -%}
+                      {%- when 2 -%}
+                        {%- assign col_label = block.settings.column_2_label -%}
+                        {%- assign col_menu_handle = block.settings.column_2_menu -%}
+                      {%- when 3 -%}
+                        {%- assign col_label = block.settings.column_3_label -%}
+                        {%- assign col_menu_handle = block.settings.column_3_menu -%}
+                      {%- when 4 -%}
+                        {%- assign col_label = block.settings.column_4_label -%}
+                        {%- assign col_menu_handle = block.settings.column_4_menu -%}
+                    {%- endcase -%}
+                    {%- assign col_nav_menu = nil -%}
+                    {%- if col_menu_handle != blank -%}
+                      {%- assign col_nav_menu = linklists[col_menu_handle] -%}
+                    {%- endif -%}
+                    {%- if col_label != blank or col_nav_menu and col_nav_menu.links.size > 0 -%}
+                      <div class="mega-col">
+                        {%- if col_label != blank -%}
+                          <span class="col-label">{{ col_label | escape }}</span>
+                        {%- endif -%}
+                        {%- if col_nav_menu and col_nav_menu.links.size > 0 -%}
+                          <ul class="col-list">
+                            {%- for link in col_nav_menu.links -%}
+                              <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  {%- if block.settings.show_feature -%}
+                    {%- assign feat_img = block.settings.feature_image -%}
+                    <a href="{{ block.settings.feature_link | default: '#' }}" class="mega-feature has-photo">
+                      <div
+                        class="feature-img"
+                        {% if feat_img != blank %}
+                          style="background-image: url('{{ feat_img | image_url: width: 900 }}');"
+                        {% endif %}
+                      ></div>
+                      <div class="feature-body">
+                        {%- if block.settings.feature_eyebrow != blank -%}
+                          <span class="feature-eyebrow">{{ block.settings.feature_eyebrow | escape }}</span>
+                        {%- endif -%}
+                        {%- if block.settings.feature_title != blank -%}
+                          <div class="feature-title">{{ block.settings.feature_title | escape }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.feature_cta != blank -%}
+                          <span class="feature-cta">{{ block.settings.feature_cta | escape }}</span>
+                        {%- endif -%}
+                      </div>
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- endunless -%}
+
+              {%- if is_menswear and block.settings.menswear_panel != 'catalog_only' -%}
+                {%- assign promo_img = block.settings.promo_image -%}
+                <div class="mega-inner mega-promo nav-version-promo">
+                  <div class="mega-promo-visual">
+                    <div
+                      class="feature-img"
+                      {% if promo_img != blank %}
+                        style="background-image: url('{{ promo_img | image_url: width: 1200 }}');"
+                      {% endif %}
+                      aria-hidden="true"
+                    ></div>
+                  </div>
+                  <div class="mega-promo-content">
+                    {%- if block.settings.promo_eyebrow != blank -%}
+                      <span class="mega-promo-eyebrow">{{ block.settings.promo_eyebrow | escape }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.promo_title != blank -%}
+                      <h3 class="mega-promo-title">{{ block.settings.promo_title | escape }}</h3>
+                    {%- endif -%}
+                    <div class="mega-promo-form-block">
+                      {%- if block.settings.promo_body != blank -%}
+                        <div class="mega-promo-copy rte">{{ block.settings.promo_body }}</div>
+                      {%- endif -%}
+                      {%- if block.settings.show_waitlist -%}
+                        <div class="waitlist-wrap">
+                          {%- if block.settings.waitlist_embed != blank -%}
+                            <div class="waitlist-embed">{{ block.settings.waitlist_embed }}</div>
+                          {%- else -%}
+                            <form class="waitlist-form" action="{{ block.settings.waitlist_action | default: '#' }}" method="post" novalidate>
+                              <input
+                                type="email"
+                                name="contact[email]"
+                                placeholder="{{ block.settings.waitlist_placeholder | escape }}"
+                                autocomplete="email"
+                                required
+                                aria-label="Email address"
+                              >
+                              <button type="submit">{{ block.settings.waitlist_button | escape }}</button>
+                            </form>
+                            <p class="waitlist-success" role="status">{{ block.settings.waitlist_success | escape }}</p>
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </nav>
+
+      <div class="utils">
+        {%- if section.settings.show_search -%}
+          <a href="{{ routes.search_url }}" class="icon-btn desktop-only" aria-label="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.show_account -%}
+          <a href="{{ routes.account_url }}" class="icon-btn desktop-only" aria-label="Account">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </a>
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-backdrop" id="phylum-navBackdrop" aria-hidden="true"></div>
+
+  <div class="mobile-panel" id="phylum-mobilePanel">
+    <div class="mobile-panel-spacer" aria-hidden="true"></div>
+    <div class="mobile-panel-scroll" id="phylum-mobilePanelScroll"></div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "PHYLUM mega menu",
+  "tag": "section",
+  "class": "phylum-mega-nav-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add menu items as blocks below. For each column, create a menu under Online Store → Navigation and assign it to the column’s link list field."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "select",
+      "id": "nav_version",
+      "label": "Menswear dropdown mode",
+      "info": "Promo shows the green coming-soon panel when the Menswear block includes it.",
+      "default": "promo",
+      "options": [
+        { "value": "promo", "label": "Promo (coming soon online)" },
+        { "value": "current", "label": "Catalog columns + feature" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account icon",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu_item",
+      "name": "Menu item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Top-level label",
+          "default": "Category"
+        },
+        {
+          "type": "select",
+          "id": "panel_layout",
+          "label": "Panel width",
+          "default": "standard",
+          "options": [
+            { "value": "standard", "label": "Standard" },
+            { "value": "slim", "label": "Slim" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Column 1"
+        },
+        {
+          "type": "text",
+          "id": "column_1_label",
+          "label": "Column 1 heading"
+        },
+        {
+          "type": "link_list",
+          "id": "column_1_menu",
+          "label": "Column 1 menu"
+        },
+        {
+          "type": "header",
+          "content": "Column 2"
+        },
+        {
+          "type": "text",
+          "id": "column_2_label",
+          "label": "Column 2 heading"
+        },
+        {
+          "type": "link_list",
+          "id": "column_2_menu",
+          "label": "Column 2 menu"
+        },
+        {
+          "type": "header",
+          "content": "Column 3"
+        },
+        {
+          "type": "text",
+          "id": "column_3_label",
+          "label": "Column 3 heading"
+        },
+        {
+          "type": "link_list",
+          "id": "column_3_menu",
+          "label": "Column 3 menu"
+        },
+        {
+          "type": "header",
+          "content": "Column 4"
+        },
+        {
+          "type": "text",
+          "id": "column_4_label",
+          "label": "Column 4 heading"
+        },
+        {
+          "type": "link_list",
+          "id": "column_4_menu",
+          "label": "Column 4 menu"
+        },
+        {
+          "type": "header",
+          "content": "Brand spotlight (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_feature",
+          "label": "Show brand spotlight card",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_image",
+          "label": "Spotlight image"
+        },
+        {
+          "type": "text",
+          "id": "feature_eyebrow",
+          "label": "Eyebrow",
+          "default": "Brand Spotlight"
+        },
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "feature_cta",
+          "label": "Link label",
+          "default": "Shop the brand"
+        },
+        {
+          "type": "url",
+          "id": "feature_link",
+          "label": "Spotlight link"
+        },
+        {
+          "type": "header",
+          "content": "Menswear / coming soon (optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_menswear",
+          "label": "This is the Menswear item",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_coming_soon_badge",
+          "label": "Show Coming Soon pill on nav label",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "coming_soon_label",
+          "label": "Pill text",
+          "default": "Coming Soon"
+        },
+        {
+          "type": "select",
+          "id": "menswear_panel",
+          "label": "Menswear panels",
+          "default": "both",
+          "options": [
+            { "value": "both", "label": "Catalog + promo (switchable via mode above)" },
+            { "value": "promo_only", "label": "Promo only" },
+            { "value": "catalog_only", "label": "Catalog only" }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image",
+          "label": "Promo panel image"
+        },
+        {
+          "type": "text",
+          "id": "promo_eyebrow",
+          "label": "Promo eyebrow",
+          "default": "Coming Soon Online"
+        },
+        {
+          "type": "text",
+          "id": "promo_title",
+          "label": "Promo title",
+          "default": "Menswear is on its way online"
+        },
+        {
+          "type": "richtext",
+          "id": "promo_body",
+          "label": "Promo body"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_waitlist",
+          "label": "Show waitlist area",
+          "default": true
+        },
+        {
+          "type": "html",
+          "id": "waitlist_embed",
+          "label": "Waitlist app embed HTML (optional)",
+          "info": "If set, replaces the default email form (Klaviyo, etc.)."
+        },
+        {
+          "type": "url",
+          "id": "waitlist_action",
+          "label": "Default form action URL"
+        },
+        {
+          "type": "text",
+          "id": "waitlist_placeholder",
+          "label": "Email placeholder",
+          "default": "Your email address"
+        },
+        {
+          "type": "text",
+          "id": "waitlist_button",
+          "label": "Submit button",
+          "default": "Join the waitlist"
+        },
+        {
+          "type": "text",
+          "id": "waitlist_success",
+          "label": "Success message",
+          "default": "You're on the list. We'll be in touch."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PHYLUM mega menu",
+      "blocks": [
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Home Decor",
+            "column_1_label": "Decorate",
+            "column_2_label": "Layer",
+            "column_3_label": "Refresh",
+            "column_4_label": "Illuminate",
+            "feature_title": "Dinosaur Designs"
+          }
+        },
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Kitchen & Dining",
+            "column_1_label": "Cook & Prep",
+            "column_2_label": "Serve & Dine",
+            "column_3_label": "Entertain",
+            "feature_title": "Mud Australia"
+          }
+        },
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Apothecary",
+            "panel_layout": "slim",
+            "column_1_label": "Nourish",
+            "column_2_label": "Scent",
+            "feature_title": "D'ORSAY"
+          }
+        },
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Outdoor",
+            "panel_layout": "slim",
+            "column_1_label": "Gather",
+            "feature_title": "Ekobo"
+          }
+        },
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Accessories",
+            "column_1_label": "Wear",
+            "column_2_label": "Adorn",
+            "column_3_label": "Create",
+            "feature_title": "SARDINE"
+          }
+        },
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Menswear",
+            "is_menswear": true,
+            "column_1_label": "Tops",
+            "column_2_label": "Bottoms",
+            "column_3_label": "Outerwear",
+            "column_4_label": "Accessories",
+            "feature_title": "Original Madras Trading Co.",
+            "promo_body": "<p>Menswear is available in store at our Palm Springs location only—we currently have a large assortment in stock, including pieces from Far Afield. Join the waitlist for first access when menswear launches online.</p>"
+          }
+        },
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Kids",
+            "column_1_label": "Play",
+            "column_2_label": "Munch",
+            "column_3_label": "Wear",
+            "feature_title": "Londji"
+          }
+        },
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Gifts",
+            "panel_layout": "slim",
+            "column_1_label": "Shop by Tier",
+            "feature_eyebrow": "Gift Guide",
+            "feature_title": "Thoughtful to exceptional",
+            "feature_cta": "Shop gifts"
+          }
+        },
+        {
+          "type": "mega_menu_item",
+          "settings": {
+            "title": "Brands",
+            "column_1_label": "A – E",
+            "column_2_label": "G – I",
+            "column_3_label": "J – M",
+            "column_4_label": "O – Z",
+            "feature_eyebrow": "Every Maker",
+            "feature_title": "Shop all brands",
+            "feature_cta": "View directory"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,22 @@
+{% comment %}
+  Renders one mega menu column from a heading + Navigation menu handle.
+  Accepts: label (string), menu_handle (link_list id)
+{% endcomment %}
+{%- assign nav_menu = nil -%}
+{%- if menu_handle != blank -%}
+  {%- assign nav_menu = linklists[menu_handle] -%}
+{%- endif -%}
+{%- if label != blank or nav_menu and nav_menu.links.size > 0 -%}
+  <div class="mega-col">
+    {%- if label != blank -%}
+      <span class="col-label">{{ label | escape }}</span>
+    {%- endif -%}
+    {%- if nav_menu and nav_menu.links.size > 0 -%}
+      <ul class="col-list">
+        {%- for link in nav_menu.links -%}
+          <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+{%- endif -%}
