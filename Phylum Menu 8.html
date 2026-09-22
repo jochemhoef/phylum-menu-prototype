@@ -820,16 +820,21 @@
 
   .mega-promo-form-block {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
   }
 
   .mega-promo-form-block .mega-promo-copy {
     max-width: none;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 
   .mega-promo-form-block .waitlist-wrap {
     width: 100%;
+    margin: 0;
+    padding-top: 2px;
   }
 
   .mega-promo-content .waitlist-form {
@@ -923,6 +928,9 @@
   }
   .waitlist-klaviyo .klaviyo-form-T43KxT {
     width: 100%;
+    position: relative !important;
+    top: auto !important;
+    margin-top: 0 !important;
   }
 
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT,
@@ -961,6 +969,10 @@
     box-shadow: none !important;
     min-height: 48px !important;
     box-sizing: border-box !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    position: relative !important;
+    top: auto !important;
   }
 
   .mega-promo-content .waitlist-klaviyo input::placeholder,
@@ -1015,16 +1027,16 @@
     color: var(--ink) !important;
   }
 
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(button),
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(input[type="submit"]),
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(form a),
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(button),
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(input[type="submit"]),
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(form a) {
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> button),
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> a[role="button"]),
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> form a),
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> button),
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> a[role="button"]),
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> form a) {
     width: 100% !important;
-    min-height: 52px !important;
+    min-height: 0 !important;
     padding: 0 !important;
-    margin-top: 10px !important;
+    margin-top: 0 !important;
   }
 
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT h1,
@@ -1033,7 +1045,7 @@
   .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT h1,
   .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT h2,
   .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT p {
-    color: var(--paper) !important;
+    display: none !important;
   }
 
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form,
@@ -1041,6 +1053,8 @@
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
+    gap: 12px !important;
+    margin-top: 0 !important;
   }
 
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
@@ -1104,13 +1118,18 @@
   }
   .m-promo-form-block {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
   }
   .m-promo-form-block .m-promo-copy {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
   .m-promo-form-block .waitlist-wrap {
     width: 100%;
+    margin: 0;
+    padding-top: 2px;
   }
   .m-promo .waitlist-form {
     width: 100%;

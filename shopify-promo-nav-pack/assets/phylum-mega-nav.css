@@ -813,16 +813,21 @@
 
   .mega-promo-form-block {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
   }
 
   .mega-promo-form-block .mega-promo-copy {
     max-width: none;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 
   .mega-promo-form-block .waitlist-wrap {
     width: 100%;
+    margin: 0;
+    padding-top: 2px;
   }
 
   .mega-promo-content .waitlist-form {
@@ -955,13 +960,18 @@
   }
   .m-promo-form-block {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
   }
   .m-promo-form-block .m-promo-copy {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
   .m-promo-form-block .waitlist-wrap {
     width: 100%;
+    margin: 0;
+    padding-top: 2px;
   }
   .m-promo .waitlist-form {
     width: 100%;
