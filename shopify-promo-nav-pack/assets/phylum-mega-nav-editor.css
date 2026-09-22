@@ -54,19 +54,24 @@
   width: 100%;
 }
 
-/* Klaviyo embed — transparent on green menswear promo panel */
+/* Klaviyo embed — transparent shell; full-height yellow CTA */
 .phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT,
 .phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form,
-.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT > div,
 .phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT,
-.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form,
-.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT > div {
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form {
   background: transparent !important;
-  background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
   padding: 0 !important;
   margin: 0 !important;
+  max-width: 100% !important;
+}
+
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT > div,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT > div {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
   max-width: 100% !important;
 }
 
@@ -75,6 +80,8 @@
 .phylum-mega-nav-root .m-promo .waitlist-klaviyo input[type="email"],
 .phylum-mega-nav-root .m-promo .waitlist-klaviyo input[type="text"] {
   width: 100% !important;
+  min-height: 48px !important;
+  box-sizing: border-box !important;
   border: 1px solid rgba(241, 238, 228, 0.22) !important;
   border-radius: 4px !important;
   background: rgba(255, 255, 255, 0.07) !important;
@@ -83,19 +90,30 @@
   box-shadow: none !important;
 }
 
-.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo button,
-.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo [type="submit"],
-.phylum-mega-nav-root .m-promo .waitlist-klaviyo button,
-.phylum-mega-nav-root .m-promo .waitlist-klaviyo [type="submit"] {
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT button,
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form a,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT button,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form a {
+  display: block !important;
   width: 100% !important;
+  min-height: 52px !important;
+  line-height: 1.35 !important;
+  box-sizing: border-box !important;
   margin-top: 10px !important;
   border: none !important;
   border-radius: 4px !important;
+  background-color: #f2a900 !important;
   background: #f2a900 !important;
   color: #24211c !important;
   padding: 15px 20px !important;
   font-weight: 600 !important;
+  text-decoration: none !important;
+  text-align: center !important;
   box-shadow: none !important;
+  opacity: 1 !important;
+  appearance: none !important;
 }
 
 @media (max-width: 1200px) {

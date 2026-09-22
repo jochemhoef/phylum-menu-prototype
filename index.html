@@ -920,20 +920,25 @@
     width: 100%;
   }
 
-  /* Klaviyo embed — match green promo panel (remove default white card) */
+  /* Klaviyo embed — transparent outer shell (do not zero padding on all inner divs) */
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT,
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form,
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT > div,
-  .mega-promo-content .waitlist-klaviyo [class*="klaviyo-form"],
   .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT,
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form,
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT > div {
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form {
     background: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT > div,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT > div {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
     max-width: 100% !important;
   }
 
@@ -950,6 +955,8 @@
     font-size: 14px !important;
     font-family: inherit !important;
     box-shadow: none !important;
+    min-height: 48px !important;
+    box-sizing: border-box !important;
   }
 
   .mega-promo-content .waitlist-klaviyo input::placeholder,
@@ -957,14 +964,25 @@
     color: rgba(241, 238, 228, 0.42) !important;
   }
 
-  .mega-promo-content .waitlist-klaviyo button,
-  .mega-promo-content .waitlist-klaviyo [type="submit"],
-  .m-promo .waitlist-klaviyo button,
-  .m-promo .waitlist-klaviyo [type="submit"] {
+  /* Submit CTA — button, submit input, or Klaviyo link-style button */
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT button,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT a[role="button"],
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form a,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT button,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT a[role="button"],
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form a {
+    display: block !important;
     width: 100% !important;
+    min-height: 52px !important;
+    height: auto !important;
+    line-height: 1.35 !important;
+    box-sizing: border-box !important;
     margin-top: 10px !important;
     border: none !important;
     border-radius: 4px !important;
+    background-color: #f2a900 !important;
     background: #f2a900 !important;
     color: var(--ink) !important;
     padding: 15px 20px !important;
@@ -972,13 +990,38 @@
     font-weight: 600 !important;
     letter-spacing: 0.06em !important;
     text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-align: center !important;
     cursor: pointer !important;
     box-shadow: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: visible !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
   }
 
-  .mega-promo-content .waitlist-klaviyo button:hover,
-  .m-promo .waitlist-klaviyo button:hover {
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT button:hover,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"]:hover,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form a:hover,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT button:hover,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"]:hover,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form a:hover {
+    background-color: #e09d00 !important;
     background: #e09d00 !important;
+    color: var(--ink) !important;
+  }
+
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(button),
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(input[type="submit"]),
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(form a),
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(button),
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(input[type="submit"]),
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(form a) {
+    width: 100% !important;
+    min-height: 52px !important;
+    padding: 0 !important;
+    margin-top: 10px !important;
   }
 
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT h1,
