@@ -981,22 +981,27 @@
     color: rgba(241, 238, 228, 0.42) !important;
   }
 
-  /* Submit CTA — button, submit input, or Klaviyo link-style button */
+  /* Submit CTA — real Klaviyo button / needsclick link (not every form anchor) */
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT button,
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT a[role="button"],
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form a,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT a.needsclick,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) > a,
   .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT button,
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
   .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT a[role="button"],
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form a {
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT a.needsclick,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) > a {
     display: block !important;
     width: 100% !important;
     min-height: 52px !important;
     height: auto !important;
     line-height: 1.35 !important;
     box-sizing: border-box !important;
-    margin-top: 10px !important;
+    margin-top: 0 !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: 1 !important;
     border: none !important;
     border-radius: 4px !important;
     background-color: #f2a900 !important;
@@ -1019,25 +1024,53 @@
   }
 
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT button:hover,
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"]:hover,
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form a:hover,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT a[role="button"]:hover,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT a.needsclick:hover,
   .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT button:hover,
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"]:hover,
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form a:hover {
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT a[role="button"]:hover,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT a.needsclick:hover {
     background-color: #e09d00 !important;
     background: #e09d00 !important;
     color: var(--ink) !important;
   }
 
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> button),
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> a[role="button"]),
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> form a),
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> button),
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> a[role="button"]),
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT div:has(> form a) {
+  /* Stack email then CTA (undo Klaviyo inline row / overlap) */
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    flex-wrap: nowrap !important;
     width: 100% !important;
+    max-width: 100% !important;
+    position: relative !important;
+    height: auto !important;
     min-height: 0 !important;
-    padding: 0 !important;
+    overflow: visible !important;
+    gap: 12px !important;
+  }
+
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]),
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    gap: 12px !important;
+  }
+
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) input[type="email"],
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) input[type="email"] {
+    grid-row: 1 !important;
+    z-index: 2 !important;
+  }
+
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) button,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) a.needsclick,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) a[role="button"],
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) button,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) a.needsclick,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) a[role="button"] {
+    grid-row: 2 !important;
     margin-top: 0 !important;
   }
 
@@ -1060,19 +1093,19 @@
     margin-top: 0 !important;
   }
 
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
-  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div > div,
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
-  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form > div > div {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
   .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
   .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"] {
+    display: none !important;
+  }
+
+  /* Klaviyo sometimes renders both button + link CTA — keep one visible stack */
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form:has(button) a.needsclick,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form:has(button) a.needsclick {
+    display: none !important;
+  }
+
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form:not(:has(button)) a:not(.needsclick):not([role="button"]),
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form:not(:has(button)) a:not(.needsclick):not([role="button"]) {
     display: none !important;
   }
 

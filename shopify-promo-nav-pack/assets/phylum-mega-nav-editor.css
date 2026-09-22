@@ -115,15 +115,42 @@
   margin-top: 0 !important;
 }
 
-.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
-.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div > div,
-.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
-.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form > div > div {
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div {
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
+  flex-wrap: nowrap !important;
   width: 100% !important;
   max-width: 100% !important;
+  position: relative !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  gap: 12px !important;
+}
+
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]),
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-auto-rows: auto !important;
+  gap: 12px !important;
+}
+
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) input[type="email"],
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) input[type="email"] {
+  grid-row: 1 !important;
+}
+
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) button,
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) a.needsclick,
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) > a,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) button,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) a.needsclick,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) > a {
+  grid-row: 2 !important;
+  margin-top: 0 !important;
 }
 
 .phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
@@ -131,16 +158,26 @@
   display: none !important;
 }
 
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form:has(button) a.needsclick,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form:has(button) a.needsclick {
+  display: none !important;
+}
+
 .phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT button,
-.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form a,
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT a.needsclick,
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) > a,
 .phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT button,
-.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form a {
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT a.needsclick,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form div:has(input[type="email"]) > a {
   display: block !important;
   width: 100% !important;
   min-height: 52px !important;
   line-height: 1.35 !important;
   box-sizing: border-box !important;
-  margin-top: 10px !important;
+  margin-top: 0 !important;
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
   border: none !important;
   border-radius: 4px !important;
   background-color: #f2a900 !important;
