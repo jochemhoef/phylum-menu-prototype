@@ -143,7 +143,7 @@
                         <div class="mega-promo-copy rte">{{ block.settings.promo_body }}</div>
                       {%- endif -%}
                       {%- if block.settings.show_waitlist -%}
-                        <div class="waitlist-wrap">
+                        <div class="waitlist-wrap waitlist-klaviyo">
                           {%- if block.settings.waitlist_embed != blank -%}
                             <div class="waitlist-embed">{{ block.settings.waitlist_embed }}</div>
                           {%- else -%}
@@ -414,8 +414,9 @@
         {
           "type": "html",
           "id": "waitlist_embed",
-          "label": "Waitlist app embed HTML (optional)",
-          "info": "If set, replaces the default email form (Klaviyo, etc.)."
+          "label": "Waitlist embed HTML",
+          "default": "<div class=\"klaviyo-form-T43KxT\"></div>",
+          "info": "Klaviyo embed for menswear waitlist. Requires Klaviyo onsite script (Shopify app embed or theme script). Replaces the fallback email form when set."
         },
         {
           "type": "url",
@@ -507,7 +508,8 @@
             "column_3_label": "Outerwear",
             "column_4_label": "Accessories",
             "feature_title": "Original Madras Trading Co.",
-            "promo_body": "<p>Menswear is available in store at our Palm Springs location only—we currently have a large assortment in stock, including pieces from Far Afield. Join the waitlist for first access when menswear launches online.</p>"
+            "promo_body": "<p>Menswear is available in store at our Palm Springs location only—we currently have a large assortment in stock, including pieces from Far Afield. Join the waitlist for first access when menswear launches online.</p>",
+            "waitlist_embed": "<div class=\"klaviyo-form-T43KxT\"></div>"
           }
         },
         {

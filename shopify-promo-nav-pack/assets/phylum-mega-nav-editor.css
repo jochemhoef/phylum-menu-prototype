@@ -45,6 +45,15 @@
   opacity: 0.92;
 }
 
+.waitlist-klaviyo {
+  width: 100%;
+  min-height: 52px;
+}
+
+.waitlist-klaviyo .klaviyo-form-T43KxT {
+  width: 100%;
+}
+
 @media (max-width: 1200px) {
   .phylum-mega-nav-root .logo img,
   .phylum-mega-nav-root .phylum-logo-img {

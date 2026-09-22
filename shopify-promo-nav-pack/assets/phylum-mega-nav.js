@@ -61,6 +61,12 @@
       btn.setAttribute('aria-expanded', 'true');
       positionMenu(item);
       document.body.classList.add('nav-open');
+      if (item.hasAttribute('data-menswear')) {
+        window.requestAnimationFrame(() => {
+          window._klOnsite = window._klOnsite || [];
+          window._klOnsite.push(['embedForm', 'T43KxT']);
+        });
+      }
     };
 
     const scheduleClose = () => {

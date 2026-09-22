@@ -912,6 +912,14 @@
   .waitlist-wrap.is-success .waitlist-form { display: none; }
   .waitlist-wrap.is-success .waitlist-success { display: block; }
 
+  .waitlist-klaviyo {
+    width: 100%;
+    min-height: 52px;
+  }
+  .waitlist-klaviyo .klaviyo-form-T43KxT {
+    width: 100%;
+  }
+
   .m-promo {
     padding: 0 24px 28px;
   }
@@ -1258,12 +1266,8 @@
               <h3 class="mega-promo-title">Menswear is on its way online</h3>
               <div class="mega-promo-form-block">
                 <p class="mega-promo-copy">Menswear is available in store at our Palm Springs location only—we currently have a large assortment in stock, including pieces from Far Afield. Join the waitlist for first access when menswear launches online.</p>
-                <div class="waitlist-wrap">
-                  <form class="waitlist-form" action="#" novalidate>
-                    <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
-                    <button type="submit">Join the waitlist</button>
-                  </form>
-                  <p class="waitlist-success" role="status">You&rsquo;re on the list. We&rsquo;ll be in touch.</p>
+                <div class="waitlist-wrap waitlist-klaviyo">
+                  <div class="klaviyo-form-T43KxT"></div>
                 </div>
               </div>
             </div>
@@ -1507,6 +1511,12 @@
       btn.setAttribute('aria-expanded','true');
       positionMenu(item);
       document.body.classList.add('nav-open');
+      if (item.hasAttribute('data-menswear')) {
+        window.requestAnimationFrame(() => {
+          window._klOnsite = window._klOnsite || [];
+          window._klOnsite.push(['embedForm', 'T43KxT']);
+        });
+      }
     };
     const scheduleClose = () => {
       closeTimer = setTimeout(() => {
@@ -1584,12 +1594,8 @@
             <div class="m-promo-title">Menswear is on its way online</div>
             <div class="m-promo-form-block">
               <p class="m-promo-copy">Menswear is available in store at our Palm Springs location only—we currently have a large assortment in stock, including pieces from Far Afield. Join the waitlist for first access when menswear launches online.</p>
-              <div class="waitlist-wrap">
-                <form class="waitlist-form" action="#" novalidate>
-                  <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email address">
-                  <button type="submit">Join the waitlist</button>
-                </form>
-                <p class="waitlist-success" role="status">You&rsquo;re on the list. We&rsquo;ll be in touch.</p>
+              <div class="waitlist-wrap waitlist-klaviyo">
+                <div class="klaviyo-form-T43KxT"></div>
               </div>
             </div>
           </div>`;
@@ -1650,6 +1656,15 @@
   bindWaitlistForms();
   buildMobileMenu();
 
+
+  (function loadKlaviyo() {
+    if (document.querySelector('script[data-phylum-klaviyo]')) return;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://static.klaviyo.com/onsite/js/WhDwC2/klaviyo.js?company_id=WhDwC2';
+    s.setAttribute('data-phylum-klaviyo', 'true');
+    document.head.appendChild(s);
+  })();
 
   // Clicking the blurred backdrop closes any open mega menu
   document.getElementById('navBackdrop').addEventListener('click', () => {
