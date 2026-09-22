@@ -90,11 +90,32 @@
   box-shadow: none !important;
 }
 
-.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT button,
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div > div,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form > div > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 .phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
+.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"] {
+  display: none !important;
+}
+
+.phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT button,
 .phylum-mega-nav-root .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form a,
 .phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT button,
-.phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
 .phylum-mega-nav-root .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form a {
   display: block !important;
   width: 100% !important;

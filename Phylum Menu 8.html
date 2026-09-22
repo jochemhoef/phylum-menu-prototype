@@ -459,7 +459,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
-      padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+      padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
     }
 
     body.menu-open .mobile-panel {
@@ -780,6 +780,11 @@
     inset: 0;
   }
 
+  .mega-promo-visual .feature-img[data-feat="menswear-promo"] {
+    background-size: cover;
+    background-position: center 12%;
+  }
+
   .mega-promo-content {
     padding: 44px 48px 40px;
     display: flex;
@@ -1031,17 +1036,45 @@
     color: var(--paper) !important;
   }
 
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT form > div > div,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form > div,
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT form > div > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .mega-promo-content .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"],
+  .m-promo .waitlist-klaviyo .klaviyo-form-T43KxT input[type="submit"] {
+    display: none !important;
+  }
+
   .m-promo {
     padding: 0 24px 28px;
   }
   .m-promo-visual {
     position: relative;
-    height: 200px;
+    height: 300px;
     border-radius: 6px;
     overflow: hidden;
     margin-bottom: 20px;
   }
-  .m-promo-visual .feature-img { position: absolute; inset: 0; }
+  .m-promo-visual .feature-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 14%;
+  }
   .m-promo-body {
     padding: 24px;
     border-radius: 6px;
