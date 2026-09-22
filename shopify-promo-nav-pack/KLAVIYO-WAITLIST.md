@@ -37,6 +37,13 @@ Configure in **Klaviyo**, not in theme code:
 
 Redirect sends users **off the current page** (menu closes). Inline success keeps them in context.
 
+## Remove white form background
+
+1. **Theme:** `phylum-mega-nav-editor.css` includes overrides for `.klaviyo-form-T43KxT` on the green panel.
+2. **Klaviyo form editor:** **Styles** → set form / column **Background** to **transparent** (or match `#535538`).
+
+If a white box remains, Klaviyo may be using an inner wrapper—inspect in DevTools and add a selector, or set background in the Klaviyo **Email Opt-In** step styles.
+
 ## QA
 
 - Open **Menswear** mega panel → email field appears (Klaviyo-styled).  
