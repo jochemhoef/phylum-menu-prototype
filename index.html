@@ -1216,12 +1216,20 @@
     gap: 24px;
     padding: 0 40px 28px;
   }
-  .reviews-head h2 {
-    font-family: "Lora", Georgia, serif;
+  @font-face {
+    font-family: "PPNeueMontreal";
+    src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/PPNeueMontreal-Medium.woff2?v=1751331964") format("woff2");
     font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  .reviews-head h2 {
+    font-family: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 500;
+    font-style: normal;
     font-size: clamp(32px, 4vw, 46px);
-    letter-spacing: -0.025em;
-    line-height: 1.1;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
     color: #3E4434;
   }
   .reviews-links {
