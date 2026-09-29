@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PHYLUM — Navigation Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F1EEE4;
@@ -1197,6 +1200,130 @@
   .m-promo .waitlist-success {
     color: #b8c4a0;
   }
+
+  /* ---------- Google reviews (Promo Nav only) ---------- */
+  .reviews { display: none; }
+  html[data-nav-version="promo"] .reviews {
+    display: block;
+    background: #E7E3D4;
+    padding: 72px 0 76px;
+    color: #3E4434;
+  }
+  .reviews-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 40px 28px;
+  }
+  .reviews-head h2 {
+    font-family: "Lora", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(32px, 4vw, 46px);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: #3E4434;
+  }
+  .reviews-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 26px;
+    margin-top: 16px;
+  }
+  .reviews-links a {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #DE6C3C;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 1px;
+  }
+  .reviews-links a:hover { color: #C45424; }
+  .reviews-arrows { display: flex; gap: 8px; flex-shrink: 0; }
+  .reviews-arrow {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(62, 68, 52, 0.28);
+    background: transparent;
+    color: #3E4434;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+  }
+  .reviews-arrow:hover { background: #fff; border-color: rgba(62, 68, 52, 0.5); }
+  .reviews-arrow svg { width: 16px; height: 16px; }
+  .reviews-viewport { overflow: hidden; padding-left: 40px; }
+  .reviews-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    will-change: transform;
+  }
+  .review-card {
+    width: 340px;
+    min-height: 292px;
+    flex: 0 0 auto;
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid rgba(62, 68, 52, 0.06);
+    box-shadow: 0 16px 40px -28px rgba(36, 33, 28, 0.45);
+    padding: 22px 24px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .review-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .review-brand svg { width: 18px; height: 18px; display: block; }
+  .review-stars { display: inline-flex; gap: 2px; }
+  .review-stars svg { width: 15px; height: 15px; }
+  .review-card blockquote {
+    font-family: "Lora", Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.45;
+    color: #2C2923;
+    margin-top: 18px;
+    flex: 1;
+  }
+  .review-card footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(62, 68, 52, 0.08);
+  }
+  .review-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #2C2923;
+  }
+  .review-when {
+    font-size: 12px;
+    color: #8A8476;
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) {
+    html[data-nav-version="promo"] .reviews { padding: 48px 0 56px; }
+    .reviews-head { padding: 0 20px 20px; align-items: flex-start; }
+    .reviews-viewport { padding-left: 20px; }
+    .reviews-track { gap: 12px; }
+    .review-card { width: min(300px, 82vw); min-height: 270px; padding: 18px 18px 16px; }
+    .review-card blockquote { font-size: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reviews-viewport { overflow-x: auto; }
+  }
 </style>
 </head>
 <body>
@@ -1647,6 +1774,94 @@
   </div>
 </section>
 
+<section class="reviews" aria-labelledby="reviews-heading">
+  <div class="reviews-head">
+    <div>
+      <h2 id="reviews-heading">Reviews that make us blush!</h2>
+      <div class="reviews-links">
+        <a href="https://maps.app.goo.gl/4PkCwBXmNPtHUFLD7" target="_blank" rel="noopener">Read More Kind Words</a>
+        <a href="https://search.google.com/local/writereview?placeid=ChIJG0yPFW4b24AR5IJs-1PoPao" target="_blank" rel="noopener">Leave a Review</a>
+      </div>
+    </div>
+    <div class="reviews-arrows">
+      <button type="button" class="reviews-arrow" data-reviews-prev aria-label="Previous reviews">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button type="button" class="reviews-arrow" data-reviews-next aria-label="Next reviews">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="reviews-viewport">
+    <div class="reviews-track">
+      <article class="review-card">
+        <div class="review-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+          <span class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg></span>
+        </div>
+        <blockquote>I had an absolutely outstanding experience with Phylum from beginning to end. Those thoughtful personal touches are so rare today and made the experience feel truly special.</blockquote>
+        <footer><span class="review-name">Inna Palissa</span><span class="review-when">2 weeks ago</span></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+          <span class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg></span>
+        </div>
+        <blockquote>We were convinced to check out Phylum by their lovely colorful window display, and we also just love a bits &amp; bobs store. But Phylum has a lot more than bits &amp; bobs!</blockquote>
+        <footer><span class="review-name">Dave Heal</span><span class="review-when">3 months ago</span></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+          <span class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg></span>
+        </div>
+        <blockquote>Phylum is not to be missed. I live in Northern CA and found this store last year—they have a wide variety of high-quality housewares, clothes, and kids' items.</blockquote>
+        <footer><span class="review-name">Linda Drew</span><span class="review-when">10 months ago</span></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+          <span class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg></span>
+        </div>
+        <blockquote>This is one of those stores that I walk into and all of my friends can tell immediately how much I love it. It was beautifully merchandised and so dang colorful.</blockquote>
+        <footer><span class="review-name">Carlee Bird</span><span class="review-when">10 months ago</span></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+          <span class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg></span>
+        </div>
+        <blockquote>Jory is the loveliest human with the best eye! I literally went back 3x to buy something - highly recommend this Palm Springs gem!</blockquote>
+        <footer><span class="review-name">Melanie Tuazon</span><span class="review-when">7 months ago</span></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+          <span class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg></span>
+        </div>
+        <blockquote>Incredible hospitality! Amazing selection of all sorts of home goods. Well curated with a vision for high quality sourcing and eye for color.</blockquote>
+        <footer><span class="review-name">meesh yeesh</span><span class="review-when">4 months ago</span></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+          <span class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg></span>
+        </div>
+        <blockquote>Every time I’m in Palm Springs I look forward to going to Phylum! They have unique gifts and a beautiful selection of items for the home.</blockquote>
+        <footer><span class="review-name">John Davis</span><span class="review-when">7 months ago</span></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+          <span class="review-stars" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#F2A900" d="M10 1.6l2.3 4.7 5.2.8-3.8 3.6.9 5.2L10 13.4 5.4 15.9l.9-5.2L2.5 7.1l5.2-.8L10 1.6z"/></svg></span>
+        </div>
+        <blockquote>A gorgeously curated store with the most delightful staff. They were incredibly kind to my kids and we can’t wait to return on our next trip to Palm Springs!</blockquote>
+        <footer><span class="review-name">Stephanie MacKeen</span><span class="review-when">7 months ago</span></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
 <script>
   // ---- Mobile menu ----
   const hb = document.getElementById('hamburger');
@@ -1870,6 +2085,71 @@
     items.forEach(i => { i.classList.remove('open'); i.querySelector('.nav-link').setAttribute('aria-expanded','false'); });
     document.body.classList.remove('nav-open');
   });
+  // Promo Nav review carousel: loops, pauses while the pointer is over it.
+  (function initReviewCarousel() {
+    const section = document.querySelector('.reviews');
+    const track = section && section.querySelector('.reviews-track');
+    if (!section || !track) return;
+
+    [...track.children].forEach((card) => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let offset = 0;
+    let half = 0;
+    let paused = reduceMotion;
+    let nudging = false;
+    const speed = 0.55;
+
+    const measure = () => { half = track.scrollWidth / 2; };
+    const wrap = () => {
+      if (!half) return;
+      while (offset <= -half) offset += half;
+      while (offset > 0) offset -= half;
+    };
+    const apply = () => { track.style.transform = 'translate3d(' + offset + 'px,0,0)'; };
+
+    const frame = () => {
+      if (section.offsetParent && !half) measure();
+      if (!paused && !nudging && half && section.offsetParent) {
+        offset -= speed;
+        wrap();
+        track.style.transition = 'none';
+        apply();
+      }
+      window.requestAnimationFrame(frame);
+    };
+
+    const nudge = (direction) => {
+      const card = track.querySelector('.review-card');
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 16;
+      const step = (card ? card.getBoundingClientRect().width : 340) + gap;
+      offset += direction * step;
+      wrap();
+      nudging = true;
+      track.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+      apply();
+    };
+
+    track.addEventListener('transitionend', () => { nudging = false; });
+    section.addEventListener('mouseenter', () => { paused = true; });
+    section.addEventListener('mouseleave', () => { if (!reduceMotion) paused = false; });
+    section.addEventListener('focusin', () => { paused = true; });
+    section.addEventListener('focusout', () => { if (!reduceMotion) paused = false; });
+    section.querySelector('[data-reviews-prev]').addEventListener('click', () => nudge(1));
+    section.querySelector('[data-reviews-next]').addEventListener('click', () => nudge(-1));
+    window.addEventListener('resize', measure);
+
+    new MutationObserver(() => {
+      window.requestAnimationFrame(() => window.requestAnimationFrame(measure));
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-nav-version'] });
+
+    measure();
+    window.requestAnimationFrame(frame);
+  })();
 </script>
 </body>
 </html>
