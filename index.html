@@ -1283,10 +1283,14 @@
   .review-brand svg { width: 18px; height: 18px; display: block; }
   .review-stars { display: inline-flex; gap: 2px; }
   .review-stars svg { width: 15px; height: 15px; }
-  .review-card blockquote {
+  .review-card blockquote,
+  .review-name,
+  .review-when {
     font-family: "Lora", Georgia, serif;
+    font-style: normal;
     font-weight: 400;
-    font-style: italic;
+  }
+  .review-card blockquote {
     font-size: 18px;
     line-height: 1.45;
     color: #2C2923;
@@ -1303,8 +1307,8 @@
     border-top: 1px solid rgba(62, 68, 52, 0.08);
   }
   .review-name {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
     letter-spacing: 0.01em;
     color: #2C2923;
   }
@@ -2085,7 +2089,7 @@
     items.forEach(i => { i.classList.remove('open'); i.querySelector('.nav-link').setAttribute('aria-expanded','false'); });
     document.body.classList.remove('nav-open');
   });
-  // Promo Nav review carousel: loops, pauses while the pointer is over it.
+  // Promo Nav review carousel: loops, pauses only while the pointer is over a card.
   (function initReviewCarousel() {
     const section = document.querySelector('.reviews');
     const track = section && section.querySelector('.reviews-track');
@@ -2135,10 +2139,14 @@
     };
 
     track.addEventListener('transitionend', () => { nudging = false; });
-    section.addEventListener('mouseenter', () => { paused = true; });
-    section.addEventListener('mouseleave', () => { if (!reduceMotion) paused = false; });
-    section.addEventListener('focusin', () => { paused = true; });
-    section.addEventListener('focusout', () => { if (!reduceMotion) paused = false; });
+    track.querySelectorAll('.review-card').forEach((card) => {
+      card.addEventListener('mouseenter', () => { paused = true; });
+      card.addEventListener('mouseleave', (event) => {
+        const next = event.relatedTarget;
+        if (next && next.closest && next.closest('.review-card')) return;
+        if (!reduceMotion) paused = false;
+      });
+    });
     section.querySelector('[data-reviews-prev]').addEventListener('click', () => nudge(1));
     section.querySelector('[data-reviews-next]').addEventListener('click', () => nudge(-1));
     window.addEventListener('resize', measure);
