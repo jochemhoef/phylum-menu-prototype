@@ -470,7 +470,8 @@
     width: max-content;
     animation: dd-marquee 60s linear infinite;
   }
-  .dd-ticker:hover .dd-ticker-track { animation-play-state: paused; }
+  .dd-ticker:hover .dd-ticker-track,
+  .dd-ticker.is-peeking .dd-ticker-track { animation-play-state: paused; }
   .dd-ticker-set { display: flex; align-items: center; }
   .dd-ticker-item {
     display: inline-flex;
@@ -591,8 +592,14 @@
     opacity: 1;
     translate: 0 0;
     scale: 1;
-    transition-delay: 0.18s;
+    pointer-events: auto;
+    cursor: pointer;
+    transition-delay: 0.18s, 0.18s, 0.18s, 0s, 0s;
   }
+  .dd-peek-cta { transition-property: opacity, translate, scale, background, color; }
+  .dd-peek-cta svg { transition: rotate 0.35s var(--dd-ease), background 0.25s ease; }
+  .dd-peek.is-on .dd-peek-cta:hover { background: var(--dd-sun); scale: 1.06; }
+  .dd-peek.is-on .dd-peek-cta:hover svg { background: var(--ink); color: var(--dd-sun); rotate: 45deg; }
   .dd-peek.is-soon .dd-peek-cta { display: none; }
   .dd-peek.is-soon .dd-peek-soon { display: flex; }
   .dd-peek.is-soon .dd-peek-img { display: none; }
@@ -1186,9 +1193,33 @@
 
     <div class="dd-horizon" aria-hidden="true">
       <svg viewBox="0 0 1440 230" preserveAspectRatio="none">
-        <path fill="#E38B63" d="M0 120 L70 104 L150 118 L250 74 L320 92 L410 52 L470 70 L560 40 L650 86 L730 66 L820 98 L900 58 L980 30 L1050 62 L1130 50 L1220 92 L1300 70 L1380 96 L1440 84 V230 H0 Z"/>
-        <path fill="#C2603A" d="M0 160 L90 132 L170 150 L260 118 L360 146 L450 110 L540 138 L640 120 L720 150 L820 116 L930 140 L1020 104 L1110 136 L1210 122 L1320 150 L1440 126 V230 H0 Z"/>
-        <path fill="#2E3024" d="M0 196 L120 178 L240 192 L380 170 L520 188 L660 174 L800 192 L940 172 L1080 190 L1220 176 L1340 190 L1440 180 V230 H0 Z"/>
+        <defs>
+          <filter id="ddPaint" x="-4%" y="-30%" width="108%" height="160%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.006 0.05" numOctaves="4" seed="4" result="warp"/>
+            <feDisplacementMap in="SourceGraphic" in2="warp" scale="14" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="grain"/>
+            <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.1  0 0 0 0 0.06  0.5 0 0 0 -0.16" result="specks"/>
+            <feComposite in="specks" in2="shape" operator="in" result="specksIn"/>
+            <feMerge><feMergeNode in="shape"/><feMergeNode in="specksIn"/></feMerge>
+          </filter>
+          <filter id="ddWash" x="-4%" y="-40%" width="108%" height="180%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.004 0.03" numOctaves="3" seed="21" result="warp"/>
+            <feDisplacementMap in="SourceGraphic" in2="warp" scale="24" xChannelSelector="G" yChannelSelector="R" result="shape"/>
+            <feGaussianBlur in="shape" stdDeviation="2.4"/>
+          </filter>
+        </defs>
+        <path filter="url(#ddWash)" fill="#EDB091" opacity="0.5" d="M-60.0 113.5 C-47.4 112.7 -19.4 113.0 0.0 109.7 C19.4 106.4 17.8 100.8 32.5 98.0 C47.2 95.2 53.2 96.4 70.0 96.3 C86.8 96.2 95.6 94.4 112.4 97.4 C129.2 100.3 131.5 113.3 150.0 110.2 C168.5 107.1 179.7 92.3 200.7 82.5 C221.7 72.7 233.6 66.0 250.0 63.5 C266.4 61.0 264.1 66.3 278.8 70.7 C293.5 75.0 303.6 85.0 320.0 84.3 C336.4 83.6 337.8 76.8 356.7 67.5 C375.6 58.2 393.6 45.3 410.0 39.9 C426.4 34.5 422.2 37.9 434.8 41.8 C447.4 45.7 453.5 57.0 470.0 58.4 C486.5 59.8 494.7 54.4 513.6 48.4 C532.5 42.4 542.2 30.4 560.0 29.9 C577.8 29.4 579.3 36.8 598.2 46.2 C617.1 55.6 630.3 69.8 650.0 74.6 C669.7 79.3 675.2 72.8 692.0 68.8 C708.8 64.8 712.3 55.2 730.0 55.5 C747.7 55.8 757.5 63.4 776.4 70.3 C795.3 77.2 800.8 90.4 820.0 88.4 C839.2 86.4 850.8 68.8 867.6 60.6 C884.4 52.3 883.6 55.7 900.0 49.1 C916.4 42.5 928.9 35.1 945.7 29.1 C962.5 23.2 966.5 20.6 980.0 20.7 C993.5 20.8 995.3 23.4 1010.0 29.4 C1024.7 35.4 1033.8 44.3 1050.0 49.3 C1066.2 54.3 1070.1 54.9 1086.9 53.3 C1103.7 51.7 1112.7 39.9 1130.0 41.7 C1147.3 43.4 1150.4 52.9 1169.3 61.7 C1188.2 70.6 1200.5 82.5 1220.0 83.8 C1239.5 85.1 1245.4 73.1 1262.2 68.0 C1279.0 62.8 1283.5 60.1 1300.0 59.4 C1316.5 58.7 1324.0 59.0 1340.8 64.7 C1357.6 70.5 1366.6 84.8 1380.0 86.8 C1393.4 88.8 1392.1 77.5 1404.7 74.3 C1417.3 71.1 1420.0 70.6 1440.0 71.4 C1460.0 72.2 1487.4 76.8 1500.0 78.3 L1500 280 L-60 280 Z"/>
+        <g filter="url(#ddPaint)">
+          <path fill="#E38B63" stroke="#C9714A" stroke-width="2" stroke-opacity="0.45" d="M-60.0 126.0 C-47.4 124.7 -19.4 123.8 0.0 120.0 C19.4 116.2 17.8 111.0 32.5 107.7 C47.2 104.3 53.2 104.5 70.0 104.0 C86.8 103.5 95.6 102.5 112.4 105.4 C129.2 108.4 131.5 120.4 150.0 118.0 C168.5 115.6 179.7 103.0 200.7 93.8 C221.7 84.6 233.6 76.6 250.0 74.0 C266.4 71.4 264.1 77.7 278.8 81.5 C293.5 85.3 303.6 93.4 320.0 92.0 C336.4 90.6 337.8 83.2 356.7 74.8 C375.6 66.4 393.6 56.4 410.0 52.0 C426.4 47.6 422.2 49.9 434.8 53.7 C447.4 57.5 453.5 68.7 470.0 70.0 C486.5 71.3 494.7 66.3 513.6 60.0 C532.5 53.7 542.2 40.9 560.0 40.0 C577.8 39.1 579.3 46.0 598.2 55.7 C617.1 65.3 630.3 80.5 650.0 86.0 C669.7 91.5 675.2 86.0 692.0 81.8 C708.8 77.6 712.3 66.1 730.0 66.0 C747.7 65.9 757.5 74.3 776.4 81.0 C795.3 87.8 800.8 100.8 820.0 98.0 C839.2 95.2 850.8 76.2 867.6 67.8 C884.4 59.4 883.6 64.0 900.0 58.0 C916.4 52.0 928.9 44.9 945.7 39.0 C962.5 33.2 966.5 30.1 980.0 30.0 C993.5 29.9 995.3 31.7 1010.0 38.4 C1024.7 45.1 1033.8 57.3 1050.0 62.0 C1066.2 66.7 1070.1 63.4 1086.9 60.9 C1103.7 58.4 1112.7 48.2 1130.0 50.0 C1147.3 51.8 1150.4 60.6 1169.3 69.5 C1188.2 78.3 1200.5 90.1 1220.0 92.0 C1239.5 93.9 1245.4 83.2 1262.2 78.6 C1279.0 74.0 1283.5 70.3 1300.0 70.0 C1316.5 69.7 1324.0 71.7 1340.8 77.1 C1357.6 82.6 1366.6 93.9 1380.0 96.0 C1393.4 98.1 1392.1 89.5 1404.7 86.9 C1417.3 84.4 1420.0 83.4 1440.0 84.0 C1460.0 84.6 1487.4 88.7 1500.0 90.0 L1500 280 L-60 280 Z"/>
+        </g>
+        <path filter="url(#ddWash)" fill="#CF6F47" opacity="0.45" d="M-60.0 140.6 C-47.4 139.7 -19.4 140.5 0.0 136.4 C19.4 132.3 17.8 125.3 32.5 121.2 C47.2 117.1 53.2 117.3 70.0 117.0 C86.8 116.7 95.6 116.8 112.4 119.9 C129.2 123.1 131.5 134.0 150.0 132.0 C168.5 130.0 179.7 119.8 200.7 110.4 C221.7 101.0 233.6 88.8 250.0 87.3 C266.4 85.7 264.1 98.2 278.8 103.3 C293.5 108.3 303.6 114.1 320.0 111.1 C336.4 108.2 337.8 98.4 356.7 89.3 C375.6 80.1 393.6 71.5 410.0 67.5 C426.4 63.5 422.2 66.2 434.8 70.2 C447.4 74.2 453.5 85.8 470.0 86.6 C486.5 87.5 494.7 79.5 513.6 74.3 C532.5 69.0 542.2 60.6 560.0 61.5 C577.8 62.4 579.3 69.7 598.2 78.6 C617.1 87.5 630.3 99.2 650.0 103.7 C669.7 108.1 675.2 104.6 692.0 99.6 C708.8 94.6 712.3 80.8 730.0 79.9 C747.7 78.9 757.5 87.8 776.4 95.1 C795.3 102.3 800.8 116.9 820.0 114.4 C839.2 112.0 850.8 90.9 867.6 83.5 C884.4 76.1 883.6 85.6 900.0 79.3 C916.4 73.0 928.9 61.2 945.7 53.7 C962.5 46.1 966.5 41.7 980.0 43.2 C993.5 44.7 995.3 53.1 1010.0 60.9 C1024.7 68.7 1033.8 77.2 1050.0 80.3 C1066.2 83.3 1070.1 77.8 1086.9 75.4 C1103.7 72.9 1112.7 66.9 1130.0 68.4 C1147.3 70.0 1150.4 73.9 1169.3 82.7 C1188.2 91.5 1200.5 106.4 1220.0 110.3 C1239.5 114.2 1245.4 105.3 1262.2 101.4 C1279.0 97.5 1283.5 92.5 1300.0 91.6 C1316.5 90.7 1324.0 92.9 1340.8 97.1 C1357.6 101.3 1366.6 110.2 1380.0 111.6 C1393.4 113.0 1392.1 106.3 1404.7 103.6 C1417.3 100.9 1420.0 97.2 1440.0 98.7 C1460.0 100.2 1487.4 108.2 1500.0 110.7 L1500 280 L-60 280 Z"/>
+        <g filter="url(#ddPaint)">
+          <path fill="#C2603A" stroke="#9E4826" stroke-width="2" stroke-opacity="0.5" d="M-60.0 166.0 C-47.4 164.7 -22.7 164.6 0.0 160.0 C22.7 155.4 29.3 150.0 48.2 144.1 C67.1 138.2 73.5 132.6 90.0 132.0 C106.5 131.4 110.2 137.6 127.0 141.4 C143.8 145.1 151.7 152.0 170.0 150.0 C188.3 148.0 195.3 138.6 214.2 131.9 C233.1 125.2 238.6 117.1 260.0 118.0 C281.4 118.9 294.9 130.2 315.9 136.0 C336.9 141.9 342.3 147.1 360.0 146.0 C377.7 144.9 381.5 138.3 400.4 130.7 C419.3 123.2 430.0 110.4 450.0 110.0 C470.0 109.6 476.6 122.8 495.5 128.6 C514.4 134.5 519.2 138.6 540.0 138.0 C560.8 137.4 573.6 129.4 594.6 125.6 C615.6 121.8 620.5 118.4 640.0 120.0 C659.5 121.6 670.9 127.0 687.7 133.3 C704.5 139.6 703.1 149.3 720.0 150.0 C736.9 150.7 747.4 143.8 768.4 136.6 C789.4 129.5 799.2 118.2 820.0 116.0 C840.8 113.8 844.2 121.2 867.3 126.2 C890.4 131.2 909.1 139.8 930.0 140.0 C950.9 140.2 947.8 134.9 966.7 127.3 C985.6 119.8 998.4 105.0 1020.0 104.0 C1041.6 103.0 1050.9 115.8 1069.8 122.6 C1088.7 129.3 1089.5 135.3 1110.0 136.0 C1130.5 136.7 1146.5 128.7 1167.5 125.7 C1188.5 122.8 1188.6 119.4 1210.0 122.0 C1231.4 124.6 1246.2 132.3 1269.3 138.2 C1292.4 144.1 1296.3 150.2 1320.0 150.0 C1343.7 149.8 1356.7 142.1 1381.9 137.1 C1407.1 132.1 1415.2 127.1 1440.0 126.0 C1464.8 124.9 1487.4 130.7 1500.0 132.0 L1500 280 L-60 280 Z"/>
+        </g>
+        <path filter="url(#ddWash)" fill="#A64C2B" opacity="0.4" d="M-60.0 182.3 C-47.4 181.4 -22.7 183.2 0.0 178.2 C22.7 173.3 29.3 165.6 48.2 158.8 C67.1 151.9 73.5 145.6 90.0 145.8 C106.5 146.0 110.2 154.8 127.0 159.8 C143.8 164.9 151.7 171.8 170.0 169.9 C188.3 168.0 195.3 157.7 214.2 150.7 C233.1 143.7 238.6 135.6 260.0 136.4 C281.4 137.3 294.9 148.8 315.9 154.6 C336.9 160.4 342.3 166.0 360.0 163.9 C377.7 161.8 381.5 152.5 400.4 144.5 C419.3 136.6 430.0 126.4 450.0 126.1 C470.0 125.9 476.6 138.4 495.5 143.5 C514.4 148.5 519.2 151.4 540.0 150.2 C560.8 149.0 573.6 141.2 594.6 137.9 C615.6 134.5 620.5 132.2 640.0 134.2 C659.5 136.2 670.9 140.4 687.7 147.4 C704.5 154.4 703.1 165.7 720.0 167.5 C736.9 169.4 747.4 163.8 768.4 156.3 C789.4 148.7 799.2 133.8 820.0 131.6 C840.8 129.4 844.2 139.7 867.3 145.7 C890.4 151.6 909.1 159.6 930.0 159.9 C950.9 160.2 947.8 155.6 966.7 147.0 C985.6 138.4 998.4 121.2 1020.0 118.9 C1041.6 116.7 1050.9 129.8 1069.8 136.3 C1088.7 142.8 1089.5 149.2 1110.0 149.8 C1130.5 150.4 1146.5 142.3 1167.5 139.3 C1188.5 136.3 1188.6 132.3 1210.0 135.6 C1231.4 139.0 1246.2 148.2 1269.3 155.2 C1292.4 162.3 1296.3 169.1 1320.0 169.2 C1343.7 169.3 1356.7 161.6 1381.9 155.8 C1407.1 150.1 1415.2 143.2 1440.0 141.8 C1464.8 140.5 1487.4 147.7 1500.0 149.2 L1500 280 L-60 280 Z"/>
+        <g filter="url(#ddPaint)">
+          <path fill="#2E3024" d="M-60.0 202.0 C-47.4 200.7 -26.9 198.7 0.0 196.0 C26.9 193.3 43.0 193.1 68.2 189.3 C93.4 185.6 96.6 178.6 120.0 178.0 C143.4 177.4 154.2 183.3 179.4 186.2 C204.6 189.2 215.2 192.4 240.0 192.0 C264.8 191.6 268.3 189.2 297.7 184.5 C327.1 179.9 347.2 170.2 380.0 170.0 C412.8 169.8 424.7 179.7 454.1 183.5 C483.5 187.3 489.6 189.1 520.0 188.0 C550.4 186.9 569.6 181.3 599.0 178.4 C628.4 175.4 633.2 172.8 660.0 174.0 C686.8 175.2 697.4 180.2 726.8 183.9 C756.2 187.7 772.7 192.1 800.0 192.0 C827.3 191.9 827.2 187.8 856.6 183.6 C886.0 179.4 909.7 173.4 940.0 172.0 C970.3 170.6 971.3 173.0 1000.7 176.7 C1030.1 180.5 1051.2 188.0 1080.0 190.0 C1108.8 192.0 1108.3 189.3 1137.7 186.4 C1167.1 183.4 1192.0 177.4 1220.0 176.0 C1248.0 174.6 1245.9 177.0 1271.1 179.9 C1296.3 182.9 1315.5 188.3 1340.0 190.0 C1364.5 191.7 1366.8 190.3 1387.8 188.2 C1408.8 186.1 1416.4 180.5 1440.0 180.0 C1463.6 179.5 1487.4 184.7 1500.0 186.0 L1500 280 L-60 280 Z"/>
+        </g>
       </svg>
     </div>
   </section>
@@ -1222,10 +1253,10 @@
         <small>Debuts in store Oct 15</small>
       </div>
     </div>
-    <span class="dd-peek-cta">
+    <a class="dd-peek-cta" href="#" target="_blank" rel="noopener" tabindex="-1">
       <span class="dd-peek-cta-label">Shop now</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
-    </span>
+    </a>
   </div>
 
   <!-- ================= AGENDA ================= -->
@@ -1454,28 +1485,45 @@
     if (ticker && peek && window.matchMedia('(hover: hover)').matches) {
       const peekImg = peek.querySelector('.dd-peek-img');
       const peekLabel = peek.querySelector('.dd-peek-cta-label');
+      const peekCta = peek.querySelector('.dd-peek-cta');
       const tickerBand = ticker.closest('.dd-ticker');
       const pos = { x: 0, y: 0 };
       const aim = { x: 0, y: 0 };
       let current = null;
       let raf = null;
+      let hideTimer = null;
+      let onCta = false;
 
       ticker.querySelectorAll('[data-peek]').forEach(item => { new Image().src = item.dataset.peek; });
 
       const follow = () => {
         pos.x += (aim.x - pos.x) * 0.16;
-        pos.y += (aim.y - pos.y) * 0.16;
-        const tilt = Math.max(-10, Math.min(10, (aim.x - pos.x) * 0.06));
-        peek.style.transform = `translate(${pos.x - peek.offsetWidth / 2}px, ${pos.y - peek.offsetHeight - 22}px) rotate(${tilt}deg)`;
+        pos.y += (aim.y - pos.y) * 0.2;
+        const tilt = onCta ? 0 : Math.max(-8, Math.min(8, (aim.x - pos.x) * 0.05));
+        peek.style.transform = `translate(${pos.x - peek.offsetWidth / 2}px, ${pos.y - peek.offsetHeight}px) rotate(${tilt}deg)`;
         raf = current ? requestAnimationFrame(follow) : null;
       };
 
-      const show = (item) => {
+      // The card sits on the item's top edge so the cursor can travel straight up onto the button.
+      const anchorTo = (item, x) => {
+        const r = item.getBoundingClientRect();
+        const half = peek.offsetWidth / 2 + 16;
+        aim.x = Math.min(window.innerWidth - half, Math.max(half, x));
+        aim.y = r.top - 6;
+      };
+
+      const show = (item, x) => {
+        clearTimeout(hideTimer);
         const wasOn = Boolean(current);
         current = item;
+        anchorTo(item, x);
+        if (!wasOn) { pos.x = aim.x; pos.y = aim.y; }
         const soon = item.hasAttribute('data-peek-soon');
         peek.classList.toggle('is-soon', soon);
-        if (!soon) peekLabel.textContent = `Shop ${item.firstChild.textContent.trim()}`;
+        if (!soon) {
+          peekLabel.textContent = `Shop ${item.firstChild.textContent.trim()}`;
+          peekCta.href = item.href;
+        }
         if (!soon && peekImg.getAttribute('src') !== item.dataset.peek) {
           if (wasOn) {
             peek.classList.add('is-swap');
@@ -1484,23 +1532,33 @@
           peekImg.src = item.dataset.peek;
         }
         peek.classList.add('is-on');
+        tickerBand.classList.add('is-peeking');
         if (!raf) raf = requestAnimationFrame(follow);
       };
 
       const hide = () => {
         current = null;
+        onCta = false;
         peek.classList.remove('is-on');
+        tickerBand.classList.remove('is-peeking');
+      };
+
+      const scheduleHide = () => {
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => { if (!onCta) hide(); }, 160);
       };
 
       tickerBand.addEventListener('pointermove', (e) => {
-        aim.x = e.clientX;
-        aim.y = e.clientY;
-        if (!current) { pos.x = aim.x; pos.y = aim.y; }
         const item = e.target.closest('.dd-ticker-item');
-        if (!item) { if (current) hide(); return; }
-        if (item !== current) show(item);
+        if (!item) { if (current) scheduleHide(); return; }
+        if (item !== current) show(item, e.clientX);
+        else { clearTimeout(hideTimer); anchorTo(item, e.clientX); }
       });
-      tickerBand.addEventListener('pointerleave', hide);
+      tickerBand.addEventListener('pointerleave', scheduleHide);
+
+      peekCta.addEventListener('pointerenter', () => { onCta = true; clearTimeout(hideTimer); });
+      peekCta.addEventListener('pointerleave', () => { onCta = false; scheduleHide(); });
+
       window.addEventListener('scroll', () => { if (current) hide(); }, { passive: true });
     }
 
