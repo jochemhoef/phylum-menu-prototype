@@ -240,8 +240,14 @@
     color: var(--dd-sun);
     text-align: right;
   }
-  .dd-unit b.is-tick { animation: dd-roll 0.45s var(--dd-ease); }
-  @keyframes dd-roll { from { translate: 0 45%; opacity: 0; } }
+  .dd-dg {
+    display: inline-grid;
+    padding: 0.14em 0;
+    margin: -0.14em 0;
+    -webkit-mask: linear-gradient(transparent, #000 22%, #000 78%, transparent);
+            mask: linear-gradient(transparent, #000 22%, #000 78%, transparent);
+  }
+  .dd-dg > span { grid-area: 1 / 1; will-change: transform, opacity, filter; }
   .dd-unit small {
     font-size: 10px;
     letter-spacing: 0.14em;
@@ -249,55 +255,6 @@
     color: rgba(238, 238, 229, 0.55);
   }
 
-  /* Editorial collage */
-  .dd-collage {
-    position: absolute;
-    inset: var(--dd-count-h) 0 0 0;
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  .dd-plate {
-    position: absolute;
-    margin: 0;
-    pointer-events: auto;
-    will-change: transform;
-  }
-  .dd-plate-frame {
-    overflow: hidden;
-    background: var(--paper-deep);
-    box-shadow: 0 30px 60px -30px rgba(70, 30, 10, 0.45);
-    clip-path: inset(100% 0 0 0);
-    transition: clip-path 1.3s var(--dd-ease);
-  }
-  .dd-plate img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    scale: 1.18;
-    transition: scale 1.8s var(--dd-ease);
-  }
-  .is-ready .dd-plate-frame { clip-path: inset(0 0 0 0); }
-  .is-ready .dd-plate img { scale: 1; }
-  .dd-plate:hover img { scale: 1.04; transition-duration: 0.8s; }
-
-  .dd-plate--1 { left: 3.5%; top: 6%;  width: 15.5vw; max-width: 250px; }
-  .dd-plate--1 .dd-plate-frame { aspect-ratio: 2 / 3; }
-  .dd-plate--2 { right: 3.5%; top: 4%; width: 24vw; max-width: 380px; }
-  .dd-plate--2 .dd-plate-frame { aspect-ratio: 3 / 2; }
-  .dd-plate--3 { right: 7%; top: 42%; width: 12.5vw; max-width: 200px; }
-  .dd-plate--3 .dd-plate-frame { aspect-ratio: 2 / 3; }
-  .dd-plate--4 { left: 6%; top: 54%; width: 20vw; max-width: 320px; }
-  .dd-plate--4 .dd-plate-frame { aspect-ratio: 3 / 2; }
-  .dd-plate--5 { left: 21%; top: 76%; width: 13vw; max-width: 210px; }
-  .dd-plate--5 .dd-plate-frame { aspect-ratio: 3 / 2; }
-
-  .dd-plate--1 .dd-plate-frame { transition-delay: 0.15s; }
-  .dd-plate--2 .dd-plate-frame { transition-delay: 0.3s; }
-  .dd-plate--3 .dd-plate-frame { transition-delay: 0.55s; }
-  .dd-plate--4 .dd-plate-frame { transition-delay: 0.45s; }
-  .dd-plate--5 .dd-plate-frame { transition-delay: 0.7s; }
 
   /* Headline */
   .dd-hero-copy {
@@ -409,10 +366,10 @@
   .dd-seal {
     position: absolute;
     z-index: 5;
-    width: 140px;
+    width: clamp(150px, 13vw, 196px);
     aspect-ratio: 1;
-    left: -18px;
-    top: -46px;
+    left: var(--nav-gutter);
+    top: calc(var(--dd-count-h) + 36px);
     rotate: -10deg;
     opacity: 0;
     scale: 0.6;
@@ -444,7 +401,7 @@
     display: grid;
     place-items: center;
     font-family: var(--dd-serif);
-    font-size: 62px;
+    font-size: clamp(66px, 5.8vw, 88px);
     line-height: 1;
     color: var(--dd-sun);
     padding-bottom: 4px;
@@ -505,8 +462,9 @@
     color: var(--dd-apricot);
     border: 1px solid rgba(242, 182, 140, 0.5);
     border-radius: 999px;
-    padding: 6px 11px;
-    translate: 0 -0.2em;
+    line-height: 1;
+    padding: 8px 12px 7px;
+    translate: 0 clamp(2px, 0.28vw, 4px);
   }
   .dd-ticker-item .dd-sunmark { width: 0.55em; color: var(--dd-sun); }
 
@@ -873,13 +831,14 @@
   }
   .dd-book-visual figure { position: absolute; margin: 0; overflow: hidden; box-shadow: 0 30px 60px -32px rgba(36, 33, 28, 0.5); }
   .dd-book-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .dd-book-visual .dd-bv-a { left: 0; top: 0; width: 58%; aspect-ratio: 2 / 3; }
-  .dd-book-visual .dd-bv-b { right: 0; bottom: 4%; width: 56%; aspect-ratio: 3 / 2; }
+  .dd-book-visual .dd-bv-a { left: 0; top: 12%; width: 48%; aspect-ratio: 2 / 3; z-index: 1; }
+  .dd-book-visual .dd-bv-c { right: 0; top: 0; width: 48%; aspect-ratio: 3 / 2; }
+  .dd-book-visual .dd-bv-b { right: 5%; bottom: 0; width: 54%; aspect-ratio: 3 / 2; z-index: 2; }
   .dd-book-visual .dd-bv-sun {
     position: absolute;
-    right: 8%;
-    top: 6%;
-    width: 30%;
+    right: 12%;
+    top: 36%;
+    width: 24%;
     color: var(--dd-terracotta);
   }
   .dd-book-visual .dd-bv-sun .dd-sunmark { width: 100%; animation: dd-spin 60s linear infinite; }
@@ -1059,8 +1018,6 @@
   @media (max-width: 1180px) {
     .dd-count { gap: 28px; }
     .dd-unit b { font-size: 28px; }
-    .dd-plate--3 { right: 4%; top: 50%; }
-    .dd-plate--5 { right: 18%; top: 72%; }
     .dd-day { grid-template-columns: 1fr; }
     .dd-day--main .dd-main-sun { left: auto; right: -20%; top: 30%; }
   }
@@ -1074,7 +1031,7 @@
       flex-direction: column;
       padding-bottom: 150px;
     }
-    .dd-hero-copy { padding-top: 72px; }
+    .dd-hero-copy { padding-top: 22px; }
     .dd-title-pre { letter-spacing: 0.3em; }
 
     .dd-count {
@@ -1093,20 +1050,9 @@
     .dd-unit small { display: none; }
     .dd-unit + .dd-unit::before { font-size: 20px; margin: 0 2px; }
 
-    .dd-collage {
-      position: relative;
-      inset: auto;
-      height: 118vw;
-      margin-top: 56px;
-    }
-    .dd-plate--1 { left: 5%;  top: 4%;   width: 40%; max-width: none; }
-    .dd-plate--2 { right: 5%; top: 12%;  width: 48%; max-width: none; }
-    .dd-plate--3 { right: 8%; top: 50%;  width: 34%; max-width: none; }
-    .dd-plate--4 { left: 5%;  top: 63%;  width: 52%; max-width: none; }
-    .dd-plate--5 { display: none; }
 
-    .dd-seal { left: -22px; top: -40px; width: 96px; }
-    .dd-seal-num { font-size: 42px; }
+    .dd-seal { position: relative; left: auto; top: auto; width: 116px; margin: 36px auto 0; }
+    .dd-seal-num { font-size: 52px; }
     .dd-seal-ring text { font-size: 15px; }
     .dd-dates { flex-direction: column; gap: 6px; }
     .dd-dates span + span::before { display: none; }
@@ -1147,7 +1093,6 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .dd-seal { opacity: 1 !important; scale: 1 !important; }
     .dd-line > span, .dd-hero-meta, .dd-reveal { translate: none !important; opacity: 1 !important; }
-    .dd-plate-frame { clip-path: none !important; }
   }
 </style>
 </head>
@@ -1183,16 +1128,17 @@
       </div>
     </div>
 
+    <div class="dd-seal" aria-hidden="true">
+      <svg class="dd-seal-ring" viewBox="0 0 200 200">
+        <defs><path id="ddRing" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
+        <text><textPath href="#ddRing" textLength="530" lengthAdjust="spacing">CHEERS TO THREE YEARS · CHEERS TO THREE YEARS ·</textPath></text>
+      </svg>
+      <div class="dd-seal-sun"><span class="dd-sunmark"></span></div>
+      <span class="dd-seal-num">3</span>
+    </div>
+
     <div class="dd-hero-copy">
       <div class="dd-title-wrap">
-      <div class="dd-seal" aria-hidden="true">
-        <svg class="dd-seal-ring" viewBox="0 0 200 200">
-          <defs><path id="ddRing" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
-          <text><textPath href="#ddRing" textLength="530" lengthAdjust="spacing">CHEERS TO THREE YEARS · CHEERS TO THREE YEARS ·</textPath></text>
-        </svg>
-        <div class="dd-seal-sun"><span class="dd-sunmark"></span></div>
-        <span class="dd-seal-num">3</span>
-      </div>
       <h1 class="dd-title" id="ddTitle">
         <span class="dd-line dd-title-pre"><span>Phylum is</span></span>
         <span class="dd-line dd-title-main"><span>Serving</span></span>
@@ -1210,24 +1156,6 @@
           <a class="dd-btn dd-btn--ghost" href="https://shopphylum.com/collections/all-products?sort_by=created-descending" target="_blank" rel="noopener">Shop what’s new</a>
         </div>
       </div>
-    </div>
-
-    <div class="dd-collage" aria-label="Scenes from Desert Dreaming">
-      <figure class="dd-plate dd-plate--1" data-speed="0.18">
-        <div class="dd-plate-frame"><img src="assets/event/lhorizon-pool.jpg" alt="Poolside at L’Horizon, Palm Springs, with the San Jacinto mountains glowing at sunset" fetchpriority="high"></div>
-      </figure>
-      <figure class="dd-plate dd-plate--2" data-speed="0.1">
-        <div class="dd-plate-frame"><img src="assets/event/fair-circle-pool.jpg" alt="A Palmer &amp; Krisel butterfly-roof house and pool on Fair Circle, Palm Springs"></div>
-      </figure>
-      <figure class="dd-plate dd-plate--3" data-speed="0.32">
-        <div class="dd-plate-frame"><img src="assets/event/joshua-tree-rainbow.jpg" alt="A rainbow over a field of Joshua trees at golden hour" loading="lazy"></div>
-      </figure>
-      <figure class="dd-plate dd-plate--4" data-speed="0.24">
-        <div class="dd-plate-frame"><img src="assets/event/windmills.jpg" alt="Wind turbines in the San Gorgonio Pass outside Palm Springs" loading="lazy"></div>
-      </figure>
-      <figure class="dd-plate dd-plate--5" data-speed="0.4">
-        <div class="dd-plate-frame"><img src="assets/event/fair-circle-facade.jpg" alt="A white mid-century facade with a breeze-block screen framed by palms" loading="lazy"></div>
-      </figure>
     </div>
 
     <div class="dd-horizon" aria-hidden="true">
@@ -1453,6 +1381,7 @@
   <section class="dd-book" aria-labelledby="ddBookTitle">
     <div class="dd-book-visual dd-reveal">
       <figure class="dd-bv-a"><img src="assets/event/lhorizon-pool.jpg" alt="" loading="lazy"></figure>
+      <figure class="dd-bv-c"><img src="assets/event/fair-circle-pool.jpg" alt="A Palmer &amp; Krisel butterfly-roof house and pool on Fair Circle, Palm Springs" loading="lazy"></figure>
       <figure class="dd-bv-b"><img src="assets/event/fair-circle-facade.jpg" alt="" loading="lazy"></figure>
       <div class="dd-bv-sun" aria-hidden="true"><span class="dd-sunmark"></span></div>
     </div>
@@ -1645,11 +1574,35 @@
       const setUnit = (key, value) => {
         const node = el.units[key];
         const text = String(value).padStart(2, '0');
-        if (node.textContent === text) return;
-        node.textContent = text;
-        node.classList.remove('is-tick');
-        void node.offsetWidth;
-        node.classList.add('is-tick');
+        if (node.dataset.v === text) return;
+        node.dataset.v = text;
+        if (!node.digits || node.digits.length !== text.length) {
+          node.textContent = '';
+          node.digits = [...text].map(ch => {
+            const slot = document.createElement('span');
+            slot.className = 'dd-dg';
+            slot.appendChild(document.createElement('span')).textContent = ch;
+            return node.appendChild(slot);
+          });
+          return;
+        }
+        [...text].forEach((ch, i) => {
+          const slot = node.digits[i];
+          const current = slot.lastElementChild;
+          if (current.textContent === ch) return;
+          const next = slot.appendChild(document.createElement('span'));
+          next.textContent = ch;
+          if (reduceMotion) { current.remove(); return; }
+          const roll = { duration: 820, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'both' };
+          current.animate([
+            { transform: 'translateY(0)', opacity: 1, filter: 'blur(0)' },
+            { transform: 'translateY(-55%)', opacity: 0, filter: 'blur(3px)' }
+          ], roll).onfinish = () => current.remove();
+          next.animate([
+            { transform: 'translateY(55%)', opacity: 0, filter: 'blur(3px)' },
+            { transform: 'translateY(0)', opacity: 1, filter: 'blur(0)' }
+          ], roll);
+        });
       };
 
       const tick = () => {
@@ -1727,26 +1680,6 @@
 
     if (reduceMotion) return;
 
-    const hero = document.querySelector('.dd-hero');
-    const plates = document.querySelectorAll('.dd-plate[data-speed]');
-    const stacked = window.matchMedia('(max-width: 860px)');
-    let ticking = false;
-
-    const update = () => {
-      const y = window.scrollY;
-      const h = hero.offsetHeight;
-      if (y < h * 1.2) {
-        plates.forEach(p => {
-          p.style.transform = stacked.matches ? '' : `translateY(${-y * parseFloat(p.dataset.speed)}px)`;
-        });
-      }
-      ticking = false;
-    };
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
   })();
 </script>
 </body>
