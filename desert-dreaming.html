@@ -59,7 +59,7 @@
     background: var(--paper);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body.chrome-loading .dd-page { visibility: hidden; }
@@ -235,7 +235,7 @@
     font-weight: 500;
     font-size: 34px;
     line-height: 1;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.045em;
     font-variant-numeric: tabular-nums;
     color: var(--dd-linen);
     text-align: right;
@@ -290,7 +290,7 @@
     font-weight: 500;
     font-size: clamp(100px, 16.5vw, 284px);
     line-height: 0.82;
-    letter-spacing: -0.065em;
+    letter-spacing: -0.052em;
     color: var(--dd-night);
   }
   .dd-title-sub {
@@ -517,7 +517,7 @@
     font-family: var(--dd-sans);
     font-weight: 500;
     font-size: 26px;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
   }
   .dd-peek-soon small {
     font-family: var(--dd-sans);
@@ -586,8 +586,8 @@
     position: relative;
     background: var(--dd-night);
     color: var(--dd-linen);
-    padding: clamp(90px, 10vw, 150px) var(--nav-gutter) clamp(90px, 9vw, 140px);
-    overflow: hidden;
+    padding: clamp(90px, 10vw, 150px) var(--nav-gutter) clamp(24px, 3vw, 44px);
+    overflow: clip;
   }
 
   .dd-agenda-head {
@@ -610,7 +610,7 @@
     font-style: normal;
     font-weight: 500;
     color: var(--dd-sun);
-    letter-spacing: -0.07em;
+    letter-spacing: -0.058em;
   }
   .dd-agenda-intro {
     font-size: 17px;
@@ -621,7 +621,7 @@
   }
   .dd-agenda-intro strong { color: var(--dd-linen); font-weight: 500; }
 
-  .dd-days { border-top: 1px solid rgba(238, 238, 229, 0.18); }
+  .dd-days { position: relative; }
 
   .dd-day {
     position: relative;
@@ -629,7 +629,6 @@
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.6fr);
     gap: 24px 56px;
     padding: clamp(40px, 4.6vw, 64px) 0;
-    border-bottom: 1px solid rgba(238, 238, 229, 0.18);
   }
 
   .dd-day-date {
@@ -659,7 +658,7 @@
     font-weight: 500;
     font-size: clamp(26px, 2.4vw, 38px);
     line-height: 1;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
   }
   .dd-day-where {
     margin-top: 6px;
@@ -684,7 +683,7 @@
     font-weight: 500;
     font-size: clamp(28px, 3vw, 48px);
     line-height: 1;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     color: var(--dd-sun);
     white-space: nowrap;
     padding-top: 0.12em;
@@ -760,22 +759,24 @@
     padding-left: var(--nav-gutter);
     padding-right: var(--nav-gutter);
     background: var(--dd-sun);
-    color: var(--ink);
-    border-bottom: none;
+    color: var(--dd-night);
     overflow: hidden;
+    z-index: 5;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -24px 50px -30px rgba(0, 0, 0, 0.5);
     isolation: isolate;
   }
   .dd-day--main .dd-day-num,
-  .dd-day--main:hover .dd-day-num { color: var(--ink); }
+  .dd-day--main:hover .dd-day-num { color: var(--dd-night); }
   .dd-day--main .dd-day-label .dd-eyebrow,
-  .dd-day--main .dd-day-where { color: rgba(36, 33, 28, 0.7); }
+  .dd-day--main .dd-day-where { color: rgba(46, 48, 36, 0.7); }
   .dd-day--main .dd-event-time { color: var(--clay-deep); }
-  .dd-day--main .dd-event-copy { color: rgba(36, 33, 28, 0.82); }
-  .dd-day--main .dd-event-copy a { color: var(--ink); border-color: rgba(36, 33, 28, 0.4); }
+  .dd-day--main .dd-event-copy { color: rgba(46, 48, 36, 0.82); }
+  .dd-day--main .dd-event-copy a { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.4); }
   .dd-day--main .dd-event-copy a:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
-  .dd-day--main .dd-tag { border-color: rgba(36, 33, 28, 0.35); color: var(--ink); }
-  .dd-day--main .dd-tag--hot { background: var(--ink); border-color: var(--ink); color: var(--dd-sun); }
-  .dd-day--main .dd-cal { color: var(--ink); border-color: rgba(36, 33, 28, 0.4); }
+  .dd-day--main .dd-tag { border-color: rgba(46, 48, 36, 0.35); color: var(--dd-night); }
+  .dd-day--main .dd-tag--hot { background: var(--dd-night); border-color: var(--dd-night); color: var(--dd-sun); }
+  .dd-day--main .dd-cal { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.4); }
   .dd-day--main .dd-cal:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
 
   .dd-day--main .dd-main-sun {
@@ -791,18 +792,84 @@
 
   .dd-main-flag {
     display: inline-flex;
+    align-items: center;
+    gap: 10px;
     align-self: flex-start;
-    margin-top: 14px;
+    margin-top: 20px;
     font-family: var(--dd-sans);
     font-weight: 500;
-    font-size: 11px;
-    letter-spacing: 0.2em;
+    font-size: 15px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    background: var(--ink);
-    color: var(--dd-sun);
-    padding: 8px 14px;
+    background: var(--clay);
+    color: var(--dd-linen);
+    padding: 12px 22px 12px 14px;
+    border: 2px solid var(--dd-night);
     border-radius: 999px;
-    rotate: -4deg;
+    box-shadow: 5px 5px 0 var(--dd-night);
+    rotate: -6deg;
+    transform-origin: 30% 50%;
+    animation: dd-wobble 3.6s var(--dd-ease) infinite;
+  }
+  .dd-main-flag .dd-sunmark { width: 26px; color: var(--dd-sun); animation: dd-spin 8s linear infinite; }
+  .dd-day--main:hover .dd-main-flag { animation-duration: 1.2s; }
+  @keyframes dd-wobble {
+    0%, 100% { rotate: -6deg; scale: 1; }
+    12% { rotate: -1deg; scale: 1.07; }
+    24% { rotate: -9deg; scale: 1.02; }
+    36% { rotate: -5deg; scale: 1; }
+  }
+
+  /* 14–16 stack as cards on scroll */
+  .dd-day--stack {
+    position: sticky;
+    top: calc(28px + var(--i) * 18px);
+    margin: 0 calc(-1 * var(--nav-gutter));
+    padding-left: var(--nav-gutter);
+    padding-right: var(--nav-gutter);
+    border-radius: 28px 28px 0 0;
+    background: var(--card);
+    box-shadow: 0 -24px 50px -30px rgba(0, 0, 0, 0.5);
+    transform-origin: 50% 0;
+    scale: calc(1 - var(--cover, 0) * 0.05);
+    isolation: isolate;
+  }
+  .dd-day--stack::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--dd-night);
+    opacity: calc(var(--cover, 0) * 0.4);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .dd-day--stack.is-loose { position: relative; top: auto; scale: none; }
+  .dd-day--stack.is-loose::after { display: none; }
+  .dd-day--olive { --card: var(--dd-khaki); --i: 0; }
+  .dd-day--clay { --card: var(--clay); --i: 1; }
+  .dd-day--clay .dd-event-time,
+  .dd-day--clay:hover .dd-day-num { color: var(--dd-linen); }
+  .dd-day--clay .dd-day-label .dd-eyebrow { color: var(--dd-sun); }
+  .dd-day--clay .dd-event-copy { color: rgba(238, 238, 229, 0.9); }
+  .dd-day--apricot { --card: var(--dd-apricot); --i: 2; color: var(--dd-night); }
+  .dd-day--apricot .dd-day-num,
+  .dd-day--apricot:hover .dd-day-num { color: var(--dd-night); }
+  .dd-day--apricot .dd-day-label .dd-eyebrow,
+  .dd-day--apricot .dd-day-where { color: rgba(46, 48, 36, 0.7); }
+  .dd-day--apricot .dd-event-time { color: var(--clay-deep); }
+  .dd-day--apricot .dd-event-copy { color: rgba(46, 48, 36, 0.85); }
+  .dd-day--apricot .dd-tag { border-color: rgba(46, 48, 36, 0.4); color: var(--dd-night); }
+  .dd-day--apricot .dd-cal { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.45); }
+  .dd-day--apricot .dd-cal:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
+
+  .dd-day--last {
+    z-index: 5;
+    align-items: center;
+    margin: 0 calc(-1 * var(--nav-gutter));
+    padding-left: var(--nav-gutter);
+    padding-right: var(--nav-gutter);
+    background: var(--dd-night);
   }
 
   .dd-reveal {
@@ -833,13 +900,12 @@
   .dd-book-visual figure { position: absolute; margin: 0; overflow: hidden; box-shadow: 0 30px 60px -32px rgba(36, 33, 28, 0.5); }
   .dd-book-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .dd-book-visual .dd-bv-a { left: 0; top: 12%; width: 48%; aspect-ratio: 2 / 3; z-index: 1; }
-  .dd-book-visual .dd-bv-c { right: 0; top: 0; width: 48%; aspect-ratio: 3 / 2; }
   .dd-book-visual .dd-bv-b { right: 5%; bottom: 0; width: 54%; aspect-ratio: 3 / 2; z-index: 2; }
   .dd-book-visual .dd-bv-sun {
     position: absolute;
-    right: 12%;
-    top: 36%;
-    width: 24%;
+    right: -2%;
+    top: -3%;
+    width: 50%;
     color: var(--dd-terracotta);
   }
   .dd-book-visual .dd-bv-sun .dd-sunmark { width: 100%; animation: dd-spin 60s linear infinite; }
@@ -859,7 +925,7 @@
     font-weight: 500;
     font-size: clamp(56px, 7vw, 120px);
     line-height: 0.9;
-    letter-spacing: -0.065em;
+    letter-spacing: -0.052em;
     color: var(--ink);
     margin-bottom: 30px;
   }
@@ -964,7 +1030,7 @@
     font-family: var(--dd-sans);
     font-weight: 500;
     font-size: 0.92em;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.048em;
     line-height: 0.95;
   }
   .dd-anywhere-title em { font-family: var(--dd-italic); font-style: normal; font-weight: 400; color: var(--dd-sun); letter-spacing: -0.02em; }
@@ -1020,6 +1086,8 @@
     .dd-count { gap: 28px; }
     .dd-unit b { font-size: 28px; }
     .dd-day { grid-template-columns: 1fr; }
+    .dd-day--stack { top: calc(12px + var(--i) * 12px); }
+    .dd-day--stack, .dd-day--main { border-radius: 20px 20px 0 0; }
     .dd-day--main .dd-main-sun { left: auto; right: -20%; top: 30%; }
   }
 
@@ -1239,7 +1307,7 @@
 
     <div class="dd-days">
 
-      <article class="dd-day dd-day--prelude dd-reveal">
+      <article class="dd-day dd-day--prelude dd-day--stack dd-day--olive">
         <div class="dd-day-date">
           <span class="dd-day-num">14</span>
           <div class="dd-day-label">
@@ -1263,7 +1331,7 @@
         </div>
       </article>
 
-      <article class="dd-day dd-reveal">
+      <article class="dd-day dd-day--stack dd-day--clay">
         <div class="dd-day-date">
           <span class="dd-day-num">15</span>
           <div class="dd-day-label">
@@ -1287,7 +1355,7 @@
         </div>
       </article>
 
-      <article class="dd-day dd-reveal">
+      <article class="dd-day dd-day--stack dd-day--apricot">
         <div class="dd-day-date">
           <span class="dd-day-num">16</span>
           <div class="dd-day-label">
@@ -1311,7 +1379,7 @@
         </div>
       </article>
 
-      <article class="dd-day dd-day--main dd-reveal">
+      <article class="dd-day dd-day--main">
         <div class="dd-main-sun" aria-hidden="true"><span class="dd-sunmark"></span></div>
         <div class="dd-day-date">
           <span class="dd-day-num">17</span>
@@ -1319,7 +1387,7 @@
             <span class="dd-eyebrow">Oct</span>
             <span class="dd-day-weekday">Saturday</span>
             <span class="dd-day-where">In-store</span>
-            <span class="dd-main-flag">The main event</span>
+            <span class="dd-main-flag"><span class="dd-sunmark" aria-hidden="true"></span>The main event</span>
           </div>
         </div>
         <div class="dd-events">
@@ -1350,7 +1418,7 @@
         </div>
       </article>
 
-      <article class="dd-day dd-reveal">
+      <article class="dd-day dd-day--last">
         <div class="dd-day-date">
           <span class="dd-day-num">18</span>
           <div class="dd-day-label">
@@ -1382,7 +1450,6 @@
   <section class="dd-book" aria-labelledby="ddBookTitle">
     <div class="dd-book-visual dd-reveal">
       <figure class="dd-bv-a"><img src="assets/event/lhorizon-pool.jpg" alt="" loading="lazy"></figure>
-      <figure class="dd-bv-c"><img src="assets/event/fair-circle-pool.jpg" alt="A Palmer &amp; Krisel butterfly-roof house and pool on Fair Circle, Palm Springs" loading="lazy"></figure>
       <figure class="dd-bv-b"><img src="assets/event/fair-circle-facade.jpg" alt="" loading="lazy"></figure>
       <div class="dd-bv-sun" aria-hidden="true"><span class="dd-sunmark"></span></div>
     </div>
@@ -1663,6 +1730,24 @@
     } else {
       start();
     }
+
+    const stack = [...document.querySelectorAll('.dd-day--stack')];
+    let stackFrame = 0;
+    const renderStack = () => {
+      stackFrame = 0;
+      stack.forEach(card => {
+        card.classList.toggle('is-loose', card.offsetHeight > window.innerHeight - 110);
+        const next = card.nextElementSibling;
+        if (!next || reduceMotion) return;
+        const r = card.getBoundingClientRect();
+        const cover = Math.min(1, Math.max(0, (r.bottom - next.getBoundingClientRect().top) / r.height));
+        card.style.setProperty('--cover', cover.toFixed(3));
+      });
+    };
+    const queueStack = () => { if (!stackFrame) stackFrame = requestAnimationFrame(renderStack); };
+    window.addEventListener('scroll', queueStack, { passive: true });
+    window.addEventListener('resize', queueStack);
+    renderStack();
 
     const reveals = document.querySelectorAll('.dd-reveal');
     if ('IntersectionObserver' in window && !reduceMotion) {
