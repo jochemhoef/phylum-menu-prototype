@@ -393,7 +393,17 @@
     color: rgba(36, 33, 28, 0.86);
   }
 
-  .dd-hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .dd-ctas {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 12px;
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+  .dd-ctas--start { margin-inline: 0; }
+  .dd-ctas .dd-btn { justify-content: center; white-space: nowrap; }
 
   /* Stickers */
   .dd-seal {
@@ -874,6 +884,16 @@
   }
   .dd-book-visual .dd-bv-sun .dd-sunmark { width: 100%; animation: dd-spin 60s linear infinite; }
   .dd-book-copy .dd-eyebrow { color: var(--clay); display: block; margin-bottom: 24px; }
+  .dd-eyebrow-date { white-space: nowrap; }
+  .dd-eyebrow-dot {
+    display: inline-block;
+    width: 1.05em; height: 1.05em;
+    margin: 0 0.7em;
+    vertical-align: -0.2em;
+    background: var(--dd-sun);
+    -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+            mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+  }
   .dd-book-title {
     font-family: var(--dd-sans);
     font-weight: 500;
@@ -902,15 +922,15 @@
   .dd-deserts {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 18px;
+    gap: 6px 30px;
     margin: 30px 0 34px;
     font-family: var(--dd-italic);
     font-style: normal;
     font-size: clamp(22px, 2vw, 30px);
     color: var(--dd-khaki);
   }
-  .dd-deserts span { display: inline-flex; align-items: center; gap: 18px; }
-  .dd-deserts span + span::before {
+  .dd-deserts span { display: inline-flex; align-items: center; gap: 12px; }
+  .dd-deserts span::before {
     content: "";
     width: 0.4em; height: 0.4em;
     background: var(--dd-sun);
@@ -941,13 +961,12 @@
     font-family: var(--dd-sans);
     font-weight: 500;
     font-size: clamp(22px, 2vw, 30px);
-    letter-spacing: -0.045em;
+    letter-spacing: -0.02em;
     text-transform: none;
     color: var(--ink);
     text-align: right;
   }
 
-  .dd-book-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 
   /* =========================================================
      FROM ANYWHERE
@@ -979,6 +998,14 @@
     letter-spacing: -0.045em;
     max-width: 12ch;
     margin-bottom: 40px;
+  }
+  .dd-anywhere-sans {
+    display: block;
+    font-family: var(--dd-sans);
+    font-weight: 500;
+    font-size: 0.92em;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
   }
   .dd-anywhere-title em { font-family: var(--dd-italic); font-style: normal; font-weight: 400; color: var(--dd-sun); letter-spacing: -0.02em; }
 
@@ -1014,9 +1041,11 @@
     display: flex;
     align-items: center;
     gap: 22px;
-    font-family: var(--dd-italic);
-    font-style: normal;
-    font-size: clamp(22px, 2.2vw, 34px);
+    font-family: var(--dd-sans);
+    font-weight: 500;
+    font-size: clamp(20px, 1.9vw, 30px);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
   }
   .dd-signoff img { width: 86px; height: auto; rotate: -8deg; }
 
@@ -1093,6 +1122,15 @@
     .dd-book-visual { max-width: 560px; }
 
     .dd-anywhere-grid { grid-template-columns: 1fr; }
+    .dd-anywhere-title { font-size: 12.6vw; max-width: none; }
+    .dd-anywhere-title em { white-space: nowrap; }
+    .dd-book-copy .dd-eyebrow-dot { display: none; }
+    .dd-eyebrow-date { display: block; margin-top: 8px; color: var(--ink-soft); }
+    .dd-deserts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 21px; }
+    .dd-signoff { gap: 16px; font-size: 19px; }
+    .dd-signoff img { width: 64px; flex-shrink: 0; }
+    .dd-urgency li { font-size: 11px; letter-spacing: 0.14em; gap: 14px; }
+    .dd-urgency li strong { font-size: 21px; }
     .dd-perk, .dd-perk + .dd-perk { padding: 24px 0; border-left: none; border-bottom: 1px solid rgba(238, 238, 229, 0.3); }
   }
 
@@ -1102,6 +1140,7 @@
     .dd-title-sub { font-size: 12vw; }
     .dd-dates { font-size: 13px; }
     .dd-btn { padding: 14px 20px; font-size: 12px; }
+    .dd-ctas { grid-auto-flow: row; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1164,7 +1203,7 @@
       <div class="dd-hero-meta">
         <p class="dd-dates"><span>October 14–18, 2026</span><span>Palm Springs &amp; online</span></p>
         <p class="dd-hero-lede">A whole new store. Hundreds of new pieces. A book signing with Jessica Ritz and our 3&nbsp;Year Party. Come home to the desert, or shop the pop-up from wherever you’re dreaming.</p>
-        <div class="dd-hero-ctas">
+        <div class="dd-ctas">
           <a class="dd-btn dd-btn--solid" href="#weekend">See the weekend
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
           </a>
@@ -1419,7 +1458,7 @@
     </div>
 
     <div class="dd-book-copy dd-reveal">
-      <span class="dd-eyebrow">Book signing · Sat 17 &amp; Sun 18</span>
+      <span class="dd-eyebrow">Book signing <i class="dd-eyebrow-dot" aria-hidden="true"></i> <span class="dd-eyebrow-date">Sat 17 &amp; Sun 18 October</span></span>
       <h2 class="dd-book-title" id="ddBookTitle">From customer <em>to author.</em></h2>
       <p>Jessica Ritz started out as a PHYLUM customer. This October she comes back to launch her first book of its kind, <em>Desert Dreaming</em>, a celebration of the homes, landscapes, and people that keep us coming back to the desert.</p>
       <p>From adobe traditions to sleek modernism, with design advice from experts and asides on foraged desert perfumes and cocktails.</p>
@@ -1434,7 +1473,7 @@
         <li>Our advice <strong>Get here early</strong></li>
       </ul>
 
-      <div class="dd-book-ctas">
+      <div class="dd-ctas dd-ctas--start">
         <a class="dd-btn dd-btn--solid" href="https://shopphylum.com/search?q=desert+dreaming" target="_blank" rel="noopener">Reserve a signed copy</a>
         <a class="dd-btn dd-btn--ghost" href="https://www.jessnritz.com/about" target="_blank" rel="noopener">Meet Jessica</a>
       </div>
@@ -1445,7 +1484,7 @@
   <section class="dd-anywhere" aria-labelledby="ddAnywhereTitle">
     <div class="dd-anywhere-sun" aria-hidden="true"><span class="dd-sunmark"></span></div>
     <span class="dd-eyebrow">Can’t be here this weekend?</span>
-    <h2 class="dd-anywhere-title dd-reveal" id="ddAnywhereTitle">Dream along <em>from anywhere.</em></h2>
+    <h2 class="dd-anywhere-title dd-reveal" id="ddAnywhereTitle"><span class="dd-anywhere-sans">Dream along</span> <em>from anywhere.</em></h2>
 
     <div class="dd-anywhere-grid dd-reveal">
       <div class="dd-perk">
@@ -1462,7 +1501,7 @@
       </div>
     </div>
 
-    <div class="dd-hero-ctas" style="justify-content:flex-start">
+    <div class="dd-ctas dd-ctas--start">
       <a class="dd-btn dd-btn--solid" href="https://shopphylum.com/collections/all-products?sort_by=created-descending" target="_blank" rel="noopener">Shop the online pop-up</a>
       <a class="dd-btn dd-btn--ghost" href="#weekend">Back to the weekend</a>
     </div>
