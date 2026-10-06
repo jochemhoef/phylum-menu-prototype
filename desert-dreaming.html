@@ -367,7 +367,7 @@
   .dd-seal {
     position: absolute;
     z-index: 5;
-    width: clamp(150px, 13vw, 196px);
+    width: clamp(184px, 16vw, 240px);
     aspect-ratio: 1;
     left: calc(var(--nav-gutter) + clamp(20px, 3vw, 56px));
     top: calc(var(--dd-count-h) + clamp(56px, 7vh, 84px));
@@ -402,7 +402,7 @@
     display: grid;
     place-items: center;
     font-family: var(--dd-serif);
-    font-size: clamp(66px, 5.8vw, 88px);
+    font-size: clamp(80px, 7.1vw, 108px);
     line-height: 1;
     color: var(--dd-sun);
     padding-bottom: 4px;
@@ -1114,13 +1114,18 @@
     .dd-unit + .dd-unit::before { font-size: 20px; margin: 0 2px; }
 
 
-    .dd-seal { position: relative; left: auto; top: auto; width: 116px; margin: 36px auto 0; }
-    .dd-seal-num { font-size: 52px; }
+    .dd-seal { position: relative; left: auto; top: auto; width: 148px; margin: 36px auto 0; }
+    .dd-seal-num { font-size: 66px; }
     .dd-seal-ring text { font-size: 15px; }
-    .dd-dates { flex-direction: column; gap: 6px; }
+    .dd-dates { flex-direction: column; align-items: center; gap: 6px; }
+    .dd-dates span { gap: 0; }
     .dd-dates span + span::before { display: none; }
 
     .dd-horizon { height: 150px; }
+    .dd-horizon svg { width: 260%; margin-left: -80%; }
+    .dd-event-foot::after { content: ""; flex-basis: 100%; order: 1; }
+    .dd-event-foot .dd-cal { order: 2; margin: 14px 0 0 2px; }
+    .dd-anywhere-sun { width: 175vw; right: -78vw; top: 66%; color: rgba(238, 238, 229, 0.13); }
 
     .dd-agenda-head { grid-template-columns: 1fr; }
     .dd-agenda-title { font-size: 21vw; }
