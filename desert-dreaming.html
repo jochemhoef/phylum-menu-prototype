@@ -37,6 +37,7 @@
     --nav-gutter: 40px;
 
     --dd-linen: #EEEEE5;
+    --dd-teal: #407575;
     --dd-khaki: #535538;
     --dd-night: #2E3024;
     --dd-night-2: #383A2C;
@@ -791,7 +792,7 @@
   .dd-day--main .dd-event-copy a { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.4); }
   .dd-day--main .dd-event-copy a:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
   .dd-day--main .dd-tag { border-color: rgba(46, 48, 36, 0.35); color: var(--dd-night); }
-  .dd-day--main .dd-tag--hot { background: var(--dd-night); border-color: var(--dd-night); color: var(--dd-sun); }
+  .dd-day--main .dd-tag--hot { background: var(--dd-teal); border-color: var(--dd-teal); color: var(--dd-linen); }
   .dd-day--main .dd-cal { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.4); }
   .dd-day--main .dd-cal:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
 
@@ -812,7 +813,7 @@
     width: clamp(140px, 11.5vw, 180px);
     aspect-ratio: 1;
     margin-top: 26px;
-    color: var(--dd-night);
+    color: var(--dd-teal);
   }
   .dd-main-flag-ring {
     position: absolute;
@@ -832,8 +833,8 @@
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: var(--dd-night);
-    box-shadow: 0 0 0 1px rgba(46, 48, 36, 0.25), 0 0 0 7px var(--dd-sun), 0 0 0 8px rgba(46, 48, 36, 0.35);
+    background: var(--dd-teal);
+    box-shadow: 0 0 0 1px rgba(64, 117, 117, 0.3), 0 0 0 7px var(--dd-sun), 0 0 0 8px rgba(64, 117, 117, 0.45);
   }
   .dd-main-flag-core .dd-sunmark { width: 62%; color: var(--dd-sun); animation: dd-spin 48s linear infinite reverse; }
 
