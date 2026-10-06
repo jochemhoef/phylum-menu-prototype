@@ -485,10 +485,11 @@
     overflow: hidden;
     background: var(--dd-khaki);
     box-shadow: 0 34px 60px -24px rgba(0, 0, 0, 0.55);
-    clip-path: inset(50% 50% 50% 50%);
+    border-radius: 28px;
+    clip-path: inset(50% 50% 50% 50% round 28px);
     transition: clip-path 0.55s var(--dd-ease);
   }
-  .dd-peek.is-on .dd-peek-card { clip-path: inset(0 0 0 0); }
+  .dd-peek.is-on .dd-peek-card { clip-path: inset(0 0 0 0 round 28px); }
   .dd-peek-img {
     position: absolute;
     inset: 0;
@@ -528,8 +529,8 @@
   }
   .dd-peek-cta {
     position: absolute;
-    right: 14px;
-    bottom: -18px;
+    left: 50%;
+    bottom: -20px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -545,7 +546,7 @@
     white-space: nowrap;
     box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
     opacity: 0;
-    translate: 0 10px;
+    translate: -50% 10px;
     scale: 0.9;
     transition: opacity 0.3s var(--dd-ease), translate 0.5s var(--dd-ease), scale 0.5s var(--dd-ease);
   }
@@ -559,7 +560,7 @@
   }
   .dd-peek.is-on .dd-peek-cta {
     opacity: 1;
-    translate: 0 0;
+    translate: -50% 0;
     scale: 1;
     pointer-events: auto;
     cursor: pointer;
