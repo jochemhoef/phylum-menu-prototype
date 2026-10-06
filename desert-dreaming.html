@@ -556,6 +556,44 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
+  .dd-peek-cta {
+    position: absolute;
+    right: 14px;
+    bottom: -18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px 11px 18px;
+    border-radius: 999px;
+    background: var(--dd-linen);
+    color: var(--ink);
+    font-family: var(--dd-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    translate: 0 10px;
+    scale: 0.9;
+    transition: opacity 0.3s var(--dd-ease), translate 0.5s var(--dd-ease), scale 0.5s var(--dd-ease);
+  }
+  .dd-peek-cta svg {
+    width: 22px;
+    height: 22px;
+    padding: 5px;
+    border-radius: 50%;
+    background: var(--dd-sun);
+    color: var(--ink);
+  }
+  .dd-peek.is-on .dd-peek-cta {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+    transition-delay: 0.18s;
+  }
+  .dd-peek.is-soon .dd-peek-cta { display: none; }
   .dd-peek.is-soon .dd-peek-soon { display: flex; }
   .dd-peek.is-soon .dd-peek-img { display: none; }
 
@@ -1184,6 +1222,10 @@
         <small>Debuts in store Oct 15</small>
       </div>
     </div>
+    <span class="dd-peek-cta">
+      <span class="dd-peek-cta-label">Shop now</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+    </span>
   </div>
 
   <!-- ================= AGENDA ================= -->
@@ -1411,6 +1453,7 @@
     const peek = document.querySelector('.dd-peek');
     if (ticker && peek && window.matchMedia('(hover: hover)').matches) {
       const peekImg = peek.querySelector('.dd-peek-img');
+      const peekLabel = peek.querySelector('.dd-peek-cta-label');
       const tickerBand = ticker.closest('.dd-ticker');
       const pos = { x: 0, y: 0 };
       const aim = { x: 0, y: 0 };
@@ -1432,6 +1475,7 @@
         current = item;
         const soon = item.hasAttribute('data-peek-soon');
         peek.classList.toggle('is-soon', soon);
+        if (!soon) peekLabel.textContent = `Shop ${item.firstChild.textContent.trim()}`;
         if (!soon && peekImg.getAttribute('src') !== item.dataset.peek) {
           if (wasOn) {
             peek.classList.add('is-swap');
