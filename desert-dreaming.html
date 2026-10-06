@@ -521,6 +521,70 @@
   }
   .dd-ticker-item .dd-sunmark { width: 0.55em; color: var(--dd-sun); }
 
+  /* Brand peek: follows the cursor over the ticker */
+  .dd-peek {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 90;
+    width: 300px;
+    pointer-events: none;
+    will-change: transform;
+  }
+  .dd-peek-card {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--dd-khaki);
+    box-shadow: 0 34px 60px -24px rgba(0, 0, 0, 0.55);
+    clip-path: inset(50% 50% 50% 50%);
+    transition: clip-path 0.55s var(--dd-ease);
+  }
+  .dd-peek.is-on .dd-peek-card { clip-path: inset(0 0 0 0); }
+  .dd-peek-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    scale: 1.3;
+    transition: scale 0.9s var(--dd-ease), opacity 0.25s ease;
+  }
+  .dd-peek.is-on .dd-peek-img { scale: 1; }
+  .dd-peek.is-swap .dd-peek-img { opacity: 0.35; }
+  .dd-peek-soon {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--dd-sun);
+    color: var(--ink);
+    text-align: center;
+  }
+  .dd-peek-soon .dd-sunmark { width: 64px; color: var(--dd-khaki); margin-bottom: 10px; animation: dd-spin 14s linear infinite; }
+  .dd-peek-soon b {
+    font-family: var(--dd-sans);
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: -0.05em;
+  }
+  .dd-peek-soon small {
+    font-family: var(--dd-sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .dd-peek.is-soon .dd-peek-soon { display: flex; }
+  .dd-peek.is-soon .dd-peek-img { display: none; }
+
+  @media (hover: none) {
+    .dd-peek { display: none; }
+  }
+
   @keyframes dd-marquee { to { transform: translateX(-50%); } }
 
   /* =========================================================
@@ -1119,20 +1183,31 @@
     <p class="dd-ticker-label dd-eyebrow">New this season · in-store &amp; online</p>
     <div class="dd-ticker-track">
       <div class="dd-ticker-set">
-        <a class="dd-ticker-item" href="https://shopphylum.com/collections/mud-australia" target="_blank" rel="noopener">Mud Australia <em>600+ new pieces</em><span class="dd-sunmark" aria-hidden="true"></span></a>
-        <a class="dd-ticker-item" href="https://shopphylum.com/collections/vendors?q=Dinosaur%20Designs" target="_blank" rel="noopener">Dinosaur Designs <em>Online debuts</em><span class="dd-sunmark" aria-hidden="true"></span></a>
-        <span class="dd-ticker-item">Wolf Ceramics <em>New to PHYLUM</em><span class="dd-sunmark" aria-hidden="true"></span></span>
-        <span class="dd-ticker-item">So Niice <em>Custom jewelry</em><span class="dd-sunmark" aria-hidden="true"></span></span>
-        <span class="dd-ticker-item">Forma Art Studio<span class="dd-sunmark" aria-hidden="true"></span></span>
-        <span class="dd-ticker-item">Mungo<span class="dd-sunmark" aria-hidden="true"></span></span>
-        <span class="dd-ticker-item">Maho Sensory<span class="dd-sunmark" aria-hidden="true"></span></span>
-        <span class="dd-ticker-item">Aaron Probyn<span class="dd-sunmark" aria-hidden="true"></span></span>
-        <span class="dd-ticker-item">Georg Jensen <em>Bernadotte</em><span class="dd-sunmark" aria-hidden="true"></span></span>
-        <span class="dd-ticker-item">Sabre Paris <em>New shipment</em><span class="dd-sunmark" aria-hidden="true"></span></span>
-        <span class="dd-ticker-item">AV86 <em>New watches</em><span class="dd-sunmark" aria-hidden="true"></span></span>
+        <a class="dd-ticker-item" data-peek="https://cdn.shopify.com/s/files/1/0930/1491/7489/collections/Mud_Australia_Hero_image.jpg?width=800" href="https://shopphylum.com/collections/mud-australia" target="_blank" rel="noopener">Mud Australia <em>600+ new pieces</em><span class="dd-sunmark" aria-hidden="true"></span></a>
+        <a class="dd-ticker-item" data-peek="https://shopphylum.com/cdn/shop/files/home-dinosaur-designs.jpg?width=800" href="https://shopphylum.com/collections/vendors?q=Dinosaur%20Designs" target="_blank" rel="noopener">Dinosaur Designs <em>Online debuts</em><span class="dd-sunmark" aria-hidden="true"></span></a>
+        <span class="dd-ticker-item" data-peek-soon>Wolf Ceramics <em>New to PHYLUM</em><span class="dd-sunmark" aria-hidden="true"></span></span>
+        <span class="dd-ticker-item" data-peek-soon>So Niice <em>Custom jewelry</em><span class="dd-sunmark" aria-hidden="true"></span></span>
+        <span class="dd-ticker-item" data-peek-soon>Forma Art Studio<span class="dd-sunmark" aria-hidden="true"></span></span>
+        <span class="dd-ticker-item" data-peek-soon>Mungo<span class="dd-sunmark" aria-hidden="true"></span></span>
+        <span class="dd-ticker-item" data-peek-soon>Maho Sensory<span class="dd-sunmark" aria-hidden="true"></span></span>
+        <a class="dd-ticker-item" data-peek="https://cdn.shopify.com/s/files/1/0930/1491/7489/collections/Aaron_Probyn_Brand_Collection_Hero.jpg?width=800" href="https://shopphylum.com/collections/aaron-probyn" target="_blank" rel="noopener">Aaron Probyn<span class="dd-sunmark" aria-hidden="true"></span></a>
+        <a class="dd-ticker-item" data-peek="https://cdn.shopify.com/s/files/1/0930/1491/7489/collections/Georg_Jensen_Brand_Collection_Hero.jpg?width=800" href="https://shopphylum.com/collections/georg-jensen" target="_blank" rel="noopener">Georg Jensen <em>Bernadotte</em><span class="dd-sunmark" aria-hidden="true"></span></a>
+        <a class="dd-ticker-item" data-peek="https://cdn.shopify.com/s/files/1/0930/1491/7489/collections/Sabre_Brand_Collection_Hero.jpg?width=800" href="https://shopphylum.com/collections/sabre" target="_blank" rel="noopener">Sabre Paris <em>New shipment</em><span class="dd-sunmark" aria-hidden="true"></span></a>
+        <a class="dd-ticker-item" data-peek="https://cdn.shopify.com/s/files/1/0930/1491/7489/files/AboutVintage-1968moonphase2.0-27_lifestyle.jpg?width=800" href="https://shopphylum.com/collections/vendors?q=AV86" target="_blank" rel="noopener">AV86 <em>New watches</em><span class="dd-sunmark" aria-hidden="true"></span></a>
       </div>
     </div>
   </section>
+
+  <div class="dd-peek" aria-hidden="true">
+    <div class="dd-peek-card">
+      <img class="dd-peek-img" alt="">
+      <div class="dd-peek-soon">
+        <span class="dd-sunmark"></span>
+        <b>New to PHYLUM</b>
+        <small>Debuts in store Oct 15</small>
+      </div>
+    </div>
+  </div>
 
   <!-- ================= AGENDA ================= -->
   <section class="dd-agenda" id="weekend" aria-labelledby="ddAgendaTitle">
@@ -1355,6 +1430,58 @@
 
     const ticker = document.querySelector('.dd-ticker-track');
     if (ticker) ticker.appendChild(ticker.firstElementChild.cloneNode(true)).setAttribute('aria-hidden', 'true');
+
+    const peek = document.querySelector('.dd-peek');
+    if (ticker && peek && window.matchMedia('(hover: hover)').matches) {
+      const peekImg = peek.querySelector('.dd-peek-img');
+      const tickerBand = ticker.closest('.dd-ticker');
+      const pos = { x: 0, y: 0 };
+      const aim = { x: 0, y: 0 };
+      let current = null;
+      let raf = null;
+
+      ticker.querySelectorAll('[data-peek]').forEach(item => { new Image().src = item.dataset.peek; });
+
+      const follow = () => {
+        pos.x += (aim.x - pos.x) * 0.16;
+        pos.y += (aim.y - pos.y) * 0.16;
+        const tilt = Math.max(-10, Math.min(10, (aim.x - pos.x) * 0.06));
+        peek.style.transform = `translate(${pos.x - peek.offsetWidth / 2}px, ${pos.y - peek.offsetHeight - 22}px) rotate(${tilt}deg)`;
+        raf = current ? requestAnimationFrame(follow) : null;
+      };
+
+      const show = (item) => {
+        const wasOn = Boolean(current);
+        current = item;
+        const soon = item.hasAttribute('data-peek-soon');
+        peek.classList.toggle('is-soon', soon);
+        if (!soon && peekImg.getAttribute('src') !== item.dataset.peek) {
+          if (wasOn) {
+            peek.classList.add('is-swap');
+            setTimeout(() => peek.classList.remove('is-swap'), 120);
+          }
+          peekImg.src = item.dataset.peek;
+        }
+        peek.classList.add('is-on');
+        if (!raf) raf = requestAnimationFrame(follow);
+      };
+
+      const hide = () => {
+        current = null;
+        peek.classList.remove('is-on');
+      };
+
+      tickerBand.addEventListener('pointermove', (e) => {
+        aim.x = e.clientX;
+        aim.y = e.clientY;
+        if (!current) { pos.x = aim.x; pos.y = aim.y; }
+        const item = e.target.closest('.dd-ticker-item');
+        if (!item) { if (current) hide(); return; }
+        if (item !== current) show(item);
+      });
+      tickerBand.addEventListener('pointerleave', hide);
+      window.addEventListener('scroll', () => { if (current) hide(); }, { passive: true });
+    }
 
     const calBase = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
     const where = 'PHYLUM, 901 N. Palm Canyon Dr., Palm Springs, CA';
