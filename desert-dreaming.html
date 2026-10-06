@@ -130,7 +130,7 @@
     align-items: center;
     gap: 40px;
     padding: 0 var(--nav-gutter);
-    background: var(--dd-night);
+    background: var(--clay);
     color: var(--dd-linen);
   }
 
@@ -155,7 +155,7 @@
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(238, 238, 229, 0.55);
+    color: rgba(238, 238, 229, 0.75);
   }
 
   .dd-count-track {
@@ -167,7 +167,7 @@
     position: absolute;
     left: 0; right: 0; top: 50%;
     height: 1px;
-    background: rgba(238, 238, 229, 0.22);
+    background: rgba(238, 238, 229, 0.4);
   }
   .dd-count-fill {
     position: absolute;
@@ -183,7 +183,7 @@
     width: 5px; height: 5px;
     margin: -2px 0 0 -2.5px;
     border-radius: 50%;
-    background: rgba(238, 238, 229, 0.45);
+    background: rgba(238, 238, 229, 0.65);
   }
   .dd-count-tick.is-past { background: var(--dd-sun); }
   .dd-count-tick b {
@@ -195,9 +195,9 @@
     font-weight: 500;
     font-size: 10px;
     letter-spacing: 0.04em;
-    color: rgba(238, 238, 229, 0.5);
+    color: rgba(238, 238, 229, 0.75);
   }
-  .dd-count-tick.is-next b { color: var(--dd-sun); }
+  .dd-count-tick.is-next b { color: var(--dd-linen); }
   .dd-count-sun {
     position: absolute;
     top: 50%;
@@ -226,7 +226,7 @@
   .dd-unit + .dd-unit::before {
     content: ":";
     font-size: 30px;
-    color: rgba(238, 238, 229, 0.3);
+    color: rgba(238, 238, 229, 0.55);
     margin: 0 6px 0 2px;
   }
   .dd-unit b {
@@ -237,7 +237,7 @@
     line-height: 1;
     letter-spacing: -0.06em;
     font-variant-numeric: tabular-nums;
-    color: var(--dd-sun);
+    color: var(--dd-linen);
     text-align: right;
   }
   .dd-dg {
@@ -252,7 +252,7 @@
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(238, 238, 229, 0.55);
+    color: rgba(238, 238, 229, 0.75);
   }
 
 
@@ -298,7 +298,7 @@
     font-size: clamp(50px, 7.4vw, 128px);
     line-height: 1;
     letter-spacing: -0.035em;
-    color: var(--clay-deep);
+    color: var(--clay);
     margin-top: 0.04em;
   }
 
@@ -368,8 +368,8 @@
     z-index: 5;
     width: clamp(150px, 13vw, 196px);
     aspect-ratio: 1;
-    left: var(--nav-gutter);
-    top: calc(var(--dd-count-h) + 36px);
+    left: calc(var(--nav-gutter) + clamp(20px, 3vw, 56px));
+    top: calc(var(--dd-count-h) + clamp(56px, 7vh, 84px));
     rotate: -10deg;
     opacity: 0;
     scale: 0.6;
