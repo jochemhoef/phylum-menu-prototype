@@ -587,7 +587,7 @@
     position: relative;
     background: var(--dd-night);
     color: var(--dd-linen);
-    padding: clamp(90px, 10vw, 150px) var(--nav-gutter) clamp(24px, 3vw, 44px);
+    padding: clamp(90px, 10vw, 150px) var(--nav-gutter) 0;
     overflow: clip;
   }
 
@@ -762,9 +762,8 @@
     background: var(--dd-sun);
     color: var(--dd-night);
     overflow: hidden;
-    z-index: 5;
-    border-radius: 28px 28px 0 0;
-    box-shadow: 0 -24px 50px -30px rgba(0, 0, 0, 0.5);
+    --card: var(--dd-sun);
+    --i: 3;
     isolation: isolate;
   }
   .dd-day--main .dd-day-num,
@@ -792,34 +791,35 @@
   .dd-day--main .dd-main-sun .dd-sunmark { width: 100%; animation: dd-spin 90s linear infinite reverse; }
 
   .dd-main-flag {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    align-self: flex-start;
-    margin-top: 20px;
+    position: relative;
+    display: block;
+    width: clamp(140px, 11.5vw, 180px);
+    aspect-ratio: 1;
+    margin-top: 26px;
+    color: var(--dd-night);
+  }
+  .dd-main-flag-ring {
+    position: absolute;
+    inset: 0;
+    animation: dd-spin 32s linear infinite;
+  }
+  .dd-main-flag-ring text {
     font-family: var(--dd-sans);
     font-weight: 500;
-    font-size: 15px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    background: var(--clay);
-    color: var(--dd-linen);
-    padding: 12px 22px 12px 14px;
-    border: 2px solid var(--dd-night);
-    border-radius: 999px;
-    box-shadow: 5px 5px 0 var(--dd-night);
-    rotate: -6deg;
-    transform-origin: 30% 50%;
-    animation: dd-wobble 3.6s var(--dd-ease) infinite;
+    font-size: 16px;
+    letter-spacing: 0.22em;
+    fill: currentColor;
   }
-  .dd-main-flag .dd-sunmark { width: 26px; color: var(--dd-sun); animation: dd-spin 8s linear infinite; }
-  .dd-day--main:hover .dd-main-flag { animation-duration: 1.2s; }
-  @keyframes dd-wobble {
-    0%, 100% { rotate: -6deg; scale: 1; }
-    12% { rotate: -1deg; scale: 1.07; }
-    24% { rotate: -9deg; scale: 1.02; }
-    36% { rotate: -5deg; scale: 1; }
+  .dd-main-flag-core {
+    position: absolute;
+    inset: 25%;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--dd-night);
+    box-shadow: 0 0 0 1px rgba(46, 48, 36, 0.25), 0 0 0 7px var(--dd-sun), 0 0 0 8px rgba(46, 48, 36, 0.35);
   }
+  .dd-main-flag-core .dd-sunmark { width: 62%; color: var(--dd-sun); animation: dd-spin 48s linear infinite reverse; }
 
   /* 14–16 stack as cards on scroll */
   .dd-day--stack {
@@ -864,14 +864,7 @@
   .dd-day--apricot .dd-cal { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.45); }
   .dd-day--apricot .dd-cal:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
 
-  .dd-day--last {
-    z-index: 5;
-    align-items: center;
-    margin: 0 calc(-1 * var(--nav-gutter));
-    padding-left: var(--nav-gutter);
-    padding-right: var(--nav-gutter);
-    background: var(--dd-night);
-  }
+  .dd-day--last { --card: var(--dd-night-2); --i: 4; align-items: center; }
 
   .dd-reveal {
     opacity: 0;
@@ -1088,7 +1081,7 @@
     .dd-unit b { font-size: 28px; }
     .dd-day { grid-template-columns: 1fr; }
     .dd-day--stack { top: calc(12px + var(--i) * 12px); }
-    .dd-day--stack, .dd-day--main { border-radius: 20px 20px 0 0; }
+    .dd-day--stack { border-radius: 20px 20px 0 0; }
     .dd-day--main .dd-main-sun { left: auto; right: -20%; top: 30%; }
   }
 
@@ -1380,7 +1373,7 @@
         </div>
       </article>
 
-      <article class="dd-day dd-day--main">
+      <article class="dd-day dd-day--stack dd-day--main">
         <div class="dd-main-sun" aria-hidden="true"><span class="dd-sunmark"></span></div>
         <div class="dd-day-date">
           <span class="dd-day-num">17</span>
@@ -1388,7 +1381,13 @@
             <span class="dd-eyebrow">Oct</span>
             <span class="dd-day-weekday">Saturday</span>
             <span class="dd-day-where">In-store</span>
-            <span class="dd-main-flag"><span class="dd-sunmark" aria-hidden="true"></span>The main event</span>
+            <span class="dd-main-flag" role="img" aria-label="The main event">
+              <svg class="dd-main-flag-ring" viewBox="0 0 200 200" aria-hidden="true">
+                <defs><path id="ddFlagRing" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+                <text><textPath href="#ddFlagRing" textLength="515" lengthAdjust="spacing">THE MAIN EVENT · THE MAIN EVENT · </textPath></text>
+              </svg>
+              <span class="dd-main-flag-core"><span class="dd-sunmark"></span></span>
+            </span>
           </div>
         </div>
         <div class="dd-events">
@@ -1419,7 +1418,7 @@
         </div>
       </article>
 
-      <article class="dd-day dd-day--last">
+      <article class="dd-day dd-day--stack dd-day--last">
         <div class="dd-day-date">
           <span class="dd-day-num">18</span>
           <div class="dd-day-label">
