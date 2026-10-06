@@ -122,6 +122,7 @@
   @keyframes dd-spin { to { rotate: 360deg; } }
 
   .announce { display: none !important; }
+  .dd-nowrap { white-space: nowrap; }
 
   /* Countdown bar */
   .dd-count {
@@ -841,7 +842,7 @@
     border-radius: 50%;
     background: var(--dd-terracotta);
   }
-  .dd-main-flag-core .dd-sunmark { width: 76%; color: var(--dd-linen); animation: dd-spin 48s linear infinite reverse; }
+  .dd-main-flag-core .dd-sunmark { width: 76%; color: var(--dd-linen); opacity: 0.5; animation: dd-spin 48s linear infinite reverse; }
 
   /* 14–16 stack as cards on scroll */
   .dd-day--stack {
@@ -1327,7 +1328,7 @@
         <span class="dd-eyebrow">October 14–18, 2026</span>
         <h2 class="dd-agenda-title" id="ddAgendaTitle">The weekend, <em>served.</em></h2>
       </div>
-      <p class="dd-agenda-intro">Four days in the new store at <strong>901 N. Palm Canyon Dr.</strong>, plus an online pop-up for everyone dreaming from somewhere else. Save the dates, get here early, and bring a friend.</p>
+      <p class="dd-agenda-intro">Four days in the new store at <strong class="dd-nowrap">901 N. Palm Canyon Dr., Palm Springs, CA</strong>, plus an online <span class="dd-nowrap">pop-up</span> for everyone dreaming from somewhere else. Save the dates, get here early, and bring a friend.</p>
     </div>
 
     <div class="dd-days">
