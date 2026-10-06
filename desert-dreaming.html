@@ -112,31 +112,9 @@
     min-height: max(820px, calc(100svh - 96px));
     overflow: hidden;
     isolation: isolate;
-    background:
-      radial-gradient(120% 70% at 50% 100%, rgba(222, 108, 60, 0.55) 0%, rgba(222, 108, 60, 0) 60%),
-      linear-gradient(180deg, var(--paper) 0%, #F4E2CB 26%, #F3C9A2 58%, #EDA17A 82%, #E2845C 100%);
+    background: var(--paper);
     padding-bottom: 210px;
   }
-
-  .dd-hero-sun {
-    position: absolute;
-    left: 50%;
-    top: 47%;
-    width: min(74vw, 960px);
-    translate: -50% -50%;
-    color: var(--dd-sun);
-    z-index: 0;
-    pointer-events: none;
-    will-change: transform;
-  }
-  .dd-hero-sun .dd-sunmark {
-    width: 100%;
-    animation: dd-spin 140s linear infinite;
-    opacity: 0;
-    scale: 0.82;
-    transition: opacity 1.6s var(--dd-ease), scale 2.2s var(--dd-ease);
-  }
-  .is-ready .dd-hero-sun .dd-sunmark { opacity: 0.92; scale: 1; }
 
   @keyframes dd-spin { to { rotate: 360deg; } }
 
@@ -234,21 +212,20 @@
     padding-left: 0.42em;
   }
   .dd-title-main {
-    font-family: var(--dd-serif);
-    font-weight: 300;
-    font-size: clamp(104px, 17.5vw, 300px);
-    line-height: 0.8;
-    letter-spacing: -0.045em;
+    font-family: var(--dd-sans);
+    font-weight: 500;
+    font-size: clamp(100px, 16.5vw, 284px);
+    line-height: 0.82;
+    letter-spacing: -0.065em;
   }
   .dd-title-sub {
-    font-family: var(--dd-italic);
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(50px, 7.2vw, 128px);
+    font-family: var(--dd-sans);
+    font-weight: 500;
+    font-size: clamp(48px, 7vw, 122px);
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.055em;
     color: var(--clay-deep);
-    margin-top: 0.06em;
+    margin-top: 0.04em;
   }
 
   .dd-line { display: block; overflow: hidden; padding: 0 0.04em 0.06em; }
@@ -346,21 +323,6 @@
     padding-bottom: 4px;
   }
 
-  .dd-badge {
-    position: absolute;
-    z-index: 5;
-    width: 122px;
-    right: calc(3.5% + min(24vw, 380px) - 64px);
-    top: 2%;
-    rotate: 9deg;
-    filter: drop-shadow(0 14px 18px rgba(80, 40, 10, 0.25));
-    opacity: 0;
-    scale: 0.6;
-    transition: opacity 0.8s var(--dd-ease) 1.15s, scale 1s var(--dd-ease) 1.15s;
-  }
-  .dd-badge img { display: block; width: 100%; height: auto; }
-  .is-ready .dd-badge { opacity: 1; scale: 1; }
-
   /* Horizon: hero sky sets into the agenda's night */
   .dd-horizon {
     position: absolute;
@@ -440,7 +402,7 @@
     gap: 40px 64px;
     margin-bottom: clamp(60px, 7vw, 110px);
   }
-  .dd-agenda-head .dd-eyebrow { color: var(--dd-apricot); margin-bottom: 26px; display: block; }
+  .dd-agenda-head .dd-eyebrow { color: var(--dd-apricot); margin-bottom: 30px; display: block; font-size: clamp(15px, 1.3vw, 19px); letter-spacing: 0.2em; }
   .dd-agenda-title {
     font-family: var(--dd-serif);
     font-weight: 300;
@@ -449,11 +411,11 @@
     letter-spacing: -0.045em;
   }
   .dd-agenda-title em {
-    font-family: var(--dd-italic);
-    font-style: italic;
-    font-weight: 400;
+    font-family: var(--dd-sans);
+    font-style: normal;
+    font-weight: 500;
     color: var(--dd-sun);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.07em;
   }
   .dd-agenda-intro {
     font-size: 17px;
@@ -498,10 +460,11 @@
   }
   .dd-day-label .dd-eyebrow { color: var(--dd-apricot); }
   .dd-day-weekday {
-    font-family: var(--dd-italic);
-    font-style: italic;
+    font-family: var(--dd-sans);
+    font-weight: 500;
     font-size: clamp(26px, 2.4vw, 38px);
     line-height: 1;
+    letter-spacing: -0.04em;
   }
   .dd-day-where {
     margin-top: 6px;
@@ -526,7 +489,7 @@
     font-weight: 500;
     font-size: clamp(28px, 3vw, 48px);
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.05em;
     color: var(--dd-sun);
     white-space: nowrap;
     padding-top: 0.12em;
@@ -851,7 +814,6 @@
     .dd-plate--3 { right: 4%; top: 50%; }
     .dd-plate--5 { right: 18%; top: 72%; }
     .dd-seal { width: 120px; }
-    .dd-badge { width: 104px; }
     .dd-day { grid-template-columns: 1fr; }
     .dd-day--main .dd-main-sun { left: auto; right: -20%; top: 30%; }
   }
@@ -866,7 +828,6 @@
       padding-bottom: 150px;
     }
     .dd-hero-copy { padding-top: 64px; }
-    .dd-hero-sun { top: 300px; width: 135vw; }
     .dd-title-pre { letter-spacing: 0.3em; }
 
     .dd-collage {
@@ -885,8 +846,6 @@
     .dd-seal { left: 0; top: -3%; width: 104px; }
     .dd-seal-num { font-size: 30px; }
     .dd-seal-ring text { font-size: 15px; }
-    .dd-badge { right: 0; top: 5%; width: 84px; }
-
     .dd-dates { flex-direction: column; gap: 6px; }
     .dd-dates span + span::before { display: none; }
 
@@ -906,8 +865,8 @@
 
   @media (max-width: 480px) {
     :root { --nav-gutter: 16px; }
-    .dd-title-main { font-size: 27vw; }
-    .dd-title-sub { font-size: 12.5vw; }
+    .dd-title-main { font-size: 26vw; }
+    .dd-title-sub { font-size: 12vw; }
     .dd-dates { font-size: 13px; }
     .dd-btn { padding: 14px 20px; font-size: 12px; }
   }
@@ -916,7 +875,7 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .dd-line > span, .dd-hero-meta, .dd-reveal { translate: none !important; opacity: 1 !important; }
     .dd-plate-frame { clip-path: none !important; }
-    .dd-plate figcaption, .dd-seal, .dd-badge, .dd-hero-sun .dd-sunmark { opacity: 1 !important; scale: 1 !important; }
+    .dd-plate figcaption, .dd-seal { opacity: 1 !important; scale: 1 !important; }
   }
 </style>
 </head>
@@ -928,8 +887,6 @@
 
   <!-- ================= HERO ================= -->
   <section class="dd-hero" aria-labelledby="ddTitle">
-    <div class="dd-hero-sun" data-sun aria-hidden="true"><span class="dd-sunmark"></span></div>
-
     <div class="dd-hero-copy">
       <h1 class="dd-title" id="ddTitle">
         <span class="dd-line dd-title-pre"><span>Phylum is</span></span>
@@ -980,9 +937,6 @@
       <span class="dd-seal-num" aria-hidden="true">3</span>
     </div>
 
-    <div class="dd-badge">
-      <img src="assets/event/best-of-the-best.png" alt="We won Best of the Best, Palm Springs Life">
-    </div>
     </div>
 
     <div class="dd-horizon" aria-hidden="true">
@@ -1018,7 +972,7 @@
   <section class="dd-agenda" id="weekend" aria-labelledby="ddAgendaTitle">
     <div class="dd-agenda-head dd-reveal">
       <div>
-        <span class="dd-eyebrow">The weekend · October 14–18</span>
+        <span class="dd-eyebrow">October 14–18, 2026</span>
         <h2 class="dd-agenda-title" id="ddAgendaTitle">The weekend, <em>served.</em></h2>
       </div>
       <p class="dd-agenda-intro">Four days in the new store at <strong>901 N. Palm Canyon Dr.</strong>, plus an online pop-up for everyone dreaming from somewhere else. Save the dates, get here early, and bring a friend.</p>
@@ -1037,7 +991,7 @@
         </div>
         <div class="dd-events">
           <div class="dd-event">
-            <div class="dd-event-time">Doors open</div>
+            <div class="dd-event-time">Live online</div>
             <div>
               <h3 class="dd-event-title">The web pop-up <em>goes live</em></h3>
               <p class="dd-event-copy">The weekend starts early online. Shop new arrivals from Mud Australia, Dinosaur Designs, AV86 and more, and claim one of a limited run of signed copies of <em>Desert Dreaming</em>.</p>
@@ -1278,7 +1232,6 @@
     if (reduceMotion) return;
 
     const hero = document.querySelector('.dd-hero');
-    const sun = document.querySelector('[data-sun]');
     const plates = document.querySelectorAll('.dd-plate[data-speed]');
     const stacked = window.matchMedia('(max-width: 860px)');
     let ticking = false;
@@ -1287,7 +1240,6 @@
       const y = window.scrollY;
       const h = hero.offsetHeight;
       if (y < h * 1.2) {
-        if (sun) sun.style.transform = `translateY(${y * 0.45}px)`;
         plates.forEach(p => {
           p.style.transform = stacked.matches ? '' : `translateY(${-y * parseFloat(p.dataset.speed)}px)`;
         });
