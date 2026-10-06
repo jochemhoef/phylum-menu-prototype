@@ -38,7 +38,6 @@
 
     --dd-linen: #EEEEE5;
     --dd-teal: #407575;
-    --dd-bloom: #F6CDC2;
     --dd-khaki: #535538;
     --dd-night: #2E3024;
     --dd-night-2: #383A2C;
@@ -799,7 +798,7 @@
   .dd-day--main .dd-event-copy a { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.4); }
   .dd-day--main .dd-event-copy a:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
   .dd-day--main .dd-tag { border-color: rgba(46, 48, 36, 0.35); color: var(--dd-night); }
-  .dd-day--main .dd-tag--hot { background: var(--dd-bloom); border-color: var(--dd-bloom); color: var(--dd-night); }
+  .dd-day--main .dd-tag--hot { background: var(--dd-terracotta); border-color: var(--dd-terracotta); color: var(--dd-linen); }
   .dd-day--main .dd-cal { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.4); }
   .dd-day--main .dd-cal:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
 
@@ -840,9 +839,9 @@
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: var(--dd-bloom);
+    background: var(--dd-terracotta);
   }
-  .dd-main-flag-core .dd-sunmark { width: 76%; color: var(--clay); animation: dd-spin 48s linear infinite reverse; }
+  .dd-main-flag-core .dd-sunmark { width: 76%; color: var(--dd-sun); animation: dd-spin 48s linear infinite reverse; }
 
   /* 14–16 stack as cards on scroll */
   .dd-day--stack {
