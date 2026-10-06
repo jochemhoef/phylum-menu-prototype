@@ -38,7 +38,7 @@
 
     --dd-linen: #EEEEE5;
     --dd-teal: #407575;
-    --dd-bloom: #B8396B;
+    --dd-bloom: #F6CDC2;
     --dd-khaki: #535538;
     --dd-night: #2E3024;
     --dd-night-2: #383A2C;
@@ -103,10 +103,10 @@
   }
   .dd-btn svg { width: 16px; height: 16px; transition: transform 0.3s var(--dd-ease); }
   .dd-btn:hover svg { transform: translateY(3px); }
-  .dd-btn--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .dd-btn--solid { background: var(--dd-night); color: var(--paper); border-color: var(--dd-night); }
   .dd-btn--solid:hover { background: var(--dd-khaki); border-color: var(--dd-khaki); }
-  .dd-btn--ghost { color: var(--ink); }
-  .dd-btn--ghost:hover { background: var(--ink); color: var(--paper); }
+  .dd-btn--ghost { color: var(--dd-night); }
+  .dd-btn--ghost:hover { background: var(--dd-night); color: var(--paper); }
 
   /* =========================================================
      HERO
@@ -135,6 +135,14 @@
     background: var(--clay);
     color: var(--dd-linen);
     isolation: isolate;
+  }
+  .dd-count::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.1  0 0 0 0 0.06  0.4 0 0 0 -0.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E") 0 0 / 240px 240px;
+    pointer-events: none;
   }
 
   .dd-count-edge {
@@ -300,8 +308,6 @@
     padding-left: 0.42em;
     color: var(--dd-night);
   }
-  .dd-hero .dd-btn--solid { background: var(--dd-night); border-color: var(--dd-night); }
-  .dd-hero .dd-btn--solid:hover { background: var(--dd-khaki); border-color: var(--dd-khaki); }
   .dd-title-main {
     font-family: var(--dd-sans);
     font-weight: 500;
@@ -769,8 +775,6 @@
   .dd-cal:hover { color: var(--dd-sun); border-color: var(--dd-sun); }
 
   /* Prelude day (online launch) */
-  .dd-day--prelude .dd-day-num { color: transparent; -webkit-text-stroke: 1.5px rgba(238, 238, 229, 0.7); }
-  .dd-day--prelude:hover .dd-day-num { -webkit-text-stroke-color: var(--dd-sun); color: transparent; }
 
   /* Saturday: the main event */
   .dd-day--main {
@@ -793,7 +797,7 @@
   .dd-day--main .dd-event-copy a { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.4); }
   .dd-day--main .dd-event-copy a:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
   .dd-day--main .dd-tag { border-color: rgba(46, 48, 36, 0.35); color: var(--dd-night); }
-  .dd-day--main .dd-tag--hot { background: var(--dd-bloom); border-color: var(--dd-bloom); color: var(--dd-linen); }
+  .dd-day--main .dd-tag--hot { background: var(--dd-bloom); border-color: var(--dd-bloom); color: var(--dd-night); }
   .dd-day--main .dd-cal { color: var(--dd-night); border-color: rgba(46, 48, 36, 0.4); }
   .dd-day--main .dd-cal:hover { color: var(--clay-deep); border-color: var(--clay-deep); }
 
@@ -814,7 +818,7 @@
     width: clamp(140px, 11.5vw, 180px);
     aspect-ratio: 1;
     margin-top: 26px;
-    color: var(--dd-bloom);
+    color: var(--dd-night);
   }
   .dd-main-flag-ring {
     position: absolute;
@@ -835,9 +839,9 @@
     place-items: center;
     border-radius: 50%;
     background: var(--dd-bloom);
-    box-shadow: 0 0 0 1px rgba(184, 57, 107, 0.3), 0 0 0 7px var(--dd-sun), 0 0 0 8px rgba(184, 57, 107, 0.45);
+    box-shadow: 0 0 0 1px rgba(46, 48, 36, 0.2), 0 0 0 7px var(--dd-sun), 0 0 0 8px rgba(46, 48, 36, 0.3);
   }
-  .dd-main-flag-core .dd-sunmark { width: 62%; color: var(--dd-sun); animation: dd-spin 48s linear infinite reverse; }
+  .dd-main-flag-core .dd-sunmark { width: 62%; color: var(--clay); animation: dd-spin 48s linear infinite reverse; }
 
   /* 14–16 stack as cards on scroll */
   .dd-day--stack {
@@ -867,8 +871,6 @@
   .dd-day--stack.is-loose::after { display: none; }
   .dd-day--olive { --card: var(--dd-khaki); --i: 0; }
   .dd-day--clay { --card: var(--clay); --i: 1; }
-  .dd-day--clay .dd-event-time,
-  .dd-day--clay:hover .dd-day-num { color: var(--dd-linen); }
   .dd-day--clay .dd-day-label .dd-eyebrow { color: var(--dd-sun); }
   .dd-day--clay .dd-event-copy { color: rgba(238, 238, 229, 0.9); }
   .dd-day--teal { --card: var(--dd-teal); --i: 2; }
@@ -930,7 +932,7 @@
     font-size: clamp(56px, 7vw, 120px);
     line-height: 0.9;
     letter-spacing: -0.052em;
-    color: var(--ink);
+    color: var(--dd-night);
     margin-bottom: 30px;
   }
   .dd-book-title em {
@@ -944,7 +946,7 @@
   .dd-book-copy p {
     font-size: 17px;
     line-height: 1.7;
-    color: var(--ink-soft);
+    color: rgba(46, 48, 36, 0.76);
     max-width: 540px;
     margin-bottom: 16px;
   }
@@ -985,7 +987,7 @@
     font-size: 12px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: rgba(46, 48, 36, 0.7);
   }
   .dd-urgency li strong {
     font-family: var(--dd-sans);
@@ -993,7 +995,7 @@
     font-size: clamp(22px, 2vw, 30px);
     letter-spacing: -0.02em;
     text-transform: none;
-    color: var(--ink);
+    color: var(--dd-night);
     text-align: right;
   }
 
@@ -1149,7 +1151,7 @@
     .dd-anywhere-title { font-size: 12.6vw; max-width: none; }
     .dd-anywhere-title em { white-space: nowrap; }
     .dd-book-copy .dd-eyebrow-dot { display: none; }
-    .dd-eyebrow-date { display: block; margin-top: 8px; color: var(--ink-soft); }
+    .dd-eyebrow-date { display: block; margin-top: 8px; color: rgba(46, 48, 36, 0.7); }
     .dd-deserts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 21px; }
     .dd-signoff { gap: 16px; font-size: 19px; }
     .dd-signoff img { width: 64px; flex-shrink: 0; }
