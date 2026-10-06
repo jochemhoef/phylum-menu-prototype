@@ -622,7 +622,7 @@
   }
   .dd-agenda-intro strong { color: var(--dd-linen); font-weight: 500; }
 
-  .dd-days { position: relative; }
+  .dd-days { position: relative; display: flow-root; }
 
   .dd-day {
     position: relative;
@@ -1733,20 +1733,46 @@
 
     const stack = [...document.querySelectorAll('.dd-day--stack')];
     let stackFrame = 0;
+    const layoutStack = () => {
+      stack.forEach(card => {
+        card.style.marginTop = card.style.marginBottom = '';
+        card.classList.toggle('is-loose', card.offsetHeight > window.innerHeight - 110);
+      });
+      // Equalise where each pinned card lets go, so the stack leaves together once the last card lands.
+      const pinned = stack.filter(card => !card.classList.contains('is-loose'));
+      const reach = card => parseFloat(getComputedStyle(card).top) + card.offsetHeight;
+      const release = Math.max(0, ...pinned.map(reach));
+      pinned.forEach(card => {
+        const extra = Math.ceil(release - reach(card));
+        if (extra <= 0) return;
+        card.style.marginBottom = `${extra}px`;
+        const next = card.nextElementSibling;
+        if (next && next.classList.contains('dd-day--stack')) next.style.marginTop = `${-extra}px`;
+      });
+    };
     const renderStack = () => {
       stackFrame = 0;
       stack.forEach(card => {
-        card.classList.toggle('is-loose', card.offsetHeight > window.innerHeight - 110);
         const next = card.nextElementSibling;
-        if (!next || reduceMotion) return;
+        if (!next || !next.classList.contains('dd-day--stack')) return;
         const r = card.getBoundingClientRect();
-        const cover = Math.min(1, Math.max(0, (r.bottom - next.getBoundingClientRect().top) / r.height));
-        card.style.setProperty('--cover', cover.toFixed(3));
+        const n = next.getBoundingClientRect();
+        if (!reduceMotion) {
+          const cover = Math.min(1, Math.max(0, (r.bottom - n.top) / r.height));
+          card.style.setProperty('--cover', cover.toFixed(3));
+        }
+        // A covered card never shows below the card on top of it.
+        const trim = (r.bottom - n.bottom + 2) * (card.offsetHeight / r.height);
+        card.style.clipPath = trim > 0 && n.top < r.bottom
+          ? `inset(0 0 ${trim.toFixed(1)}px 0 round ${getComputedStyle(card).borderTopLeftRadius} ${getComputedStyle(card).borderTopLeftRadius} 0 0)`
+          : '';
       });
     };
     const queueStack = () => { if (!stackFrame) stackFrame = requestAnimationFrame(renderStack); };
     window.addEventListener('scroll', queueStack, { passive: true });
-    window.addEventListener('resize', queueStack);
+    window.addEventListener('resize', () => { layoutStack(); queueStack(); });
+    window.addEventListener('load', () => { layoutStack(); renderStack(); });
+    layoutStack();
     renderStack();
 
     const reveals = document.querySelectorAll('.dd-reveal');
