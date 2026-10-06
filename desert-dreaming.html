@@ -141,28 +141,6 @@
     min-width: 0;
     white-space: nowrap;
   }
-  .dd-count-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--dd-sans);
-    font-weight: 500;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--dd-apricot);
-  }
-  .dd-count-kicker::before {
-    content: "";
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: currentColor;
-    translate: 0 -1px;
-  }
-  .dd-count.is-live .dd-count-kicker { color: var(--dd-sun); }
-  .dd-count.is-live .dd-count-kicker::before { animation: dd-pulse 1.4s ease-in-out infinite; }
-  @keyframes dd-pulse { 50% { opacity: 0.25; scale: 0.6; } }
-
   .dd-count-title {
     font-family: var(--dd-sans);
     font-weight: 500;
@@ -446,7 +424,7 @@
   }
   .dd-seal-sun {
     position: absolute;
-    inset: 24%;
+    inset: 13%;
     color: var(--dd-khaki);
   }
   .dd-seal-sun .dd-sunmark { width: 100%; }
@@ -456,7 +434,7 @@
     display: grid;
     place-items: center;
     font-family: var(--dd-serif);
-    font-size: 44px;
+    font-size: 62px;
     line-height: 1;
     color: var(--dd-sun);
     padding-bottom: 4px;
@@ -1054,7 +1032,7 @@
     .dd-plate--5 { display: none; }
 
     .dd-seal { left: -22px; top: -40px; width: 96px; }
-    .dd-seal-num { font-size: 30px; }
+    .dd-seal-num { font-size: 42px; }
     .dd-seal-ring text { font-size: 15px; }
     .dd-dates { flex-direction: column; gap: 6px; }
     .dd-dates span + span::before { display: none; }
@@ -1099,7 +1077,6 @@
   <section class="dd-hero" aria-labelledby="ddTitle">
     <div class="dd-count" data-count>
       <div class="dd-count-label">
-        <span class="dd-count-kicker" data-count-kicker>Next up</span>
         <span class="dd-count-title" data-count-title>The web pop-up goes live</span>
         <span class="dd-count-when" data-count-when>Wed, Oct 14 · Online</span>
       </div>
@@ -1515,7 +1492,6 @@
       const offset = previewNow ? Date.parse(previewNow + (previewNow.length <= 16 ? ':00-07:00' : '')) - Date.now() : 0;
 
       const el = {
-        kicker: countdown.querySelector('[data-count-kicker]'),
         title: countdown.querySelector('[data-count-title]'),
         when: countdown.querySelector('[data-count-when]'),
         fill: countdown.querySelector('[data-count-fill]'),
@@ -1544,18 +1520,15 @@
 
         let target;
         if (live) {
-          el.kicker.textContent = 'Happening now';
-          el.title.textContent = live.title;
+          el.title.textContent = `Now · ${live.title}`;
           el.when.textContent = live.when;
           target = live.end;
         } else if (nextIndex !== -1) {
           const next = milestones[nextIndex];
-          el.kicker.textContent = nextIndex === 0 ? 'Countdown' : 'Next up';
           el.title.textContent = next.title;
           el.when.textContent = next.when;
           target = next.start;
         } else {
-          el.kicker.textContent = done ? 'That’s a wrap' : 'Happening now';
           el.title.textContent = done ? 'Thank you for three years. Shop the pop-up online.' : last.title;
           el.when.textContent = '';
           target = done ? now : last.end;
