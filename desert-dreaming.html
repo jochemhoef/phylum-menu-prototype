@@ -613,7 +613,7 @@
     position: relative;
     background: var(--paper);
     color: var(--ink);
-    padding: clamp(48px, 5vw, 72px) var(--nav-gutter) 0;
+    padding: clamp(88px, 9vw, 128px) var(--nav-gutter) 0;
     overflow: clip;
   }
 
@@ -650,7 +650,8 @@
   }
   .dd-agenda-intro strong { color: var(--dd-linen); font-weight: 500; }
 
-  .dd-days { position: relative; display: flow-root; }
+  .dd-days { position: relative; display: flow-root; padding-bottom: clamp(280px, 46vh, 520px); }
+  .dd-days > .dd-day--stack:first-child { box-shadow: none; }
 
   .dd-day {
     position: relative;
@@ -1740,18 +1741,6 @@
       stack.forEach(card => {
         card.style.marginTop = card.style.marginBottom = '';
         card.classList.toggle('is-loose', card.offsetHeight > window.innerHeight - 110);
-      });
-      // Every pinned card lets go when the last card lands, so the stack leaves together.
-      const pinned = stack.filter(card => !card.classList.contains('is-loose'));
-      const reach = card => parseFloat(getComputedStyle(card).top) + card.offsetHeight;
-      const last = stack[stack.length - 1];
-      const release = pinned.includes(last) ? reach(last) : Math.max(0, ...pinned.map(reach));
-      pinned.forEach(card => {
-        const extra = Math.round(release - reach(card));
-        if (!extra) return;
-        card.style.marginBottom = `${extra}px`;
-        const next = card.nextElementSibling;
-        if (next && next.classList.contains('dd-day--stack')) next.style.marginTop = `${-extra}px`;
       });
     };
     const renderStack = () => {
