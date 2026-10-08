@@ -293,7 +293,7 @@
   .dd-title-pre {
     font-family: var(--dd-sans);
     font-weight: 500;
-    font-size: clamp(16px, 1.6vw, 24px);
+    font-size: clamp(13px, 1.2vw, 18px);
     letter-spacing: 0.42em;
     text-transform: uppercase;
     margin-bottom: 0.4em;
@@ -1705,7 +1705,29 @@
       setInterval(tick, 1000);
     }
 
-    const start = () => requestAnimationFrame(() => document.body.classList.add('is-ready'));
+    const fitWelcome = () => {
+      const main = document.querySelector('.dd-title-main');
+      const mainText = main && main.querySelector('span');
+      const subText = document.querySelector('.dd-title-sub span');
+      if (!main || !mainText || !subText) return;
+      const target = subText.getBoundingClientRect().width;
+      if (!target) return;
+      let lo = 24;
+      let hi = 420;
+      for (let i = 0; i < 18; i++) {
+        const mid = (lo + hi) / 2;
+        main.style.fontSize = mid + 'px';
+        if (mainText.getBoundingClientRect().width > target) hi = mid;
+        else lo = mid;
+      }
+      main.style.fontSize = lo + 'px';
+    };
+
+    const start = () => {
+      fitWelcome();
+      requestAnimationFrame(() => document.body.classList.add('is-ready'));
+    };
+    window.addEventListener('resize', fitWelcome);
     if (document.fonts && document.fonts.ready) {
       Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1200))]).then(start);
     } else {
