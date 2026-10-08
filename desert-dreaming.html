@@ -650,7 +650,7 @@
   }
   .dd-agenda-intro strong { color: var(--dd-linen); font-weight: 500; }
 
-  .dd-days { position: relative; display: flow-root; padding-bottom: clamp(280px, 46vh, 520px); }
+  .dd-days { position: relative; display: flow-root; }
   .dd-days > .dd-day--stack:first-child { box-shadow: none; }
 
   .dd-day {
@@ -859,7 +859,7 @@
     background: var(--card);
     box-shadow: 0 -24px 50px -30px rgba(0, 0, 0, 0.5);
     transform-origin: 50% 0;
-    scale: calc(1 - var(--cover, 0) * 0.05);
+    z-index: calc(var(--i) + 1);
     isolation: isolate;
   }
   .dd-day--stack::after {
@@ -1740,7 +1740,18 @@
     const layoutStack = () => {
       stack.forEach(card => {
         card.style.marginTop = card.style.marginBottom = '';
-        card.classList.toggle('is-loose', card.offsetHeight > window.innerHeight - 110);
+        card.classList.remove('is-loose');
+      });
+      // Shorter cards hold until the last one has stacked, then the deck scrolls away together.
+      const reach = card => parseFloat(getComputedStyle(card).top) + card.offsetHeight;
+      const release = Math.max(...stack.map(reach));
+      stack.forEach(card => {
+        const next = card.nextElementSibling;
+        if (!next || !next.classList.contains('dd-day--stack')) return;
+        const extra = Math.round(release - reach(card));
+        if (extra <= 0) return;
+        card.style.marginBottom = `${extra}px`;
+        next.style.marginTop = `${-extra}px`;
       });
     };
     const renderStack = () => {
