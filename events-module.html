@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homepage Event Module — Templates | PHYLUM</title>
+<meta name="description" content="Pre-approved PHYLUM homepage event modules for a trunk show, a designer talk, and a holiday open house. Swap the live one in assets/homepage-event.json.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#F1EEE4">
+<link rel="icon" href="assets/event/phylum-sun.svg" type="image/svg+xml">
+<link rel="stylesheet" href="event-module.css">
+<style>
+  @font-face {
+    font-family: "GTAlpinaLight";
+    src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/GT-Alpina-Standard-Light.woff2?v=1752612418") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "PPNeueMontreal";
+    src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/PPNeueMontreal-Medium.woff2?v=1751331964") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  :root {
+    --paper: #F1EEE4;
+    --paper-deep: #E8E3D5;
+    --ink: #24211C;
+    --ink-soft: #5A554A;
+    --line: #CFC8B6;
+    --sage-deep: #5F6748;
+    --yellow: #f2a900;
+    --serif: "GTAlpinaLight", "Iowan Old Style", Palatino, Georgia, serif;
+    --sans: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
+    --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --gutter: clamp(20px, 4vw, 48px);
+    --max: 1180px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--body);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.5;
+  }
+  body.chrome-loading .event-docs { visibility: hidden; }
+  .event-docs .nav-version-switcher { display: none !important; }
+  .event-docs a { color: inherit; }
+  .event-docs h1, .event-docs h2, .event-docs h3 { font-style: normal; font-weight: 300; }
+  .event-docs p { text-wrap: pretty; }
+  .skip {
+    position: absolute; left: 16px; top: -48px; z-index: 400;
+    background: var(--ink); color: var(--paper); padding: 10px 14px;
+    font-family: var(--sans); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .skip:focus { top: 16px; }
+  .event-docs :focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 3px; }
+  .ed-wrap { width: min(var(--max), calc(100% - var(--gutter) * 2)); margin-inline: auto; }
+  .ed-intro { padding: clamp(36px, 5vw, 72px) 0 28px; }
+  .ed-crumb ol {
+    display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0 0 28px; padding: 0;
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft);
+  }
+  .ed-crumb li:not(:last-child)::after { content: "/"; margin-left: 8px; color: var(--line); }
+  .ed-crumb a { text-decoration: none; }
+  .ed-crumb a:hover { color: var(--ink); }
+  .ed-eyebrow {
+    font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sage-deep); margin: 0 0 16px;
+  }
+  .ed-intro h1 {
+    font-family: var(--serif); font-size: clamp(42px, 5.4vw, 72px);
+    line-height: 0.94; letter-spacing: -0.03em; margin: 0 0 18px; max-width: 14ch;
+  }
+  .ed-lede { max-width: 40em; font-size: 18px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 12px; font-family: var(--sans); font-weight: 500; }
+  .ed-note { max-width: 46em; font-size: 15px; color: var(--ink-soft); margin: 0; }
+
+  .ed-how { background: var(--paper-deep); padding: clamp(48px, 6vw, 80px) 0; }
+  .ed-how h2 {
+    font-family: var(--serif); font-size: clamp(32px, 4vw, 48px);
+    line-height: 1; letter-spacing: -0.03em; margin: 0 0 22px;
+  }
+  .ed-steps { list-style: none; margin: 0 0 28px; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .ed-steps li { border-top: 1px solid var(--ink); padding-top: 16px; }
+  .ed-steps span {
+    display: block; font-family: var(--sans); font-weight: 500; color: var(--sage-deep);
+    letter-spacing: 0.06em; margin-bottom: 8px;
+  }
+  .ed-steps h3 { font-family: var(--sans); font-weight: 500; font-size: 16px; margin: 0 0 8px; }
+  .ed-steps p, .ed-fields { margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
+  .ed-fields { margin-bottom: 18px; }
+  .ed-fields code, .ed-pre { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; }
+  .ed-fields code { font-size: 0.92em; color: var(--ink); }
+  .ed-pre {
+    margin: 0; padding: 22px 24px; background: var(--ink); color: var(--paper);
+    font-size: 13px; line-height: 1.55; overflow-x: auto; border-radius: 8px;
+  }
+
+  .ed-label {
+    width: min(var(--max), calc(100% - var(--gutter) * 2));
+    margin: 0 auto;
+    padding: 28px 0 14px;
+  }
+  .ed-label p { margin: 0; font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage-deep); }
+  .ed-label h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(28px, 3vw, 40px); letter-spacing: -0.03em; margin: 8px 0 0; }
+  .ed-caption {
+    width: min(var(--max), calc(100% - var(--gutter) * 2));
+    margin: 0 auto;
+    padding: 18px 0 8px;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .ed-caption strong { color: var(--ink); font-weight: 600; }
+
+  .ed-foot { padding: 48px 0 64px; border-top: 1px solid var(--line); margin-top: 48px; }
+  .ed-foot-grid { display: flex; justify-content: space-between; gap: 32px; align-items: flex-start; }
+  .ed-wordmark { height: 28px; width: auto; }
+  .ed-foot address { font-style: normal; color: var(--ink-soft); font-size: 14px; line-height: 1.6; margin-top: 14px; }
+  .ed-foot address a { color: var(--ink); text-decoration: none; }
+  .ed-foot nav { display: flex; flex-wrap: wrap; gap: 10px 22px; max-width: 460px; justify-content: flex-end; }
+  .ed-foot nav a { font-family: var(--sans); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; }
+  .ed-foot nav a:hover { color: var(--sage-deep); }
+  .ed-colophon { margin-top: 28px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  @media (max-width: 800px) {
+    .ed-steps, .ed-foot-grid { grid-template-columns: 1fr; display: grid; }
+    .ed-foot nav { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="site-chrome"></div>
+
+<main class="event-docs" id="main">
+  <header class="ed-intro">
+    <div class="ed-wrap">
+      <nav class="ed-crumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li aria-current="page">Event module</li>
+        </ol>
+      </nav>
+      <p class="ed-eyebrow">Homepage takeover</p>
+      <h1>One module. Swap the event.</h1>
+      <p class="ed-lede">A small in-store event can take the top of the homepage without a new design. Date, title, a short note, a photograph, and a way to RSVP.</p>
+      <p class="ed-note">Dates, times, and the talk’s speaker line are placeholders until the event calendar is confirmed. Modernism Week stays a custom page of its own. Desert Dreaming is the reference for a past, one-off event — not this module.</p>
+    </div>
+  </header>
+
+  <section class="ed-how" aria-labelledby="swap-title">
+    <div class="ed-wrap">
+      <h2 id="swap-title">How to swap it</h2>
+      <ol class="ed-steps">
+        <li>
+          <span>01</span>
+          <h3>Edit one file</h3>
+          <p>Open <code>assets/homepage-event.json</code>. That file is the only thing the homepage reads.</p>
+        </li>
+        <li>
+          <span>02</span>
+          <h3>Paste a template</h3>
+          <p>Copy the fields from one of the three blocks below, then change the date, copy, image, and links.</p>
+        </li>
+        <li>
+          <span>03</span>
+          <h3>Or turn it off</h3>
+          <p>Set <code>"active"</code> to <code>false</code> and the module leaves the homepage. Nothing else has to move.</p>
+        </li>
+      </ol>
+      <p class="ed-fields"><code>kicker</code> is the date line. <code>title</code>, <code>blurb</code>, and <code>meta</code> are the rest of the text. <code>image</code> and <code>imageAlt</code> point at a file in <code>assets/</code>. <code>tone</code> is <code>paper</code>, <code>deep</code>, or <code>ink</code>. <code>imageSide</code> is <code>right</code> or <code>left</code>. <code>cta</code> and <code>secondary</code> each take a <code>label</code> and an <code>href</code>. RSVP links below are mailto placeholders — replace them with the live RSVP or event page.</p>
+      <pre class="ed-pre">{
+  "active": true,
+  "kicker": "Saturday, November 14",
+  "title": "Garza Marfa trunk show",
+  "blurb": "One or two sentences.",
+  "meta": "Palm Springs flagship · 11am–4pm",
+  "image": "assets/brands/garza-marfa.jpg",
+  "imageAlt": "Describe the photograph.",
+  "tone": "paper",
+  "imageSide": "right",
+  "cta": { "label": "RSVP", "href": "mailto:hello@shopphylum.com" },
+  "secondary": { "label": "Learn more", "href": "/pages/the-event" }
+}</pre>
+    </div>
+  </section>
+
+  <div class="ed-label">
+    <p>Live preview</p>
+    <h2>What’s on the homepage now</h2>
+  </div>
+  <section id="event-takeover" class="event-takeover" data-event-src="assets/homepage-event.json" hidden></section>
+  <p class="ed-caption">This block is rendered from <strong>assets/homepage-event.json</strong>. Change that file and both this preview and the homepage update.</p>
+
+  <div class="ed-label" id="trunk-show">
+    <p>Template 01 · tone paper · image right</p>
+    <h2>Trunk show</h2>
+  </div>
+  <!-- TEMPLATE trunk-show. Copy these fields into assets/homepage-event.json.
+       image: assets/brands/garza-marfa.jpg
+       tone: paper
+       imageSide: right
+       cta.href is a mailto placeholder. -->
+  <section class="event-takeover" aria-labelledby="trunk-title">
+    <div class="event-grid">
+      <div class="event-copy">
+        <p class="event-kicker"><span class="event-sun" aria-hidden="true"></span>Saturday, November 14</p>
+        <h2 class="event-title" id="trunk-title">Garza Marfa trunk show</h2>
+        <p class="event-blurb">Blankets and textiles from Marfa, on the table for one Saturday. Come see the stripe, the weight, and what it does in a desert room.</p>
+        <p class="event-meta">Palm Springs flagship · 11am–4pm</p>
+        <div class="event-ctas">
+          <a class="event-btn event-btn--solid" href="mailto:hello@shopphylum.com?subject=RSVP%3A%20Garza%20Marfa%20trunk%20show">RSVP</a>
+          <a class="event-btn event-btn--ghost" href="https://shopphylum.com/search?q=Garza%20Marfa">Shop the maker</a>
+        </div>
+      </div>
+      <figure class="event-media">
+        <img src="assets/brands/garza-marfa.jpg" alt="Folded Garza Marfa textiles in black and cream with a striped border, stacked on a wooden bench." width="1024" height="768" decoding="async">
+      </figure>
+    </div>
+  </section>
+  <p class="ed-caption">Use for a one-day maker visit. Keep the blurb to two sentences. The date in this template is a placeholder.</p>
+
+  <div class="ed-label" id="designer-talk">
+    <p>Template 02 · tone ink · image left</p>
+    <h2>Designer talk</h2>
+  </div>
+  <!-- TEMPLATE designer-talk. Speaker name is intentionally not invented.
+       image: assets/event/fair-circle-facade.jpg
+       tone: ink
+       imageSide: left -->
+  <section class="event-takeover event-takeover--ink event-takeover--flip" aria-labelledby="talk-title">
+    <div class="event-grid">
+      <div class="event-copy">
+        <p class="event-kicker"><span class="event-sun" aria-hidden="true"></span>Thursday, November 20 · 6pm</p>
+        <h2 class="event-title" id="talk-title">Setting a desert table</h2>
+        <p class="event-blurb">An hour in the shop on linen, clay, and what stays on the table through the holidays. Add the speaker’s name here when the calendar is confirmed.</p>
+        <p class="event-meta">Palm Springs flagship · Seating is limited</p>
+        <div class="event-ctas">
+          <a class="event-btn event-btn--solid" href="mailto:hello@shopphylum.com?subject=RSVP%3A%20Setting%20a%20desert%20table">RSVP</a>
+          <a class="event-btn event-btn--ghost" href="https://maps.app.goo.gl/4PkCwBXmNPtHUFLD7">Get directions</a>
+        </div>
+      </div>
+      <figure class="event-media">
+        <img src="assets/event/fair-circle-facade.jpg" alt="The PHYLUM storefront in Palm Springs, a yellow facade with the shop’s painted sun." width="1024" height="683" decoding="async">
+      </figure>
+    </div>
+  </section>
+  <p class="ed-caption">The ink ground is for an evening. Don’t name a guest until it’s booked — the sentence above is the placeholder.</p>
+
+  <div class="ed-label" id="holiday-open-house">
+    <p>Template 03 · tone deep · image right</p>
+    <h2>Holiday open house</h2>
+  </div>
+  <!-- TEMPLATE holiday-open-house.
+       image: assets/mega-nav/gifts-wrapping.png
+       tone: deep
+       imageSide: right
+       Secondary link can point at gift-registry.html during the season. -->
+  <section class="event-takeover event-takeover--deep" aria-labelledby="holiday-title">
+    <div class="event-grid">
+      <div class="event-copy">
+        <p class="event-kicker"><span class="event-sun" aria-hidden="true"></span>Saturday, December 5 · 11–4</p>
+        <h2 class="event-title" id="holiday-title">Holiday open house</h2>
+        <p class="event-blurb">Gift wrap at the counter, and the registry table open for anyone building a list. Come by the flagship. Bring a name.</p>
+        <p class="event-meta">Palm Springs flagship · No ticket needed</p>
+        <div class="event-ctas">
+          <a class="event-btn event-btn--solid" href="mailto:hello@shopphylum.com?subject=RSVP%3A%20Holiday%20open%20house">RSVP</a>
+          <a class="event-btn event-btn--ghost" href="gift-registry.html">Start a registry</a>
+        </div>
+      </div>
+      <figure class="event-media">
+        <img src="assets/mega-nav/gifts-wrapping.png" alt="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery." width="768" height="1024" decoding="async">
+      </figure>
+    </div>
+  </section>
+  <p class="ed-caption">Drop-in hours, not a seated talk. Point the second button at the registry while that table is up.</p>
+
+  <footer class="ed-foot">
+    <div class="ed-wrap">
+      <div class="ed-foot-grid">
+        <div>
+          <img class="ed-wordmark" src="assets/event/phylum-wordmark.png" width="296" height="102" alt="PHYLUM">
+          <address>
+            901 N. Palm Canyon Dr., Suite 101<br>
+            Palm Springs, CA 92262<br>
+            <a href="tel:+17604242110">(760) 424-2110</a><br>
+            <a href="mailto:hello@shopphylum.com">hello@shopphylum.com</a>
+          </address>
+        </div>
+        <nav aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="brands.html">Brands</a>
+          <a href="gift-registry.html">Gift Registry</a>
+          <a href="trade.html">Trade Program</a>
+          <a href="desert-dreaming.html">Desert Dreaming</a>
+          <a href="https://shopphylum.com">Shop</a>
+        </nav>
+      </div>
+      <p class="ed-colophon">© 2026 PHYLUM · Event module</p>
+    </div>
+  </footer>
+</main>
+<script src="site-chrome.js"></script>
+<script src="event-module.js"></script>
+</body>
+</html>

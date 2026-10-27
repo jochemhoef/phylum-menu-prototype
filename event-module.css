@@ -1,0 +1,223 @@
+/* WEB-551 — reusable homepage event takeover.
+   Loaded by index.html and events-module.html.
+   Swap the live event in assets/homepage-event.json. */
+
+.event-takeover,
+.event-docs {
+  --paper: #F1EEE4;
+  --paper-deep: #E8E3D5;
+  --ink: #24211C;
+  --ink-soft: #5A554A;
+  --line: #CFC8B6;
+  --sage-deep: #5F6748;
+  --yellow: #f2a900;
+  --serif: "GTAlpinaLight", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  --sans: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
+  --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@font-face {
+  font-family: "GTAlpinaLight";
+  src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/GT-Alpina-Standard-Light.woff2?v=1752612418") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PPNeueMontreal";
+  src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/PPNeueMontreal-Medium.woff2?v=1751331964") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.event-takeover {
+  background: var(--paper);
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--body);
+  font-style: normal;
+  font-synthesis: none;
+  line-height: 1.5;
+}
+.event-takeover[hidden] { display: none !important; }
+.event-takeover * { box-sizing: border-box; }
+.event-takeover h2,
+.event-takeover p { margin: 0; }
+.event-takeover em,
+.event-takeover h2 { font-style: normal; }
+.event-takeover p { text-wrap: pretty; }
+
+.event-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  min-height: clamp(440px, 48vw, 560px);
+  align-items: stretch;
+}
+.event-takeover--flip .event-copy { order: 2; }
+.event-takeover--flip .event-media { order: 1; }
+
+.event-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  padding: clamp(36px, 5vw, 72px) clamp(24px, 5vw, 72px);
+  min-width: 0;
+}
+.event-takeover .event-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  margin: 0 0 16px;
+}
+.event-sun {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  background: currentColor;
+  -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+          mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+}
+.event-takeover .event-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(40px, 4.6vw, 68px);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  max-width: 11em;
+  margin: 0 0 18px;
+}
+.event-takeover .event-blurb {
+  max-width: 36em;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+.event-takeover .event-meta {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 26px;
+}
+.event-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.event-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.25;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.event-btn--solid {
+  background: var(--sage-deep);
+  border-color: var(--sage-deep);
+  color: #fff;
+}
+.event-btn--solid:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.event-btn--ghost {
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.event-btn--ghost:hover { background: var(--ink); color: var(--paper); }
+.event-takeover :focus-visible {
+  outline: 2px solid var(--sage-deep);
+  outline-offset: 3px;
+}
+
+.event-media {
+  position: relative;
+  margin: 0;
+  min-height: 320px;
+  overflow: hidden;
+  background: var(--paper-deep);
+}
+.event-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.7s var(--ease);
+}
+.event-media:hover img { transform: scale(1.035); }
+
+.event-takeover--deep { background: var(--paper-deep); }
+.event-takeover--ink {
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom-color: var(--ink);
+}
+.event-takeover--ink .event-kicker { color: var(--yellow); }
+.event-takeover--ink .event-blurb { color: rgba(241, 238, 228, 0.88); }
+.event-takeover--ink .event-meta { color: rgba(241, 238, 228, 0.72); }
+.event-takeover--ink .event-btn--solid {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+.event-takeover--ink .event-btn--solid:hover {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+}
+.event-takeover--ink .event-btn--ghost {
+  border-color: var(--paper);
+  color: var(--paper);
+}
+.event-takeover--ink .event-btn--ghost:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+.event-takeover--ink :focus-visible { outline-color: var(--yellow); }
+
+@media (max-width: 800px) {
+  .event-grid { grid-template-columns: 1fr; min-height: 0; }
+  .event-media,
+  .event-takeover--flip .event-media { order: -1; height: 62vw; min-height: 220px; max-height: 380px; }
+  .event-copy,
+  .event-takeover--flip .event-copy { order: 0; padding: 32px 20px 40px; }
+  .event-takeover .event-title { font-size: clamp(38px, 11vw, 56px); }
+}
+@media (max-width: 560px) {
+  .event-ctas { flex-direction: column; align-items: stretch; }
+  .event-btn {
+    width: 100%;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    padding: 14px 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-btn,
+  .event-media img { transition: none; }
+  .event-media:hover img { transform: none; }
+}

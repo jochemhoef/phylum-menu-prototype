@@ -1,0 +1,20 @@
+{
+  "_note": "EDIT this file to swap the homepage event module. Copy a template from events-module.html. Set active to false to hide the module. Dates, times, and RSVP links are placeholders until the event calendar is confirmed.",
+  "active": true,
+  "kicker": "Saturday, November 14",
+  "title": "Garza Marfa trunk show",
+  "blurb": "Blankets and textiles from Marfa, on the table for one Saturday. Come see the stripe, the weight, and what it does in a desert room.",
+  "meta": "Palm Springs flagship · 11am–4pm",
+  "image": "assets/brands/garza-marfa.jpg",
+  "imageAlt": "Folded Garza Marfa textiles in black and cream with a striped border, stacked on a wooden bench.",
+  "tone": "paper",
+  "imageSide": "right",
+  "cta": {
+    "label": "RSVP",
+    "href": "mailto:hello@shopphylum.com?subject=RSVP%3A%20Garza%20Marfa%20trunk%20show"
+  },
+  "secondary": {
+    "label": "Shop the maker",
+    "href": "https://shopphylum.com/search?q=Garza%20Marfa"
+  }
+}

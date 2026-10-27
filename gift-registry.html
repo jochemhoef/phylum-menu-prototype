@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gift Registry for Weddings &amp; Holidays | PHYLUM Palm Springs</title>
+<meta name="description" content="Create or find a PHYLUM gift registry for a wedding, the holidays, or a new house. A wishlist sits alongside it. Palm Springs modernist mercantile.">
+<link rel="canonical" href="https://phylum-menu.onrender.com/gift-registry.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F1EEE4">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PHYLUM">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="PHYLUM Gift Registry — Register for the pieces that stay">
+<meta property="og:description" content="A PHYLUM registry for weddings, holidays, and housewarmings, plus a wishlist. Create a list or find one by name.">
+<meta property="og:url" content="https://phylum-menu.onrender.com/gift-registry.html">
+<meta property="og:image" content="https://phylum-menu.onrender.com/assets/mega-nav/gifts-wrapping.png">
+<meta property="og:image:alt" content="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PHYLUM Gift Registry — Register for the pieces that stay">
+<meta name="twitter:description" content="A PHYLUM registry for weddings, holidays, and housewarmings, plus a wishlist.">
+<meta name="twitter:image" content="https://phylum-menu.onrender.com/assets/mega-nav/gifts-wrapping.png">
+<meta name="twitter:image:alt" content="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery.">
+<link rel="icon" href="assets/event/phylum-sun.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<style>
+  @font-face {
+    font-family: "GTAlpinaLight";
+    src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/GT-Alpina-Standard-Light.woff2?v=1752612418") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "PPNeueMontreal";
+    src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/PPNeueMontreal-Medium.woff2?v=1751331964") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --paper: #F1EEE4;
+    --paper-deep: #E8E3D5;
+    --ink: #24211C;
+    --ink-soft: #5A554A;
+    --line: #CFC8B6;
+    --sage: #7C8360;
+    --sage-deep: #5F6748;
+    --yellow: #f2a900;
+    --serif: "GTAlpinaLight", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    --sans: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
+    --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --gutter: clamp(20px, 4vw, 48px);
+    --max: 1180px;
+    /* EDIT: Gift Reggie app-proxy paths on the shop. Confirm the proxy is installed before launch. */
+    --registry-create: https://shopphylum.com/apps/giftregistry/create;
+    --registry-find: https://shopphylum.com/apps/giftregistry/find;
+  }
+
+  .gr-page { color-scheme: light; }
+  body.chrome-loading .gr { visibility: hidden; }
+  .gr-page .nav-version-switcher { display: none !important; }
+  .gr-page a.nav-direct[aria-current="page"] {
+    box-shadow: inset 0 -1.5px 0 currentColor;
+  }
+  .gr-page a,
+  .gr-page button,
+  .gr-page summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .gr-page :focus:not(:focus-visible) { outline: none; }
+
+  .gr {
+    font-family: var(--body);
+    font-style: normal;
+    font-synthesis: none;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.5;
+  }
+  .gr em, .gr i, .gr h1, .gr h2, .gr h3, .gr address { font-style: normal; }
+  .gr h1, .gr h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-synthesis: none;
+  }
+  .gr h3, .gr .gr-eyebrow, .gr .gr-lede {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-synthesis: none;
+  }
+  .gr * { box-sizing: border-box; }
+  .gr img { max-width: 100%; display: block; }
+  .gr p { text-wrap: pretty; }
+  .gr a { color: inherit; }
+
+  a.gr-btn--solid,
+  a.gr-btn--solid:hover,
+  a.gr-btn--solid:focus-visible { color: #fff; }
+  a.gr-btn--ghost,
+  a.gr-btn--ghost:focus-visible { color: var(--ink); }
+  a.gr-btn--ghost:hover,
+  a.gr-btn--ghost:hover:focus-visible { color: var(--paper); }
+  a.gr-btn--paper,
+  a.gr-btn--paper:hover,
+  a.gr-btn--paper:focus-visible { color: var(--ink); }
+  a.gr-text-link { color: var(--sage-deep); }
+
+  .skip {
+    position: absolute;
+    left: 16px;
+    top: -48px;
+    z-index: 400;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 14px;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .skip:focus { top: 16px; }
+
+  .gr-wrap {
+    width: min(var(--max), calc(100% - var(--gutter) * 2));
+    margin-inline: auto;
+  }
+  .gr-hero-grid > *,
+  .gr-wish-grid > * { min-width: 0; }
+
+  .gr-eyebrow {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin: 0 0 18px;
+  }
+  .gr-sun {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    vertical-align: -2px;
+    background: currentColor;
+    -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+            mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+  }
+
+  .gr-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    max-width: 100%;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 1.25;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+    overflow-wrap: break-word;
+    min-width: 0;
+    cursor: pointer;
+    transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+  }
+  .gr-btn--solid { background: var(--sage-deep); border-color: var(--sage-deep); color: #fff; }
+  .gr-btn--solid:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .gr-btn--ghost { background: transparent; border-color: var(--ink); color: var(--ink); }
+  .gr-btn--ghost:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .gr-btn--paper { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+  .gr-btn--paper:hover { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+  .gr-close .gr-btn:focus-visible { outline-color: var(--yellow); }
+  .gr :focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 3px; }
+
+  .gr-hero { padding: clamp(36px, 5vw, 72px) 0 clamp(48px, 6vw, 88px); }
+  .gr-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(28px, 4vw, 64px);
+    align-items: end;
+  }
+  .gr-crumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .gr-crumb li:not(:last-child)::after {
+    content: "/";
+    margin-left: 8px;
+    color: var(--line);
+  }
+  .gr-crumb a { text-decoration: none; }
+  .gr-crumb a:hover { color: var(--ink); }
+  .gr-hero h1 {
+    font-size: clamp(46px, 5.6vw, 84px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin: 0 0 22px;
+  }
+  .gr-lede {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 38em;
+    margin: 0 0 28px;
+  }
+  .gr-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .gr-meta {
+    margin: 22px 0 0;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .gr-hero-fig { margin: 0; overflow: hidden; }
+  .gr-hero-fig img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center;
+    background: var(--paper-deep);
+    transform: scale(1);
+    transition: transform 0.7s var(--ease);
+  }
+  .gr-hero-fig:hover img { transform: scale(1.035); }
+  .gr-hero-fig figcaption {
+    margin-top: 12px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .gr-section { padding: clamp(64px, 8vw, 108px) 0; }
+  .gr-section--deep { background: var(--paper-deep); }
+  .gr-section h2,
+  .gr-faq h2 {
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 0 0 16px;
+  }
+  .gr-intro {
+    max-width: 40em;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 40px;
+  }
+
+  .gr-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .gr-steps li { border-top: 1px solid var(--ink); padding-top: 20px; }
+  .gr-index {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: var(--sage-deep);
+    margin-bottom: 10px;
+  }
+  .gr-steps h3,
+  .gr-who h3,
+  .gr-gift h3 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.01em;
+    margin: 0 0 8px;
+  }
+  .gr-steps p,
+  .gr-who p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.55; }
+
+  .gr-who {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line);
+  }
+  .gr-who article { padding: 28px 28px 32px 0; border-bottom: 1px solid var(--line); }
+  .gr-who article:nth-child(odd) { padding-right: 36px; }
+  .gr-who article:nth-child(even) {
+    padding-left: 36px;
+    border-left: 1px solid var(--line);
+  }
+
+  .gr-edit-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  .gr-edit-head .gr-intro { margin: 0; }
+  .gr-text-link {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 3px;
+    white-space: nowrap;
+  }
+  .gr-text-link:hover { color: var(--ink); }
+
+  .gr-gifts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px 18px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .gr-gift { min-width: 0; }
+  .gr-gift a { display: block; text-decoration: none; color: inherit; }
+  .gr-gift figure { margin: 0 0 14px; overflow: hidden; background: var(--paper-deep); }
+  .gr-gift img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.7s var(--ease);
+  }
+  .gr-gift a:hover img { transform: scale(1.035); }
+  .gr-gift p { margin: 0 0 12px; color: var(--ink-soft); font-size: 15px; line-height: 1.5; }
+  .gr-gift .gr-text-link { font-size: 12px; }
+
+  .gr-note {
+    margin: 28px 0 0;
+    max-width: 46em;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .gr-wish { background: var(--ink); color: var(--paper); }
+  .gr-wish .gr-eyebrow { color: var(--yellow); }
+  .gr-wish-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: clamp(28px, 4vw, 64px);
+    align-items: end;
+  }
+  .gr-wish h2 {
+    font-size: clamp(36px, 4.4vw, 60px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 0 0 16px;
+    max-width: 14ch;
+  }
+  .gr-wish p { margin: 0 0 28px; max-width: 38em; font-size: 17px; line-height: 1.6; color: rgba(241, 238, 228, 0.88); }
+  .gr-wish-aside {
+    border-top: 1px solid rgba(241, 238, 228, 0.28);
+    padding-top: 22px;
+  }
+  .gr-wish-aside p { font-size: 16px; margin: 0 0 8px; }
+  .gr-wish-aside a { color: var(--paper); }
+
+  .gr-faq { background: var(--paper-deep); padding: clamp(64px, 8vw, 108px) 0; }
+  .gr-faq-list { border-top: 1px solid var(--line); max-width: 820px; }
+  .gr-faq-item { border-bottom: 1px solid var(--line); }
+  .gr-faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 0;
+  }
+  .gr-faq-item summary::-webkit-details-marker { display: none; }
+  .gr-faq-item summary::after {
+    content: "+";
+    font-family: var(--serif);
+    font-size: 28px;
+    line-height: 1;
+    color: var(--sage-deep);
+    flex-shrink: 0;
+  }
+  .gr-faq-item[open] summary::after { content: "–"; }
+  .gr-faq-item h3 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(17px, 2vw, 20px);
+    margin: 0;
+  }
+  .gr-faq-a { padding: 0 48px 22px 0; }
+  .gr-faq-item p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6; }
+  .gr-faq-item a { color: var(--sage-deep); }
+
+  .gr-close {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(72px, 10vw, 128px) 0;
+    text-align: center;
+  }
+  .gr-close .gr-sun {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 22px;
+    display: block;
+    color: var(--yellow);
+  }
+  .gr-close h2 {
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0 auto 18px;
+    max-width: 14ch;
+  }
+  .gr-close p {
+    margin: 0 auto 28px;
+    max-width: 36em;
+    color: rgba(241, 238, 228, 0.88);
+    font-size: 17px;
+  }
+  .gr-close .gr-ctas { justify-content: center; }
+  .gr-close a.gr-btn--ghost,
+  .gr-close a.gr-btn--ghost:focus-visible {
+    border-color: var(--paper);
+    color: var(--paper);
+  }
+  .gr-close a.gr-btn--ghost:hover,
+  .gr-close a.gr-btn--ghost:hover:focus-visible {
+    background: var(--paper);
+    border-color: var(--paper);
+    color: var(--ink);
+  }
+
+  .gr-foot { padding: 48px 0 64px; border-top: 1px solid var(--line); }
+  .gr-foot-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  .gr-wordmark { height: 28px; width: auto; }
+  .gr-foot address {
+    font-style: normal;
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+  .gr-foot address a { color: var(--ink); text-decoration: none; }
+  .gr-foot address a:hover { text-decoration: underline; }
+  .gr-foot nav { display: flex; flex-wrap: wrap; gap: 10px 22px; max-width: 420px; justify-content: flex-end; }
+  .gr-foot nav a {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .gr-foot nav a:hover { color: var(--sage-deep); }
+  .gr-colophon {
+    margin-top: 28px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .gr-hero-grid, .gr-wish-grid, .gr-who { grid-template-columns: 1fr; }
+    .gr-hero-fig img { height: auto; aspect-ratio: 4 / 3; object-position: center 42%; }
+    .gr-who article,
+    .gr-who article:nth-child(odd),
+    .gr-who article:nth-child(even) {
+      padding: 24px 0;
+      border-left: none;
+    }
+    .gr-steps { grid-template-columns: 1fr; }
+    .gr-gifts { grid-template-columns: 1fr 1fr; }
+    .gr-edit-head, .gr-foot-grid { flex-direction: column; }
+    .gr-foot nav { justify-content: flex-start; max-width: none; }
+  }
+  @media (max-width: 560px) {
+    .gr-ctas { flex-direction: column; align-items: stretch; }
+    .gr-btn {
+      width: 100%;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 14px 16px;
+    }
+    .gr-gifts { grid-template-columns: 1fr; }
+    .gr-hero h1 { font-size: clamp(42px, 12vw, 64px); }
+    .gr-hero-fig img {
+      height: 40vh;
+      max-height: 320px;
+      aspect-ratio: auto;
+      object-position: center 30%;
+    }
+  }
+
+  .js-motion .gr-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s var(--ease), transform 0.8s var(--ease);
+  }
+  .js-motion .gr-reveal.is-in { opacity: 1; transform: none; }
+  .js-motion .gr-hero-fig.gr-reveal { transition-delay: 0.08s; }
+  @media (prefers-reduced-motion: reduce) {
+    .gr-btn, .gr-hero-fig img, .gr-gift img, .js-motion .gr-reveal { transition: none; }
+    .gr-hero-fig:hover img, .gr-gift a:hover img, .js-motion .gr-reveal {
+      transform: none;
+      opacity: 1;
+    }
+  }
+</style>
+<script>
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("js-motion");
+  }
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HomeGoodsStore",
+      "@id": "https://shopphylum.com/#organization",
+      "name": "PHYLUM",
+      "url": "https://shopphylum.com",
+      "image": "https://phylum-menu.onrender.com/assets/event/phylum-wordmark.png",
+      "telephone": "+1-760-424-2110",
+      "email": "hello@shopphylum.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "901 N. Palm Canyon Dr. Suite 101",
+        "addressLocality": "Palm Springs",
+        "addressRegion": "CA",
+        "postalCode": "92262",
+        "addressCountry": "US"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://phylum-menu.onrender.com/index.html" },
+        { "@type": "ListItem", "position": 2, "name": "Gift Registry", "item": "https://phylum-menu.onrender.com/gift-registry.html" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is the PHYLUM registry only for weddings?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Use it for a wedding, the holidays, a housewarming, or any occasion where people have asked what to bring. A wishlist is there when you want a list without guest tracking." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I create a registry?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Choose Create a registry and sign in with a PHYLUM account. The list is built with Gift Reggie, the registry app already on the shop. You can also start one in person at the Palm Springs flagship." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do guests find a registry?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Guests search by the first or last name of the person who made the list. They do not need an account to view it or to buy from it." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a registry and a wishlist?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A registry is meant to be shared. It can show what has been bought and what is still needed. A wishlist is a simpler private list, with no guest tracking. You remove things yourself once you have them." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do registry gifts ship?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Registry gifts checkout like any other PHYLUM order. The shop publishes complimentary shipping on orders over $150, and Palm Springs pickup is available. Confirm the shipping offer on the order before you rely on it." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I register in the store?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Come to the flagship at 901 N. Palm Canyon Drive, Suite 101, and the shop can help you start a list. Call (760) 424-2110 before you visit if you want someone waiting." }
+        },
+        {
+          "@type": "Question",
+          "name": "What if something on the list sells out?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Guests can see what is still needed. If a piece is gone, they can choose something else from the edit. The list itself does not promise that every item stays in stock." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a fee?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Creating a PHYLUM registry or wishlist is free. You need a PHYLUM account, which is also free." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="gr-page">
+<a class="skip" href="#main">Skip to content</a>
+<div id="site-chrome"></div>
+
+<!-- EDIT: Placeholder positioning copy. Gift Reggie URLs below are the standard app-proxy paths (/apps/giftregistry/create, /find, /wishlist, /manage). Confirm the proxy on shopphylum.com before launch. Curated makers are starting points, not a fixed assortment. -->
+<main class="gr" id="main">
+  <section class="gr-hero" aria-labelledby="registry-title">
+    <div class="gr-wrap gr-hero-grid">
+      <div class="gr-hero-copy gr-reveal">
+        <nav class="gr-crumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li aria-current="page">Gift Registry</li>
+          </ol>
+        </nav>
+        <p class="gr-eyebrow"><span class="gr-sun" aria-hidden="true"></span>Gift Registry</p>
+        <h1 id="registry-title">Register for the pieces that stay.</h1>
+        <p class="gr-lede">PHYLUM’s registry is for a wedding, the holidays, or a new set of keys. Choose from the modernist mercantile in Palm Springs, share the list, and let people shop it. A wishlist sits beside the registry, for lists you’d rather keep closer.</p>
+        <div class="gr-ctas">
+          <a class="gr-btn gr-btn--solid" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
+          <a class="gr-btn gr-btn--ghost" href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>
+        </div>
+        <p class="gr-meta">Weddings · Holidays · Housewarmings · Wishlists</p>
+      </div>
+      <figure class="gr-hero-fig gr-reveal">
+        <img src="assets/mega-nav/gifts-wrapping.png" width="768" height="1024" alt="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery." fetchpriority="high" decoding="async">
+        <figcaption>Wrapped in the shop</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="gr-section gr-section--deep" id="how" aria-labelledby="how-title">
+    <div class="gr-wrap gr-reveal">
+      <p class="gr-eyebrow">How it works</p>
+      <h2 id="how-title">Make the list. Share the name.</h2>
+      <p class="gr-intro">The registry runs through the gift registry already on the PHYLUM shop. This page is the front door. Creating, finding, and editing the list happen on the shop, in your account.</p>
+      <ol class="gr-steps">
+        <li>
+          <span class="gr-index">01</span>
+          <h3>Create</h3>
+          <p>Sign in and open a registry. Add pieces from the edit as you shop online, or start the list with us in the store.</p>
+        </li>
+        <li>
+          <span class="gr-index">02</span>
+          <h3>Share</h3>
+          <p>Guests search by your name. They don’t need an account to look, and the list can show what’s still needed.</p>
+        </li>
+        <li>
+          <span class="gr-index">03</span>
+          <h3>Give</h3>
+          <p>Gifts check out like any other PHYLUM order, and can be shipped or picked up at the Palm Springs flagship.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="gr-section" aria-labelledby="who-title">
+    <div class="gr-wrap gr-reveal">
+      <p class="gr-eyebrow">Occasions</p>
+      <h2 id="who-title">Weddings, holidays, and the rest.</h2>
+      <p class="gr-intro">The same list works for a long engagement or a Saturday in December. Pick the one that fits, or skip the occasion and keep a wishlist.</p>
+      <div class="gr-who">
+        <article>
+          <span class="gr-index">01</span>
+          <h3>Weddings</h3>
+          <p>Tabletop, linen, and objects for a house you’re actually going to live in. Not a set of eight of anything you wouldn’t choose yourself.</p>
+        </article>
+        <article>
+          <span class="gr-index">02</span>
+          <h3>Holidays</h3>
+          <p>A shared list for the people who ask, every year, what you want. Smaller gifts and one considered piece.</p>
+        </article>
+        <article>
+          <span class="gr-index">03</span>
+          <h3>Housewarmings</h3>
+          <p>The first bowls, a blanket, a light. Useful in a desert house and still welcome when the boxes are gone.</p>
+        </article>
+        <article>
+          <span class="gr-index">04</span>
+          <h3>Just because</h3>
+          <p>Use the wishlist when there’s no guest list. It’s a private note of what you’d like, without the tracking.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="gr-section gr-section--deep" id="ideas" aria-labelledby="ideas-title">
+    <div class="gr-wrap gr-reveal">
+      <div class="gr-edit-head">
+        <div>
+          <p class="gr-eyebrow">Gift ideas</p>
+          <h2 id="ideas-title">A few places to begin.</h2>
+          <p class="gr-intro">Starting points from the floor in Palm Springs. Anything with an Add to Registry button can go on the list.</p>
+        </div>
+        <a class="gr-text-link" href="https://shopphylum.com">Shop the edit</a>
+      </div>
+      <!-- EDIT: Point each card at a real product or collection URL. Search links are stand-ins. -->
+      <ul class="gr-gifts">
+        <li class="gr-gift">
+          <a href="https://shopphylum.com/search?q=Hasami">
+            <figure><img src="assets/brands/hasami.jpg" width="1024" height="768" alt="Stacked Hasami porcelain bowls and plates in warm white and speckled charcoal." loading="lazy" decoding="async"></figure>
+            <h3>Hasami</h3>
+            <p>Stacked porcelain for the everyday table.</p>
+            <span class="gr-text-link">Shop the maker</span>
+          </a>
+        </li>
+        <li class="gr-gift">
+          <a href="https://shopphylum.com/search?q=Chilewich">
+            <figure><img src="assets/brands/chilewich.jpg" width="1024" height="768" alt="Woven Chilewich table linens in coral, blush, and teal, folded on a pale stone surface." loading="lazy" decoding="async"></figure>
+            <h3>Chilewich</h3>
+            <p>Woven vinyl that takes a desert afternoon.</p>
+            <span class="gr-text-link">Shop the maker</span>
+          </a>
+        </li>
+        <li class="gr-gift">
+          <a href="https://shopphylum.com/search?q=David%20Mellor">
+            <figure><img src="assets/brands/david-mellor.jpg" width="1024" height="682" alt="David Mellor stainless flatware arranged in a circle on a gray table." loading="lazy" decoding="async"></figure>
+            <h3>David Mellor</h3>
+            <p>Flatware with a clean modernist line.</p>
+            <span class="gr-text-link">Shop the maker</span>
+          </a>
+        </li>
+        <li class="gr-gift">
+          <a href="https://shopphylum.com/search?q=Studio%20Arhoj">
+            <figure><img src="assets/brands/studio-arhoj.jpg" width="1024" height="682" alt="A glossy coral Studio Arhoj ceramic vessel on a light wood table." loading="lazy" decoding="async"></figure>
+            <h3>Studio Arhoj</h3>
+            <p>A single vessel, given on its own.</p>
+            <span class="gr-text-link">Shop the maker</span>
+          </a>
+        </li>
+        <li class="gr-gift">
+          <a href="https://shopphylum.com/search?q=Ekobo">
+            <figure><img src="assets/brands/ekobo.jpg" width="1000" height="1001" alt="Speckled Ekobo bamboo-fiber dinnerware in blush, sage, and sand, set outdoors with oranges." loading="lazy" decoding="async"></figure>
+            <h3>Ekobo</h3>
+            <p>Speckled bowls for the patio table.</p>
+            <span class="gr-text-link">Shop the maker</span>
+          </a>
+        </li>
+        <li class="gr-gift">
+          <a href="https://shopphylum.com/search?q=gift">
+            <figure><img src="assets/mega-nav/gifts-wrapping.png" width="768" height="1024" alt="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery." loading="lazy" decoding="async"></figure>
+            <h3>The wrap</h3>
+            <p>The last step, done at the counter in the shop.</p>
+            <span class="gr-text-link">Shop gifts</span>
+          </a>
+        </li>
+      </ul>
+      <p class="gr-note">These are not a set registry. Prices, stock, and which pieces can be added are confirmed on the product page.</p>
+    </div>
+  </section>
+
+  <section class="gr-section gr-wish" id="wishlist" aria-labelledby="wish-title">
+    <div class="gr-wrap gr-wish-grid gr-reveal">
+      <div>
+        <p class="gr-eyebrow"><span class="gr-sun" aria-hidden="true"></span>Wishlist</p>
+        <h2 id="wish-title">A list, without the occasion.</h2>
+        <p>The same tools include a wishlist. It’s simpler than a registry: no guest list, no purchase tracking. Keep it for yourself, or for a holiday note you don’t want to send around.</p>
+        <div class="gr-ctas">
+          <a class="gr-btn gr-btn--paper" href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
+        </div>
+      </div>
+      <div class="gr-wish-aside">
+        <p>Already have a list?</p>
+        <p><a href="https://shopphylum.com/apps/giftregistry/manage">Manage your registry</a></p>
+        <p>Questions first? Write <a href="mailto:hello@shopphylum.com">hello@shopphylum.com</a> or call <a href="tel:+17604242110">(760) 424-2110</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gr-faq" aria-labelledby="faq-title">
+    <div class="gr-wrap gr-reveal">
+      <p class="gr-eyebrow">FAQ</p>
+      <h2 id="faq-title">Questions, answered plainly.</h2>
+      <div class="gr-faq-list">
+        <details class="gr-faq-item">
+          <summary><h3>Is the PHYLUM registry only for weddings?</h3></summary>
+          <div class="gr-faq-a"><p>No. Use it for a wedding, the holidays, a housewarming, or any occasion where people have asked what to bring. A wishlist is there when you want a list without guest tracking.</p></div>
+        </details>
+        <details class="gr-faq-item">
+          <summary><h3>How do I create a registry?</h3></summary>
+          <div class="gr-faq-a"><p>Choose <a href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a> and sign in with a PHYLUM account. You can also start one in person at the Palm Springs flagship.</p></div>
+        </details>
+        <details class="gr-faq-item">
+          <summary><h3>How do guests find a registry?</h3></summary>
+          <div class="gr-faq-a"><p>Guests search by first or last name on <a href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>. They don’t need an account to view the list or to buy from it.</p></div>
+        </details>
+        <details class="gr-faq-item">
+          <summary><h3>What’s the difference between a registry and a wishlist?</h3></summary>
+          <div class="gr-faq-a"><p>A registry is meant to be shared. It can show what has been bought and what is still needed. A <a href="https://shopphylum.com/apps/giftregistry/wishlist">wishlist</a> is a simpler private list, with no guest tracking. You remove things yourself once you have them.</p></div>
+        </details>
+        <details class="gr-faq-item">
+          <summary><h3>Do registry gifts ship?</h3></summary>
+          <div class="gr-faq-a"><p>They check out like any other PHYLUM order. The shop publishes complimentary shipping on orders over $150, and Palm Springs pickup is available. Confirm the shipping offer on the order before you rely on it.</p></div>
+        </details>
+        <details class="gr-faq-item">
+          <summary><h3>Can I register in the store?</h3></summary>
+          <div class="gr-faq-a"><p>Yes. The flagship is at 901 N. Palm Canyon Drive, Suite 101, in the Palm Springs Design District. Call <a href="tel:+17604242110">(760) 424-2110</a> if you’d like someone there to start the list with you.</p></div>
+        </details>
+        <details class="gr-faq-item">
+          <summary><h3>What if something on the list sells out?</h3></summary>
+          <div class="gr-faq-a"><p>Guests can see what’s still needed. If a piece is gone, they can choose something else from the edit. The list doesn’t promise that every item stays in stock.</p></div>
+        </details>
+        <details class="gr-faq-item">
+          <summary><h3>Is there a fee?</h3></summary>
+          <div class="gr-faq-a"><p>Creating a PHYLUM registry or wishlist is free. You need a PHYLUM account, which is also free. Return to a list you’ve already made from <a href="https://shopphylum.com/apps/giftregistry/manage">your account</a>.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="gr-close" aria-labelledby="close-title">
+    <div class="gr-wrap gr-reveal">
+      <span class="gr-sun" aria-hidden="true"></span>
+      <h2 id="close-title">Make the list. Share the name.</h2>
+      <p>Create a registry, or look one up by name. The wishlist is there if you’d rather not share it yet.</p>
+      <div class="gr-ctas">
+        <a class="gr-btn gr-btn--paper" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
+        <a class="gr-btn gr-btn--ghost" href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="gr-foot">
+    <div class="gr-wrap">
+      <div class="gr-foot-grid">
+        <div>
+          <img class="gr-wordmark" src="assets/event/phylum-wordmark.png" width="296" height="102" alt="PHYLUM">
+          <address>
+            901 N. Palm Canyon Dr., Suite 101<br>
+            Palm Springs, CA 92262<br>
+            <a href="tel:+17604242110">(760) 424-2110</a><br>
+            <a href="mailto:hello@shopphylum.com">hello@shopphylum.com</a>
+          </address>
+        </div>
+        <nav aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="brands.html">Brands</a>
+          <a href="https://shopphylum.com">Shop</a>
+          <a href="https://shopphylum.com/pages/about">About</a>
+          <a href="gift-registry.html" aria-current="page">Gift Registry</a>
+          <a href="trade.html">Trade Program</a>
+          <a href="https://shopphylum.com/apps/giftregistry/create">Create</a>
+        </nav>
+      </div>
+      <p class="gr-colophon">© 2026 PHYLUM · Gift Registry</p>
+    </div>
+  </footer>
+</main>
+
+<script src="site-chrome.js"></script>
+<script>
+  (function () {
+    if (!document.documentElement.classList.contains("js-motion")) return;
+    if (!("IntersectionObserver" in window)) {
+      document.documentElement.classList.remove("js-motion");
+      return;
+    }
+    var nodes = document.querySelectorAll(".gr-reveal");
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        seen.unobserve(entry.target);
+      });
+    }, { threshold: 0.16, rootMargin: "0px 0px -6% 0px" });
+    nodes.forEach(function (node) { seen.observe(node); });
+  })();
+</script>
+</body>
+</html>
