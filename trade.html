@@ -704,7 +704,11 @@
   @media (max-width: 900px) {
     .tp-hero-grid, .tp-apply-grid, .tp-pair { grid-template-columns: 1fr; }
     .tp-plus { justify-self: start; }
-    .tp-hero-fig img { aspect-ratio: 4 / 3; }
+    .tp-hero-fig img {
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-position: center 42%;
+    }
     .tp-who { grid-template-columns: 1fr; }
     .tp-who article,
     .tp-who article:nth-child(odd),
@@ -739,6 +743,12 @@
     .tp-mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
     .tp-mosaic figure, .tp-mosaic figure:first-child { height: 220px; grid-column: auto; }
     .tp-hero h1 { font-size: clamp(42px, 12vw, 64px); }
+    .tp-hero-fig img {
+      height: 40vh;
+      max-height: 320px;
+      aspect-ratio: auto;
+      object-position: center 42%;
+    }
   }
 
   /* Scroll reveals. Hidden only after JS confirms motion is allowed. */
