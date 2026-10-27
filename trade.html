@@ -40,6 +40,8 @@
   }
 
   :root {
+    --lime: #F0FFAE;
+    --pink: #FBCAFF;
     --paper: #F1EEE4;
     --paper-deep: #E8E3D5;
     --ink: #24211C;
@@ -153,7 +155,7 @@
     font-family: var(--sans);
     font-weight: 500;
     font-size: 0.84em;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.035em;
     line-height: 1;
     margin-bottom: 0.04em;
   }
@@ -281,28 +283,8 @@
       linear-gradient(0deg, rgba(30, 27, 22, 0.5) 0%, rgba(30, 27, 22, 0) 42%);
   }
   .tp-hero-inner { position: relative; }
-  .tp-hero-copy { max-width: 780px; }
+  .tp-hero-copy { max-width: 900px; }
 
-  .tp-crumb ol {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    list-style: none;
-    margin: 0 0 28px;
-    padding: 0;
-    font-family: var(--sans);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(241, 238, 228, 0.78);
-  }
-  .tp-crumb li:not(:last-child)::after {
-    content: "/";
-    margin-left: 8px;
-    color: rgba(241, 238, 228, 0.5);
-  }
-  .tp-crumb a { text-decoration: none; }
-  .tp-crumb a:hover { color: var(--paper); }
   .tp-hero .tp-eyebrow { color: var(--yellow); }
 
   .tp-hero h1 {
@@ -324,15 +306,6 @@
   }
 
   .tp-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-  .tp-meta {
-    margin: 26px 0 0;
-    font-family: var(--sans);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(241, 238, 228, 0.78);
-  }
-
   .tp-hero-cap {
     position: absolute;
     right: var(--gutter);
@@ -346,57 +319,10 @@
     text-shadow: 0 1px 10px rgba(30, 27, 22, 0.5);
   }
 
-  /* Spinning seal */
-  .tp-seal {
-    position: absolute;
-    right: 0;
-    top: clamp(-20px, -1vw, 0px);
-    width: clamp(150px, 15vw, 236px);
-    aspect-ratio: 1;
-    rotate: -8deg;
-    opacity: 0;
-    scale: 0.7;
-    transition: opacity 0.8s var(--ease) 0.6s, scale 1s var(--ease) 0.6s;
-  }
-  .is-ready .tp-seal { opacity: 1; scale: 1; }
-  .tp-seal-ring {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    color: var(--paper);
-    animation: tp-spin 30s linear infinite;
-  }
-  .tp-seal-ring text {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 15px;
-    letter-spacing: 0.2em;
-    fill: currentColor;
-  }
-  .tp-seal-sun {
-    position: absolute;
-    inset: 14%;
-    color: var(--yellow);
-    animation: tp-spin 60s linear infinite reverse;
-  }
-  .tp-seal-sun .tp-sun { width: 100%; display: block; }
-  .tp-seal-num {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(40px, 4.2vw, 66px);
-    letter-spacing: -0.04em;
-    color: var(--ink);
-  }
-
   /* ---------- Ticker ---------- */
   .tp-ticker {
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--lime);
+    color: var(--ink);
     overflow: hidden;
     padding: 18px 0;
   }
@@ -425,7 +351,7 @@
   }
   .tp-ticker-row .tp-sun {
     width: 0.8em;
-    color: var(--yellow);
+    color: var(--clay);
     animation: tp-spin 12s linear infinite;
   }
   @keyframes tp-marquee { to { transform: translateX(-50%); } }
@@ -473,24 +399,46 @@
     align-items: center;
   }
   .tp-deal {
-    background: rgba(241, 238, 228, 0.1);
-    border: 1px solid rgba(241, 238, 228, 0.38);
-    -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
-    border-radius: 6px;
+    --deal: var(--yellow);
+    --deal-sun: var(--clay);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--deal);
+    color: var(--ink);
+    border-radius: 10px;
     padding: clamp(28px, 3.4vw, 52px);
     height: 100%;
+    rotate: -1.5deg;
+    box-shadow: 0 30px 60px -34px rgba(36, 33, 28, 0.55);
+    transition: rotate 0.6s var(--ease);
+  }
+  .tp-deal--joy { --deal: var(--pink); --deal-sun: var(--yellow); rotate: 1.5deg; }
+  .tp-deal:hover { rotate: 0deg; }
+  .tp-deal::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -18%;
+    right: -14%;
+    width: 62%;
+    aspect-ratio: 1;
+    background: var(--deal-sun);
+    -webkit-mask: var(--sun) center / contain no-repeat;
+            mask: var(--sun) center / contain no-repeat;
+    opacity: 0.9;
+    animation: tp-spin 40s linear infinite;
   }
   .tp-deal .tp-num {
-    font-family: var(--serif);
-    font-weight: 300;
+    font-family: var(--sans);
+    font-weight: 500;
     font-size: clamp(120px, 15vw, 248px);
     line-height: 0.8;
-    letter-spacing: -0.05em;
-    margin: 0 0 0.3em;
-    color: var(--paper);
+    letter-spacing: -0.045em;
+    margin: 0 0 0.32em;
+    color: var(--ink);
   }
-  .tp-num-unit { font-size: 0.56em; letter-spacing: -0.02em; vertical-align: 0.42em; margin-left: 0.04em; }
+  .tp-num-unit { font-size: 0.5em; letter-spacing: -0.02em; vertical-align: 0.5em; margin-left: 0.04em; }
   .tp-deal h3 {
     font-family: var(--sans);
     font-weight: 500;
@@ -502,7 +450,7 @@
   .tp-deal p {
     margin: 0;
     max-width: 30em;
-    color: #fff;
+    color: var(--ink);
     font-size: 17px;
     line-height: 1.55;
   }
@@ -512,7 +460,7 @@
     place-items: center;
     width: clamp(84px, 8vw, 132px);
     aspect-ratio: 1;
-    color: var(--yellow);
+    color: var(--lime);
   }
   .tp-plus .tp-sun { position: absolute; inset: 0; width: 100%; animation: tp-spin 24s linear infinite; }
   .tp-plus-glyph {
@@ -567,9 +515,7 @@
     background: var(--card);
     border-radius: 6px;
     overflow: hidden;
-    transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
   }
-  .tp-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -28px rgba(36, 33, 28, 0.45); }
   .tp-card--sage { --card: #DCDFCB; --accent: #4F5739; }
   .tp-card--apricot { --card: #F3DCC6; --accent: #9A4520; }
   .tp-card--sun { --card: #F5E4B8; --accent: #7A5A00; }
@@ -588,6 +534,7 @@
     background: rgba(241, 238, 228, 0.94);
     color: var(--ink);
     padding: 6px 10px;
+    border-radius: 6px;
     font-family: var(--sans);
     font-size: 10.5px;
     letter-spacing: 0.14em;
@@ -622,10 +569,11 @@
     font-family: var(--sans);
     font-weight: 500;
     font-size: clamp(24px, 2vw, 32px);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     line-height: 1.02;
-    margin: 0 0 4px;
+    margin: 0 0 clamp(40px, 4vw, 64px);
   }
+  .tp-card-foot { margin-top: auto; }
   .tp-card-tag {
     font-family: var(--serif);
     font-weight: 300;
@@ -633,34 +581,16 @@
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--accent);
-    margin: 0 0 16px;
+    margin: 0 0 12px;
   }
-  .tp-card-body > p:not(.tp-card-tag) {
-    margin: 0 0 22px;
+  .tp-card-foot > p:not(.tp-card-tag) {
+    margin: 0;
     color: var(--ink-soft);
     font-size: 15.5px;
     line-height: 1.55;
   }
-  .tp-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    list-style: none;
-    margin: auto 0 0;
-    padding: 0;
-  }
-  .tp-chips li {
-    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-    color: var(--accent);
-    border-radius: 999px;
-    padding: 5px 12px;
-    font-family: var(--sans);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
   /* How it works */
+  #how h2 { margin-bottom: clamp(64px, 7vw, 120px); }
   .tp-steps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -673,11 +603,11 @@
     display: block;
     font-family: var(--serif);
     font-weight: 300;
-    font-size: clamp(72px, 7vw, 120px);
+    font-size: clamp(96px, 9vw, 160px);
     line-height: 0.85;
     letter-spacing: -0.05em;
-    color: var(--sage-deep);
-    margin-bottom: 22px;
+    color: var(--yellow);
+    margin-bottom: 26px;
   }
   .tp-steps h3 {
     font-family: var(--sans);
@@ -740,6 +670,7 @@
     background: rgba(241, 238, 228, 0.94);
     color: var(--ink);
     padding: 6px 10px;
+    border-radius: 6px;
     font-family: var(--sans);
     font-size: 11px;
     letter-spacing: 0.14em;
@@ -754,7 +685,7 @@
     gap: clamp(28px, 6vw, 112px);
     align-items: start;
   }
-  .tp-apply-copy p {
+  .tp-apply-copy p:not(.tp-eyebrow) {
     color: var(--ink-soft);
     font-size: 17px;
     line-height: 1.6;
@@ -764,7 +695,6 @@
 
   .tp-form, .tp-success {
     background: #fff;
-    border: 1px solid var(--line);
     border-radius: 8px;
     padding: clamp(28px, 4vw, 52px);
   }
@@ -792,8 +722,8 @@
   .tp-field select {
     width: 100%;
     min-height: 50px;
-    border: 1px solid var(--line);
-    background-color: var(--paper);
+    border: 1px solid #ECE8DD;
+    background-color: #FAF9F5;
     color: var(--ink);
     font: 16px/1.4 var(--body);
     padding: 13px 14px;
@@ -846,7 +776,7 @@
     letter-spacing: -0.03em;
     margin: 0 0 12px;
   }
-  .tp-success p { margin: 0 0 22px; color: var(--ink-soft); font-size: 17px; line-height: 1.55; }
+  .tp-success p:not(.tp-eyebrow) { margin: 0 0 22px; color: var(--ink-soft); font-size: 17px; line-height: 1.55; }
   .tp-success-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
   /* ---------- FAQ ---------- */
@@ -927,7 +857,7 @@
     letter-spacing: -0.035em;
     margin: 0 auto 24px;
   }
-  .tp-close p {
+  .tp-close p:not(.tp-eyebrow) {
     margin: 0 auto 32px;
     max-width: 36em;
     color: var(--paper);
@@ -995,8 +925,6 @@
       background:
         linear-gradient(0deg, rgba(30, 27, 22, 0.88) 0%, rgba(30, 27, 22, 0.66) 46%, rgba(30, 27, 22, 0.12) 78%, rgba(30, 27, 22, 0.2) 100%);
     }
-    .tp-hero-inner { display: flex; flex-direction: column; }
-    .tp-seal { position: relative; order: -1; align-self: flex-end; top: auto; width: 128px; margin-bottom: 8px; }
     .tp-hero-cap { display: none; }
     .tp-offer-sun { width: 150vw; right: -70vw; top: 30%; }
     .tp-steps { grid-template-columns: 1fr; }
@@ -1032,7 +960,6 @@
     .tp-mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
     .tp-mosaic figure, .tp-mosaic figure:first-child { height: 240px; grid-column: auto; }
     .tp-hero h1 { font-size: clamp(46px, 13vw, 64px); }
-    .tp-seal { width: 112px; }
     .tp-deal .tp-num { font-size: clamp(112px, 34vw, 160px); }
   }
 
@@ -1050,7 +977,7 @@
   @media (prefers-reduced-motion: reduce) {
     .tp-btn,
     .tp-hero-bg,
-    .tp-card,
+    .tp-deal,
     .tp-card img,
     .tp-mosaic img,
     .tp-pm,
@@ -1060,25 +987,22 @@
       transition: none;
     }
     .tp-sun,
-    .tp-seal-ring,
-    .tp-seal-sun,
     .tp-ticker-track,
     .tp-eyebrow .tp-sun,
     .tp-offer-sun .tp-sun,
     .tp-close-sun .tp-sun,
     .tp-plus .tp-sun,
+    .tp-deal::after,
     .tp-card-num .tp-sun {
       animation: none;
     }
     .tp-hero-bg,
-    .tp-card:hover,
     .tp-card:hover img,
     .tp-mosaic figure:hover img,
     .js-motion .tp-reveal {
       transform: none;
       opacity: 1;
     }
-    .tp-seal { opacity: 1; scale: 1; }
   }
 </style>
 <script>
@@ -1210,12 +1134,6 @@
     <div class="tp-hero-shade" aria-hidden="true"></div>
     <div class="tp-wrap tp-hero-inner">
       <div class="tp-hero-copy tp-reveal">
-        <nav class="tp-crumb" aria-label="Breadcrumb">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li aria-current="page">Trade Program</li>
-          </ol>
-        </nav>
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Trade Program</p>
         <h1 id="trade-title"><span class="tp-s">Your favorite designer’s</span> favorite store.</h1>
         <p class="tp-lede">PHYLUM is a modernist mercantile in Palm Springs. The Trade Program is for interior designers, architects, stylists, and stagers who specify from that edit — with 15% off and Joy loyalty points on the same purchase.</p>
@@ -1223,15 +1141,6 @@
           <a class="tp-btn tp-btn--solid" href="#apply">Apply for trade access</a>
           <a class="tp-btn tp-btn--light" href="#offer">See the double-dip</a>
         </div>
-        <p class="tp-meta">Palm Springs Design District · Indio outpost · Online</p>
-      </div>
-      <div class="tp-seal" aria-hidden="true">
-        <svg class="tp-seal-ring" viewBox="0 0 200 200">
-          <defs><path id="tpRing" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
-          <text><textPath href="#tpRing" textLength="530" lengthAdjust="spacing">TRADE PROGRAM · JOY POINTS TOO · </textPath></text>
-        </svg>
-        <div class="tp-seal-sun"><span class="tp-sun"></span></div>
-        <span class="tp-seal-num">15%</span>
       </div>
     </div>
     <p class="tp-hero-cap">Striped stoneware, from the PHYLUM serveware edit</p>
@@ -1273,7 +1182,7 @@
           <p>Off qualifying purchases once your trade account is approved.</p>
         </article>
         <span class="tp-plus" aria-hidden="true"><span class="tp-sun"></span><span class="tp-plus-glyph">+</span></span>
-        <article class="tp-deal">
+        <article class="tp-deal tp-deal--joy">
           <p class="tp-num">Joy</p>
           <h3>Loyalty points</h3>
           <p>Earned in addition to the discount, not instead of it.</p>
@@ -1300,11 +1209,10 @@
           </figure>
           <div class="tp-card-body">
             <h3>Interior designers</h3>
-            <p class="tp-card-tag">Rooms people live in.</p>
-            <p>Tabletop, textiles, and objects for projects and for the people who live with them.</p>
-            <ul class="tp-chips" aria-label="Often specified">
-              <li>Textiles</li><li>Tabletop</li><li>Lighting</li>
-            </ul>
+            <div class="tp-card-foot">
+              <p class="tp-card-tag">Rooms people live in.</p>
+              <p>Tabletop, textiles, and objects for projects and for the people who live with them.</p>
+            </div>
           </div>
         </li>
         <li class="tp-card tp-card--sage tp-reveal">
@@ -1315,11 +1223,10 @@
           </figure>
           <div class="tp-card-body">
             <h3>Architects</h3>
-            <p class="tp-card-tag">Material, made legible.</p>
-            <p>Modernist pieces with a clear material story, scaled for drawings and for rooms.</p>
-            <ul class="tp-chips" aria-label="Often specified">
-              <li>Clocks</li><li>Lighting</li><li>Objects</li>
-            </ul>
+            <div class="tp-card-foot">
+              <p class="tp-card-tag">Material, made legible.</p>
+              <p>Modernist pieces with a clear material story, scaled for drawings and for rooms.</p>
+            </div>
           </div>
         </li>
         <li class="tp-card tp-card--apricot tp-reveal">
@@ -1330,11 +1237,10 @@
           </figure>
           <div class="tp-card-body">
             <h3>Stylists</h3>
-            <p class="tp-card-tag">Color for the frame.</p>
-            <p>A tight edit for sets, stories, and seasonal installs.</p>
-            <ul class="tp-chips" aria-label="Often specified">
-              <li>Tabletop</li><li>Color</li><li>Props</li>
-            </ul>
+            <div class="tp-card-foot">
+              <p class="tp-card-tag">Color for the frame.</p>
+              <p>A tight edit for sets, stories, and seasonal installs.</p>
+            </div>
           </div>
         </li>
         <li class="tp-card tp-card--sun tp-reveal">
@@ -1345,11 +1251,10 @@
           </figure>
           <div class="tp-card-body">
             <h3>Stagers</h3>
-            <p class="tp-card-tag">A desert house, dressed.</p>
-            <p>Goods that dress a desert house without looking like a catalog.</p>
-            <ul class="tp-chips" aria-label="Often specified">
-              <li>Outdoor</li><li>Glassware</li><li>Barware</li>
-            </ul>
+            <div class="tp-card-foot">
+              <p class="tp-card-tag">A desert house, dressed.</p>
+              <p>Goods that dress a desert house without looking like a catalog.</p>
+            </div>
           </div>
         </li>
       </ul>
@@ -1359,7 +1264,7 @@
   <section class="tp-section tp-section--deep" id="how" aria-labelledby="how-title">
     <div class="tp-wrap tp-reveal">
       <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>How it works</p>
-      <h2 id="how-title"><span class="tp-s">Apply. Get approved.</span> Shop.</h2>
+      <h2 id="how-title"><span class="tp-s">From first hello</span> to trade pricing.</h2>
       <ol class="tp-steps">
         <li>
           <span class="tp-step-num">01</span>
