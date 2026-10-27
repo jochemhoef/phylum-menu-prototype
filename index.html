@@ -327,6 +327,13 @@
   }
   .btn-primary { background: var(--clay); border-color: var(--clay); color: #fff; }
   .btn-ghost { background: transparent; color: #fff; }
+  a.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: inherit;
+  }
 
   .note {
     max-width: 1440px; margin: 0 auto; padding: 34px 40px 60px;
@@ -607,6 +614,11 @@
 
     .m-feature .feature-title { font-size: 22px; }
     .m-feature .feature-cta { font-size: 14px; }
+
+    a.m-direct {
+      text-decoration: none;
+      color: var(--clay-deep);
+    }
   }
 
   @media (max-width: 480px) {
@@ -1745,6 +1757,8 @@
         </div>
       </div>
 
+      <a class="nav-link nav-direct" href="trade.html">Trade Program</a>
+
     </nav>
 
     <div class="utils">
@@ -1782,6 +1796,7 @@
     <div class="hero-ctas">
       <button class="btn btn-primary">Shop Now</button>
       <button class="btn btn-ghost">About PHYLUM</button>
+      <a class="btn btn-ghost" href="trade.html">Trade Program</a>
     </div>
   </div>
 </section>
@@ -2052,6 +2067,13 @@
         if (!isOpen) group.classList.add('open');
       });
       panel.appendChild(group);
+    });
+    document.querySelectorAll('a.nav-direct').forEach((direct) => {
+      const link = document.createElement('a');
+      link.className = 'm-parent m-direct';
+      link.href = direct.getAttribute('href') || 'trade.html';
+      link.textContent = direct.textContent.trim() || 'Trade Program';
+      panel.appendChild(link);
     });
     bindWaitlistForms(panel);
   };

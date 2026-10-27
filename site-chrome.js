@@ -191,6 +191,13 @@
         });
         panel.appendChild(group);
       });
+      document.querySelectorAll('a.nav-direct').forEach((direct) => {
+        const link = document.createElement('a');
+        link.className = 'm-parent m-direct';
+        link.href = direct.getAttribute('href') || 'trade.html';
+        link.textContent = direct.textContent.trim() || 'Trade Program';
+        panel.appendChild(link);
+      });
       bindWaitlistForms(panel);
     };
 
@@ -258,6 +265,12 @@
 
       const logo = mount.querySelector('.logo');
       if (logo) logo.setAttribute('href', 'index.html');
+
+      const page = (location.pathname.split('/').pop() || 'index.html').split('?')[0] || 'index.html';
+      mount.querySelectorAll('a.nav-direct').forEach((a) => {
+        const href = (a.getAttribute('href') || '').split('?')[0];
+        if (href === page) a.setAttribute('aria-current', 'page');
+      });
 
       initNav();
     } catch (err) {
