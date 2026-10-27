@@ -716,7 +716,14 @@
     line-height: 1.6;
     margin: 0 0 14px;
   }
-  .tp-apply-copy a { color: var(--sage-deep); }
+  .tp-apply-copy a {
+    color: var(--clay);
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) left bottom / 0% 1px no-repeat;
+    transition: background-size 0.5s var(--ease);
+  }
+  .tp-apply-copy a:hover,
+  .tp-apply-copy a:focus-visible { background-size: 100% 1px; }
 
   .tp-form, .tp-success {
     background: #fff;
@@ -839,9 +846,10 @@
     flex-shrink: 0;
     width: 36px;
     height: 36px;
-    border: 1px solid var(--sage-deep);
+    background: var(--yellow);
+    border: 1px solid var(--yellow);
     border-radius: 50%;
-    transition: background-color 0.45s var(--ease), rotate 0.6s var(--ease);
+    transition: background-color 0.45s var(--ease), border-color 0.45s var(--ease), rotate 0.6s var(--ease);
   }
   .tp-pm::before,
   .tp-pm::after {
@@ -853,11 +861,11 @@
     height: 1.5px;
     margin: -0.75px 0 0 -6.5px;
     border-radius: 1px;
-    background: var(--sage-deep);
+    background: var(--ink);
     transition: transform 0.6s var(--ease), background-color 0.45s var(--ease);
   }
   .tp-pm::after { transform: rotate(90deg); }
-  .tp-faq-item.is-open .tp-pm { background: var(--sage-deep); rotate: 180deg; }
+  .tp-faq-item.is-open .tp-pm { background: var(--sage-deep); border-color: var(--sage-deep); rotate: 180deg; }
   .tp-faq-item.is-open .tp-pm::before,
   .tp-faq-item.is-open .tp-pm::after { background: #fff; }
   .tp-faq-item.is-open .tp-pm::after { transform: rotate(0deg); }
@@ -1347,10 +1355,10 @@
     <div class="tp-wrap tp-apply-grid">
       <div class="tp-apply-copy tp-reveal">
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Application</p>
-        <h2 id="apply-title"><span class="tp-s">Apply for</span> the Trade Program.</h2>
+        <h2 id="apply-title"><span class="tp-s">Apply for</span> the trade program.</h2>
         <p>Tell us about the practice. We read every application.</p>
         <p>Questions first? Write <a href="mailto:hello@shopphylum.com">hello@shopphylum.com</a> or call <a href="tel:+17604242110">(760) 424-2110</a>.</p>
-        <p>The flagship is at 901 N. Palm Canyon Dr., Suite 101, Palm Springs, in the Design District.</p>
+        <p>The flagship is at <a href="https://maps.google.com/?q=901+N+Palm+Canyon+Dr+Suite+101+Palm+Springs+CA+92262">901 N. Palm Canyon Dr., Suite 101, Palm Springs</a>, in the Design District.</p>
       </div>
       <!-- TODO: Wire this form to Shopify customer tags, Joy, or a form service such as Klaviyo. It is front-end only — submission is not sent anywhere. -->
       <form class="tp-form tp-reveal" id="tradeForm" action="#" method="post" novalidate>
@@ -1391,7 +1399,6 @@
             <input id="trade-tax" name="tax_id" type="text" autocomplete="off" spellcheck="false">
           </div>
           <!-- TODO: Confirm this privacy line with the client before it stands in for the Shopify privacy policy. -->
-          <p class="tp-fine">This preview keeps your application in the browser. It isn’t sent yet. Once the form is connected, we’ll use these details only to review trade access and reply to you.</p>
           <div class="tp-field tp-field--wide">
             <button class="tp-btn tp-btn--solid" type="submit">Submit application</button>
           </div>
