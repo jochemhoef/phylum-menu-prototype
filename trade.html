@@ -44,6 +44,7 @@
     --peach: #FFBFAC;
     --paper: #F1EEE4;
     --paper-deep: #E8E3D5;
+    --paper-soft: #EEEBE1;
     --ink: #24211C;
     --ink-soft: #5A554A;
     --line: #CFC8B6;
@@ -708,6 +709,7 @@
   }
 
   /* ---------- Apply ---------- */
+  .tp-apply { background: var(--paper-soft); }
   .tp-apply { padding-bottom: clamp(80px, 9vw, 140px); }
   .tp-apply-grid {
     display: grid;
@@ -817,7 +819,7 @@
   .tp-success-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
   /* ---------- FAQ ---------- */
-  .tp-faq { background: var(--paper-deep); padding: clamp(80px, 9vw, 140px) 0; }
+  .tp-faq { background: var(--paper-soft); padding: clamp(80px, 9vw, 140px) 0; }
   .tp-faq-grid {
     display: grid;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
@@ -825,7 +827,6 @@
     align-items: start;
   }
   .tp-faq-head { position: sticky; top: 32px; }
-  .tp-faq-list { border-top: 1px solid var(--line); }
   .tp-faq-item { border-bottom: 1px solid var(--line); }
   .tp-faq-item summary {
     cursor: pointer;
@@ -851,8 +852,8 @@
     flex-shrink: 0;
     width: 36px;
     height: 36px;
-    background: var(--yellow);
-    border: 1px solid var(--yellow);
+    background: transparent;
+    border: 1px solid var(--ink);
     border-radius: 50%;
     transition: background-color 0.45s var(--ease), border-color 0.45s var(--ease), rotate 0.6s var(--ease);
   }
@@ -870,9 +871,9 @@
     transition: transform 0.6s var(--ease), background-color 0.45s var(--ease);
   }
   .tp-pm::after { transform: rotate(90deg); }
-  .tp-faq-item.is-open .tp-pm { background: var(--sage-deep); border-color: var(--sage-deep); rotate: 180deg; }
-  .tp-faq-item.is-open .tp-pm::before,
-  .tp-faq-item.is-open .tp-pm::after { background: #fff; }
+  .tp-faq-item summary:hover .tp-pm,
+  .tp-faq-item.is-open .tp-pm { background: var(--yellow); border-color: var(--yellow); }
+  .tp-faq-item.is-open .tp-pm { rotate: 180deg; }
   .tp-faq-item.is-open .tp-pm::after { transform: rotate(0deg); }
   .tp-faq-a { overflow: hidden; }
   .tp-faq-a-inner { padding: 0 60px 26px 0; }
