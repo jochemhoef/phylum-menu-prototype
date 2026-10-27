@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trade Program for Designers &amp; Architects | PHYLUM Palm Springs</title>
-<meta name="description" content="Join PHYLUM’s Trade Program for interior designers, architects, stylists, and stagers. 15% off plus Joy loyalty points at our Palm Springs modernist mercantile.">
+<meta name="description" content="PHYLUM’s Trade Program for interior designers, architects, stylists, and stagers: unique, high-quality finishing pieces with color and texture, plus 15% off and PHYLUM Rewards.">
 <link rel="canonical" href="https://phylum-menu.onrender.com/trade.html">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#F1EEE4">
@@ -12,13 +12,13 @@
 <meta property="og:site_name" content="PHYLUM">
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="PHYLUM Trade Program: your favorite designer’s favorite store">
-<meta property="og:description" content="15% off plus Joy loyalty points for interior designers, architects, stylists, and stagers. Apply for trade access at PHYLUM in Palm Springs.">
+<meta property="og:description" content="Unique, high-quality finishing pieces with color and texture, at a more accessible price. 15% off plus PHYLUM Rewards for the trade.">
 <meta property="og:url" content="https://phylum-menu.onrender.com/trade.html">
 <meta property="og:image" content="https://phylum-menu.onrender.com/assets/trade/hero-striped-stoneware.jpg">
 <meta property="og:image:alt" content="Striped speckled stoneware bowls and a tumbler on a sunlit birch shelf at PHYLUM.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PHYLUM Trade Program: your favorite designer’s favorite store">
-<meta name="twitter:description" content="15% off plus Joy loyalty points for interior designers, architects, stylists, and stagers.">
+<meta name="twitter:description" content="Finishing pieces with color and texture, plus 15% off and PHYLUM Rewards for the trade.">
 <meta name="twitter:image" content="https://phylum-menu.onrender.com/assets/trade/hero-striped-stoneware.jpg">
 <meta name="twitter:image:alt" content="Striped speckled stoneware bowls and a tumbler on a sunlit birch shelf at PHYLUM.">
 <link rel="icon" href="assets/event/phylum-sun.svg" type="image/svg+xml">
@@ -400,7 +400,7 @@
     line-height: 0.95;
     letter-spacing: -0.035em;
     margin: 0 0 22px;
-    max-width: 14ch;
+    max-width: 18ch;
   }
   .tp-offer-intro {
     max-width: 36em;
@@ -954,7 +954,7 @@
         linear-gradient(0deg, rgba(30, 27, 22, 0.88) 0%, rgba(30, 27, 22, 0.66) 46%, rgba(30, 27, 22, 0.12) 78%, rgba(30, 27, 22, 0.2) 100%);
     }
     .tp-hero-cap { display: none; }
-    .tp-offer-sun { width: 150vw; right: -70vw; top: 30%; }
+    .tp-offer-sun { width: 150vw; right: -70vw; top: 74%; }
     .tp-steps { grid-template-columns: 1fr; }
     .tp-mosaic {
       grid-template-columns: 1fr 1fr;
@@ -991,6 +991,135 @@
     .tp-deal .tp-num { font-size: clamp(112px, 34vw, 160px); }
   }
 
+  /* ---------- Value proposition ---------- */
+  .tp-edit { background: var(--paper-soft); }
+  .tp-values {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 56px);
+    list-style: none;
+    margin: 0 0 clamp(40px, 4.4vw, 64px);
+    padding: 0;
+  }
+  .tp-value-num {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(40px, 3.4vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--clay);
+    margin-bottom: 14px;
+  }
+  .tp-values h3 {
+    font-size: clamp(20px, 1.6vw, 24px);
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  .tp-values p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.55; max-width: 30em; }
+
+  .tp-deal { display: flex; flex-direction: column; }
+  .tp-deal h3 { margin-top: auto; }
+  .tp-deal .tp-num--word { font-size: clamp(72px, 8vw, 124px); line-height: 0.9; }
+
+  /* ---------- Testimonials ---------- */
+  .tp-voices { overflow: hidden; }
+  .tp-voices-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: clamp(32px, 3.4vw, 52px);
+  }
+  .tp-voices-head h2 { margin-bottom: 0; }
+  .tp-voices-nav { display: flex; gap: 10px; flex-shrink: 0; }
+  .tp-arrow {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    font: 20px/1 var(--sans);
+    cursor: pointer;
+    transition: background-color 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.35s var(--ease);
+  }
+  .tp-arrow:hover:not(:disabled) { background: var(--yellow); border-color: var(--yellow); }
+  .tp-arrow:disabled { opacity: 0.3; cursor: default; }
+  .tp-voices-track {
+    --edge: max(var(--gutter), calc((100vw - var(--max)) / 2));
+    display: flex;
+    gap: clamp(14px, 1.4vw, 22px);
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--edge) 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .tp-voices-track::-webkit-scrollbar { display: none; }
+  .tp-voice {
+    --card: var(--paper-deep);
+    flex: 0 0 clamp(280px, 30vw, 440px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: clamp(28px, 2.8vw, 44px);
+    min-height: clamp(360px, 30vw, 440px);
+  }
+  .tp-voice--sun { --card: #F1EE80; }
+  .tp-voice--peach { --card: var(--peach); }
+  .tp-voice--sage { --card: #DCDFCB; }
+  .tp-voice--lime { --card: var(--lime); }
+  .tp-voice--clay { --card: var(--clay); color: var(--paper); }
+  .tp-voice blockquote { margin: 0 0 32px; }
+  .tp-voice blockquote p {
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(24px, 2vw, 32px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    text-indent: -0.4em;
+  }
+  .tp-voice-name {
+    margin: auto 0 2px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 17px;
+  }
+  .tp-voice-studio { margin: 0 0 14px; font-size: 14px; opacity: 0.75; }
+  .tp-voice-link {
+    align-self: flex-start;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: inherit;
+    background: linear-gradient(currentColor, currentColor) left bottom / 0% 1px no-repeat;
+    padding-bottom: 3px;
+    transition: background-size 0.5s var(--ease);
+  }
+  .tp-voice-link:hover,
+  .tp-voice-link:focus-visible { background-size: 100% 1px; }
+
+  .tp-hint { font-size: 13px; line-height: 1.4; color: var(--ink-soft); }
+
+  @media (max-width: 900px) {
+    .tp-values { grid-template-columns: 1fr; }
+    .tp-voices-head { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .tp-voice { flex-basis: 82vw; min-height: 340px; }
+  }
+
   /* Scroll reveals. Hidden only after JS confirms motion is allowed. */
   .js-motion .tp-reveal {
     opacity: 0;
@@ -1011,6 +1140,9 @@
     .tp-pm,
     .tp-pm::before,
     .tp-pm::after,
+    .tp-arrow,
+    .tp-voice-link,
+    .tp-voices-track { scroll-behavior: auto; }
     .js-motion .tp-reveal {
       transition: none;
     }
@@ -1049,7 +1181,7 @@
       "image": "https://phylum-menu.onrender.com/assets/event/phylum-wordmark.png",
       "logo": "https://phylum-menu.onrender.com/assets/event/phylum-wordmark.png",
       "telephone": "+1-760-424-2110",
-      "email": "hello@shopphylum.com",
+      "email": "trade@shopphylum.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "901 N. Palm Canyon Dr. Suite 101",
@@ -1093,15 +1225,15 @@
           "name": "What is the trade offer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Approved members receive 15% off plus Joy loyalty points. Both apply on qualifying purchases. That is the double-dip: the discount does not replace the points."
+            "text": "Approved members receive 15% off plus PHYLUM Rewards points. Both apply on qualifying purchases. That is the double-dip: the discount does not replace the points."
           }
         },
         {
           "@type": "Question",
-          "name": "What are Joy loyalty points?",
+          "name": "What is PHYLUM Rewards?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Joy loyalty points are the points in PHYLUM’s loyalty program, presented to customers as PHYLUM Rewards. Trade members earn them in addition to the 15% discount. Current earn and redeem terms are on the PHYLUM Rewards page."
+            "text": "PHYLUM Rewards is PHYLUM’s loyalty program. Trade members earn PHYLUM Rewards points in addition to the 15% discount. Current earn and redeem terms are on the PHYLUM Rewards page."
           }
         },
         {
@@ -1109,7 +1241,7 @@
           "name": "How do I apply?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Use the form on this page. Share your name, business, email, phone, website or portfolio, and trade type. A resale or tax ID is optional."
+            "text": "Use the form on this page. Share your name, business, email, phone, website or portfolio, trade type, and your interior design license or accreditation. A resale certificate is optional."
           }
         },
         {
@@ -1141,7 +1273,7 @@
           "name": "Do I need a resale certificate?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The form asks for a resale or tax ID if you have one. It is optional. If a resale certificate is required for your account, PHYLUM will ask for it during review."
+            "text": "Only for tax-exempt purchases. The resale certificate is optional on the application; add it if you plan to buy for resale without paying sales tax."
           }
         }
       ]
@@ -1162,10 +1294,10 @@
       <div class="tp-hero-copy tp-reveal">
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Trade Program</p>
         <h1 id="trade-title"><span class="tp-s">Your favorite designer’s</span> favorite store.</h1>
-        <p class="tp-lede">PHYLUM is a modernist mercantile in Palm Springs. The Trade Program is for interior designers, architects, stylists, and stagers who specify from that edit, with 15% off and Joy loyalty points on the same purchase.</p>
+        <p class="tp-lede">Unique, high-quality finishing pieces that bring color and texture to a room, from a modernist mercantile in Palm Springs, at a more accessible price than typical trade suppliers.</p>
         <div class="tp-ctas">
           <a class="tp-btn tp-btn--sun" href="#apply">Apply for trade access</a>
-          <a class="tp-btn tp-btn--light" href="#offer">See the double-dip</a>
+          <a class="tp-btn tp-btn--light" href="#edit">Explore the edit</a>
         </div>
       </div>
     </div>
@@ -1197,12 +1329,62 @@
     </div>
   </div>
 
+  <section class="tp-section tp-edit" id="edit" aria-labelledby="edit-title">
+    <div class="tp-wrap tp-reveal">
+      <div class="tp-edit-head">
+        <div>
+          <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Why designers shop PHYLUM</p>
+          <h2 id="edit-title"><span class="tp-s">Finishing pieces</span> with color and texture.</h2>
+          <p class="tp-intro">Designers come for the curation and the style, not just the discount. PHYLUM is a modernist mercantile in Palm Springs with unique, high-quality pieces that finish a room, at a more accessible price than typical trade suppliers.</p>
+        </div>
+        <a class="tp-text-link" href="brands.html">Browse the makers</a>
+      </div>
+      <ul class="tp-values">
+        <li><span class="tp-value-num">01</span><h3>Curated, not catalogued</h3><p>A tight edit of makers chosen for character, so every piece earns its place in a scheme.</p></li>
+        <li><span class="tp-value-num">02</span><h3>Color and texture</h3><p>Glaze, weave, cork, and lacquer: the layer that makes a finished room feel lived in.</p></li>
+        <li><span class="tp-value-num">03</span><h3>A more accessible price</h3><p>Quality you can specify generously, without the markup of typical trade suppliers.</p></li>
+      </ul>
+      <div class="tp-mosaic">
+        <a href="https://shopphylum.com/collections/studio-arhoj">
+          <figure>
+            <img src="assets/trade/studio-arhoj.jpg" width="1400" height="934" alt="Studio Arhoj glazed ceramic figures with painted eyes, scattered across a sunlit walnut table." loading="lazy" decoding="async">
+            <figcaption>Studio Arhoj</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/collections/mud-australia">
+          <figure>
+            <img src="assets/trade/mud-australia.jpg" width="1024" height="682" alt="Mud Australia porcelain bowls and plates in mint, sky, and apricot on a linen-covered dinner table." loading="lazy" decoding="async">
+            <figcaption>Mud Australia</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/collections/chilewich">
+          <figure>
+            <img src="assets/trade/chilewich.jpg" width="1056" height="517" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async">
+            <figcaption>Chilewich</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/collections/liga">
+          <figure>
+            <img src="assets/trade/liga.jpg" width="1000" height="1000" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async">
+            <figcaption>LIGA</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/collections/hoptimist">
+          <figure>
+            <img src="assets/trade/hoptimist.jpg" width="1200" height="796" alt="Hoptimist bobble figures in bright colors lined up on concrete steps." loading="lazy" decoding="async">
+            <figcaption>Hoptimist</figcaption>
+          </figure>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="tp-offer" id="offer" aria-labelledby="offer-title">
     <div class="tp-offer-sun" aria-hidden="true"><span class="tp-sun"></span></div>
     <div class="tp-wrap tp-reveal">
       <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>The double-dip</p>
-      <h2 id="offer-title"><span class="tp-s">Fifteen percent off.</span> Joy points, too.</h2>
-      <p class="tp-offer-intro">Trade members get both. The discount and the loyalty points sit on the same qualifying purchase. That is the double-dip. Joy points are the points in <a href="https://shopphylum.com/pages/phylumpoints">PHYLUM Rewards</a>.</p>
+      <h2 id="offer-title"><span class="tp-s">Fifteen percent off.</span> PHYLUM Rewards, too.</h2>
+      <p class="tp-offer-intro">Trade members get both. The discount and <a href="https://shopphylum.com/pages/phylumpoints">PHYLUM Rewards</a> points sit on the same qualifying purchase. That is the double-dip.</p>
       <div class="tp-pair">
         <article class="tp-deal">
           <p class="tp-num">15<span class="tp-num-unit">%</span></p>
@@ -1211,9 +1393,9 @@
         </article>
         <span class="tp-plus" aria-hidden="true"><span class="tp-plus-glyph">+</span></span>
         <article class="tp-deal tp-deal--joy">
-          <p class="tp-num">Joy</p>
+          <p class="tp-num tp-num--word">Rewards</p>
           <h3>Loyalty points</h3>
-          <p>Earned in addition to the discount, not instead of it.</p>
+          <p>PHYLUM Rewards points, earned in addition to the discount, not instead of it.</p>
         </article>
       </div>
       <!-- TODO: Confirm exclusions (sale, gift cards, special orders) and whether the public PHYLUM Rewards earn rate still applies on discounted trade purchases. -->
@@ -1226,7 +1408,7 @@
       <div class="tp-reveal">
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Who it’s for</p>
         <h2 id="who-title"><span class="tp-s">The practices</span> we open the program to.</h2>
-        <p class="tp-intro">Apply if you specify, style, or stage with goods for clients. A resale or tax ID is welcome and optional on the form.</p>
+        <p class="tp-intro">Apply if you specify, style, or stage with goods for clients. You’ll need a design license or accreditation; a resale certificate is optional.</p>
       </div>
       <ul class="tp-who">
         <li class="tp-card tp-reveal">
@@ -1298,62 +1480,84 @@
         <li>
           <span class="tp-step-num">02</span>
           <h3>Get approved</h3>
-          <!-- TODO: Approval timing and the exact account setup (Shopify customer tag, Joy, or in-store) are not defined yet. -->
+          <!-- TODO: Approval timing and the exact account setup (Shopify customer tag, PHYLUM Rewards, or in-store) are not defined yet. -->
           <p>We review the application and email you about next steps. Access is not instant.</p>
         </li>
         <li>
           <span class="tp-step-num">03</span>
           <h3>Shop</h3>
           <!-- TODO: Confirm trade pricing is available online and at both the Palm Springs flagship and the Indio outpost. -->
-          <p>Use trade pricing on qualifying purchases, and keep earning Joy points.</p>
+          <p>Use trade pricing on qualifying purchases, and keep earning PHYLUM Rewards points.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <section class="tp-section tp-edit" aria-labelledby="edit-title">
-    <div class="tp-wrap tp-reveal">
-      <div class="tp-edit-head">
+
+  <!-- EDIT: Placeholder testimonials. Jory is gathering 5+ designer quotes; replace each quote, name, studio, and site link. -->
+  <section class="tp-section tp-voices" id="voices" aria-labelledby="voices-title">
+    <div class="tp-wrap">
+      <div class="tp-voices-head tp-reveal">
         <div>
-          <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>The edit</p>
-          <h2 id="edit-title"><span class="tp-s">What the trade</span> specifies.</h2>
-          <p class="tp-intro">Tabletop, textiles, and objects from the makers on the floor in Palm Springs.</p>
+          <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>From the trade</p>
+          <h2 id="voices-title"><span class="tp-s">Designers on</span> shopping PHYLUM.</h2>
         </div>
-        <a class="tp-text-link" href="brands.html">Browse the makers</a>
-      </div>
-      <div class="tp-mosaic">
-        <a href="https://shopphylum.com/collections/studio-arhoj">
-          <figure>
-            <img src="assets/trade/studio-arhoj.jpg" width="1400" height="934" alt="Studio Arhoj glazed ceramic figures with painted eyes, scattered across a sunlit walnut table." loading="lazy" decoding="async">
-            <figcaption>Studio Arhoj</figcaption>
-          </figure>
-        </a>
-        <a href="https://shopphylum.com/collections/mud-australia">
-          <figure>
-            <img src="assets/trade/mud-australia.jpg" width="1024" height="682" alt="Mud Australia porcelain bowls and plates in mint, sky, and apricot on a linen-covered dinner table." loading="lazy" decoding="async">
-            <figcaption>Mud Australia</figcaption>
-          </figure>
-        </a>
-        <a href="https://shopphylum.com/collections/chilewich">
-          <figure>
-            <img src="assets/trade/chilewich.jpg" width="1056" height="517" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async">
-            <figcaption>Chilewich</figcaption>
-          </figure>
-        </a>
-        <a href="https://shopphylum.com/collections/liga">
-          <figure>
-            <img src="assets/trade/liga.jpg" width="1000" height="1000" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async">
-            <figcaption>LIGA</figcaption>
-          </figure>
-        </a>
-        <a href="https://shopphylum.com/collections/hoptimist">
-          <figure>
-            <img src="assets/trade/hoptimist.jpg" width="1200" height="796" alt="Hoptimist bobble figures in bright colors lined up on concrete steps." loading="lazy" decoding="async">
-            <figcaption>Hoptimist</figcaption>
-          </figure>
-        </a>
+        <div class="tp-voices-nav">
+          <button class="tp-arrow" type="button" data-dir="-1" aria-label="Previous testimonial" aria-controls="voicesTrack"><span aria-hidden="true">←</span></button>
+          <button class="tp-arrow" type="button" data-dir="1" aria-label="Next testimonial" aria-controls="voicesTrack"><span aria-hidden="true">→</span></button>
+        </div>
       </div>
     </div>
+    <ul class="tp-voices-track tp-reveal" id="voicesTrack" tabindex="0" aria-label="Designer testimonials">
+      <li class="tp-voice">
+        <blockquote>
+          <p>“PHYLUM is where I go when a room needs its last ten percent: the bowl, the throw, the object that makes it feel finished.”</p>
+        </blockquote>
+        <p class="tp-voice-name">Designer name 1</p>
+        <p class="tp-voice-studio">Studio name · City</p>
+        <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
+      </li>
+      <li class="tp-voice tp-voice--sun">
+        <blockquote>
+          <p>“The edit is so tight that I can send a client there and trust whatever they fall for.”</p>
+        </blockquote>
+        <p class="tp-voice-name">Designer name 2</p>
+        <p class="tp-voice-studio">Studio name · City</p>
+        <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
+      </li>
+      <li class="tp-voice tp-voice--peach">
+        <blockquote>
+          <p>“Color and texture I can’t find from my usual trade vendors, at prices that let me specify more than one piece.”</p>
+        </blockquote>
+        <p class="tp-voice-name">Designer name 3</p>
+        <p class="tp-voice-studio">Studio name · City</p>
+        <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
+      </li>
+      <li class="tp-voice tp-voice--sage">
+        <blockquote>
+          <p>“Every install, there’s something from PHYLUM on the shelf. Clients always ask where it came from.”</p>
+        </blockquote>
+        <p class="tp-voice-name">Designer name 4</p>
+        <p class="tp-voice-studio">Studio name · City</p>
+        <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
+      </li>
+      <li class="tp-voice tp-voice--lime">
+        <blockquote>
+          <p>“It feels like shopping with a friend who has impeccable taste, and the trade pricing makes it easy to say yes.”</p>
+        </blockquote>
+        <p class="tp-voice-name">Designer name 5</p>
+        <p class="tp-voice-studio">Studio name · City</p>
+        <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
+      </li>
+      <li class="tp-voice tp-voice--clay">
+        <blockquote>
+          <p>“The pieces photograph beautifully. For styling a shoot or a stage, it’s my first stop in the desert.”</p>
+        </blockquote>
+        <p class="tp-voice-name">Designer name 6</p>
+        <p class="tp-voice-studio">Studio name · City</p>
+        <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
+      </li>
+    </ul>
   </section>
 
   <section class="tp-section tp-section--deep tp-apply" id="apply" aria-labelledby="apply-title">
@@ -1362,11 +1566,11 @@
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Application</p>
         <h2 id="apply-title"><span class="tp-s">Apply for</span> the trade program.</h2>
         <p>Tell us about the practice. We read every application.</p>
-        <p>Questions first? Write <a href="mailto:hello@shopphylum.com">hello@shopphylum.com</a> or call <a href="tel:+17604242110">(760) 424-2110</a>.</p>
+        <p>Questions first? Write <a href="mailto:trade@shopphylum.com">trade@shopphylum.com</a> or call <a href="tel:+17604242110">(760) 424-2110</a>.</p>
         <p>The flagship is at <a href="https://maps.google.com/?q=901+N+Palm+Canyon+Dr+Suite+101+Palm+Springs+CA+92262">901 N. Palm Canyon Dr., Suite 101, Palm Springs</a>, in the Design District.</p>
       </div>
-      <!-- TODO: Wire this form to Shopify customer tags, Joy, or a form service such as Klaviyo. It is front-end only; submission is not sent anywhere. -->
-      <form class="tp-form tp-reveal" id="tradeForm" action="#" method="post" novalidate>
+      <!-- TODO: Applications go to trade@shopphylum.com (being set up). Wire this form to that inbox, Shopify customer tags, or a form service such as Klaviyo. It is front-end only; submission is not sent anywhere. -->
+      <form class="tp-form tp-reveal" id="tradeForm" action="#" method="post" data-recipient="trade@shopphylum.com" novalidate>
         <div class="tp-fields">
           <div class="tp-field">
             <label for="trade-name">Name</label>
@@ -1400,8 +1604,14 @@
             </select>
           </div>
           <div class="tp-field">
-            <label for="trade-tax">Resale or tax ID <span class="tp-opt">(optional)</span></label>
-            <input id="trade-tax" name="tax_id" type="text" autocomplete="off" spellcheck="false">
+            <label for="trade-license">Design license or accreditation</label>
+            <input id="trade-license" name="license" type="text" autocomplete="off" spellcheck="false" placeholder="License # or ASID, IIDA, NCIDQ" aria-describedby="trade-license-hint" required>
+            <span class="tp-hint" id="trade-license-hint">Your interior design license number or accrediting body.</span>
+          </div>
+          <div class="tp-field tp-field--wide">
+            <label for="trade-resale">Resale certificate <span class="tp-opt">(optional)</span></label>
+            <input id="trade-resale" name="resale_certificate" type="text" autocomplete="off" spellcheck="false" aria-describedby="trade-resale-hint">
+            <span class="tp-hint" id="trade-resale-hint">Only needed for tax-exempt purchases.</span>
           </div>
           <!-- TODO: Confirm this privacy line with the client before it stands in for the Shopify privacy policy. -->
           <div class="tp-field tp-field--wide">
@@ -1413,7 +1623,7 @@
       <div class="tp-success tp-reveal is-in" id="tradeSuccess" hidden tabindex="-1">
         <p class="tp-eyebrow">Application received</p>
         <h3>Thank you. We’ll be in touch.</h3>
-        <p>Your details stayed in this browser, since this preview doesn’t send them yet. When the form is connected, a person at PHYLUM will follow up by email. Until then, the edit is open to browse.</p>
+        <p>Applications go to <a href="mailto:trade@shopphylum.com">trade@shopphylum.com</a>, and a person at PHYLUM will follow up by email. This preview keeps your details in the browser until the form is connected. Until then, the edit is open to browse.</p>
         <div class="tp-success-actions">
           <a class="tp-btn tp-btn--solid" href="brands.html">Browse the makers</a>
           <button class="tp-btn tp-btn--ghost" type="button" id="tradeReset">Submit another</button>
@@ -1435,15 +1645,15 @@
           </details>
           <details class="tp-faq-item">
             <summary><h3>What is the trade offer?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-            <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Approved members receive 15% off plus Joy loyalty points. Both apply on qualifying purchases. That is the double-dip: the discount does not replace the points.</p></div></div>
+            <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Approved members receive 15% off plus PHYLUM Rewards points. Both apply on qualifying purchases. That is the double-dip: the discount does not replace the points.</p></div></div>
           </details>
           <details class="tp-faq-item">
-            <summary><h3>What are Joy loyalty points?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-            <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Joy loyalty points are the points in PHYLUM’s loyalty program, presented to customers as <a href="https://shopphylum.com/pages/phylumpoints">PHYLUM Rewards</a>. Trade members earn them in addition to the 15% discount. Current earn and redeem terms are on the PHYLUM Rewards page.</p></div></div>
+            <summary><h3>What is PHYLUM Rewards?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+            <div class="tp-faq-a"><div class="tp-faq-a-inner"><p><a href="https://shopphylum.com/pages/phylumpoints">PHYLUM Rewards</a> is PHYLUM’s loyalty program. Trade members earn PHYLUM Rewards points in addition to the 15% discount. Current earn and redeem terms are on the PHYLUM Rewards page.</p></div></div>
           </details>
           <details class="tp-faq-item">
             <summary><h3>How do I apply?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-            <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Use the form on this page. Share your name, business, email, phone, website or portfolio, and trade type. A resale or tax ID is optional.</p></div></div>
+            <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Use the form on this page. Share your name, business, email, phone, website or portfolio, trade type, and your interior design license or accreditation. A resale certificate is optional.</p></div></div>
           </details>
           <details class="tp-faq-item">
             <summary><h3>What happens after I apply?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
@@ -1459,7 +1669,7 @@
           </details>
           <details class="tp-faq-item">
             <summary><h3>Do I need a resale certificate?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-            <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>The form asks for a resale or tax ID if you have one. It is optional. If a resale certificate is required for your account, PHYLUM will ask for it during review.</p></div></div>
+            <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Only for tax-exempt purchases. The resale certificate is optional on the application; add it if you plan to buy for resale without paying sales tax.</p></div></div>
           </details>
       </div>
     </div>
@@ -1469,7 +1679,7 @@
     <div class="tp-wrap tp-close-copy tp-reveal">
       <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Trade Program</p>
       <h2 id="close-title"><span class="tp-s">Your favorite designer’s</span> favorite store.</h2>
-      <p>15% off, plus Joy loyalty points. Apply and we’ll take it from there.</p>
+      <p>Finishing pieces with color and texture, 15% off, and PHYLUM Rewards. Apply and we’ll take it from there.</p>
       <a class="tp-btn tp-btn--sun" href="#apply">Apply for trade access</a>
     </div>
     <div class="tp-close-sun" aria-hidden="true"><span class="tp-sun"></span></div>
@@ -1585,6 +1795,33 @@
     wide.addEventListener('change', measure);
     reduce.addEventListener('change', measure);
     measure();
+  })();
+
+  (function () {
+    var track = document.getElementById('voicesTrack');
+    if (!track) return;
+    var buttons = document.querySelectorAll('.tp-arrow[aria-controls="voicesTrack"]');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function step() {
+      var card = track.querySelector('.tp-voice');
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return card ? card.offsetWidth + gap : track.clientWidth;
+    }
+    function sync() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      buttons.forEach(function (button) {
+        var dir = Number(button.dataset.dir);
+        button.disabled = dir < 0 ? track.scrollLeft <= 2 : track.scrollLeft >= max;
+      });
+    }
+    buttons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        track.scrollBy({ left: Number(button.dataset.dir) * step(), behavior: reduce.matches ? 'auto' : 'smooth' });
+      });
+    });
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
   })();
 
   (function () {
