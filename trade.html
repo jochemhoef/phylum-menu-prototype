@@ -379,8 +379,8 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: var(--sage);
-    color: #fff;
+    background: var(--paper-deep);
+    color: var(--ink);
     padding: clamp(80px, 10vw, 148px) 0;
   }
   .tp-offer-sun {
@@ -390,10 +390,10 @@
     top: 30%;
     width: min(74vw, 1040px);
     translate: 0 -50%;
-    color: rgba(241, 238, 228, 0.12);
+    color: rgba(124, 131, 96, 0.14);
   }
   .tp-offer-sun .tp-sun { width: 100%; display: block; animation: tp-spin 160s linear infinite; }
-  .tp-offer .tp-eyebrow { color: #fff; }
+  .tp-offer .tp-eyebrow { color: var(--sage-deep); }
   .tp-offer h2 {
     font-size: clamp(44px, 5.6vw, 96px);
     line-height: 0.95;
@@ -405,10 +405,10 @@
     max-width: 36em;
     font-size: clamp(17px, 1.3vw, 19px);
     line-height: 1.6;
-    color: #fff;
+    color: var(--ink-soft);
     margin: 0 0 clamp(48px, 6vw, 88px);
   }
-  .tp-offer-intro a { color: #fff; }
+  .tp-offer-intro a { color: var(--sage-deep); }
 
   .tp-pair {
     display: grid;
@@ -427,7 +427,7 @@
     border-radius: 10px;
     padding: clamp(28px, 3.4vw, 52px);
     height: 100%;
-    box-shadow: 0 30px 60px -34px rgba(36, 33, 28, 0.55);
+    box-shadow: 0 30px 60px -36px rgba(36, 33, 28, 0.4);
   }
   .tp-deal--joy { --deal: var(--peach); --deal-sun: var(--yellow); }
   /* Scroll-driven: --p goes 0 (stacked in the center) to 1 (side by side). */
@@ -486,7 +486,7 @@
     place-items: center;
     width: clamp(84px, 8vw, 132px);
     aspect-ratio: 1;
-    color: var(--paper);
+    color: var(--ink);
   }
   .tp-plus-glyph {
     position: relative;
@@ -494,13 +494,13 @@
     font-weight: 300;
     font-size: clamp(56px, 5vw, 88px);
     line-height: 1;
-    color: var(--paper);
+    color: var(--ink);
     padding-bottom: 0.08em;
   }
   .tp-note {
     margin: 32px 0 0;
     font-size: 14px;
-    color: #fff;
+    color: var(--ink-soft);
   }
 
   /* ---------- Sections ---------- */
@@ -616,6 +616,11 @@
   }
   /* How it works */
   #how h2 { margin-bottom: clamp(64px, 7vw, 120px); }
+  .tp-how { background: var(--sage); color: #fff; }
+  .tp-how .tp-eyebrow { color: #fff; }
+  .tp-how h2,
+  .tp-how .tp-steps h3 { color: #fff; }
+  .tp-how .tp-steps p { color: rgba(255, 255, 255, 0.9); }
   .tp-steps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1290,7 +1295,7 @@
     </div>
   </section>
 
-  <section class="tp-section tp-section--deep" id="how" aria-labelledby="how-title">
+  <section class="tp-section tp-how" id="how" aria-labelledby="how-title">
     <div class="tp-wrap tp-reveal">
       <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>How it works</p>
       <h2 id="how-title"><span class="tp-s">From first hello</span> to trade pricing.</h2>
