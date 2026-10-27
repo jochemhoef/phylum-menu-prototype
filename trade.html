@@ -339,8 +339,8 @@
 
   /* ---------- Ticker ---------- */
   .tp-ticker {
-    background: var(--lime);
-    color: var(--ink);
+    background: var(--clay);
+    color: var(--paper);
     overflow: hidden;
     padding: 18px 0;
   }
@@ -369,7 +369,7 @@
   }
   .tp-ticker-row .tp-sun {
     width: 0.8em;
-    color: var(--clay);
+    color: var(--yellow);
     animation: tp-spin 12s linear infinite;
   }
   @keyframes tp-marquee { to { transform: translateX(-50%); } }
@@ -379,7 +379,7 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: var(--paper-deep);
+    background: var(--paper);
     color: var(--ink);
     padding: clamp(80px, 10vw, 148px) 0;
   }
@@ -390,7 +390,7 @@
     top: 30%;
     width: min(74vw, 1040px);
     translate: 0 -50%;
-    color: rgba(124, 131, 96, 0.14);
+    color: var(--yellow);
   }
   .tp-offer-sun .tp-sun { width: 100%; display: block; animation: tp-spin 160s linear infinite; }
   .tp-offer .tp-eyebrow { color: var(--sage-deep); }
@@ -417,7 +417,7 @@
     align-items: center;
   }
   .tp-deal {
-    --deal: var(--yellow);
+    --deal: #F1EE80;
     --deal-sun: var(--clay);
     position: relative;
     isolation: isolate;
