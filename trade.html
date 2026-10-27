@@ -22,10 +22,7 @@
 <meta name="twitter:image" content="https://phylum-menu.onrender.com/assets/brands/chilewich.jpg">
 <meta name="twitter:image:alt" content="Woven Chilewich table linens in coral, blush, and teal, folded on a pale stone surface.">
 <link rel="icon" href="assets/event/phylum-sun.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <style>
   @font-face {
     font-family: "GTAlpinaLight";
@@ -53,7 +50,6 @@
     --sage: #7C8360;
     --yellow: #f2a900;
     --serif: "GTAlpinaLight", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
-    --italic: "Lora", Georgia, serif;
     --sans: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
     --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -70,15 +66,39 @@
 
   .tp {
     font-family: var(--body);
+    font-style: normal;
+    font-synthesis: none;
     color: var(--ink);
     background: var(--paper);
     line-height: 1.5;
+  }
+  .tp em, .tp i, .tp h1, .tp h2, .tp h3, .tp address { font-style: normal; }
+  .tp h1, .tp h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-synthesis: none;
+  }
+  .tp h3, .tp .tp-eyebrow, .tp .tp-lede, .tp .tp-intro, .tp .tp-offer-intro {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-synthesis: none;
   }
 
   .tp * { box-sizing: border-box; }
   .tp img { max-width: 100%; display: block; }
   .tp p { text-wrap: pretty; }
   .tp a { color: inherit; }
+  a.tp-btn--solid,
+  a.tp-btn--solid:hover,
+  a.tp-btn--solid:focus-visible { color: #fff; }
+  a.tp-btn--ghost,
+  a.tp-btn--ghost:focus-visible { color: var(--ink); }
+  a.tp-btn--ghost:hover,
+  a.tp-btn--ghost:hover:focus-visible { color: var(--paper); }
+  a.tp-btn--paper,
+  a.tp-btn--paper:hover,
+  a.tp-btn--paper:focus-visible { color: var(--ink); }
+  a.tp-text-link { color: var(--clay-deep); }
 
   .skip {
     position: absolute;
@@ -135,36 +155,49 @@
     justify-content: center;
     gap: 10px;
     min-height: 48px;
-    padding: 14px 26px;
+    max-width: 100%;
+    padding: 14px 28px;
     border-radius: 999px;
     border: 1px solid transparent;
     font-family: var(--sans);
     font-weight: 500;
+    font-style: normal;
     font-size: 13px;
-    letter-spacing: 0.14em;
+    line-height: 1.25;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    text-align: center;
     text-decoration: none;
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: break-word;
+    min-width: 0;
     cursor: pointer;
-    transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+    transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
   }
   .tp-btn--solid {
     background: var(--clay-deep);
     border-color: var(--clay-deep);
     color: #fff;
   }
-  .tp-btn--solid:hover { background: var(--ink); border-color: var(--ink); }
+  .tp-btn--solid:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
   .tp-btn--ghost {
     background: transparent;
     border-color: var(--ink);
     color: var(--ink);
   }
-  .tp-btn--ghost:hover { background: var(--ink); color: var(--paper); }
+  .tp-btn--ghost:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
   .tp-btn--paper {
     background: var(--paper);
     border-color: var(--paper);
     color: var(--ink);
   }
-  .tp-btn--paper:hover { background: var(--yellow); border-color: var(--yellow); }
+  .tp-btn--paper:hover { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+  .tp-close .tp-btn:focus-visible,
+  .tp-offer .tp-btn:focus-visible,
+  .tp-offer a:focus-visible {
+    outline-color: var(--yellow);
+  }
 
   .tp :focus-visible {
     outline: 2px solid var(--clay-deep);
@@ -211,15 +244,10 @@
     letter-spacing: -0.03em;
     margin: 0 0 22px;
   }
-  .tp-hero h1 em {
-    font-family: var(--italic);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--clay-deep);
-    letter-spacing: -0.02em;
-  }
 
   .tp-lede {
+    font-family: var(--sans);
+    font-weight: 500;
     font-size: 18px;
     line-height: 1.6;
     color: var(--ink-soft);
@@ -244,7 +272,10 @@
     object-fit: cover;
     object-position: center;
     background: var(--paper-deep);
+    transform: scale(1);
+    transition: transform 0.7s var(--ease);
   }
+  .tp-hero-fig:hover img { transform: scale(1.035); }
   .tp-hero-fig figcaption {
     margin-top: 12px;
     font-family: var(--sans);
@@ -365,9 +396,11 @@
   }
   .tp-index {
     display: block;
-    font-family: var(--serif);
-    font-size: 28px;
-    color: var(--sage);
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: var(--clay-deep);
     margin-bottom: 10px;
   }
   .tp-who h3,
@@ -434,7 +467,10 @@
     height: 100%;
     object-fit: cover;
     background: var(--paper-deep);
+    transform: scale(1);
+    transition: transform 0.7s var(--ease);
   }
+  .tp-mosaic figure:hover img { transform: scale(1.035); }
   .tp-mosaic figcaption {
     position: absolute;
     left: 10px;
@@ -587,13 +623,7 @@
     line-height: 0.95;
     letter-spacing: -0.03em;
     margin: 0 auto 18px;
-    max-width: 14ch;
-  }
-  .tp-close h2 em {
-    font-family: var(--italic);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--yellow);
+    max-width: 12ch;
   }
   .tp-close p {
     margin: 0 auto 28px;
@@ -664,16 +694,49 @@
 
   @media (max-width: 560px) {
     .tp-ctas, .tp-success-actions { flex-direction: column; align-items: stretch; }
-    .tp-btn { width: 100%; }
+    .tp-btn {
+      width: 100%;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 14px 16px;
+    }
     .tp-mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
     .tp-mosaic figure, .tp-mosaic figure:first-child { height: 220px; grid-column: auto; }
     .tp-hero h1 { font-size: clamp(42px, 12vw, 64px); }
   }
 
+  /* Scroll reveals. Hidden only after JS confirms motion is allowed. */
+  .js-motion .tp-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s var(--ease), transform 0.8s var(--ease);
+  }
+  .js-motion .tp-reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+  .js-motion .tp-hero-fig.tp-reveal { transition-delay: 0.08s; }
+
   @media (prefers-reduced-motion: reduce) {
-    .tp-btn { transition: none; }
+    .tp-btn,
+    .tp-hero-fig img,
+    .tp-mosaic img,
+    .js-motion .tp-reveal {
+      transition: none;
+    }
+    .tp-hero-fig:hover img,
+    .tp-mosaic figure:hover img,
+    .js-motion .tp-reveal {
+      transform: none;
+      opacity: 1;
+    }
   }
 </style>
+<script>
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("js-motion");
+  }
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -795,7 +858,7 @@
 <main class="tp" id="main">
   <section class="tp-hero" aria-labelledby="trade-title">
     <div class="tp-wrap tp-hero-grid">
-      <div class="tp-hero-copy">
+      <div class="tp-hero-copy tp-reveal">
         <nav class="tp-crumb" aria-label="Breadcrumb">
           <ol>
             <li><a href="index.html">Home</a></li>
@@ -803,7 +866,7 @@
           </ol>
         </nav>
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Trade Program</p>
-        <h1 id="trade-title">Your favorite<br><em>designer’s</em><br>favorite store.</h1>
+        <h1 id="trade-title">Your favorite<br>designer’s<br>favorite store.</h1>
         <p class="tp-lede">PHYLUM is a modernist mercantile in Palm Springs. The Trade Program is for interior designers, architects, stylists, and stagers who specify from that edit — with 15% off and Joy loyalty points on the same purchase.</p>
         <div class="tp-ctas">
           <a class="tp-btn tp-btn--solid" href="#apply">Apply for trade access</a>
@@ -811,7 +874,7 @@
         </div>
         <p class="tp-meta">Palm Springs Design District · Indio outpost · Online</p>
       </div>
-      <figure class="tp-hero-fig">
+      <figure class="tp-hero-fig tp-reveal">
         <img src="assets/brands/chilewich.jpg" width="1024" height="768" alt="Woven Chilewich table linens in coral, blush, and teal, folded on a pale stone surface." fetchpriority="high" decoding="async">
         <figcaption>Chilewich, from the PHYLUM edit</figcaption>
       </figure>
@@ -819,7 +882,7 @@
   </section>
 
   <section class="tp-offer" id="offer" aria-labelledby="offer-title">
-    <div class="tp-wrap">
+    <div class="tp-wrap tp-reveal">
       <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>The double-dip</p>
       <h2 id="offer-title">Fifteen percent off. Joy points, too.</h2>
       <p class="tp-offer-intro">Trade members get both. The discount and the loyalty points sit on the same qualifying purchase — that is the double-dip. Joy points are the points in <a href="https://shopphylum.com/pages/phylumpoints">PHYLUM Rewards</a>.</p>
@@ -842,7 +905,7 @@
   </section>
 
   <section class="tp-section" aria-labelledby="who-title">
-    <div class="tp-wrap">
+    <div class="tp-wrap tp-reveal">
       <p class="tp-eyebrow">Who it’s for</p>
       <h2 id="who-title">The practices we open the program to.</h2>
       <p class="tp-intro">Apply if you specify, style, or stage with goods for clients. A resale or tax ID is welcome and optional on the form.</p>
@@ -872,7 +935,7 @@
   </section>
 
   <section class="tp-section tp-section--deep" id="how" aria-labelledby="how-title">
-    <div class="tp-wrap">
+    <div class="tp-wrap tp-reveal">
       <p class="tp-eyebrow">How it works</p>
       <h2 id="how-title">Apply. Get approved. Shop.</h2>
       <ol class="tp-steps">
@@ -898,7 +961,7 @@
   </section>
 
   <section class="tp-section tp-edit" aria-labelledby="edit-title">
-    <div class="tp-wrap">
+    <div class="tp-wrap tp-reveal">
       <div class="tp-edit-head">
         <div>
           <p class="tp-eyebrow">The edit</p>
@@ -934,7 +997,7 @@
 
   <section class="tp-section tp-section--deep tp-apply" id="apply" aria-labelledby="apply-title">
     <div class="tp-wrap tp-apply-grid">
-      <div class="tp-apply-copy">
+      <div class="tp-apply-copy tp-reveal">
         <p class="tp-eyebrow">Application</p>
         <h2 id="apply-title">Apply for the Trade Program.</h2>
         <p>Tell us about the practice. We read every application.</p>
@@ -943,7 +1006,7 @@
       </div>
 
       <!-- TODO: Wire this form to Shopify customer tags, Joy, or a form service such as Klaviyo. It is front-end only — submission is not sent anywhere. -->
-      <form class="tp-form" id="tradeForm" action="#" method="post" novalidate>
+      <form class="tp-form tp-reveal" id="tradeForm" action="#" method="post" novalidate>
         <div class="tp-fields">
           <div class="tp-field">
             <label for="trade-name">Name</label>
@@ -988,7 +1051,7 @@
         </div>
       </form>
 
-      <div class="tp-success" id="tradeSuccess" hidden tabindex="-1">
+      <div class="tp-success tp-reveal is-in" id="tradeSuccess" hidden tabindex="-1">
         <p class="tp-eyebrow">Application received</p>
         <h3>Thank you. We’ll be in touch.</h3>
         <p>Your details stayed in this browser — this preview doesn’t send them yet. When the form is connected, a person at PHYLUM will follow up by email. Until then, the edit is open to browse.</p>
@@ -1001,7 +1064,7 @@
   </section>
 
   <section class="tp-faq" aria-labelledby="faq-title">
-    <div class="tp-wrap">
+    <div class="tp-wrap tp-reveal">
       <p class="tp-eyebrow">FAQ</p>
       <h2 id="faq-title">Questions, answered plainly.</h2>
       <div class="tp-faq-list">
@@ -1042,9 +1105,9 @@
   </section>
 
   <section class="tp-close" aria-labelledby="close-title">
-    <div class="tp-wrap">
+    <div class="tp-wrap tp-reveal">
       <span class="tp-sun" aria-hidden="true"></span>
-      <h2 id="close-title">Your favorite <em>designer’s</em> favorite store.</h2>
+      <h2 id="close-title">Your favorite<br>designer’s<br>favorite store.</h2>
       <p>15% off, plus Joy loyalty points. Apply and we’ll take it from there.</p>
       <a class="tp-btn tp-btn--paper" href="#apply">Apply for trade access</a>
     </div>
@@ -1108,6 +1171,23 @@
         if (first) first.focus();
       });
     }
+  })();
+
+  (function () {
+    if (!document.documentElement.classList.contains('js-motion')) return;
+    if (!('IntersectionObserver' in window)) {
+      document.documentElement.classList.remove('js-motion');
+      return;
+    }
+    var nodes = document.querySelectorAll('.tp-reveal');
+    var seen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        seen.unobserve(entry.target);
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -6% 0px' });
+    nodes.forEach(function (node) { seen.observe(node); });
   })();
 </script>
 </body>

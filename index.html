@@ -333,6 +333,25 @@
     justify-content: center;
     text-decoration: none;
     font-family: inherit;
+    line-height: 1.25;
+    text-align: center;
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: break-word;
+    min-width: 0;
+    max-width: 100%;
+  }
+  a.btn[href="trade.html"] {
+    background: var(--paper);
+    border-color: var(--paper);
+    color: var(--ink);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  a.btn[href="trade.html"]:hover,
+  a.btn[href="trade.html"]:focus-visible {
+    background: #f2a900;
+    border-color: #f2a900;
+    color: var(--ink);
   }
 
   .note {
