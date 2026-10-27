@@ -14,13 +14,13 @@
 <meta property="og:title" content="PHYLUM Gift Registry — Register for the pieces that stay">
 <meta property="og:description" content="A PHYLUM registry for weddings, holidays, and housewarmings, plus a wishlist. Create a list or find one by name.">
 <meta property="og:url" content="https://phylum-menu.onrender.com/gift-registry.html">
-<meta property="og:image" content="https://phylum-menu.onrender.com/assets/mega-nav/gifts-wrapping.png">
-<meta property="og:image:alt" content="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery.">
+<meta property="og:image" content="https://phylum-menu.onrender.com/assets/registry/gift-wrap.jpg">
+<meta property="og:image:alt" content="A PHYLUM gift wrapped in marbled coral and lilac paper, tied with cream cord and a PHYLUM tag.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PHYLUM Gift Registry — Register for the pieces that stay">
 <meta name="twitter:description" content="A PHYLUM registry for weddings, holidays, and housewarmings, plus a wishlist.">
-<meta name="twitter:image" content="https://phylum-menu.onrender.com/assets/mega-nav/gifts-wrapping.png">
-<meta name="twitter:image:alt" content="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery.">
+<meta name="twitter:image" content="https://phylum-menu.onrender.com/assets/registry/gift-wrap.jpg">
+<meta name="twitter:image:alt" content="A PHYLUM gift wrapped in marbled coral and lilac paper, tied with cream cord and a PHYLUM tag.">
 <link rel="icon" href="assets/event/phylum-sun.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 <style>
@@ -40,73 +40,89 @@
   }
 
   :root {
+    --lime: #F0FFAE;
+    --peach: #FFBFAC;
     --paper: #F1EEE4;
     --paper-deep: #E8E3D5;
     --ink: #24211C;
     --ink-soft: #5A554A;
     --line: #CFC8B6;
     --sage: #7C8360;
+    /* Brand sage fails AA for small type and for white labels. This is the same hue, darkened. */
     --sage-deep: #5F6748;
     --yellow: #f2a900;
+    --clay: #C05A28;
     --serif: "GTAlpinaLight", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
     --sans: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
     --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    --gutter: clamp(20px, 4vw, 48px);
-    --max: 1180px;
-    /* EDIT: Gift Reggie app-proxy paths on the shop. Confirm the proxy is installed before launch. */
-    --registry-create: https://shopphylum.com/apps/giftregistry/create;
-    --registry-find: https://shopphylum.com/apps/giftregistry/find;
+    --gutter: clamp(20px, 4.5vw, 72px);
+    --max: 1440px;
+    --sun: url("assets/event/phylum-sun.svg");
   }
 
-  .gr-page { color-scheme: light; }
-  body.chrome-loading .gr { visibility: hidden; }
-  .gr-page .nav-version-switcher { display: none !important; }
-  .gr-page a.nav-direct[aria-current="page"] {
+  .tp-page { color-scheme: light; }
+  body.chrome-loading .tp { visibility: hidden; }
+  .tp-page .nav-version-switcher { display: none !important; }
+  .tp-page a.nav-direct[aria-current="page"] {
     box-shadow: inset 0 -1.5px 0 currentColor;
   }
-  .gr-page a,
-  .gr-page button,
-  .gr-page summary {
+  .tp-page a,
+  .tp-page button,
+  .tp-page summary,
+  .tp-page input,
+  .tp-page select,
+  .tp-page label,
+  .tp-page form {
     -webkit-tap-highlight-color: transparent;
   }
-  .gr-page :focus:not(:focus-visible) { outline: none; }
+  .tp-page :focus:not(:focus-visible) {
+    outline: none;
+  }
 
-  .gr {
+  .tp {
     font-family: var(--body);
     font-style: normal;
     font-synthesis: none;
     color: var(--ink);
     background: var(--paper);
     line-height: 1.5;
+    overflow-x: clip;
   }
-  .gr em, .gr i, .gr h1, .gr h2, .gr h3, .gr address { font-style: normal; }
-  .gr h1, .gr h2 {
+  .tp em, .tp i, .tp h1, .tp h2, .tp h3, .tp address { font-style: normal; }
+  .tp h1, .tp h2 {
     font-family: var(--serif);
     font-weight: 300;
     font-synthesis: none;
   }
-  .gr h3, .gr .gr-eyebrow, .gr .gr-lede {
+  .tp h3, .tp .tp-eyebrow, .tp .tp-lede, .tp .tp-intro, .tp .tp-offer-intro {
     font-family: var(--sans);
     font-weight: 500;
     font-synthesis: none;
   }
-  .gr * { box-sizing: border-box; }
-  .gr img { max-width: 100%; display: block; }
-  .gr p { text-wrap: pretty; }
-  .gr a { color: inherit; }
 
-  a.gr-btn--solid,
-  a.gr-btn--solid:hover,
-  a.gr-btn--solid:focus-visible { color: #fff; }
-  a.gr-btn--ghost,
-  a.gr-btn--ghost:focus-visible { color: var(--ink); }
-  a.gr-btn--ghost:hover,
-  a.gr-btn--ghost:hover:focus-visible { color: var(--paper); }
-  a.gr-btn--paper,
-  a.gr-btn--paper:hover,
-  a.gr-btn--paper:focus-visible { color: var(--ink); }
-  a.gr-text-link { color: var(--sage-deep); }
+  .tp * { box-sizing: border-box; }
+  .tp img { max-width: 100%; display: block; }
+  .tp p { text-wrap: pretty; }
+  .tp a { color: inherit; }
+  a.tp-btn--solid,
+  a.tp-btn--solid:hover,
+  a.tp-btn--solid:focus-visible { color: #fff; }
+  a.tp-btn--ghost,
+  a.tp-btn--ghost:focus-visible { color: var(--ink); }
+  a.tp-btn--ghost:hover,
+  a.tp-btn--ghost:hover:focus-visible { color: var(--paper); }
+  a.tp-btn--light,
+  a.tp-btn--light:focus-visible { color: var(--paper); }
+  a.tp-btn--light:hover,
+  a.tp-btn--light:hover:focus-visible { color: var(--ink); }
+  a.tp-btn--paper,
+  a.tp-btn--paper:hover,
+  a.tp-btn--paper:focus-visible,
+  a.tp-btn--sun,
+  a.tp-btn--sun:hover,
+  a.tp-btn--sun:focus-visible { color: var(--ink); }
+  a.tp-text-link { color: var(--sage-deep); }
 
   .skip {
     position: absolute;
@@ -123,41 +139,64 @@
   }
   .skip:focus { top: 16px; }
 
-  .gr-wrap {
+  .tp-wrap {
     width: min(var(--max), calc(100% - var(--gutter) * 2));
     margin-inline: auto;
   }
-  .gr-hero-grid > *,
-  .gr-wish-grid > * { min-width: 0; }
+  .tp-apply-grid > *,
+  .tp-pair > *,
+  .tp-mosaic,
+  .tp-mosaic figure,
+  .tp-edit-head > *,
+  .tp-faq-grid > * {
+    min-width: 0;
+  }
 
-  .gr-eyebrow {
+  /* Display headings: a sans lead line, then a serif close. */
+  .tp-s {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.84em;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin-bottom: 0.04em;
+  }
+
+  .tp-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: var(--sans);
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--sage-deep);
-    margin: 0 0 18px;
-  }
-  .gr-sun {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    margin-right: 8px;
-    vertical-align: -2px;
-    background: currentColor;
-    -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
-            mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+    margin: 0 0 22px;
   }
 
-  .gr-btn {
+  @keyframes tp-spin { to { rotate: 360deg; } }
+
+  .tp-sun {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 16px;
+    aspect-ratio: 1;
+    background: currentColor;
+    -webkit-mask: var(--sun) center / contain no-repeat;
+            mask: var(--sun) center / contain no-repeat;
+  }
+  .tp-eyebrow .tp-sun { animation: tp-spin 14s linear infinite; }
+
+  .tp-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    min-height: 48px;
+    min-height: 52px;
     max-width: 100%;
-    padding: 14px 28px;
+    padding: 15px 30px;
     border-radius: 999px;
     border: 1px solid transparent;
     font-family: var(--sans);
@@ -170,157 +209,447 @@
     text-align: center;
     text-decoration: none;
     white-space: normal;
+    overflow: visible;
     overflow-wrap: break-word;
     min-width: 0;
     cursor: pointer;
     transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
   }
-  .gr-btn--solid { background: var(--sage-deep); border-color: var(--sage-deep); color: #fff; }
-  .gr-btn--solid:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
-  .gr-btn--ghost { background: transparent; border-color: var(--ink); color: var(--ink); }
-  .gr-btn--ghost:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .gr-btn--paper { background: var(--paper); border-color: var(--paper); color: var(--ink); }
-  .gr-btn--paper:hover { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
-  .gr-close .gr-btn:focus-visible { outline-color: var(--yellow); }
-  .gr :focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 3px; }
+  .tp-btn--solid {
+    background: var(--sage-deep);
+    border-color: var(--sage-deep);
+    color: #fff;
+  }
+  .tp-btn--solid:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .tp-btn--ghost {
+    background: transparent;
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .tp-btn--ghost:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .tp-btn--light {
+    background: rgba(241, 238, 228, 0.08);
+    border-color: rgba(241, 238, 228, 0.85);
+    color: var(--paper);
+    -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+  }
+  .tp-btn--light:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+  .tp-btn--paper {
+    background: var(--paper);
+    border-color: var(--paper);
+    color: var(--ink);
+  }
+  .tp-btn--paper:hover { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+  .tp-btn--sun {
+    background: var(--yellow);
+    border-color: var(--yellow);
+    color: var(--ink);
+  }
+  .tp-btn--sun:hover { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+  .tp-hero .tp-btn:focus-visible,
+  .tp-close .tp-btn:focus-visible,
+  .tp-offer .tp-btn:focus-visible,
+  .tp-offer a:focus-visible {
+    outline-color: var(--yellow);
+  }
 
-  .gr-hero { padding: clamp(36px, 5vw, 72px) 0 clamp(48px, 6vw, 88px); }
-  .gr-hero-grid {
+  .tp :focus-visible {
+    outline: 2px solid var(--sage-deep);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Hero ---------- */
+  .tp-hero {
+    position: relative;
+    isolation: isolate;
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: clamp(28px, 4vw, 64px);
     align-items: end;
+    min-height: clamp(640px, 88svh, 960px);
+    padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 6vw, 96px);
+    color: var(--paper);
+    background: #3B3125;
+    overflow: hidden;
   }
-  .gr-crumb ol {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    list-style: none;
+  .tp-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% 55%;
+    transform: scale(1.06);
+    transition: transform 2.4s var(--ease);
+  }
+  .is-ready .tp-hero-bg { transform: scale(1); }
+  .tp-hero-shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(90deg, rgba(30, 27, 22, 0.82) 0%, rgba(30, 27, 22, 0.6) 34%, rgba(30, 27, 22, 0.14) 66%, rgba(30, 27, 22, 0) 82%),
+      linear-gradient(0deg, rgba(30, 27, 22, 0.5) 0%, rgba(30, 27, 22, 0) 42%);
+  }
+  .tp-hero-inner { position: relative; }
+  .tp-hero-copy { max-width: 900px; }
+
+  .tp-hero .tp-eyebrow { color: var(--yellow); }
+
+  .tp-hero h1 {
+    font-size: clamp(56px, 7.6vw, 136px);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
     margin: 0 0 28px;
-    padding: 0;
+  }
+  .tp-hero h1 .tp-s { font-size: 0.8em; }
+
+  .tp-lede {
     font-family: var(--sans);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
+    font-weight: 500;
+    font-size: clamp(17px, 1.35vw, 20px);
+    line-height: 1.55;
+    color: rgba(241, 238, 228, 0.92);
+    max-width: 36em;
+    margin: 0 0 32px;
   }
-  .gr-crumb li:not(:last-child)::after {
-    content: "/";
-    margin-left: 8px;
-    color: var(--line);
-  }
-  .gr-crumb a { text-decoration: none; }
-  .gr-crumb a:hover { color: var(--ink); }
-  .gr-hero h1 {
-    font-size: clamp(46px, 5.6vw, 84px);
-    line-height: 0.92;
-    letter-spacing: -0.03em;
-    margin: 0 0 22px;
-  }
-  .gr-lede {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    max-width: 38em;
-    margin: 0 0 28px;
-  }
-  .gr-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-  .gr-meta {
-    margin: 22px 0 0;
+
+  .tp-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .tp-hero-cap {
+    position: absolute;
+    right: var(--gutter);
+    bottom: clamp(20px, 2.4vw, 32px);
+    margin: 0;
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-  .gr-hero-fig { margin: 0; overflow: hidden; }
-  .gr-hero-fig img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: center;
-    background: var(--paper-deep);
-    transform: scale(1);
-    transition: transform 0.7s var(--ease);
-  }
-  .gr-hero-fig:hover img { transform: scale(1.035); }
-  .gr-hero-fig figcaption {
-    margin-top: 12px;
-    font-family: var(--sans);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
+    color: rgba(241, 238, 228, 0.86);
+    text-shadow: 0 1px 10px rgba(30, 27, 22, 0.5);
   }
 
-  .gr-section { padding: clamp(64px, 8vw, 108px) 0; }
-  .gr-section--deep { background: var(--paper-deep); }
-  .gr-section h2,
-  .gr-faq h2 {
-    font-size: clamp(36px, 4.5vw, 64px);
-    line-height: 0.98;
-    letter-spacing: -0.03em;
-    margin: 0 0 16px;
+  /* ---------- Ticker ---------- */
+  .tp-ticker {
+    background: var(--lime);
+    color: var(--ink);
+    overflow: hidden;
+    padding: 18px 0;
   }
-  .gr-intro {
-    max-width: 40em;
+  .tp-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: tp-marquee 46s linear infinite;
+  }
+  .tp-ticker-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(48px, 5vw, 80px);
+    padding-right: clamp(48px, 5vw, 80px);
+    margin: 0;
+    list-style: none;
+  }
+  .tp-ticker-row li {
+    display: flex;
+    align-items: center;
+    gap: clamp(48px, 5vw, 80px);
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(22px, 2vw, 30px);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .tp-ticker-row .tp-sun {
+    width: 0.8em;
+    color: var(--clay);
+    animation: tp-spin 12s linear infinite;
+  }
+  @keyframes tp-marquee { to { transform: translateX(-50%); } }
+
+  /* ---------- Offer ---------- */
+  .tp-offer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--sage);
+    color: #fff;
+    padding: clamp(80px, 10vw, 148px) 0;
+  }
+  .tp-offer-sun {
+    position: absolute;
+    z-index: -1;
+    right: -24vw;
+    top: 30%;
+    width: min(74vw, 1040px);
+    translate: 0 -50%;
+    color: rgba(241, 238, 228, 0.12);
+  }
+  .tp-offer-sun .tp-sun { width: 100%; display: block; animation: tp-spin 160s linear infinite; }
+  .tp-offer .tp-eyebrow { color: #fff; }
+  .tp-offer h2 {
+    font-size: clamp(44px, 5.6vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin: 0 0 22px;
+    max-width: 14ch;
+  }
+  .tp-offer-intro {
+    max-width: 36em;
+    font-size: clamp(17px, 1.3vw, 19px);
+    line-height: 1.6;
+    color: #fff;
+    margin: 0 0 clamp(48px, 6vw, 88px);
+  }
+  .tp-offer-intro a { color: #fff; }
+
+  .tp-pair {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: clamp(20px, 3vw, 56px);
+    align-items: center;
+  }
+  .tp-deal {
+    --deal: var(--yellow);
+    --deal-sun: var(--clay);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--deal);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: clamp(28px, 3.4vw, 52px);
+    height: 100%;
+    box-shadow: 0 30px 60px -34px rgba(36, 33, 28, 0.55);
+  }
+  .tp-deal--joy { --deal: var(--peach); --deal-sun: var(--yellow); }
+  /* Scroll-driven: --p goes 0 (stacked in the center) to 1 (side by side). */
+  .tp-pair.is-scrolly { position: relative; }
+  .tp-pair.is-scrolly .tp-deal {
+    transform: translate3d(calc(var(--dx, 0px) * (1 - var(--p, 1))), calc(var(--dy, 0px) * (1 - var(--p, 1))), 0) scale(calc(0.92 + 0.08 * var(--p, 1)));
+    will-change: transform;
+  }
+  .tp-pair.is-scrolly .tp-deal:first-child { position: relative; z-index: 2; --dy: -18px; }
+  .tp-pair.is-scrolly .tp-deal--joy { --dy: 18px; }
+  .tp-pair.is-scrolly .tp-plus {
+    opacity: var(--p, 1);
+    transform: scale(calc(0.4 + 0.6 * var(--p, 1))) rotate(calc(-180deg * (1 - var(--p, 1))));
+  }
+  .tp-deal::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -18%;
+    right: -14%;
+    width: 62%;
+    aspect-ratio: 1;
+    background: var(--deal-sun);
+    -webkit-mask: var(--sun) center / contain no-repeat;
+            mask: var(--sun) center / contain no-repeat;
+    opacity: 0.9;
+  }
+  .tp-deal .tp-num {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(120px, 15vw, 248px);
+    line-height: 0.8;
+    letter-spacing: -0.045em;
+    margin: 0 0 0.32em;
+    color: var(--ink);
+  }
+  .tp-num-unit { font-size: 0.5em; letter-spacing: -0.02em; vertical-align: 0.5em; margin-left: 0.04em; }
+  .tp-deal h3 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(15px, 1.2vw, 18px);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .tp-deal p {
+    margin: 0;
+    max-width: 30em;
+    color: var(--ink);
     font-size: 17px;
+    line-height: 1.55;
+  }
+  .tp-plus {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: clamp(84px, 8vw, 132px);
+    aspect-ratio: 1;
+    color: var(--paper);
+  }
+  .tp-plus-glyph {
+    position: relative;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(56px, 5vw, 88px);
+    line-height: 1;
+    color: var(--paper);
+    padding-bottom: 0.08em;
+  }
+  .tp-note {
+    margin: 32px 0 0;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  /* ---------- Sections ---------- */
+  .tp-section { padding: clamp(80px, 9vw, 140px) 0; }
+  .tp-section--deep { background: var(--paper-deep); }
+  .tp-section h2,
+  .tp-apply h2,
+  .tp-faq h2,
+  .tp-edit h2 {
+    font-size: clamp(44px, 5.4vw, 92px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin: 0 0 20px;
+  }
+  .tp-intro {
+    max-width: 40em;
+    font-size: clamp(17px, 1.3vw, 19px);
     line-height: 1.6;
     color: var(--ink-soft);
-    margin: 0 0 40px;
+    margin: 0 0 clamp(40px, 4.4vw, 64px);
   }
 
-  .gr-steps {
+  /* Who it's for */
+  .tp-who {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 1.4vw, 22px);
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .gr-steps li { border-top: 1px solid var(--ink); padding-top: 20px; }
-  .gr-index {
-    display: block;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 22px;
-    letter-spacing: 0.06em;
-    color: var(--sage-deep);
-    margin-bottom: 10px;
+  .tp-card {
+    --card: var(--paper-deep);
+    --accent: var(--sage-deep);
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border-radius: 6px;
+    overflow: hidden;
   }
-  .gr-steps h3,
-  .gr-who h3,
-  .gr-gift h3 {
+  .tp-card--sage { --card: #DCDFCB; --accent: #4F5739; }
+  .tp-card--apricot { --card: #F3DCC6; --accent: #9A4520; }
+  .tp-card--sun { --card: #F5E4B8; --accent: #7A5A00; }
+  .tp-card figure { position: relative; margin: 0; overflow: hidden; aspect-ratio: 4 / 4.4; }
+  .tp-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.9s var(--ease);
+  }
+  .tp-card:hover img { transform: scale(1.05); }
+  .tp-card figcaption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(241, 238, 228, 0.94);
+    color: var(--ink);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .tp-card-num {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: grid;
+    place-items: center;
+    width: 54px;
+    aspect-ratio: 1;
+    color: var(--yellow);
+  }
+  .tp-card-num .tp-sun { position: absolute; inset: 0; width: 100%; animation: tp-spin 30s linear infinite; }
+  .tp-card-num span:last-child {
+    position: relative;
     font-family: var(--sans);
     font-weight: 500;
-    font-size: 18px;
-    letter-spacing: 0.01em;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .tp-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: clamp(22px, 2vw, 30px);
+  }
+  .tp-card h3 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(24px, 2vw, 32px);
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    margin: 0 0 clamp(40px, 4vw, 64px);
+  }
+  .tp-card-foot { margin-top: auto; }
+  .tp-card-tag {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(22px, 1.8vw, 28px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  .tp-card-foot > p:not(.tp-card-tag) {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+  /* How it works */
+  #how h2 { margin-bottom: clamp(64px, 7vw, 120px); }
+  .tp-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(28px, 4vw, 72px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .tp-step-num {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(96px, 9vw, 160px);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--yellow);
+    margin-bottom: 26px;
+  }
+  .tp-steps h3 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(20px, 1.6vw, 24px);
+    letter-spacing: -0.01em;
     margin: 0 0 8px;
   }
-  .gr-steps p,
-  .gr-who p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.55; }
-
-  .gr-who {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-top: 1px solid var(--line);
-  }
-  .gr-who article { padding: 28px 28px 32px 0; border-bottom: 1px solid var(--line); }
-  .gr-who article:nth-child(odd) { padding-right: 36px; }
-  .gr-who article:nth-child(even) {
-    padding-left: 36px;
-    border-left: 1px solid var(--line);
+  .tp-steps p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 30em;
   }
 
-  .gr-edit-head {
+  /* ---------- Edit ---------- */
+  .tp-edit-head {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 24px;
-    margin-bottom: 28px;
+    margin-bottom: 36px;
   }
-  .gr-edit-head .gr-intro { margin: 0; }
-  .gr-text-link {
+  .tp-edit-head .tp-intro { margin: 0; }
+  .tp-text-link {
     font-family: var(--sans);
     font-size: 13px;
     letter-spacing: 0.14em;
@@ -331,159 +660,265 @@
     padding-bottom: 3px;
     white-space: nowrap;
   }
-  .gr-text-link:hover { color: var(--ink); }
+  .tp-text-link:hover { color: var(--ink); }
 
-  .gr-gifts {
+  .tp-mosaic {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px 18px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    grid-template-rows: clamp(240px, 22vw, 360px) clamp(240px, 22vw, 360px);
+    gap: 14px;
   }
-  .gr-gift { min-width: 0; }
-  .gr-gift a { display: block; text-decoration: none; color: inherit; }
-  .gr-gift figure { margin: 0 0 14px; overflow: hidden; background: var(--paper-deep); }
-  .gr-gift img {
+  .tp-mosaic figure { margin: 0; position: relative; min-height: 0; overflow: hidden; border-radius: 4px; }
+  .tp-mosaic figure:first-child { grid-row: 1 / span 2; }
+  .tp-mosaic img {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    height: 100%;
     object-fit: cover;
+    background: var(--paper-deep);
     transform: scale(1);
     transition: transform 0.7s var(--ease);
   }
-  .gr-gift a:hover img { transform: scale(1.035); }
-  .gr-gift p { margin: 0 0 12px; color: var(--ink-soft); font-size: 15px; line-height: 1.5; }
-  .gr-gift .gr-text-link { font-size: 12px; }
+  .tp-mosaic figure:hover img { transform: scale(1.035); }
+  .tp-mosaic figcaption {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(241, 238, 228, 0.94);
+    color: var(--ink);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
-  .gr-note {
-    margin: 28px 0 0;
-    max-width: 46em;
-    font-size: 14px;
-    line-height: 1.55;
+  /* ---------- Apply ---------- */
+  .tp-apply { padding-bottom: clamp(80px, 9vw, 140px); }
+  .tp-apply-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(28px, 6vw, 112px);
+    align-items: start;
+  }
+  .tp-apply-copy p:not(.tp-eyebrow) {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+  .tp-apply-copy a { color: var(--sage-deep); }
+
+  .tp-form, .tp-success {
+    background: #fff;
+    border-radius: 8px;
+    padding: clamp(28px, 4vw, 52px);
+  }
+  .tp-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 18px;
+    align-items: start;
+  }
+  .tp-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .tp-field--wide { grid-column: 1 / -1; }
+  .tp-field label {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .tp-opt { color: var(--ink-soft); letter-spacing: 0.04em; text-transform: none; font-family: var(--body); font-size: 13px; font-weight: 400; }
+  .tp-field input,
+  .tp-field select {
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid #ECE8DD;
+    background-color: #FAF9F5;
+    color: var(--ink);
+    font: 16px/1.4 var(--body);
+    padding: 13px 14px;
+    border-radius: 8px;
+    transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
+  }
+  .tp-field input::placeholder { color: var(--ink-soft); }
+  .tp-field select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+    background-position: right 16px center, right 10px center;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 36px;
+  }
+  .tp-field input:focus,
+  .tp-field select:focus,
+  .tp-field input:focus-visible,
+  .tp-field select:focus-visible {
+    border-color: var(--sage-deep);
+    background-color: #fff;
+  }
+  .tp-field input:focus-visible,
+  .tp-field select:focus-visible {
+    outline: 2px solid var(--sage-deep);
+    outline-offset: 2px;
+  }
+  .tp-field input:user-invalid,
+  .tp-field select:user-invalid { border-color: var(--sage-deep); }
+  .tp-fine {
+    grid-column: 1 / -1;
+    margin: 2px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
     color: var(--ink-soft);
   }
-
-  .gr-wish { background: var(--ink); color: var(--paper); }
-  .gr-wish .gr-eyebrow { color: var(--yellow); }
-  .gr-wish-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    gap: clamp(28px, 4vw, 64px);
-    align-items: end;
+  .tp-form .tp-btn,
+  .tp-success .tp-btn {
+    margin-top: 4px;
+    border-radius: 8px;
+    align-self: flex-start;
+    width: fit-content;
   }
-  .gr-wish h2 {
-    font-size: clamp(36px, 4.4vw, 60px);
-    line-height: 0.98;
+  .tp-success[hidden], .tp-form[hidden] { display: none; }
+  .tp-success h3 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 1.05;
     letter-spacing: -0.03em;
-    margin: 0 0 16px;
-    max-width: 14ch;
+    margin: 0 0 12px;
   }
-  .gr-wish p { margin: 0 0 28px; max-width: 38em; font-size: 17px; line-height: 1.6; color: rgba(241, 238, 228, 0.88); }
-  .gr-wish-aside {
-    border-top: 1px solid rgba(241, 238, 228, 0.28);
-    padding-top: 22px;
-  }
-  .gr-wish-aside p { font-size: 16px; margin: 0 0 8px; }
-  .gr-wish-aside a { color: var(--paper); }
+  .tp-success p:not(.tp-eyebrow) { margin: 0 0 22px; color: var(--ink-soft); font-size: 17px; line-height: 1.55; }
+  .tp-success-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-  .gr-faq { background: var(--paper-deep); padding: clamp(64px, 8vw, 108px) 0; }
-  .gr-faq-list { border-top: 1px solid var(--line); max-width: 820px; }
-  .gr-faq-item { border-bottom: 1px solid var(--line); }
-  .gr-faq-item summary {
+  /* ---------- FAQ ---------- */
+  .tp-faq { background: var(--paper-deep); padding: clamp(80px, 9vw, 140px) 0; }
+  .tp-faq-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(28px, 6vw, 112px);
+    align-items: start;
+  }
+  .tp-faq-head { position: sticky; top: 32px; }
+  .tp-faq-list { border-top: 1px solid var(--line); }
+  .tp-faq-item { border-bottom: 1px solid var(--line); }
+  .tp-faq-item summary {
     cursor: pointer;
     list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
-    padding: 22px 0;
+    gap: 24px;
+    padding: 26px 0;
   }
-  .gr-faq-item summary::-webkit-details-marker { display: none; }
-  .gr-faq-item summary::after {
-    content: "+";
-    font-family: var(--serif);
-    font-size: 28px;
-    line-height: 1;
-    color: var(--sage-deep);
-    flex-shrink: 0;
-  }
-  .gr-faq-item[open] summary::after { content: "–"; }
-  .gr-faq-item h3 {
+  .tp-faq-item summary::-webkit-details-marker { display: none; }
+  .tp-faq-item h3 {
     font-family: var(--sans);
     font-weight: 500;
-    font-size: clamp(17px, 2vw, 20px);
+    font-size: clamp(18px, 1.5vw, 22px);
+    letter-spacing: -0.01em;
     margin: 0;
+    transition: color 0.3s var(--ease);
   }
-  .gr-faq-a { padding: 0 48px 22px 0; }
-  .gr-faq-item p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6; }
-  .gr-faq-item a { color: var(--sage-deep); }
+  .tp-faq-item summary:hover h3 { color: var(--sage-deep); }
+  .tp-pm {
+    position: relative;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--sage-deep);
+    border-radius: 50%;
+    transition: background-color 0.45s var(--ease), rotate 0.6s var(--ease);
+  }
+  .tp-pm::before,
+  .tp-pm::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 13px;
+    height: 1.5px;
+    margin: -0.75px 0 0 -6.5px;
+    border-radius: 1px;
+    background: var(--sage-deep);
+    transition: transform 0.6s var(--ease), background-color 0.45s var(--ease);
+  }
+  .tp-pm::after { transform: rotate(90deg); }
+  .tp-faq-item.is-open .tp-pm { background: var(--sage-deep); rotate: 180deg; }
+  .tp-faq-item.is-open .tp-pm::before,
+  .tp-faq-item.is-open .tp-pm::after { background: #fff; }
+  .tp-faq-item.is-open .tp-pm::after { transform: rotate(0deg); }
+  .tp-faq-a { overflow: hidden; }
+  .tp-faq-a-inner { padding: 0 60px 26px 0; }
+  .tp-faq-item p { margin: 0; color: var(--ink-soft); font-size: 16.5px; line-height: 1.6; }
+  .tp-faq-item a { color: var(--sage-deep); }
 
-  .gr-close {
-    background: var(--ink);
+  /* ---------- Close ---------- */
+  .tp-close {
+    position: relative;
+    overflow: hidden;
+    background: var(--clay);
     color: var(--paper);
-    padding: clamp(72px, 10vw, 128px) 0;
+    padding: clamp(88px, 11vw, 156px) 0 0;
     text-align: center;
   }
-  .gr-close .gr-sun {
-    width: 42px;
-    height: 42px;
-    margin: 0 auto 22px;
-    display: block;
+  .tp-close .tp-eyebrow { justify-content: center; color: var(--paper); }
+  .tp-close h2 {
+    font-size: clamp(52px, 7.4vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    margin: 0 auto 24px;
+  }
+  .tp-close p:not(.tp-eyebrow) {
+    margin: 0 auto 32px;
+    max-width: 36em;
+    color: var(--paper);
+    font-size: clamp(17px, 1.3vw, 19px);
+  }
+  .tp-close-copy { position: relative; z-index: 1; }
+  .tp-close-sun {
+    --size: min(1180px, 128vw);
+    width: var(--size);
+    aspect-ratio: 1;
+    margin: clamp(56px, 6vw, 96px) auto calc(var(--size) * -0.56);
     color: var(--yellow);
   }
-  .gr-close h2 {
-    font-size: clamp(40px, 6vw, 76px);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin: 0 auto 18px;
-    max-width: 14ch;
-  }
-  .gr-close p {
-    margin: 0 auto 28px;
-    max-width: 36em;
-    color: rgba(241, 238, 228, 0.88);
-    font-size: 17px;
-  }
-  .gr-close .gr-ctas { justify-content: center; }
-  .gr-close a.gr-btn--ghost,
-  .gr-close a.gr-btn--ghost:focus-visible {
-    border-color: var(--paper);
-    color: var(--paper);
-  }
-  .gr-close a.gr-btn--ghost:hover,
-  .gr-close a.gr-btn--ghost:hover:focus-visible {
-    background: var(--paper);
-    border-color: var(--paper);
-    color: var(--ink);
-  }
+  .tp-close-sun .tp-sun { width: 100%; display: block; animation: tp-spin 120s linear infinite; }
 
-  .gr-foot { padding: 48px 0 64px; border-top: 1px solid var(--line); }
-  .gr-foot-grid {
+  /* ---------- Footer ---------- */
+  .tp-foot {
+    padding: 48px 0 64px;
+  }
+  .tp-foot-grid {
     display: flex;
     justify-content: space-between;
     gap: 32px;
     align-items: flex-start;
   }
-  .gr-wordmark { height: 28px; width: auto; }
-  .gr-foot address {
+  .tp-wordmark { height: 28px; width: auto; }
+  .tp-foot address {
     font-style: normal;
     color: var(--ink-soft);
     font-size: 14px;
     line-height: 1.6;
     margin-top: 14px;
   }
-  .gr-foot address a { color: var(--ink); text-decoration: none; }
-  .gr-foot address a:hover { text-decoration: underline; }
-  .gr-foot nav { display: flex; flex-wrap: wrap; gap: 10px 22px; max-width: 420px; justify-content: flex-end; }
-  .gr-foot nav a {
+  .tp-foot address a { color: var(--ink); text-decoration: none; }
+  .tp-foot address a:hover { text-decoration: underline; }
+  .tp-foot nav { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+  .tp-foot nav a {
     font-family: var(--sans);
     font-size: 13px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
   }
-  .gr-foot nav a:hover { color: var(--sage-deep); }
-  .gr-colophon {
+  .tp-foot nav a:hover { color: var(--sage-deep); }
+  .tp-colophon {
     margin-top: 28px;
     font-size: 12px;
     letter-spacing: 0.08em;
@@ -491,51 +926,173 @@
     color: var(--ink-soft);
   }
 
-  @media (max-width: 900px) {
-    .gr-hero-grid, .gr-wish-grid, .gr-who { grid-template-columns: 1fr; }
-    .gr-hero-fig img { height: auto; aspect-ratio: 4 / 3; object-position: center 42%; }
-    .gr-who article,
-    .gr-who article:nth-child(odd),
-    .gr-who article:nth-child(even) {
-      padding: 24px 0;
-      border-left: none;
-    }
-    .gr-steps { grid-template-columns: 1fr; }
-    .gr-gifts { grid-template-columns: 1fr 1fr; }
-    .gr-edit-head, .gr-foot-grid { flex-direction: column; }
-    .gr-foot nav { justify-content: flex-start; max-width: none; }
+  @media (max-width: 1180px) {
+    .tp-who { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-card figure { aspect-ratio: 16 / 11; }
   }
+
+  @media (max-width: 900px) {
+    .tp-apply-grid, .tp-pair, .tp-faq-grid { grid-template-columns: 1fr; }
+    .tp-faq-head { position: static; }
+    .tp-plus { justify-self: center; margin: -8px 0; }
+    .tp-hero { min-height: clamp(620px, 92svh, 860px); }
+    .tp-hero-bg { object-position: 66% 50%; }
+    .tp-hero-shade {
+      background:
+        linear-gradient(0deg, rgba(30, 27, 22, 0.88) 0%, rgba(30, 27, 22, 0.66) 46%, rgba(30, 27, 22, 0.12) 78%, rgba(30, 27, 22, 0.2) 100%);
+    }
+    .tp-hero-cap { display: none; }
+    .tp-offer-sun { width: 150vw; right: -70vw; top: 30%; }
+    .tp-steps { grid-template-columns: 1fr; }
+    .tp-mosaic {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 280px 200px 200px;
+    }
+    .tp-mosaic figure:first-child { grid-row: auto; grid-column: 1 / -1; }
+    .tp-edit-head { flex-direction: column; align-items: flex-start; }
+    .tp-fields { grid-template-columns: 1fr; }
+    .tp-foot-grid { flex-direction: column; }
+  }
+
+  @media (max-width: 640px) {
+    .tp-who { grid-template-columns: 1fr; }
+    .tp-card figure { aspect-ratio: 4 / 3; }
+    .tp-faq-a-inner { padding-right: 0; }
+  }
+
   @media (max-width: 560px) {
-    .gr-ctas { flex-direction: column; align-items: stretch; }
-    .gr-btn {
+    .tp-ctas, .tp-success-actions { flex-direction: column; align-items: stretch; }
+    .tp-btn {
       width: 100%;
       font-size: 12px;
       letter-spacing: 0.08em;
       padding: 14px 16px;
     }
-    .gr-gifts { grid-template-columns: 1fr; }
-    .gr-hero h1 { font-size: clamp(42px, 12vw, 64px); }
-    .gr-hero-fig img {
-      height: 40vh;
-      max-height: 320px;
-      aspect-ratio: auto;
-      object-position: center 30%;
+    .tp-form .tp-btn,
+    .tp-success .tp-btn {
+      width: 100%;
+      align-self: stretch;
     }
+    .tp-mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
+    .tp-mosaic figure, .tp-mosaic figure:first-child { height: 240px; grid-column: auto; }
+    .tp-hero h1 { font-size: clamp(46px, 13vw, 64px); }
+    .tp-deal .tp-num { font-size: clamp(112px, 34vw, 160px); }
   }
 
-  .js-motion .gr-reveal {
+  /* Scroll reveals. Hidden only after JS confirms motion is allowed. */
+  .js-motion .tp-reveal {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.7s var(--ease), transform 0.8s var(--ease);
   }
-  .js-motion .gr-reveal.is-in { opacity: 1; transform: none; }
-  .js-motion .gr-hero-fig.gr-reveal { transition-delay: 0.08s; }
+  .js-motion .tp-reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .gr-btn, .gr-hero-fig img, .gr-gift img, .js-motion .gr-reveal { transition: none; }
-    .gr-hero-fig:hover img, .gr-gift a:hover img, .js-motion .gr-reveal {
+    .tp-btn,
+    .tp-hero-bg,
+    .tp-deal,
+    .tp-card img,
+    .tp-mosaic img,
+    .tp-pm,
+    .tp-pm::before,
+    .tp-pm::after,
+    .js-motion .tp-reveal {
+      transition: none;
+    }
+    .tp-sun,
+    .tp-ticker-track,
+    .tp-eyebrow .tp-sun,
+    .tp-offer-sun .tp-sun,
+    .tp-close-sun .tp-sun,
+    .tp-card-num .tp-sun {
+      animation: none;
+    }
+    .tp-hero-bg,
+    .tp-card:hover img,
+    .tp-mosaic figure:hover img,
+    .js-motion .tp-reveal {
       transform: none;
       opacity: 1;
     }
+  }
+
+  /* ---------- Registry ---------- */
+  .gr-hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    min-height: clamp(640px, 88svh, 960px);
+    background: var(--peach);
+    color: var(--ink);
+    overflow: hidden;
+  }
+  .gr-hero-copy {
+    position: relative;
+    align-self: end;
+    padding: clamp(56px, 6vw, 96px) clamp(32px, 5vw, 88px) clamp(56px, 6vw, 96px) max(var(--gutter), calc((100vw - var(--max)) / 2));
+  }
+  .gr-hero-sun {
+    position: absolute;
+    z-index: -1;
+    left: -18%;
+    top: -26%;
+    width: min(64vw, 820px);
+    color: rgba(192, 90, 40, 0.14);
+  }
+  .gr-hero-sun .tp-sun { width: 100%; display: block; animation: tp-spin 160s linear infinite; }
+  .gr-hero .tp-eyebrow { color: var(--clay); }
+  .gr-hero h1 {
+    font-size: clamp(54px, 6.6vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    margin: 0 0 28px;
+  }
+  .gr-hero h1 .tp-s { font-size: 0.8em; }
+  .gr-hero .tp-lede { color: var(--ink); max-width: 32em; }
+  .gr-hero-media { position: relative; margin: 0; overflow: hidden; min-height: 100%; }
+  .gr-hero-media .tp-hero-bg { z-index: 0; object-position: 50% 40%; }
+  .gr-hero-media .tp-hero-cap { z-index: 1; }
+
+  .tp-deal .gr-num { font-size: clamp(72px, 8.2vw, 128px); }
+  .tp-plus-glyph.gr-or { font-size: clamp(40px, 3.6vw, 60px); padding-bottom: 0.12em; }
+  .tp-deal h3 + p { margin-bottom: 28px; }
+  .gr-deal-btn {
+    min-height: 46px;
+    padding: 12px 24px;
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  a.gr-deal-btn,
+  a.gr-deal-btn:focus-visible { color: var(--paper); }
+  .gr-deal-btn:hover { background: var(--paper); border-color: var(--paper); }
+  a.gr-deal-btn:hover { color: var(--ink); }
+  .tp-note a { color: #fff; }
+
+  .gr-mosaic > a { display: block; min-height: 0; border-radius: 4px; overflow: hidden; }
+  .gr-mosaic > a:first-child { grid-row: 1 / span 2; }
+  .gr-mosaic > a figure { height: 100%; }
+  .gr-mosaic > a:hover img { transform: scale(1.035); }
+  .gr-note { margin: 22px 0 0; font-size: 14px; color: var(--ink-soft); }
+
+  .gr-close-ctas { justify-content: center; }
+
+  @media (max-width: 900px) {
+    .gr-hero { grid-template-columns: 1fr; min-height: 0; }
+    .gr-hero-media { order: -1; aspect-ratio: 4 / 3.4; }
+    .gr-hero-copy { padding: 44px var(--gutter) 56px; }
+    .gr-hero-sun { width: 130vw; left: -40vw; top: -30%; }
+    .gr-mosaic > a:first-child { grid-row: auto; grid-column: 1 / -1; }
+  }
+  @media (max-width: 560px) {
+    .gr-mosaic > a, .gr-mosaic > a:first-child { height: 240px; grid-column: auto; }
+    .gr-hero h1 { font-size: clamp(46px, 13vw, 64px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gr-hero-sun .tp-sun { animation: none; }
   }
 </style>
 <script>
@@ -620,233 +1177,279 @@
 }
 </script>
 </head>
-<body class="gr-page">
+<body class="tp-page">
 <a class="skip" href="#main">Skip to content</a>
 <div id="site-chrome"></div>
 
-<!-- EDIT: Placeholder positioning copy. Gift Reggie URLs below are the standard app-proxy paths (/apps/giftregistry/create, /find, /wishlist, /manage). Confirm the proxy on shopphylum.com before launch. Curated makers are starting points, not a fixed assortment. -->
-<main class="gr" id="main">
+<!-- EDIT: Gift Reggie URLs are the standard app-proxy paths (/apps/giftregistry/create, /find, /wishlist, /manage). Confirm the proxy on shopphylum.com before launch. -->
+<main class="tp" id="main">
   <section class="gr-hero" aria-labelledby="registry-title">
-    <div class="gr-wrap gr-hero-grid">
-      <div class="gr-hero-copy gr-reveal">
-        <nav class="gr-crumb" aria-label="Breadcrumb">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li aria-current="page">Gift Registry</li>
-          </ol>
-        </nav>
-        <p class="gr-eyebrow"><span class="gr-sun" aria-hidden="true"></span>Gift Registry</p>
-        <h1 id="registry-title">Register for the pieces that stay.</h1>
-        <p class="gr-lede">PHYLUM’s registry is for a wedding, the holidays, or a new set of keys. Choose from the modernist mercantile in Palm Springs, share the list, and let people shop it. A wishlist sits beside the registry, for lists you’d rather keep closer.</p>
-        <div class="gr-ctas">
-          <a class="gr-btn gr-btn--solid" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
-          <a class="gr-btn gr-btn--ghost" href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>
-        </div>
-        <p class="gr-meta">Weddings · Holidays · Housewarmings · Wishlists</p>
+    <div class="gr-hero-copy tp-reveal">
+      <div class="gr-hero-sun" aria-hidden="true"><span class="tp-sun"></span></div>
+      <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Gift Registry</p>
+      <h1 id="registry-title"><span class="tp-s">Register for</span> the pieces that stay.</h1>
+      <p class="tp-lede">PHYLUM’s registry is for a wedding, the holidays, or a new set of keys. Choose from the modernist mercantile in Palm Springs, share the list, and let people shop it.</p>
+      <div class="tp-ctas">
+        <a class="tp-btn tp-btn--sun" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
+        <a class="tp-btn tp-btn--ghost" href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>
       </div>
-      <figure class="gr-hero-fig gr-reveal">
-        <img src="assets/mega-nav/gifts-wrapping.png" width="768" height="1024" alt="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery." fetchpriority="high" decoding="async">
-        <figcaption>Wrapped in the shop</figcaption>
-      </figure>
+    </div>
+    <figure class="gr-hero-media">
+      <img class="tp-hero-bg" src="assets/registry/gift-wrap.jpg" srcset="assets/registry/gift-wrap-800.jpg 800w, assets/registry/gift-wrap.jpg 1218w" sizes="(max-width: 900px) 100vw, 50vw" width="1218" height="1439" alt="A PHYLUM gift wrapped in marbled coral and lilac paper, tied with cream cord, a sprig of greenery, and a PHYLUM tag." fetchpriority="high" decoding="async">
+      <figcaption class="tp-hero-cap">Wrapped at the counter in Palm Springs</figcaption>
+    </figure>
+  </section>
+
+  <div class="tp-ticker" aria-hidden="true">
+    <div class="tp-ticker-track">
+      <ul class="tp-ticker-row">
+        <li>Weddings<span class="tp-sun"></span></li>
+        <li>Holidays<span class="tp-sun"></span></li>
+        <li>Housewarmings<span class="tp-sun"></span></li>
+        <li>Wishlists<span class="tp-sun"></span></li>
+        <li>Weddings<span class="tp-sun"></span></li>
+        <li>Holidays<span class="tp-sun"></span></li>
+        <li>Housewarmings<span class="tp-sun"></span></li>
+        <li>Wishlists<span class="tp-sun"></span></li>
+      </ul>
+      <ul class="tp-ticker-row">
+        <li>Weddings<span class="tp-sun"></span></li>
+        <li>Holidays<span class="tp-sun"></span></li>
+        <li>Housewarmings<span class="tp-sun"></span></li>
+        <li>Wishlists<span class="tp-sun"></span></li>
+        <li>Weddings<span class="tp-sun"></span></li>
+        <li>Holidays<span class="tp-sun"></span></li>
+        <li>Housewarmings<span class="tp-sun"></span></li>
+        <li>Wishlists<span class="tp-sun"></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="tp-offer" id="lists" aria-labelledby="lists-title">
+    <div class="tp-offer-sun" aria-hidden="true"><span class="tp-sun"></span></div>
+    <div class="tp-wrap tp-reveal">
+      <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Two lists</p>
+      <h2 id="lists-title"><span class="tp-s">One to share.</span> One to keep.</h2>
+      <p class="tp-offer-intro">A registry is meant to be shared, and guests can see what’s still needed. A wishlist is simpler and private, with no guest list and no tracking.</p>
+      <div class="tp-pair">
+        <article class="tp-deal">
+          <p class="tp-num gr-num">Share</p>
+          <h3>Registry</h3>
+          <p>For a wedding, the holidays, or a new house. Guests find it by name and see what’s still needed.</p>
+          <a class="tp-btn gr-deal-btn" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
+        </article>
+        <span class="tp-plus" aria-hidden="true"><span class="tp-plus-glyph gr-or">or</span></span>
+        <article class="tp-deal tp-deal--joy">
+          <p class="tp-num gr-num">Keep</p>
+          <h3>Wishlist</h3>
+          <p>A private note of what you’d like. Remove things yourself once you have them.</p>
+          <a class="tp-btn gr-deal-btn" href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
+        </article>
+      </div>
+      <p class="tp-note">Already have a list? <a href="https://shopphylum.com/apps/giftregistry/manage">Manage your registry</a>. Questions first? Write <a href="mailto:hello@shopphylum.com">hello@shopphylum.com</a> or call <a href="tel:+17604242110">(760) 424-2110</a>.</p>
     </div>
   </section>
 
-  <section class="gr-section gr-section--deep" id="how" aria-labelledby="how-title">
-    <div class="gr-wrap gr-reveal">
-      <p class="gr-eyebrow">How it works</p>
-      <h2 id="how-title">Make the list. Share the name.</h2>
-      <p class="gr-intro">The registry runs through the gift registry already on the PHYLUM shop. This page is the front door. Creating, finding, and editing the list happen on the shop, in your account.</p>
-      <ol class="gr-steps">
+  <section class="tp-section" aria-labelledby="who-title">
+    <div class="tp-wrap">
+      <div class="tp-reveal">
+        <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Occasions</p>
+        <h2 id="who-title"><span class="tp-s">Weddings, holidays,</span> and the rest.</h2>
+        <p class="tp-intro">The same list works for a long engagement or a Saturday in December. Pick the one that fits, or skip the occasion and keep a wishlist.</p>
+      </div>
+      <ul class="tp-who">
+        <li class="tp-card tp-reveal">
+          <figure>
+            <img src="assets/trade/mud-australia.jpg" width="1024" height="682" alt="Mud Australia porcelain bowls and plates in mint, sky, and apricot on a linen-covered dinner table." loading="lazy" decoding="async">
+            <figcaption>Mud Australia</figcaption>
+            <span class="tp-card-num" aria-hidden="true"><span class="tp-sun"></span><span>01</span></span>
+          </figure>
+          <div class="tp-card-body">
+            <h3>Weddings</h3>
+            <div class="tp-card-foot">
+              <p class="tp-card-tag">A table for the long run.</p>
+              <p>Tabletop, linen, and objects for a house you’re actually going to live in.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tp-card tp-card--sage tp-reveal">
+          <figure>
+            <img src="assets/trade/johanna-gullichsen.jpg" width="1200" height="751" alt="Johanna Gullichsen woven cushions in rust and cream on a pale sofa beside a potted plant." loading="lazy" decoding="async">
+            <figcaption>Johanna Gullichsen</figcaption>
+            <span class="tp-card-num" aria-hidden="true"><span class="tp-sun"></span><span>02</span></span>
+          </figure>
+          <div class="tp-card-body">
+            <h3>Holidays</h3>
+            <div class="tp-card-foot">
+              <p class="tp-card-tag">One considered piece.</p>
+              <p>A shared list for the people who ask, every year, what you want.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tp-card tp-card--apricot tp-reveal">
+          <figure>
+            <img src="assets/trade/koziol.jpg" width="1100" height="1101" alt="Koziol wine glasses and an ice bucket with two bottles at the edge of a swimming pool." loading="lazy" decoding="async">
+            <figcaption>Koziol</figcaption>
+            <span class="tp-card-num" aria-hidden="true"><span class="tp-sun"></span><span>03</span></span>
+          </figure>
+          <div class="tp-card-body">
+            <h3>Housewarmings</h3>
+            <div class="tp-card-foot">
+              <p class="tp-card-tag">A desert house, filled in.</p>
+              <p>The first bowls, a blanket, a light. Still welcome when the boxes are gone.</p>
+            </div>
+          </div>
+        </li>
+        <li class="tp-card tp-card--sun tp-reveal">
+          <figure>
+            <img src="assets/trade/hoptimist.jpg" width="1200" height="796" alt="Hoptimist bobble figures in bright colors lined up on concrete steps." loading="lazy" decoding="async">
+            <figcaption>Hoptimist</figcaption>
+            <span class="tp-card-num" aria-hidden="true"><span class="tp-sun"></span><span>04</span></span>
+          </figure>
+          <div class="tp-card-body">
+            <h3>Just because</h3>
+            <div class="tp-card-foot">
+              <p class="tp-card-tag">No guest list required.</p>
+              <p>Use the wishlist for a private note of what you’d like, without the tracking.</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="tp-section tp-section--deep" id="how" aria-labelledby="how-title">
+    <div class="tp-wrap tp-reveal">
+      <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>How it works</p>
+      <h2 id="how-title"><span class="tp-s">A list in minutes.</span> Gifts for years.</h2>
+      <ol class="tp-steps">
         <li>
-          <span class="gr-index">01</span>
+          <span class="tp-step-num">01</span>
           <h3>Create</h3>
-          <p>Sign in and open a registry. Add pieces from the edit as you shop online, or start the list with us in the store.</p>
+          <p>Sign in and open a registry. Add pieces as you shop online, or start the list with us in the store.</p>
         </li>
         <li>
-          <span class="gr-index">02</span>
+          <span class="tp-step-num">02</span>
           <h3>Share</h3>
           <p>Guests search by your name. They don’t need an account to look, and the list can show what’s still needed.</p>
         </li>
         <li>
-          <span class="gr-index">03</span>
+          <span class="tp-step-num">03</span>
           <h3>Give</h3>
-          <p>Gifts check out like any other PHYLUM order, and can be shipped or picked up at the Palm Springs flagship.</p>
+          <p>Gifts check out like any other PHYLUM order, shipped or picked up at the Palm Springs flagship.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <section class="gr-section" aria-labelledby="who-title">
-    <div class="gr-wrap gr-reveal">
-      <p class="gr-eyebrow">Occasions</p>
-      <h2 id="who-title">Weddings, holidays, and the rest.</h2>
-      <p class="gr-intro">The same list works for a long engagement or a Saturday in December. Pick the one that fits, or skip the occasion and keep a wishlist.</p>
-      <div class="gr-who">
-        <article>
-          <span class="gr-index">01</span>
-          <h3>Weddings</h3>
-          <p>Tabletop, linen, and objects for a house you’re actually going to live in. Not a set of eight of anything you wouldn’t choose yourself.</p>
-        </article>
-        <article>
-          <span class="gr-index">02</span>
-          <h3>Holidays</h3>
-          <p>A shared list for the people who ask, every year, what you want. Smaller gifts and one considered piece.</p>
-        </article>
-        <article>
-          <span class="gr-index">03</span>
-          <h3>Housewarmings</h3>
-          <p>The first bowls, a blanket, a light. Useful in a desert house and still welcome when the boxes are gone.</p>
-        </article>
-        <article>
-          <span class="gr-index">04</span>
-          <h3>Just because</h3>
-          <p>Use the wishlist when there’s no guest list. It’s a private note of what you’d like, without the tracking.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="gr-section gr-section--deep" id="ideas" aria-labelledby="ideas-title">
-    <div class="gr-wrap gr-reveal">
-      <div class="gr-edit-head">
+  <section class="tp-section tp-edit" id="ideas" aria-labelledby="ideas-title">
+    <div class="tp-wrap tp-reveal">
+      <div class="tp-edit-head">
         <div>
-          <p class="gr-eyebrow">Gift ideas</p>
-          <h2 id="ideas-title">A few places to begin.</h2>
-          <p class="gr-intro">Starting points from the floor in Palm Springs. Anything with an Add to Registry button can go on the list.</p>
+          <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Gift ideas</p>
+          <h2 id="ideas-title"><span class="tp-s">A few places</span> to begin.</h2>
+          <p class="tp-intro">Starting points from the floor in Palm Springs. Anything with an Add to Registry button can go on the list.</p>
         </div>
-        <a class="gr-text-link" href="https://shopphylum.com">Shop the edit</a>
+        <a class="tp-text-link" href="https://shopphylum.com">Shop the edit</a>
       </div>
-      <!-- EDIT: Point each card at a real product or collection URL. Search links are stand-ins. -->
-      <ul class="gr-gifts">
-        <li class="gr-gift">
-          <a href="https://shopphylum.com/search?q=Hasami">
-            <figure><img src="assets/brands/hasami.jpg" width="1024" height="768" alt="Stacked Hasami porcelain bowls and plates in warm white and speckled charcoal." loading="lazy" decoding="async"></figure>
-            <h3>Hasami</h3>
-            <p>Stacked porcelain for the everyday table.</p>
-            <span class="gr-text-link">Shop the maker</span>
-          </a>
-        </li>
-        <li class="gr-gift">
-          <a href="https://shopphylum.com/search?q=Chilewich">
-            <figure><img src="assets/brands/chilewich.jpg" width="1024" height="768" alt="Woven Chilewich table linens in coral, blush, and teal, folded on a pale stone surface." loading="lazy" decoding="async"></figure>
-            <h3>Chilewich</h3>
-            <p>Woven vinyl that takes a desert afternoon.</p>
-            <span class="gr-text-link">Shop the maker</span>
-          </a>
-        </li>
-        <li class="gr-gift">
-          <a href="https://shopphylum.com/search?q=David%20Mellor">
-            <figure><img src="assets/brands/david-mellor.jpg" width="1024" height="682" alt="David Mellor stainless flatware arranged in a circle on a gray table." loading="lazy" decoding="async"></figure>
-            <h3>David Mellor</h3>
-            <p>Flatware with a clean modernist line.</p>
-            <span class="gr-text-link">Shop the maker</span>
-          </a>
-        </li>
-        <li class="gr-gift">
-          <a href="https://shopphylum.com/search?q=Studio%20Arhoj">
-            <figure><img src="assets/brands/studio-arhoj.jpg" width="1024" height="682" alt="A glossy coral Studio Arhoj ceramic vessel on a light wood table." loading="lazy" decoding="async"></figure>
-            <h3>Studio Arhoj</h3>
-            <p>A single vessel, given on its own.</p>
-            <span class="gr-text-link">Shop the maker</span>
-          </a>
-        </li>
-        <li class="gr-gift">
-          <a href="https://shopphylum.com/search?q=Ekobo">
-            <figure><img src="assets/brands/ekobo.jpg" width="1000" height="1001" alt="Speckled Ekobo bamboo-fiber dinnerware in blush, sage, and sand, set outdoors with oranges." loading="lazy" decoding="async"></figure>
-            <h3>Ekobo</h3>
-            <p>Speckled bowls for the patio table.</p>
-            <span class="gr-text-link">Shop the maker</span>
-          </a>
-        </li>
-        <li class="gr-gift">
-          <a href="https://shopphylum.com/search?q=gift">
-            <figure><img src="assets/mega-nav/gifts-wrapping.png" width="768" height="1024" alt="A gift wrapped in cream paper with a rust ribbon and a sprig of greenery." loading="lazy" decoding="async"></figure>
-            <h3>The wrap</h3>
-            <p>The last step, done at the counter in the shop.</p>
-            <span class="gr-text-link">Shop gifts</span>
-          </a>
-        </li>
-      </ul>
+      <!-- EDIT: Point each tile at a real collection URL. Search links are stand-ins. -->
+      <div class="tp-mosaic gr-mosaic">
+        <a href="https://shopphylum.com/search?q=Studio%20Arhoj">
+          <figure>
+            <img src="assets/trade/studio-arhoj.jpg" width="1400" height="934" alt="Studio Arhoj glazed ceramic figures with painted eyes, scattered across a sunlit walnut table." loading="lazy" decoding="async">
+            <figcaption>Studio Arhoj</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/search?q=Chilewich">
+          <figure>
+            <img src="assets/trade/chilewich.jpg" width="1056" height="517" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async">
+            <figcaption>Chilewich</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/search?q=LIGA">
+          <figure>
+            <img src="assets/trade/liga.jpg" width="1000" height="1000" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async">
+            <figcaption>LIGA</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/search?q=Ekobo">
+          <figure>
+            <img src="assets/trade/ekobo.jpg" width="1400" height="622" alt="Ekobo plates in teal, coral, and sand arranged with sliced citrus on a blush backdrop." loading="lazy" decoding="async">
+            <figcaption>Ekobo</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/search?q=gift">
+          <figure>
+            <img src="assets/mega-nav/gifts-wrapping.png" width="768" height="1024" alt="Gifts wrapped in marbled paper and tied with cream rope on a concrete ledge outside the shop." loading="lazy" decoding="async">
+            <figcaption>The wrap</figcaption>
+          </figure>
+        </a>
+      </div>
       <p class="gr-note">These are not a set registry. Prices, stock, and which pieces can be added are confirmed on the product page.</p>
     </div>
   </section>
 
-  <section class="gr-section gr-wish" id="wishlist" aria-labelledby="wish-title">
-    <div class="gr-wrap gr-wish-grid gr-reveal">
-      <div>
-        <p class="gr-eyebrow"><span class="gr-sun" aria-hidden="true"></span>Wishlist</p>
-        <h2 id="wish-title">A list, without the occasion.</h2>
-        <p>The same tools include a wishlist. It’s simpler than a registry: no guest list, no purchase tracking. Keep it for yourself, or for a holiday note you don’t want to send around.</p>
-        <div class="gr-ctas">
-          <a class="gr-btn gr-btn--paper" href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
-        </div>
+  <section class="tp-faq" aria-labelledby="faq-title">
+    <div class="tp-wrap tp-faq-grid">
+      <div class="tp-faq-head tp-reveal">
+        <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>FAQ</p>
+        <h2 id="faq-title"><span class="tp-s">Questions,</span> answered plainly.</h2>
       </div>
-      <div class="gr-wish-aside">
-        <p>Already have a list?</p>
-        <p><a href="https://shopphylum.com/apps/giftregistry/manage">Manage your registry</a></p>
-        <p>Questions first? Write <a href="mailto:hello@shopphylum.com">hello@shopphylum.com</a> or call <a href="tel:+17604242110">(760) 424-2110</a>.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="gr-faq" aria-labelledby="faq-title">
-    <div class="gr-wrap gr-reveal">
-      <p class="gr-eyebrow">FAQ</p>
-      <h2 id="faq-title">Questions, answered plainly.</h2>
-      <div class="gr-faq-list">
-        <details class="gr-faq-item">
-          <summary><h3>Is the PHYLUM registry only for weddings?</h3></summary>
-          <div class="gr-faq-a"><p>No. Use it for a wedding, the holidays, a housewarming, or any occasion where people have asked what to bring. A wishlist is there when you want a list without guest tracking.</p></div>
+      <div class="tp-faq-list tp-reveal">
+        <details class="tp-faq-item">
+          <summary><h3>Is the PHYLUM registry only for weddings?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>No. Use it for a wedding, the holidays, a housewarming, or any occasion where people have asked what to bring. A wishlist is there when you want a list without guest tracking.</p></div></div>
         </details>
-        <details class="gr-faq-item">
-          <summary><h3>How do I create a registry?</h3></summary>
-          <div class="gr-faq-a"><p>Choose <a href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a> and sign in with a PHYLUM account. You can also start one in person at the Palm Springs flagship.</p></div>
+        <details class="tp-faq-item">
+          <summary><h3>How do I create a registry?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Choose <a href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a> and sign in with a PHYLUM account. You can also start one in person at the Palm Springs flagship.</p></div></div>
         </details>
-        <details class="gr-faq-item">
-          <summary><h3>How do guests find a registry?</h3></summary>
-          <div class="gr-faq-a"><p>Guests search by first or last name on <a href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>. They don’t need an account to view the list or to buy from it.</p></div>
+        <details class="tp-faq-item">
+          <summary><h3>How do guests find a registry?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Guests search by first or last name on <a href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>. They don’t need an account to view the list or to buy from it.</p></div></div>
         </details>
-        <details class="gr-faq-item">
-          <summary><h3>What’s the difference between a registry and a wishlist?</h3></summary>
-          <div class="gr-faq-a"><p>A registry is meant to be shared. It can show what has been bought and what is still needed. A <a href="https://shopphylum.com/apps/giftregistry/wishlist">wishlist</a> is a simpler private list, with no guest tracking. You remove things yourself once you have them.</p></div>
+        <details class="tp-faq-item">
+          <summary><h3>What’s the difference between a registry and a wishlist?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>A registry is meant to be shared. It can show what has been bought and what is still needed. A <a href="https://shopphylum.com/apps/giftregistry/wishlist">wishlist</a> is a simpler private list, with no guest tracking. You remove things yourself once you have them.</p></div></div>
         </details>
-        <details class="gr-faq-item">
-          <summary><h3>Do registry gifts ship?</h3></summary>
-          <div class="gr-faq-a"><p>They check out like any other PHYLUM order. The shop publishes complimentary shipping on orders over $150, and Palm Springs pickup is available. Confirm the shipping offer on the order before you rely on it.</p></div>
+        <details class="tp-faq-item">
+          <summary><h3>Do registry gifts ship?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>They check out like any other PHYLUM order. The shop publishes complimentary shipping on orders over $150, and Palm Springs pickup is available. Confirm the shipping offer on the order before you rely on it.</p></div></div>
         </details>
-        <details class="gr-faq-item">
-          <summary><h3>Can I register in the store?</h3></summary>
-          <div class="gr-faq-a"><p>Yes. The flagship is at 901 N. Palm Canyon Drive, Suite 101, in the Palm Springs Design District. Call <a href="tel:+17604242110">(760) 424-2110</a> if you’d like someone there to start the list with you.</p></div>
+        <details class="tp-faq-item">
+          <summary><h3>Can I register in the store?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Yes. The flagship is at 901 N. Palm Canyon Drive, Suite 101, in the Palm Springs Design District. Call <a href="tel:+17604242110">(760) 424-2110</a> if you’d like someone there to start the list with you.</p></div></div>
         </details>
-        <details class="gr-faq-item">
-          <summary><h3>What if something on the list sells out?</h3></summary>
-          <div class="gr-faq-a"><p>Guests can see what’s still needed. If a piece is gone, they can choose something else from the edit. The list doesn’t promise that every item stays in stock.</p></div>
+        <details class="tp-faq-item">
+          <summary><h3>What if something on the list sells out?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Guests can see what’s still needed. If a piece is gone, they can choose something else from the edit. The list doesn’t promise that every item stays in stock.</p></div></div>
         </details>
-        <details class="gr-faq-item">
-          <summary><h3>Is there a fee?</h3></summary>
-          <div class="gr-faq-a"><p>Creating a PHYLUM registry or wishlist is free. You need a PHYLUM account, which is also free. Return to a list you’ve already made from <a href="https://shopphylum.com/apps/giftregistry/manage">your account</a>.</p></div>
+        <details class="tp-faq-item">
+          <summary><h3>Is there a fee?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
+          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Creating a PHYLUM registry or wishlist is free. You need a PHYLUM account, which is also free. Return to a list you’ve already made from <a href="https://shopphylum.com/apps/giftregistry/manage">your account</a>.</p></div></div>
         </details>
       </div>
     </div>
   </section>
 
-  <section class="gr-close" aria-labelledby="close-title">
-    <div class="gr-wrap gr-reveal">
-      <span class="gr-sun" aria-hidden="true"></span>
-      <h2 id="close-title">Make the list. Share the name.</h2>
+  <section class="tp-close" aria-labelledby="close-title">
+    <div class="tp-wrap tp-close-copy tp-reveal">
+      <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Gift Registry</p>
+      <h2 id="close-title"><span class="tp-s">Make the list.</span> Share the name.</h2>
       <p>Create a registry, or look one up by name. The wishlist is there if you’d rather not share it yet.</p>
-      <div class="gr-ctas">
-        <a class="gr-btn gr-btn--paper" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
-        <a class="gr-btn gr-btn--ghost" href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>
+      <div class="tp-ctas gr-close-ctas">
+        <a class="tp-btn tp-btn--sun" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
+        <a class="tp-btn tp-btn--light" href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>
       </div>
     </div>
+    <div class="tp-close-sun" aria-hidden="true"><span class="tp-sun"></span></div>
   </section>
 
-  <footer class="gr-foot">
-    <div class="gr-wrap">
-      <div class="gr-foot-grid">
+  <footer class="tp-foot">
+    <div class="tp-wrap">
+      <div class="tp-foot-grid">
         <div>
-          <img class="gr-wordmark" src="assets/event/phylum-wordmark.png" width="296" height="102" alt="PHYLUM">
+          <img class="tp-wordmark" src="assets/event/phylum-wordmark.png" width="296" height="102" alt="PHYLUM">
           <address>
             901 N. Palm Canyon Dr., Suite 101<br>
             Palm Springs, CA 92262<br>
@@ -864,28 +1467,99 @@
           <a href="https://shopphylum.com/apps/giftregistry/create">Create</a>
         </nav>
       </div>
-      <p class="gr-colophon">© 2026 PHYLUM · Gift Registry</p>
+      <p class="tp-colophon">© 2026 PHYLUM · Gift Registry</p>
     </div>
   </footer>
 </main>
 
+
 <script src="site-chrome.js"></script>
 <script>
   (function () {
-    if (!document.documentElement.classList.contains("js-motion")) return;
-    if (!("IntersectionObserver" in window)) {
-      document.documentElement.classList.remove("js-motion");
+    if (!document.documentElement.classList.contains('js-motion')) return;
+    if (!('IntersectionObserver' in window)) {
+      document.documentElement.classList.remove('js-motion');
       return;
     }
-    var nodes = document.querySelectorAll(".gr-reveal");
+    var nodes = document.querySelectorAll('.tp-reveal');
     var seen = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-in");
+        entry.target.classList.add('is-in');
         seen.unobserve(entry.target);
       });
-    }, { threshold: 0.16, rootMargin: "0px 0px -6% 0px" });
+    }, { threshold: 0.16, rootMargin: '0px 0px -6% 0px' });
     nodes.forEach(function (node) { seen.observe(node); });
+  })();
+
+  requestAnimationFrame(function () {
+    document.documentElement.classList.add('is-ready');
+  });
+  (function () {
+    var pair = document.querySelector('.tp-pair');
+    if (!pair) return;
+    var deals = pair.querySelectorAll('.tp-deal');
+    var wide = window.matchMedia('(min-width: 901px)');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function measure() {
+      var on = wide.matches && !reduce.matches;
+      pair.classList.toggle('is-scrolly', on);
+      if (!on) return;
+      var mid = pair.offsetWidth / 2;
+      deals.forEach(function (deal) {
+        deal.style.setProperty('--dx', (mid - (deal.offsetLeft + deal.offsetWidth / 2)) + 'px');
+      });
+      update();
+    }
+    function update() {
+      if (!pair.classList.contains('is-scrolly')) return;
+      var top = pair.getBoundingClientRect().top;
+      var vh = window.innerHeight;
+      var t = Math.min(1, Math.max(0, (vh * 0.95 - top) / (vh * 0.6)));
+      var eased = t * t * (3 - 2 * t);
+      pair.style.setProperty('--p', eased.toFixed(4));
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', measure);
+    wide.addEventListener('change', measure);
+    reduce.addEventListener('change', measure);
+    measure();
+  })();
+
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelectorAll('.tp-faq-item').forEach(function (item) {
+      var summary = item.querySelector('summary');
+      var panel = item.querySelector('.tp-faq-a');
+      var anim = null;
+      if (!summary || !panel) return;
+      if (item.open) item.classList.add('is-open');
+
+      summary.addEventListener('click', function (event) {
+        event.preventDefault();
+        var opening = !item.classList.contains('is-open');
+        item.classList.toggle('is-open', opening);
+
+        if (reduce.matches || !panel.animate) {
+          item.open = opening;
+          return;
+        }
+
+        var from = anim ? panel.getBoundingClientRect().height : (opening ? 0 : panel.offsetHeight);
+        if (anim) anim.cancel();
+        if (opening) item.open = true;
+        var to = opening ? panel.scrollHeight : 0;
+
+        anim = panel.animate(
+          { height: [from + 'px', to + 'px'], opacity: opening ? [0.2, 1] : [1, 0] },
+          { duration: opening ? 520 : 380, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+        );
+        anim.onfinish = function () {
+          anim = null;
+          if (!opening) item.open = false;
+        };
+      });
+    });
   })();
 </script>
 </body>
