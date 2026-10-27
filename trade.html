@@ -430,7 +430,7 @@
     height: 100%;
     box-shadow: 0 30px 60px -36px rgba(36, 33, 28, 0.4);
   }
-  .tp-deal--joy { --deal: var(--peach); --deal-sun: var(--yellow); }
+  .tp-deal--joy { --deal: var(--peach); --deal-sun: #535538; }
   /* Scroll-driven: --p goes 0 (stacked in the center) to 1 (side by side). */
   .tp-pair.is-scrolly { position: relative; }
   .tp-pair.is-scrolly .tp-deal {
@@ -617,7 +617,7 @@
   }
   /* How it works */
   #how h2 { margin-bottom: clamp(64px, 7vw, 120px); }
-  .tp-how { background: var(--sage); color: #fff; }
+  .tp-how { background: #535538; color: #fff; }
   .tp-how .tp-eyebrow { color: #fff; }
   .tp-how h2,
   .tp-how .tp-steps h3 { color: #fff; }
@@ -684,7 +684,9 @@
     gap: 14px;
   }
   .tp-mosaic figure { margin: 0; position: relative; min-height: 0; overflow: hidden; border-radius: 4px; }
-  .tp-mosaic figure:first-child { grid-row: 1 / span 2; }
+  .tp-mosaic > a { display: block; min-height: 0; border-radius: 4px; overflow: hidden; }
+  .tp-mosaic > a:first-child { grid-row: 1 / span 2; }
+  .tp-mosaic > a figure { height: 100%; }
   .tp-mosaic img {
     width: 100%;
     height: 100%;
@@ -971,7 +973,7 @@
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 280px 200px 200px;
     }
-    .tp-mosaic figure:first-child { grid-row: auto; grid-column: 1 / -1; }
+    .tp-mosaic > a:first-child { grid-row: auto; grid-column: 1 / -1; }
     .tp-edit-head { flex-direction: column; align-items: flex-start; }
     .tp-fields { grid-template-columns: 1fr; }
     .tp-foot-grid { flex-direction: column; }
@@ -997,7 +999,7 @@
       align-self: stretch;
     }
     .tp-mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
-    .tp-mosaic figure, .tp-mosaic figure:first-child { height: 240px; grid-column: auto; }
+    .tp-mosaic > a, .tp-mosaic > a:first-child { height: 240px; grid-column: auto; }
     .tp-hero h1 { font-size: clamp(46px, 13vw, 64px); }
     .tp-deal .tp-num { font-size: clamp(112px, 34vw, 160px); }
   }
@@ -1333,26 +1335,36 @@
         <a class="tp-text-link" href="brands.html">Browse the makers</a>
       </div>
       <div class="tp-mosaic">
-        <figure>
-          <img src="assets/trade/studio-arhoj.jpg" width="1400" height="934" alt="Studio Arhoj glazed ceramic figures with painted eyes, scattered across a sunlit walnut table." loading="lazy" decoding="async">
-          <figcaption>Studio Arhoj</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/trade/mud-australia.jpg" width="1024" height="682" alt="Mud Australia porcelain bowls and plates in mint, sky, and apricot on a linen-covered dinner table." loading="lazy" decoding="async">
-          <figcaption>Mud Australia</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/trade/chilewich.jpg" width="1056" height="517" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async">
-          <figcaption>Chilewich</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/trade/liga.jpg" width="1000" height="1000" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async">
-          <figcaption>LIGA</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/trade/hoptimist.jpg" width="1200" height="796" alt="Hoptimist bobble figures in bright colors lined up on concrete steps." loading="lazy" decoding="async">
-          <figcaption>Hoptimist</figcaption>
-        </figure>
+        <a href="https://shopphylum.com/collections/studio-arhoj">
+          <figure>
+            <img src="assets/trade/studio-arhoj.jpg" width="1400" height="934" alt="Studio Arhoj glazed ceramic figures with painted eyes, scattered across a sunlit walnut table." loading="lazy" decoding="async">
+            <figcaption>Studio Arhoj</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/collections/mud-australia">
+          <figure>
+            <img src="assets/trade/mud-australia.jpg" width="1024" height="682" alt="Mud Australia porcelain bowls and plates in mint, sky, and apricot on a linen-covered dinner table." loading="lazy" decoding="async">
+            <figcaption>Mud Australia</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/collections/chilewich">
+          <figure>
+            <img src="assets/trade/chilewich.jpg" width="1056" height="517" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async">
+            <figcaption>Chilewich</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/collections/liga">
+          <figure>
+            <img src="assets/trade/liga.jpg" width="1000" height="1000" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async">
+            <figcaption>LIGA</figcaption>
+          </figure>
+        </a>
+        <a href="https://shopphylum.com/collections/hoptimist">
+          <figure>
+            <img src="assets/trade/hoptimist.jpg" width="1200" height="796" alt="Hoptimist bobble figures in bright colors lined up on concrete steps." loading="lazy" decoding="async">
+            <figcaption>Hoptimist</figcaption>
+          </figure>
+        </a>
       </div>
     </div>
   </section>
