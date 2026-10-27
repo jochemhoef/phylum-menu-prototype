@@ -419,7 +419,6 @@
   }
   .tp-deal {
     --deal: #F1EE80;
-    --deal-sun: var(--clay);
     position: relative;
     isolation: isolate;
     overflow: hidden;
@@ -430,7 +429,7 @@
     height: 100%;
     box-shadow: 0 30px 60px -36px rgba(36, 33, 28, 0.4);
   }
-  .tp-deal--joy { --deal: var(--peach); --deal-sun: #535538; }
+  .tp-deal--joy { --deal: var(--peach); }
   /* Scroll-driven: --p goes 0 (stacked in the center) to 1 (side by side). */
   .tp-pair.is-scrolly { position: relative; }
   .tp-pair.is-scrolly .tp-deal {
@@ -442,19 +441,6 @@
   .tp-pair.is-scrolly .tp-plus {
     opacity: var(--p, 1);
     transform: scale(calc(0.4 + 0.6 * var(--p, 1))) rotate(calc(-180deg * (1 - var(--p, 1))));
-  }
-  .tp-deal::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: -18%;
-    right: -14%;
-    width: 62%;
-    aspect-ratio: 1;
-    background: var(--deal-sun);
-    -webkit-mask: var(--sun) center / contain no-repeat;
-            mask: var(--sun) center / contain no-repeat;
-    opacity: 0.16;
   }
   .tp-deal .tp-num {
     font-family: var(--sans);
