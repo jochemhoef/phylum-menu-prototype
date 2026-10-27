@@ -781,6 +781,58 @@
   }
   .tp-field input:user-invalid,
   .tp-field select:user-invalid { border-color: var(--sage-deep); }
+  .tp-field .tp-upload-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .tp-field .tp-upload {
+    position: relative;
+    flex-wrap: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 72px;
+    padding: 12px 14px;
+    border: 1px dashed #D9D3C3;
+    border-radius: 8px;
+    background: #FAF9F5;
+    cursor: pointer;
+    transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
+  }
+  .tp-upload:hover,
+  .tp-upload.is-over { border-color: var(--sage-deep); background: #fff; }
+  .tp-upload:focus-within { outline: 2px solid var(--sage-deep); outline-offset: 2px; }
+  .tp-upload.is-invalid { border-color: var(--clay); }
+  .tp-upload-btn {
+    flex-shrink: 0;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--ink);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+  .tp-upload:hover .tp-upload-btn { background: var(--yellow); border-color: var(--yellow); }
+  .tp-upload-name {
+    min-width: 0;
+    font-family: var(--body);
+    letter-spacing: 0;
+    text-transform: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  .tp-upload.has-file .tp-upload-name { color: var(--ink); }
   .tp-fine {
     grid-column: 1 / -1;
     margin: 2px 0 0;
@@ -1089,7 +1141,7 @@
     text-indent: -0.4em;
   }
   .tp-voice-name {
-    margin: auto 0 2px;
+    margin: 0 0 2px;
     font-family: var(--sans);
     font-weight: 500;
     font-size: 17px;
@@ -1113,7 +1165,7 @@
     display: block;
     width: 56px;
     height: 56px;
-    margin-top: 24px;
+    margin: auto 0 14px;
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--paper) 70%, transparent);
@@ -1522,55 +1574,55 @@
         <blockquote>
           <p>“PHYLUM is where I go when a room needs its last ten percent: the bowl, the throw, the object that makes it feel finished.”</p>
         </blockquote>
-        <p class="tp-voice-name">Designer name 1</p>
+        <img class="tp-voice-avatar" src="assets/trade/avatar-men-32.jpg" alt="" width="56" height="56" loading="lazy">
+        <p class="tp-voice-name">Brad Krefman</p>
         <p class="tp-voice-studio">Studio name · City</p>
         <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
-        <img class="tp-voice-avatar" src="assets/trade/avatar-placeholder.svg" alt="Designer name 1" width="56" height="56" loading="lazy">
       </li>
       <li class="tp-voice tp-voice--sun">
         <blockquote>
           <p>“The edit is so tight that I can send a client there and trust whatever they fall for.”</p>
         </blockquote>
-        <p class="tp-voice-name">Designer name 2</p>
+        <img class="tp-voice-avatar" src="assets/trade/avatar-women-44.jpg" alt="" width="56" height="56" loading="lazy">
+        <p class="tp-voice-name">Michelle Boudreau</p>
         <p class="tp-voice-studio">Studio name · City</p>
         <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
-        <img class="tp-voice-avatar" src="assets/trade/avatar-placeholder.svg" alt="Designer name 2" width="56" height="56" loading="lazy">
       </li>
       <li class="tp-voice tp-voice--peach">
         <blockquote>
           <p>“Color and texture I can’t find from my usual trade vendors, at prices that let me specify more than one piece.”</p>
         </blockquote>
-        <p class="tp-voice-name">Designer name 3</p>
+        <img class="tp-voice-avatar" src="assets/trade/avatar-women-65.jpg" alt="" width="56" height="56" loading="lazy">
+        <p class="tp-voice-name">Cathy Radcliffe</p>
         <p class="tp-voice-studio">Studio name · City</p>
         <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
-        <img class="tp-voice-avatar" src="assets/trade/avatar-placeholder.svg" alt="Designer name 3" width="56" height="56" loading="lazy">
       </li>
       <li class="tp-voice tp-voice--sage">
         <blockquote>
           <p>“Every install, there’s something from PHYLUM on the shelf. Clients always ask where it came from.”</p>
         </blockquote>
-        <p class="tp-voice-name">Designer name 4</p>
+        <img class="tp-voice-avatar" src="assets/trade/avatar-women-68.jpg" alt="" width="56" height="56" loading="lazy">
+        <p class="tp-voice-name">Maureen Gage</p>
         <p class="tp-voice-studio">Studio name · City</p>
         <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
-        <img class="tp-voice-avatar" src="assets/trade/avatar-placeholder.svg" alt="Designer name 4" width="56" height="56" loading="lazy">
       </li>
       <li class="tp-voice tp-voice--lime">
         <blockquote>
           <p>“It feels like shopping with a friend who has impeccable taste, and the trade pricing makes it easy to say yes.”</p>
         </blockquote>
+        <img class="tp-voice-avatar" src="assets/trade/avatar-women-79.jpg" alt="" width="56" height="56" loading="lazy">
         <p class="tp-voice-name">Designer name 5</p>
         <p class="tp-voice-studio">Studio name · City</p>
         <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
-        <img class="tp-voice-avatar" src="assets/trade/avatar-placeholder.svg" alt="Designer name 5" width="56" height="56" loading="lazy">
       </li>
       <li class="tp-voice tp-voice--clay">
         <blockquote>
           <p>“The pieces photograph beautifully. For styling a shoot or a stage, it’s my first stop in the desert.”</p>
         </blockquote>
+        <img class="tp-voice-avatar" src="assets/trade/avatar-men-46.jpg" alt="" width="56" height="56" loading="lazy">
         <p class="tp-voice-name">Designer name 6</p>
         <p class="tp-voice-studio">Studio name · City</p>
         <a class="tp-voice-link" href="#" rel="noopener">studio-website.com <span aria-hidden="true">↗</span></a>
-        <img class="tp-voice-avatar" src="assets/trade/avatar-placeholder.svg" alt="Designer name 6" width="56" height="56" loading="lazy">
       </li>
     </ul>
   </section>
@@ -1585,7 +1637,7 @@
         <p>The flagship is at <a href="https://maps.google.com/?q=901+N+Palm+Canyon+Dr+Suite+101+Palm+Springs+CA+92262">901 N. Palm Canyon Dr., Suite 101, Palm Springs</a>, in the Design District.</p>
       </div>
       <!-- TODO: Applications go to trade@shopphylum.com (being set up). Wire this form to that inbox, Shopify customer tags, or a form service such as Klaviyo. It is front-end only; submission is not sent anywhere. -->
-      <form class="tp-form tp-reveal" id="tradeForm" action="#" method="post" data-recipient="trade@shopphylum.com" novalidate>
+      <form class="tp-form tp-reveal" id="tradeForm" action="#" method="post" enctype="multipart/form-data" data-recipient="trade@shopphylum.com" novalidate>
         <div class="tp-fields">
           <div class="tp-field">
             <label for="trade-name">Name</label>
@@ -1627,6 +1679,15 @@
             <label for="trade-resale">Resale certificate <span class="tp-opt">(optional)</span></label>
             <input id="trade-resale" name="resale_certificate" type="text" autocomplete="off" spellcheck="false" aria-describedby="trade-resale-hint">
             <span class="tp-hint" id="trade-resale-hint">Only needed for tax-exempt purchases.</span>
+          </div>
+          <div class="tp-field tp-field--wide">
+            <label for="trade-docs">License or business card <span class="tp-opt">(optional)</span></label>
+            <label class="tp-upload" for="trade-docs" id="tradeUpload">
+              <input class="tp-upload-input" id="trade-docs" name="documents" type="file" accept=".pdf,.jpg,.jpeg,.png,.heic,application/pdf,image/*" multiple aria-describedby="trade-docs-hint">
+              <span class="tp-upload-btn">Choose file</span>
+              <span class="tp-upload-name" id="tradeUploadName">or drop it here</span>
+            </label>
+            <span class="tp-hint" id="trade-docs-hint">A copy of your license, certificate, or business card. PDF, JPG, or PNG, up to 10 MB each.</span>
           </div>
           <!-- TODO: Confirm this privacy line with the client before it stands in for the Shopify privacy policy. -->
           <div class="tp-field tp-field--wide">
@@ -1729,6 +1790,40 @@
 
 <script src="site-chrome.js"></script>
 <script>
+  (function () {
+    var input = document.getElementById('trade-docs');
+    var zone = document.getElementById('tradeUpload');
+    var label = document.getElementById('tradeUploadName');
+    if (!input || !zone || !label) return;
+    var empty = label.textContent;
+    var limit = 10 * 1024 * 1024;
+    function sync() {
+      var files = Array.prototype.slice.call(input.files || []);
+      var tooBig = files.some(function (file) { return file.size > limit; });
+      input.setCustomValidity(tooBig ? 'Each file needs to be 10 MB or smaller.' : '');
+      zone.classList.toggle('is-invalid', tooBig);
+      zone.classList.toggle('has-file', files.length > 0);
+      label.textContent = tooBig ? 'Each file needs to be 10 MB or smaller.'
+        : files.length === 1 ? files[0].name
+        : files.length ? files.length + ' files selected'
+        : empty;
+    }
+    input.addEventListener('change', sync);
+    ['dragenter', 'dragover'].forEach(function (type) {
+      zone.addEventListener(type, function (event) { event.preventDefault(); zone.classList.add('is-over'); });
+    });
+    ['dragleave', 'drop'].forEach(function (type) {
+      zone.addEventListener(type, function () { zone.classList.remove('is-over'); });
+    });
+    zone.addEventListener('drop', function (event) {
+      event.preventDefault();
+      if (!event.dataTransfer || !event.dataTransfer.files.length) return;
+      input.files = event.dataTransfer.files;
+      sync();
+    });
+    input.form && input.form.addEventListener('reset', function () { setTimeout(sync, 0); });
+  })();
+
   (function () {
     var form = document.getElementById('tradeForm');
     var success = document.getElementById('tradeSuccess');
