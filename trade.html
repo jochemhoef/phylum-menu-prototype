@@ -409,12 +409,21 @@
     border-radius: 10px;
     padding: clamp(28px, 3.4vw, 52px);
     height: 100%;
-    rotate: -1.5deg;
     box-shadow: 0 30px 60px -34px rgba(36, 33, 28, 0.55);
-    transition: rotate 0.6s var(--ease);
   }
-  .tp-deal--joy { --deal: var(--pink); --deal-sun: var(--yellow); rotate: 1.5deg; }
-  .tp-deal:hover { rotate: 0deg; }
+  .tp-deal--joy { --deal: var(--pink); --deal-sun: var(--yellow); }
+  /* Scroll-driven: --p goes 0 (stacked in the center) to 1 (side by side). */
+  .tp-pair.is-scrolly { position: relative; }
+  .tp-pair.is-scrolly .tp-deal {
+    transform: translate3d(calc(var(--dx, 0px) * (1 - var(--p, 1))), calc(var(--dy, 0px) * (1 - var(--p, 1))), 0) scale(calc(0.92 + 0.08 * var(--p, 1)));
+    will-change: transform;
+  }
+  .tp-pair.is-scrolly .tp-deal:first-child { position: relative; z-index: 2; --dy: -18px; }
+  .tp-pair.is-scrolly .tp-deal--joy { --dy: 18px; }
+  .tp-pair.is-scrolly .tp-plus {
+    opacity: var(--p, 1);
+    transform: scale(calc(0.4 + 0.6 * var(--p, 1))) rotate(calc(-180deg * (1 - var(--p, 1))));
+  }
   .tp-deal::after {
     content: "";
     position: absolute;
@@ -460,16 +469,15 @@
     place-items: center;
     width: clamp(84px, 8vw, 132px);
     aspect-ratio: 1;
-    color: var(--lime);
+    color: var(--paper);
   }
-  .tp-plus .tp-sun { position: absolute; inset: 0; width: 100%; animation: tp-spin 24s linear infinite; }
   .tp-plus-glyph {
     position: relative;
     font-family: var(--serif);
     font-weight: 300;
-    font-size: clamp(36px, 3.4vw, 56px);
+    font-size: clamp(56px, 5vw, 88px);
     line-height: 1;
-    color: var(--ink);
+    color: var(--paper);
     padding-bottom: 0.08em;
   }
   .tp-note {
@@ -991,7 +999,6 @@
     .tp-eyebrow .tp-sun,
     .tp-offer-sun .tp-sun,
     .tp-close-sun .tp-sun,
-    .tp-plus .tp-sun,
     .tp-deal::after,
     .tp-card-num .tp-sun {
       animation: none;
@@ -1181,7 +1188,7 @@
           <h3>Trade discount</h3>
           <p>Off qualifying purchases once your trade account is approved.</p>
         </article>
-        <span class="tp-plus" aria-hidden="true"><span class="tp-sun"></span><span class="tp-plus-glyph">+</span></span>
+        <span class="tp-plus" aria-hidden="true"><span class="tp-plus-glyph">+</span></span>
         <article class="tp-deal tp-deal--joy">
           <p class="tp-num">Joy</p>
           <h3>Loyalty points</h3>
@@ -1189,7 +1196,7 @@
         </article>
       </div>
       <!-- TODO: Confirm exclusions (sale, gift cards, special orders) and whether the public PHYLUM Rewards earn rate still applies on discounted trade purchases. -->
-      <p class="tp-note">Exclusions, if any, are confirmed with your account. They are not published on this page.</p>
+      <p class="tp-note">Exclusions, if any, are confirmed with your account.</p>
     </div>
   </section>
 
@@ -1523,6 +1530,36 @@
   requestAnimationFrame(function () {
     document.documentElement.classList.add('is-ready');
   });
+  (function () {
+    var pair = document.querySelector('.tp-pair');
+    if (!pair) return;
+    var deals = pair.querySelectorAll('.tp-deal');
+    var wide = window.matchMedia('(min-width: 901px)');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function measure() {
+      var on = wide.matches && !reduce.matches;
+      pair.classList.toggle('is-scrolly', on);
+      if (!on) return;
+      var mid = pair.offsetWidth / 2;
+      deals.forEach(function (deal) {
+        deal.style.setProperty('--dx', (mid - (deal.offsetLeft + deal.offsetWidth / 2)) + 'px');
+      });
+      update();
+    }
+    function update() {
+      if (!pair.classList.contains('is-scrolly')) return;
+      var top = pair.getBoundingClientRect().top;
+      var vh = window.innerHeight;
+      var t = Math.min(1, Math.max(0, (vh * 0.95 - top) / (vh * 0.6)));
+      var eased = t * t * (3 - 2 * t);
+      pair.style.setProperty('--p', eased.toFixed(4));
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', measure);
+    wide.addEventListener('change', measure);
+    reduce.addEventListener('change', measure);
+    measure();
+  })();
 
   (function () {
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
