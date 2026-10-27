@@ -341,6 +341,10 @@
     min-width: 0;
     max-width: 100%;
   }
+  a.btn[href="trade.html"],
+  a.nav-direct[href="trade.html"] {
+    -webkit-tap-highlight-color: transparent;
+  }
   a.btn[href="trade.html"] {
     background: var(--paper);
     border-color: var(--paper);
@@ -637,7 +641,9 @@
     a.m-direct {
       text-decoration: none;
       color: var(--clay-deep);
+      -webkit-tap-highlight-color: transparent;
     }
+    a.m-direct[href="trade.html"] { color: #5F6748; }
   }
 
   @media (max-width: 480px) {

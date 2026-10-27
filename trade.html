@@ -45,9 +45,9 @@
     --ink: #24211C;
     --ink-soft: #5A554A;
     --line: #CFC8B6;
-    --clay: #C05A28;
-    --clay-deep: #A24A1F;
     --sage: #7C8360;
+    /* Brand sage fails AA for small type and for white labels. This is the same hue, darkened. */
+    --sage-deep: #5F6748;
     --yellow: #f2a900;
     --serif: "GTAlpinaLight", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
     --sans: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
@@ -62,6 +62,18 @@
   .trade-page .nav-version-switcher { display: none !important; }
   .trade-page a.nav-direct[aria-current="page"] {
     box-shadow: inset 0 -1.5px 0 currentColor;
+  }
+  .trade-page a,
+  .trade-page button,
+  .trade-page summary,
+  .trade-page input,
+  .trade-page select,
+  .trade-page label,
+  .trade-page form {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .trade-page :focus:not(:focus-visible) {
+    outline: none;
   }
 
   .tp {
@@ -98,7 +110,7 @@
   a.tp-btn--paper,
   a.tp-btn--paper:hover,
   a.tp-btn--paper:focus-visible { color: var(--ink); }
-  a.tp-text-link { color: var(--clay-deep); }
+  a.tp-text-link { color: var(--sage-deep); }
 
   .skip {
     position: absolute;
@@ -134,7 +146,7 @@
     font-size: 12px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--clay-deep);
+    color: var(--sage-deep);
     margin: 0 0 18px;
   }
 
@@ -176,8 +188,8 @@
     transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
   }
   .tp-btn--solid {
-    background: var(--clay-deep);
-    border-color: var(--clay-deep);
+    background: var(--sage-deep);
+    border-color: var(--sage-deep);
     color: #fff;
   }
   .tp-btn--solid:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
@@ -200,7 +212,7 @@
   }
 
   .tp :focus-visible {
-    outline: 2px solid var(--clay-deep);
+    outline: 2px solid var(--sage-deep);
     outline-offset: 3px;
   }
 
@@ -400,7 +412,7 @@
     font-weight: 500;
     font-size: 22px;
     letter-spacing: 0.06em;
-    color: var(--clay-deep);
+    color: var(--sage-deep);
     margin-bottom: 10px;
   }
   .tp-who h3,
@@ -446,7 +458,7 @@
     font-size: 13px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--clay-deep);
+    color: var(--sage-deep);
     text-decoration: none;
     border-bottom: 1px solid currentColor;
     padding-bottom: 3px;
@@ -498,64 +510,83 @@
     line-height: 1.6;
     margin: 0 0 14px;
   }
-  .tp-apply-copy a { color: var(--clay-deep); }
+  .tp-apply-copy a { color: var(--sage-deep); }
 
   .tp-form, .tp-success {
     background: #fff;
     border: 1px solid var(--line);
-    padding: clamp(22px, 3vw, 36px);
+    border-radius: 8px;
+    padding: clamp(28px, 4vw, 44px);
   }
   .tp-fields {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px 16px;
+    gap: 20px 18px;
+    align-items: start;
   }
-  .tp-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .tp-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
   .tp-field--wide { grid-column: 1 / -1; }
   .tp-field label {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
     font-family: var(--sans);
     font-size: 12px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink);
   }
-  .tp-opt { color: var(--ink-soft); letter-spacing: 0.06em; text-transform: none; font-family: var(--body); font-size: 13px; }
+  .tp-opt { color: var(--ink-soft); letter-spacing: 0.04em; text-transform: none; font-family: var(--body); font-size: 13px; font-weight: 400; }
   .tp-field input,
   .tp-field select {
     width: 100%;
-    min-height: 48px;
+    min-height: 50px;
     border: 1px solid var(--line);
-    background: var(--paper);
+    background-color: var(--paper);
     color: var(--ink);
     font: 16px/1.4 var(--body);
-    padding: 12px 14px;
-    border-radius: 0;
+    padding: 13px 14px;
+    border-radius: 8px;
+    transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
   }
+  .tp-field input::placeholder { color: var(--ink-soft); }
   .tp-field select {
     appearance: none;
     background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
-    background-position: calc(100% - 18px) 22px, calc(100% - 12px) 22px;
+    background-position: right 16px center, right 10px center;
     background-size: 6px 6px, 6px 6px;
     background-repeat: no-repeat;
     padding-right: 36px;
   }
   .tp-field input:focus,
-  .tp-field select:focus {
-    outline: 2px solid var(--clay-deep);
-    outline-offset: 1px;
-    border-color: var(--clay-deep);
+  .tp-field select:focus,
+  .tp-field input:focus-visible,
+  .tp-field select:focus-visible {
+    border-color: var(--sage-deep);
     background-color: #fff;
   }
+  .tp-field input:focus-visible,
+  .tp-field select:focus-visible {
+    outline: 2px solid var(--sage-deep);
+    outline-offset: 2px;
+  }
   .tp-field input:user-invalid,
-  .tp-field select:user-invalid { border-color: var(--clay-deep); }
+  .tp-field select:user-invalid { border-color: var(--sage-deep); }
   .tp-fine {
     grid-column: 1 / -1;
-    margin: 0;
+    margin: 2px 0 0;
     font-size: 13px;
     line-height: 1.5;
     color: var(--ink-soft);
   }
-  .tp-form .tp-btn { margin-top: 8px; }
+  .tp-form .tp-btn,
+  .tp-success .tp-btn {
+    margin-top: 4px;
+    border-radius: 8px;
+    align-self: flex-start;
+    width: fit-content;
+  }
   .tp-success[hidden], .tp-form[hidden] { display: none; }
   .tp-success h3 {
     font-family: var(--serif);
@@ -587,7 +618,7 @@
     font-family: var(--serif);
     font-size: 28px;
     line-height: 1;
-    color: var(--clay-deep);
+    color: var(--sage-deep);
     flex-shrink: 0;
   }
   .tp-faq-item[open] summary::after { content: "–"; }
@@ -600,7 +631,7 @@
   }
   .tp-faq-item .tp-faq-a { padding: 0 48px 22px 0; }
   .tp-faq-item p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6; }
-  .tp-faq-item a { color: var(--clay-deep); }
+  .tp-faq-item a { color: var(--sage-deep); }
 
   /* ---------- Close ---------- */
   .tp-close {
@@ -661,7 +692,7 @@
     text-transform: uppercase;
     text-decoration: none;
   }
-  .tp-foot nav a:hover { color: var(--clay-deep); }
+  .tp-foot nav a:hover { color: var(--sage-deep); }
   .tp-colophon {
     margin-top: 28px;
     font-size: 12px;
@@ -699,6 +730,11 @@
       font-size: 12px;
       letter-spacing: 0.08em;
       padding: 14px 16px;
+    }
+    .tp-form .tp-btn,
+    .tp-success .tp-btn {
+      width: 100%;
+      align-self: stretch;
     }
     .tp-mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
     .tp-mosaic figure, .tp-mosaic figure:first-child { height: 220px; grid-column: auto; }
