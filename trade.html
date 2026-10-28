@@ -343,7 +343,34 @@
     background: var(--clay);
     color: var(--paper);
     overflow: hidden;
-    padding: 18px 0;
+    padding: clamp(16px, 2vw, 22px) 0;
+  }
+  .tp-ticker-inner {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 40px);
+  }
+  .tp-ticker-label {
+    flex-shrink: 0;
+    padding-left: max(var(--gutter), calc((100vw - var(--max)) / 2));
+    padding-right: clamp(20px, 2.5vw, 32px);
+    border-right: 1px solid color-mix(in srgb, var(--paper) 28%, transparent);
+  }
+  .tp-ticker-heading {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: clamp(14px, 1.15vw, 17px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--paper);
+    white-space: nowrap;
+  }
+  .tp-ticker-scroll {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
   }
   .tp-ticker-track {
     display: flex;
@@ -750,13 +777,13 @@
   .tp-apply-contact a:focus-visible { background-size: 100% 1px; }
 
   .tp-form-title {
-    margin: 0 0 clamp(20px, 2.4vw, 28px);
+    margin: 0 0 clamp(24px, 3vw, 36px);
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: clamp(24px, 2.6vw, 36px);
     font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--sage-deep);
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    color: var(--ink);
   }
 
   .tp-form, .tp-success {
@@ -1034,6 +1061,14 @@
   }
 
   @media (max-width: 900px) {
+    .tp-ticker-inner { flex-wrap: wrap; align-items: flex-start; }
+    .tp-ticker-label {
+      flex: 1 1 100%;
+      border-right: none;
+      padding-right: max(var(--gutter), calc((100vw - var(--max)) / 2));
+      padding-bottom: 4px;
+    }
+    .tp-ticker-scroll { flex: 1 1 100%; mask-image: none; }
     .tp-apply-grid, .tp-pair, .tp-faq-grid { grid-template-columns: 1fr; }
     .tp-faq-head { position: static; }
     .tp-plus { justify-self: center; margin: -8px 0; }
@@ -1404,7 +1439,12 @@
     <p class="tp-hero-cap">Striped stoneware, from the PHYLUM serveware edit</p>
   </section>
 
-  <div class="tp-ticker" aria-hidden="true">
+  <div class="tp-ticker" aria-labelledby="ticker-heading">
+    <div class="tp-ticker-inner">
+      <div class="tp-ticker-label">
+        <p class="tp-ticker-heading" id="ticker-heading">Who this is for</p>
+      </div>
+      <div class="tp-ticker-scroll">
     <div class="tp-ticker-track">
       <ul class="tp-ticker-row">
         <li>Interior designers<span class="tp-sun"></span></li>
@@ -1426,6 +1466,8 @@
         <li>Stylists<span class="tp-sun"></span></li>
         <li>Stagers<span class="tp-sun"></span></li>
       </ul>
+    </div>
+      </div>
     </div>
   </div>
 
