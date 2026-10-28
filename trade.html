@@ -738,7 +738,21 @@
     font-weight: 500;
     letter-spacing: -0.035em;
   }
-  .tp-apply-h2-line { display: block; }
+  #apply-title .tp-apply-h2-lead,
+  #apply-title .tp-apply-h2-serif {
+    display: block;
+    font-size: inherit;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+  #apply-title .tp-apply-h2-lead {
+    font-family: var(--sans);
+    font-weight: 500;
+  }
+  #apply-title .tp-apply-h2-serif {
+    font-family: var(--serif);
+    font-weight: 300;
+  }
 
   .tp-apply-lede {
     max-width: 22em;
@@ -1713,7 +1727,7 @@
     <div class="tp-wrap tp-apply-grid">
       <div class="tp-apply-copy tp-reveal">
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Application</p>
-        <h2 id="apply-title"><span class="tp-s">Ready</span><span class="tp-apply-h2-line"><span class="tp-h2-sans">to </span>talk shop?</span></h2>
+        <h2 id="apply-title"><span class="tp-apply-h2-lead">Ready to </span><span class="tp-apply-h2-serif">talk shop?</span></h2>
         <p class="tp-apply-lede">Tell us about the practice. We read every application (yes, really).</p>
         <ul class="tp-apply-contact">
           <li>
