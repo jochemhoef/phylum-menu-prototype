@@ -706,20 +706,58 @@
     gap: clamp(28px, 6vw, 112px);
     align-items: start;
   }
-  .tp-apply-copy p:not(.tp-eyebrow) {
+  .tp-h2-sans {
+    font-family: var(--sans);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+  }
+
+  .tp-apply-lede {
+    max-width: 22em;
     color: var(--ink-soft);
     font-size: 17px;
-    line-height: 1.6;
-    margin: 0 0 14px;
+    line-height: 1.55;
+    margin: 0 0 clamp(28px, 3vw, 40px);
   }
-  .tp-apply-copy a {
+  .tp-apply-contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 22em;
+  }
+  .tp-apply-contact-label {
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .tp-apply-contact a {
+    font-size: 16px;
+    line-height: 1.45;
     color: var(--clay);
     text-decoration: none;
     background: linear-gradient(currentColor, currentColor) left bottom / 0% 1px no-repeat;
     transition: background-size 0.5s var(--ease);
   }
-  .tp-apply-copy a:hover,
-  .tp-apply-copy a:focus-visible { background-size: 100% 1px; }
+  .tp-apply-contact a:hover,
+  .tp-apply-contact a:focus-visible { background-size: 100% 1px; }
+
+  .tp-form-title {
+    margin: 0 0 clamp(20px, 2.4vw, 28px);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
 
   .tp-form, .tp-success {
     background: #fff;
@@ -1632,13 +1670,26 @@
     <div class="tp-wrap tp-apply-grid">
       <div class="tp-apply-copy tp-reveal">
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Application</p>
-        <h2 id="apply-title"><span class="tp-s">Ready to talk shop?</span> Apply for the trade program.</h2>
-        <p>Tell us about the practice. We read every application (yes, really).</p>
-        <p>Questions first? Write <a href="mailto:trade@shopphylum.com">trade@shopphylum.com</a> or call <a href="tel:+17604242110">(760) 424-2110</a>.</p>
-        <p>Or swing by the flagship at <a href="https://maps.google.com/?q=901+N+Palm+Canyon+Dr+Suite+101+Palm+Springs+CA+92262">901 N. Palm Canyon Dr., Suite 101, Palm Springs</a>, in the Design District.</p>
+        <h2 id="apply-title"><span class="tp-h2-sans">Ready to talk </span>shop?</h2>
+        <p class="tp-apply-lede">Tell us about the practice. We read every application (yes, really).</p>
+        <ul class="tp-apply-contact">
+          <li>
+            <span class="tp-apply-contact-label">Questions first</span>
+            <a href="mailto:trade@shopphylum.com">trade@shopphylum.com</a>
+          </li>
+          <li>
+            <span class="tp-apply-contact-label">Or call</span>
+            <a href="tel:+17604242110">(760) 424-2110</a>
+          </li>
+          <li>
+            <span class="tp-apply-contact-label">Visit the flagship</span>
+            <a href="https://maps.google.com/?q=901+N+Palm+Canyon+Dr+Suite+101+Palm+Springs+CA+92262">901 N. Palm Canyon Dr., Suite 101<br>Palm Springs · Design District</a>
+          </li>
+        </ul>
       </div>
       <!-- TODO: Applications go to trade@shopphylum.com (being set up). Wire this form to that inbox, Shopify customer tags, or a form service such as Klaviyo. It is front-end only; submission is not sent anywhere. -->
       <form class="tp-form tp-reveal" id="tradeForm" action="#" method="post" enctype="multipart/form-data" data-recipient="trade@shopphylum.com" novalidate>
+        <p class="tp-form-title">Apply for the trade program</p>
         <div class="tp-fields">
           <div class="tp-field">
             <label for="trade-name">Name</label>
@@ -1713,7 +1764,7 @@
     <div class="tp-wrap tp-faq-grid">
       <div class="tp-faq-head tp-reveal">
         <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>FAQ</p>
-        <h2 id="faq-title"><span class="tp-s">Good questions.</span> Straight answers.</h2>
+        <h2 id="faq-title"><span class="tp-h2-sans">Straight </span>answers</h2>
       </div>
       <div class="tp-faq-list tp-reveal">
           <details class="tp-faq-item">
