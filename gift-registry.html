@@ -3,26 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gift Registry for Weddings &amp; Holidays | PHYLUM Palm Springs</title>
-<meta name="description" content="Create or find a PHYLUM gift registry for a wedding, the holidays, or a new house. A wishlist sits alongside it. Palm Springs modernist mercantile.">
+<title>Gift Registry for Weddings, Housewarmings &amp; More | PHYLUM Palm Springs</title>
+<meta name="description" content="Big news deserves better gifts. Start a PHYLUM gift registry for a wedding, a new place, the holidays, or just because, or find a friend’s list by name. Free to make, free to share.">
 <link rel="canonical" href="https://phylum-menu.onrender.com/gift-registry.html">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#F1EEE4">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PHYLUM">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="PHYLUM Gift Registry — Register for the pieces that stay">
-<meta property="og:description" content="A PHYLUM registry for weddings, holidays, and housewarmings, plus a wishlist. Create a list or find one by name.">
+<meta property="og:title" content="PHYLUM Gift Registry — Big news deserves better gifts">
+<meta property="og:description" content="A registry for weddings, housewarmings, holidays, and no reason at all, plus a wishlist just for you. Free to make, free to share.">
 <meta property="og:url" content="https://phylum-menu.onrender.com/gift-registry.html">
 <meta property="og:image" content="https://phylum-menu.onrender.com/assets/registry/gift-wrap.jpg">
 <meta property="og:image:alt" content="A PHYLUM gift wrapped in marbled coral and lilac paper, tied with cream cord and a PHYLUM tag.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PHYLUM Gift Registry — Register for the pieces that stay">
-<meta name="twitter:description" content="A PHYLUM registry for weddings, holidays, and housewarmings, plus a wishlist.">
+<meta name="twitter:title" content="PHYLUM Gift Registry — Big news deserves better gifts">
+<meta name="twitter:description" content="A registry for weddings, housewarmings, holidays, and no reason at all, plus a wishlist just for you.">
 <meta name="twitter:image" content="https://phylum-menu.onrender.com/assets/registry/gift-wrap.jpg">
 <meta name="twitter:image:alt" content="A PHYLUM gift wrapped in marbled coral and lilac paper, tied with cream cord and a PHYLUM tag.">
 <link rel="icon" href="assets/event/phylum-sun.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="preload" as="image" href="assets/registry/hero-gift-wrap.jpg">
 <style>
   @font-face {
     font-family: "GTAlpinaLight";
@@ -48,137 +49,107 @@
     --ink-soft: #5A554A;
     --line: #CFC8B6;
     --sage: #7C8360;
-    /* Brand sage fails AA for small type and for white labels. This is the same hue, darkened. */
     --sage-deep: #5F6748;
     --yellow: #f2a900;
     --clay: #C05A28;
+    --clay-deep: #A24A1F;
     --serif: "GTAlpinaLight", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
     --sans: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
     --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    --gutter: clamp(20px, 4.5vw, 72px);
+    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --gutter: clamp(16px, 4.5vw, 72px);
     --max: 1440px;
     --sun: url("assets/event/phylum-sun.svg");
   }
 
+  /* ---------- Shared chrome hooks ---------- */
   .tp-page { color-scheme: light; }
-  body.chrome-loading .tp { visibility: hidden; }
+  body.chrome-loading .gr { visibility: hidden; }
   .tp-page .nav-version-switcher { display: none !important; }
-  .tp-page a.nav-direct[aria-current="page"] {
-    box-shadow: inset 0 -1.5px 0 currentColor;
-  }
-  .tp-page a,
-  .tp-page button,
-  .tp-page summary,
-  .tp-page input,
-  .tp-page select,
-  .tp-page label,
-  .tp-page form {
-    -webkit-tap-highlight-color: transparent;
-  }
-  .tp-page :focus:not(:focus-visible) {
-    outline: none;
-  }
+  .tp-page a.nav-direct[aria-current="page"] { box-shadow: inset 0 -1.5px 0 currentColor; }
+  .tp-page a, .tp-page button, .tp-page summary, .tp-page input, .tp-page label { -webkit-tap-highlight-color: transparent; }
+  .tp-page :focus:not(:focus-visible) { outline: none; }
 
-  .tp {
+  .skip {
+    position: absolute; left: 16px; top: -48px; z-index: 400;
+    background: var(--ink); color: var(--paper);
+    padding: 10px 14px; font-family: var(--sans); font-size: 13px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .skip:focus { top: 16px; }
+
+  /* ---------- Base ---------- */
+  .gr {
     font-family: var(--body);
-    font-style: normal;
     font-synthesis: none;
     color: var(--ink);
     background: var(--paper);
     line-height: 1.5;
     overflow-x: clip;
   }
-  .tp em, .tp i, .tp h1, .tp h2, .tp h3, .tp address { font-style: normal; }
-  .tp h1, .tp h2 {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-synthesis: none;
-  }
-  .tp h3, .tp .tp-eyebrow, .tp .tp-lede, .tp .tp-intro, .tp .tp-offer-intro {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-synthesis: none;
-  }
+  .gr * { box-sizing: border-box; }
+  .gr img { display: block; max-width: 100%; }
+  .gr p { text-wrap: pretty; }
+  .gr a { color: inherit; }
+  .gr em, .gr i, .gr address { font-style: normal; }
+  .gr h1, .gr h2, .gr h3, .gr h4 { margin: 0; font-weight: 300; font-style: normal; }
+  .gr h1, .gr h2 { font-family: var(--serif); text-wrap: balance; }
+  .gr :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-  .tp * { box-sizing: border-box; }
-  .tp img { max-width: 100%; display: block; }
-  .tp p { text-wrap: pretty; }
-  .tp a { color: inherit; }
-  a.tp-btn--solid,
-  a.tp-btn--solid:hover,
-  a.tp-btn--solid:focus-visible { color: #fff; }
-  a.tp-btn--ghost,
-  a.tp-btn--ghost:focus-visible { color: var(--ink); }
-  a.tp-btn--ghost:hover,
-  a.tp-btn--ghost:hover:focus-visible { color: var(--paper); }
-  a.tp-btn--light,
-  a.tp-btn--light:focus-visible { color: var(--paper); }
-  a.tp-btn--light:hover,
-  a.tp-btn--light:hover:focus-visible { color: var(--ink); }
-  a.tp-btn--paper,
-  a.tp-btn--paper:hover,
-  a.tp-btn--paper:focus-visible,
-  a.tp-btn--sun,
-  a.tp-btn--sun:hover,
-  a.tp-btn--sun:focus-visible { color: var(--ink); }
-  a.tp-text-link { color: var(--sage-deep); }
+  .gr-wrap { width: min(var(--max), calc(100% - var(--gutter) * 2)); margin-inline: auto; }
 
-  .skip {
-    position: absolute;
-    left: 16px;
-    top: -48px;
-    z-index: 400;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 10px 14px;
-    font-family: var(--sans);
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .skip:focus { top: 16px; }
-
-  .tp-wrap {
-    width: min(var(--max), calc(100% - var(--gutter) * 2));
-    margin-inline: auto;
-  }
-  .tp-apply-grid > *,
-  .tp-pair > *,
-  .tp-mosaic,
-  .tp-mosaic figure,
-  .tp-edit-head > *,
-  .tp-faq-grid > * {
-    min-width: 0;
-  }
-
-  /* Display headings: a sans lead line, then a serif close. */
-  .tp-s {
+  .gr-s {
     display: block;
     font-family: var(--sans);
     font-weight: 500;
-    font-size: 0.84em;
+    font-size: 0.8em;
     letter-spacing: -0.035em;
     line-height: 1;
-    margin-bottom: 0.04em;
+    margin-bottom: 0.06em;
   }
-
-  .tp-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .gr-h2 {
+    font-size: clamp(42px, 5.6vw, 96px);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+  }
+  .gr-intro {
     font-family: var(--sans);
     font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--sage-deep);
-    margin: 0 0 22px;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 36em;
+    margin: 22px 0 0;
   }
 
-  @keyframes tp-spin { to { rotate: 360deg; } }
+  /* Highlighter swipe behind a word. Grows when its section reveals. */
+  .gr-hl {
+    position: relative;
+    z-index: 0;
+    white-space: nowrap;
+  }
+  .gr-hl::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -0.06em;
+    right: -0.08em;
+    bottom: 0.06em;
+    height: 0.42em;
+    border-radius: 0.2em;
+    background: var(--hl, var(--lime));
+    transform-origin: 0 50%;
+    rotate: -1.5deg;
+  }
+  .js-motion .gr-hl::before { transform: scaleX(0); transition: transform 0.9s var(--ease) 0.35s; }
+  .js-motion .is-in .gr-hl::before,
+  .js-motion .gr-hl.is-in::before { transform: scaleX(1); }
 
-  .tp-sun {
+  @keyframes gr-spin { to { rotate: 360deg; } }
+  @keyframes gr-spin-rev { to { rotate: -360deg; } }
+
+  .gr-sun {
     display: inline-block;
     flex-shrink: 0;
     width: 16px;
@@ -187,912 +158,1484 @@
     -webkit-mask: var(--sun) center / contain no-repeat;
             mask: var(--sun) center / contain no-repeat;
   }
-  .tp-eyebrow .tp-sun { animation: tp-spin 14s linear infinite; }
 
-  .tp-btn {
+  /* Pill kicker: a little sticker, not a plain eyebrow. */
+  .gr-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 22px;
+    padding: 7px 14px 7px 10px;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 11.5px;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    rotate: -2deg;
+  }
+  .gr-kicker .gr-sun { width: 15px; animation: gr-spin 12s linear infinite; }
+
+  /* ---------- Buttons: fill sweeps up from below ---------- */
+  .gr-btn {
+    --bg: var(--ink);
+    --fg: var(--paper);
+    --bg-h: var(--yellow);
+    --fg-h: var(--ink);
+    --bd: var(--bg);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    min-height: 52px;
+    min-height: 54px;
     max-width: 100%;
-    padding: 15px 30px;
+    padding: 15px 28px;
     border-radius: 999px;
-    border: 1px solid transparent;
+    border: 1.5px solid var(--bd);
+    background: var(--bg);
+    color: var(--fg);
     font-family: var(--sans);
     font-weight: 500;
-    font-style: normal;
     font-size: 13px;
-    line-height: 1.25;
+    line-height: 1.2;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-align: center;
     text-decoration: none;
-    white-space: normal;
-    overflow: visible;
-    overflow-wrap: break-word;
-    min-width: 0;
     cursor: pointer;
-    transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+    transition: color 0.45s var(--ease), border-color 0.45s var(--ease), translate 0.4s var(--ease);
+    translate: var(--mx, 0px) var(--my, 0px);
   }
-  .tp-btn--solid {
-    background: var(--sage-deep);
-    border-color: var(--sage-deep);
-    color: #fff;
-  }
-  .tp-btn--solid:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
-  .tp-btn--ghost {
-    background: transparent;
-    border-color: var(--ink);
-    color: var(--ink);
-  }
-  .tp-btn--ghost:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .tp-btn--light {
-    background: rgba(241, 238, 228, 0.08);
-    border-color: rgba(241, 238, 228, 0.85);
-    color: var(--paper);
-    -webkit-backdrop-filter: blur(6px);
-            backdrop-filter: blur(6px);
-  }
-  .tp-btn--light:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
-  .tp-btn--paper {
-    background: var(--paper);
-    border-color: var(--paper);
-    color: var(--ink);
-  }
-  .tp-btn--paper:hover { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
-  .tp-btn--sun {
-    background: var(--yellow);
-    border-color: var(--yellow);
-    color: var(--ink);
-  }
-  .tp-btn--sun:hover { background: var(--lime); border-color: var(--lime); color: var(--ink); }
-  .tp-hero .tp-btn:focus-visible,
-  .tp-close .tp-btn:focus-visible,
-  .tp-offer .tp-btn:focus-visible,
-  .tp-offer a:focus-visible {
-    outline-color: var(--yellow);
-  }
-
-  .tp :focus-visible {
-    outline: 2px solid var(--sage-deep);
-    outline-offset: 3px;
-  }
-
-  /* ---------- Hero ---------- */
-  .tp-hero {
-    position: relative;
-    isolation: isolate;
-    display: grid;
-    align-items: end;
-    min-height: clamp(640px, 88svh, 960px);
-    padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 6vw, 96px);
-    color: var(--paper);
-    background: #3B3125;
-    overflow: hidden;
-  }
-  .tp-hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 70% 55%;
-    transform: scale(1.06);
-    transition: transform 2.4s var(--ease);
-  }
-  .is-ready .tp-hero-bg { transform: scale(1); }
-  .tp-hero-shade {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-      linear-gradient(90deg, rgba(30, 27, 22, 0.82) 0%, rgba(30, 27, 22, 0.6) 34%, rgba(30, 27, 22, 0.14) 66%, rgba(30, 27, 22, 0) 82%),
-      linear-gradient(0deg, rgba(30, 27, 22, 0.5) 0%, rgba(30, 27, 22, 0) 42%);
-  }
-  .tp-hero-inner { position: relative; }
-  .tp-hero-copy { max-width: 900px; }
-
-  .tp-hero .tp-eyebrow { color: var(--yellow); }
-
-  .tp-hero h1 {
-    font-size: clamp(56px, 7.6vw, 136px);
-    line-height: 0.9;
-    letter-spacing: -0.035em;
-    margin: 0 0 28px;
-  }
-  .tp-hero h1 .tp-s { font-size: 0.8em; }
-
-  .tp-lede {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(17px, 1.35vw, 20px);
-    line-height: 1.55;
-    color: rgba(241, 238, 228, 0.92);
-    max-width: 36em;
-    margin: 0 0 32px;
-  }
-
-  .tp-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-  .tp-hero-cap {
-    position: absolute;
-    right: var(--gutter);
-    bottom: clamp(20px, 2.4vw, 32px);
-    margin: 0;
-    font-family: var(--sans);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(241, 238, 228, 0.86);
-    text-shadow: 0 1px 10px rgba(30, 27, 22, 0.5);
-  }
-
-  /* ---------- Ticker ---------- */
-  .tp-ticker {
-    background: var(--lime);
-    color: var(--ink);
-    overflow: hidden;
-    padding: 18px 0;
-  }
-  .tp-ticker-track {
-    display: flex;
-    width: max-content;
-    animation: tp-marquee 46s linear infinite;
-  }
-  .tp-ticker-row {
-    display: flex;
-    align-items: center;
-    gap: clamp(48px, 5vw, 80px);
-    padding-right: clamp(48px, 5vw, 80px);
-    margin: 0;
-    list-style: none;
-  }
-  .tp-ticker-row li {
-    display: flex;
-    align-items: center;
-    gap: clamp(48px, 5vw, 80px);
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(22px, 2vw, 30px);
-    letter-spacing: -0.02em;
-    white-space: nowrap;
-  }
-  .tp-ticker-row .tp-sun {
-    width: 0.8em;
-    color: var(--clay);
-    animation: tp-spin 12s linear infinite;
-  }
-  @keyframes tp-marquee { to { transform: translateX(-50%); } }
-
-  /* ---------- Offer ---------- */
-  .tp-offer {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    background: var(--sage);
-    color: #fff;
-    padding: clamp(80px, 10vw, 148px) 0;
-  }
-  .tp-offer-sun {
-    position: absolute;
-    z-index: -1;
-    right: -24vw;
-    top: 30%;
-    width: min(74vw, 1040px);
-    translate: 0 -50%;
-    color: rgba(241, 238, 228, 0.12);
-  }
-  .tp-offer-sun .tp-sun { width: 100%; display: block; animation: tp-spin 160s linear infinite; }
-  .tp-offer .tp-eyebrow { color: #fff; }
-  .tp-offer h2 {
-    font-size: clamp(44px, 5.6vw, 96px);
-    line-height: 0.95;
-    letter-spacing: -0.035em;
-    margin: 0 0 22px;
-    max-width: 14ch;
-  }
-  .tp-offer-intro {
-    max-width: 36em;
-    font-size: clamp(17px, 1.3vw, 19px);
-    line-height: 1.6;
-    color: #fff;
-    margin: 0 0 clamp(48px, 6vw, 88px);
-  }
-  .tp-offer-intro a { color: #fff; }
-
-  .tp-pair {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: clamp(20px, 3vw, 56px);
-    align-items: center;
-  }
-  .tp-deal {
-    --deal: var(--yellow);
-    --deal-sun: var(--clay);
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    background: var(--deal);
-    color: var(--ink);
-    border-radius: 10px;
-    padding: clamp(28px, 3.4vw, 52px);
-    height: 100%;
-    box-shadow: 0 30px 60px -34px rgba(36, 33, 28, 0.55);
-  }
-  .tp-deal--joy { --deal: var(--peach); --deal-sun: var(--yellow); }
-  /* Scroll-driven: --p goes 0 (stacked in the center) to 1 (side by side). */
-  .tp-pair.is-scrolly { position: relative; }
-  .tp-pair.is-scrolly .tp-deal {
-    transform: translate3d(calc(var(--dx, 0px) * (1 - var(--p, 1))), calc(var(--dy, 0px) * (1 - var(--p, 1))), 0) scale(calc(0.92 + 0.08 * var(--p, 1)));
-    will-change: transform;
-  }
-  .tp-pair.is-scrolly .tp-deal:first-child { position: relative; z-index: 2; --dy: -18px; }
-  .tp-pair.is-scrolly .tp-deal--joy { --dy: 18px; }
-  .tp-pair.is-scrolly .tp-plus {
-    opacity: var(--p, 1);
-    transform: scale(calc(0.4 + 0.6 * var(--p, 1))) rotate(calc(-180deg * (1 - var(--p, 1))));
-  }
-  .tp-deal::after {
+  .gr-btn::before {
     content: "";
     position: absolute;
     z-index: -1;
-    top: -18%;
-    right: -14%;
-    width: 62%;
-    aspect-ratio: 1;
-    background: var(--deal-sun);
-    -webkit-mask: var(--sun) center / contain no-repeat;
-            mask: var(--sun) center / contain no-repeat;
-    opacity: 0.9;
+    inset: -2px;
+    border-radius: inherit;
+    background: var(--bg-h);
+    transform: translateY(101%);
+    transition: transform 0.55s var(--ease);
   }
-  .tp-deal .tp-num {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(120px, 15vw, 248px);
-    line-height: 0.8;
-    letter-spacing: -0.045em;
-    margin: 0 0 0.32em;
-    color: var(--ink);
-  }
-  .tp-num-unit { font-size: 0.5em; letter-spacing: -0.02em; vertical-align: 0.5em; margin-left: 0.04em; }
-  .tp-deal h3 {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(15px, 1.2vw, 18px);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin: 0 0 10px;
-  }
-  .tp-deal p {
-    margin: 0;
-    max-width: 30em;
-    color: var(--ink);
-    font-size: 17px;
-    line-height: 1.55;
-  }
-  .tp-plus {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: clamp(84px, 8vw, 132px);
-    aspect-ratio: 1;
-    color: var(--paper);
-  }
-  .tp-plus-glyph {
-    position: relative;
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(56px, 5vw, 88px);
-    line-height: 1;
-    color: var(--paper);
-    padding-bottom: 0.08em;
-  }
-  .tp-note {
-    margin: 32px 0 0;
-    font-size: 14px;
-    color: #fff;
-  }
+  .gr-btn:hover, .gr-btn:focus-visible { color: var(--fg-h); border-color: var(--bg-h); }
+  .gr-btn:hover::before, .gr-btn:focus-visible::before { transform: translateY(0); }
+  .gr-btn-arrow { display: inline-block; transition: transform 0.45s var(--ease); }
+  .gr-btn:hover .gr-btn-arrow { transform: translateX(4px) rotate(-8deg); }
+  a.gr-btn, a.gr-btn:hover, a.gr-btn:focus-visible { text-decoration: none; }
+  .gr-btn--sun { --bg: var(--yellow); --fg: var(--ink); --bg-h: var(--ink); --fg-h: var(--paper); }
+  .gr-btn--ghost { --bg: transparent; --fg: var(--ink); --bd: var(--ink); --bg-h: var(--ink); --fg-h: var(--paper); }
+  .gr-btn--light { --bg: transparent; --fg: var(--paper); --bd: rgba(241, 238, 228, 0.8); --bg-h: var(--paper); --fg-h: var(--ink); }
+  .gr-btn--lime { --bg: var(--lime); --fg: var(--ink); --bg-h: var(--paper); --fg-h: var(--ink); }
+  a.gr-btn { color: var(--fg); }
+  a.gr-btn:hover, a.gr-btn:focus-visible { color: var(--fg-h); }
 
-  /* ---------- Sections ---------- */
-  .tp-section { padding: clamp(80px, 9vw, 140px) 0; }
-  .tp-section--deep { background: var(--paper-deep); }
-  .tp-section h2,
-  .tp-apply h2,
-  .tp-faq h2,
-  .tp-edit h2 {
-    font-size: clamp(44px, 5.4vw, 92px);
-    line-height: 0.95;
-    letter-spacing: -0.035em;
-    margin: 0 0 20px;
-  }
-  .tp-intro {
-    max-width: 40em;
-    font-size: clamp(17px, 1.3vw, 19px);
-    line-height: 1.6;
-    color: var(--ink-soft);
-    margin: 0 0 clamp(40px, 4.4vw, 64px);
-  }
+  .gr-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 
-  /* Who it's for */
-  .tp-who {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(14px, 1.4vw, 22px);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .tp-card {
-    --card: var(--paper-deep);
-    --accent: var(--sage-deep);
-    display: flex;
-    flex-direction: column;
-    background: var(--card);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .tp-card--sage { --card: #DCDFCB; --accent: #4F5739; }
-  .tp-card--apricot { --card: #F3DCC6; --accent: #9A4520; }
-  .tp-card--sun { --card: #F5E4B8; --accent: #7A5A00; }
-  .tp-card figure { position: relative; margin: 0; overflow: hidden; aspect-ratio: 4 / 4.4; }
-  .tp-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.9s var(--ease);
-  }
-  .tp-card:hover img { transform: scale(1.05); }
-  .tp-card figcaption {
-    position: absolute;
-    left: 12px;
-    bottom: 12px;
-    background: rgba(241, 238, 228, 0.94);
-    color: var(--ink);
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-family: var(--sans);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .tp-card-num {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    display: grid;
-    place-items: center;
-    width: 54px;
-    aspect-ratio: 1;
-    color: var(--yellow);
-  }
-  .tp-card-num .tp-sun { position: absolute; inset: 0; width: 100%; animation: tp-spin 30s linear infinite; }
-  .tp-card-num span:last-child {
-    position: relative;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-  }
-  .tp-card-body {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: clamp(22px, 2vw, 30px);
-  }
-  .tp-card h3 {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(24px, 2vw, 32px);
-    letter-spacing: -0.02em;
-    line-height: 1.02;
-    margin: 0 0 clamp(40px, 4vw, 64px);
-  }
-  .tp-card-foot { margin-top: auto; }
-  .tp-card-tag {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(22px, 1.8vw, 28px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--accent);
-    margin: 0 0 12px;
-  }
-  .tp-card-foot > p:not(.tp-card-tag) {
-    margin: 0;
-    color: var(--ink-soft);
-    font-size: 15.5px;
-    line-height: 1.55;
-  }
-  /* How it works */
-  #how h2 { margin-bottom: clamp(64px, 7vw, 120px); }
-  .tp-steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(28px, 4vw, 72px);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .tp-step-num {
-    display: block;
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(96px, 9vw, 160px);
-    line-height: 0.85;
-    letter-spacing: -0.05em;
-    color: var(--yellow);
-    margin-bottom: 26px;
-  }
-  .tp-steps h3 {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(20px, 1.6vw, 24px);
-    letter-spacing: -0.01em;
-    margin: 0 0 8px;
-  }
-  .tp-steps p {
-    margin: 0;
-    color: var(--ink-soft);
-    font-size: 16px;
-    line-height: 1.55;
-    max-width: 30em;
-  }
-
-  /* ---------- Edit ---------- */
-  .tp-edit-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 24px;
-    margin-bottom: 36px;
-  }
-  .tp-edit-head .tp-intro { margin: 0; }
-  .tp-text-link {
-    font-family: var(--sans);
-    font-size: 13px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--sage-deep);
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-    padding-bottom: 3px;
-    white-space: nowrap;
-  }
-  .tp-text-link:hover { color: var(--ink); }
-
-  .tp-mosaic {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr;
-    grid-template-rows: clamp(240px, 22vw, 360px) clamp(240px, 22vw, 360px);
-    gap: 14px;
-  }
-  .tp-mosaic figure { margin: 0; position: relative; min-height: 0; overflow: hidden; border-radius: 4px; }
-  .tp-mosaic figure:first-child { grid-row: 1 / span 2; }
-  .tp-mosaic img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background: var(--paper-deep);
-    transform: scale(1);
-    transition: transform 0.7s var(--ease);
-  }
-  .tp-mosaic figure:hover img { transform: scale(1.035); }
-  .tp-mosaic figcaption {
-    position: absolute;
-    left: 12px;
-    bottom: 12px;
-    background: rgba(241, 238, 228, 0.94);
-    color: var(--ink);
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-family: var(--sans);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  /* ---------- Apply ---------- */
-  .tp-apply { padding-bottom: clamp(80px, 9vw, 140px); }
-  .tp-apply-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: clamp(28px, 6vw, 112px);
-    align-items: start;
-  }
-  .tp-apply-copy p:not(.tp-eyebrow) {
-    color: var(--ink-soft);
-    font-size: 17px;
-    line-height: 1.6;
-    margin: 0 0 14px;
-  }
-  .tp-apply-copy a { color: var(--sage-deep); }
-
-  .tp-form, .tp-success {
-    background: #fff;
-    border-radius: 8px;
-    padding: clamp(28px, 4vw, 52px);
-  }
-  .tp-fields {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px 18px;
-    align-items: start;
-  }
-  .tp-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-  .tp-field--wide { grid-column: 1 / -1; }
-  .tp-field label {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 6px;
-    font-family: var(--sans);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink);
-  }
-  .tp-opt { color: var(--ink-soft); letter-spacing: 0.04em; text-transform: none; font-family: var(--body); font-size: 13px; font-weight: 400; }
-  .tp-field input,
-  .tp-field select {
-    width: 100%;
-    min-height: 50px;
-    border: 1px solid #ECE8DD;
-    background-color: #FAF9F5;
-    color: var(--ink);
-    font: 16px/1.4 var(--body);
-    padding: 13px 14px;
-    border-radius: 8px;
-    transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
-  }
-  .tp-field input::placeholder { color: var(--ink-soft); }
-  .tp-field select {
-    appearance: none;
-    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
-    background-position: right 16px center, right 10px center;
-    background-size: 6px 6px, 6px 6px;
-    background-repeat: no-repeat;
-    padding-right: 36px;
-  }
-  .tp-field input:focus,
-  .tp-field select:focus,
-  .tp-field input:focus-visible,
-  .tp-field select:focus-visible {
-    border-color: var(--sage-deep);
-    background-color: #fff;
-  }
-  .tp-field input:focus-visible,
-  .tp-field select:focus-visible {
-    outline: 2px solid var(--sage-deep);
-    outline-offset: 2px;
-  }
-  .tp-field input:user-invalid,
-  .tp-field select:user-invalid { border-color: var(--sage-deep); }
-  .tp-fine {
-    grid-column: 1 / -1;
-    margin: 2px 0 0;
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-  }
-  .tp-form .tp-btn,
-  .tp-success .tp-btn {
-    margin-top: 4px;
-    border-radius: 8px;
-    align-self: flex-start;
-    width: fit-content;
-  }
-  .tp-success[hidden], .tp-form[hidden] { display: none; }
-  .tp-success h3 {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(32px, 4vw, 46px);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin: 0 0 12px;
-  }
-  .tp-success p:not(.tp-eyebrow) { margin: 0 0 22px; color: var(--ink-soft); font-size: 17px; line-height: 1.55; }
-  .tp-success-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-
-  /* ---------- FAQ ---------- */
-  .tp-faq { background: var(--paper-deep); padding: clamp(80px, 9vw, 140px) 0; }
-  .tp-faq-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: clamp(28px, 6vw, 112px);
-    align-items: start;
-  }
-  .tp-faq-head { position: sticky; top: 32px; }
-  .tp-faq-list { border-top: 1px solid var(--line); }
-  .tp-faq-item { border-bottom: 1px solid var(--line); }
-  .tp-faq-item summary {
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    padding: 26px 0;
-  }
-  .tp-faq-item summary::-webkit-details-marker { display: none; }
-  .tp-faq-item h3 {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(18px, 1.5vw, 22px);
-    letter-spacing: -0.01em;
-    margin: 0;
-    transition: color 0.3s var(--ease);
-  }
-  .tp-faq-item summary:hover h3 { color: var(--sage-deep); }
-  .tp-pm {
-    position: relative;
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--sage-deep);
-    border-radius: 50%;
-    transition: background-color 0.45s var(--ease), rotate 0.6s var(--ease);
-  }
-  .tp-pm::before,
-  .tp-pm::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 13px;
-    height: 1.5px;
-    margin: -0.75px 0 0 -6.5px;
-    border-radius: 1px;
-    background: var(--sage-deep);
-    transition: transform 0.6s var(--ease), background-color 0.45s var(--ease);
-  }
-  .tp-pm::after { transform: rotate(90deg); }
-  .tp-faq-item.is-open .tp-pm { background: var(--sage-deep); rotate: 180deg; }
-  .tp-faq-item.is-open .tp-pm::before,
-  .tp-faq-item.is-open .tp-pm::after { background: #fff; }
-  .tp-faq-item.is-open .tp-pm::after { transform: rotate(0deg); }
-  .tp-faq-a { overflow: hidden; }
-  .tp-faq-a-inner { padding: 0 60px 26px 0; }
-  .tp-faq-item p { margin: 0; color: var(--ink-soft); font-size: 16.5px; line-height: 1.6; }
-  .tp-faq-item a { color: var(--sage-deep); }
-
-  /* ---------- Close ---------- */
-  .tp-close {
-    position: relative;
-    overflow: hidden;
-    background: var(--clay);
-    color: var(--paper);
-    padding: clamp(88px, 11vw, 156px) 0 0;
-    text-align: center;
-  }
-  .tp-close .tp-eyebrow { justify-content: center; color: var(--paper); }
-  .tp-close h2 {
-    font-size: clamp(52px, 7.4vw, 132px);
-    line-height: 0.92;
-    letter-spacing: -0.035em;
-    margin: 0 auto 24px;
-  }
-  .tp-close p:not(.tp-eyebrow) {
-    margin: 0 auto 32px;
-    max-width: 36em;
-    color: var(--paper);
-    font-size: clamp(17px, 1.3vw, 19px);
-  }
-  .tp-close-copy { position: relative; z-index: 1; }
-  .tp-close-sun {
-    --size: min(1180px, 128vw);
-    width: var(--size);
-    aspect-ratio: 1;
-    margin: clamp(56px, 6vw, 96px) auto calc(var(--size) * -0.56);
-    color: var(--yellow);
-  }
-  .tp-close-sun .tp-sun { width: 100%; display: block; animation: tp-spin 120s linear infinite; }
-
-  /* ---------- Footer ---------- */
-  .tp-foot {
-    padding: 48px 0 64px;
-  }
-  .tp-foot-grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
-    align-items: flex-start;
-  }
-  .tp-wordmark { height: 28px; width: auto; }
-  .tp-foot address {
-    font-style: normal;
-    color: var(--ink-soft);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-top: 14px;
-  }
-  .tp-foot address a { color: var(--ink); text-decoration: none; }
-  .tp-foot address a:hover { text-decoration: underline; }
-  .tp-foot nav { display: flex; flex-wrap: wrap; gap: 10px 22px; }
-  .tp-foot nav a {
-    font-family: var(--sans);
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-  .tp-foot nav a:hover { color: var(--sage-deep); }
-  .tp-colophon {
-    margin-top: 28px;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  @media (max-width: 1180px) {
-    .tp-who { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .tp-card figure { aspect-ratio: 16 / 11; }
-  }
-
-  @media (max-width: 900px) {
-    .tp-apply-grid, .tp-pair, .tp-faq-grid { grid-template-columns: 1fr; }
-    .tp-faq-head { position: static; }
-    .tp-plus { justify-self: center; margin: -8px 0; }
-    .tp-hero { min-height: clamp(620px, 92svh, 860px); }
-    .tp-hero-bg { object-position: 66% 50%; }
-    .tp-hero-shade {
-      background:
-        linear-gradient(0deg, rgba(30, 27, 22, 0.88) 0%, rgba(30, 27, 22, 0.66) 46%, rgba(30, 27, 22, 0.12) 78%, rgba(30, 27, 22, 0.2) 100%);
-    }
-    .tp-hero-cap { display: none; }
-    .tp-offer-sun { width: 150vw; right: -70vw; top: 30%; }
-    .tp-steps { grid-template-columns: 1fr; }
-    .tp-mosaic {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 280px 200px 200px;
-    }
-    .tp-mosaic figure:first-child { grid-row: auto; grid-column: 1 / -1; }
-    .tp-edit-head { flex-direction: column; align-items: flex-start; }
-    .tp-fields { grid-template-columns: 1fr; }
-    .tp-foot-grid { flex-direction: column; }
-  }
-
-  @media (max-width: 640px) {
-    .tp-who { grid-template-columns: 1fr; }
-    .tp-card figure { aspect-ratio: 4 / 3; }
-    .tp-faq-a-inner { padding-right: 0; }
-  }
-
-  @media (max-width: 560px) {
-    .tp-ctas, .tp-success-actions { flex-direction: column; align-items: stretch; }
-    .tp-btn {
-      width: 100%;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      padding: 14px 16px;
-    }
-    .tp-form .tp-btn,
-    .tp-success .tp-btn {
-      width: 100%;
-      align-self: stretch;
-    }
-    .tp-mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
-    .tp-mosaic figure, .tp-mosaic figure:first-child { height: 240px; grid-column: auto; }
-    .tp-hero h1 { font-size: clamp(46px, 13vw, 64px); }
-    .tp-deal .tp-num { font-size: clamp(112px, 34vw, 160px); }
-  }
-
-  /* Scroll reveals. Hidden only after JS confirms motion is allowed. */
-  .js-motion .tp-reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.7s var(--ease), transform 0.8s var(--ease);
-  }
-  .js-motion .tp-reveal.is-in {
-    opacity: 1;
-    transform: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .tp-btn,
-    .tp-hero-bg,
-    .tp-deal,
-    .tp-card img,
-    .tp-mosaic img,
-    .tp-pm,
-    .tp-pm::before,
-    .tp-pm::after,
-    .js-motion .tp-reveal {
-      transition: none;
-    }
-    .tp-sun,
-    .tp-ticker-track,
-    .tp-eyebrow .tp-sun,
-    .tp-offer-sun .tp-sun,
-    .tp-close-sun .tp-sun,
-    .tp-card-num .tp-sun {
-      animation: none;
-    }
-    .tp-hero-bg,
-    .tp-card:hover img,
-    .tp-mosaic figure:hover img,
-    .js-motion .tp-reveal {
-      transform: none;
-      opacity: 1;
-    }
-  }
-
-  /* ---------- Registry ---------- */
+  /* =========================================================
+     1. HERO
+     ========================================================= */
   .gr-hero {
     position: relative;
     isolation: isolate;
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    min-height: clamp(640px, 88svh, 960px);
-    background: var(--peach);
-    color: var(--ink);
+    place-items: center;
+    min-height: max(700px, calc(100svh - var(--nav-h, 78px) - 34px));
+    padding: clamp(96px, 9vw, 132px) var(--gutter) clamp(104px, 9vw, 132px);
+    text-align: center;
+    background:
+      radial-gradient(60% 55% at 50% 52%, rgba(255, 191, 172, 0.55) 0%, rgba(255, 191, 172, 0) 70%),
+      var(--paper);
     overflow: hidden;
-  }
-  .gr-hero-copy {
-    position: relative;
-    align-self: end;
-    padding: clamp(56px, 6vw, 96px) clamp(32px, 5vw, 88px) clamp(56px, 6vw, 96px) max(var(--gutter), calc((100vw - var(--max)) / 2));
   }
   .gr-hero-sun {
     position: absolute;
-    z-index: -1;
-    left: -18%;
-    top: -26%;
-    width: min(64vw, 820px);
-    color: rgba(192, 90, 40, 0.14);
+    z-index: -3;
+    left: 50%;
+    top: 52%;
+    width: min(1120px, 96vw);
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    color: rgba(242, 169, 0, 0.36);
+    pointer-events: none;
   }
-  .gr-hero-sun .tp-sun { width: 100%; display: block; animation: tp-spin 160s linear infinite; }
-  .gr-hero .tp-eyebrow { color: var(--clay); }
+  .gr-hero-sun .gr-sun { width: 100%; display: block; animation: gr-spin 150s linear infinite; }
+  .js-motion .gr-hero-sun { scale: 0.6; opacity: 0; transition: scale 2.2s var(--ease), opacity 1.4s ease; }
+  .is-ready .gr-hero-sun { scale: 1; opacity: 1; }
+
+  .gr-hero-copy {
+    position: relative;
+    z-index: 2;
+    width: min(800px, 52vw);
+  }
+  .gr-hero .gr-kicker { color: var(--clay); background: var(--paper); }
   .gr-hero h1 {
-    font-size: clamp(54px, 6.6vw, 120px);
-    line-height: 0.9;
-    letter-spacing: -0.035em;
-    margin: 0 0 28px;
+    margin: 0 0 26px;
+    letter-spacing: -0.04em;
+    line-height: 0.86;
   }
-  .gr-hero h1 .tp-s { font-size: 0.8em; }
-  .gr-hero .tp-lede { color: var(--ink); max-width: 32em; }
-  .gr-hero-media { position: relative; margin: 0; overflow: hidden; min-height: 100%; }
-  .gr-hero-media .tp-hero-bg { z-index: 0; object-position: 50% 40%; }
-  .gr-hero-media .tp-hero-cap { z-index: 1; }
+  .gr-h1-a {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(30px, 3.9vw, 66px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 0.1em;
+  }
+  .gr-h1-b {
+    position: relative;
+    display: inline-block;
+    font-size: clamp(60px, 7.8vw, 140px);
+    padding-bottom: 0.1em;
+  }
+  .gr-ribbon {
+    position: absolute;
+    left: -2%;
+    width: 104%;
+    bottom: -0.12em;
+    height: 0.34em;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .gr-ribbon path {
+    fill: none;
+    stroke: var(--clay);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .js-motion .gr-ribbon path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--ease) 1s; }
+  .is-ready .gr-ribbon path { stroke-dashoffset: 0; }
 
-  .tp-deal .gr-num { font-size: clamp(72px, 8.2vw, 128px); }
-  .tp-plus-glyph.gr-or { font-size: clamp(40px, 3.6vw, 60px); padding-bottom: 0.12em; }
-  .tp-deal h3 + p { margin-bottom: 28px; }
-  .gr-deal-btn {
-    min-height: 46px;
-    padding: 12px 24px;
+  /* Word-by-word rise */
+  .gr-w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.04em 0.03em 0.14em; margin: -0.04em -0.03em -0.14em; }
+  .gr-w > span { display: inline-block; }
+  .js-motion .gr-w > span {
+    transform: translateY(112%) rotate(7deg);
+    transition: transform 1.1s var(--ease) calc(var(--i, 0) * 75ms + 120ms);
+  }
+  .is-ready .gr-w > span { transform: none; }
+
+  .gr-lede {
+    max-width: 33em;
+    margin: 0 auto 32px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .gr-hero .gr-ctas { justify-content: center; }
+
+  .js-motion .gr-hero-fade {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.9s var(--ease) var(--d, 0.6s), transform 1s var(--ease) var(--d, 0.6s);
+  }
+  .is-ready .gr-hero-fade { opacity: 1; transform: none; }
+
+  /* Polaroids */
+  .gr-pic {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    width: var(--w);
+    transform: translate3d(var(--px, 0px), var(--py, 0px), 0) rotate(var(--r, 0deg));
+    will-change: transform;
+    pointer-events: none;
+  }
+  .gr-pic-in { display: block; }
+  .js-motion .gr-pic-in {
+    opacity: 0;
+    transform: translate(var(--fx, 0px), var(--fy, 0px)) scale(0.35) rotate(calc(var(--r, 0deg) * -3));
+    transition: transform 1.3s var(--spring) var(--d, 0.3s), opacity 0.5s ease var(--d, 0.3s);
+  }
+  .is-ready .gr-pic-in { opacity: 1; transform: none; }
+  .gr-pic-float {
+    position: relative;
+    display: block;
+    background: #FFFDF8;
+    padding: 8px 8px 30px;
+    border-radius: 3px;
+    box-shadow: 0 26px 44px -24px rgba(36, 33, 28, 0.5), 0 2px 6px rgba(36, 33, 28, 0.08);
+    animation: gr-bob 7s ease-in-out infinite;
+    animation-delay: var(--bd, 0s);
+  }
+  .gr-pic-float::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: -10px;
+    left: 50%;
+    width: 64px;
+    height: 20px;
+    translate: -50% 0;
+    rotate: var(--tape-r, -4deg);
+    background: var(--tape, rgba(240, 255, 174, 0.82));
+    box-shadow: 0 1px 2px rgba(36, 33, 28, 0.08);
+  }
+  .gr-pic img { width: 100%; height: auto; aspect-ratio: var(--ar, 1); object-fit: cover; border-radius: 1px; background: var(--paper-deep); }
+  .gr-pic figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 9px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  @keyframes gr-bob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1.2deg); }
+  }
+
+  .gr-pic--1 { --w: clamp(150px, 13.5vw, 236px); --r: -7deg; --ar: 4 / 4.7; left: 3%; top: 8%; --fx: 22vw; --fy: 18vh; --d: 0.2s; --bd: -1s; }
+  .gr-pic--2 { --w: clamp(132px, 12vw, 212px); --r: 6deg; --ar: 1; left: 7%; bottom: 7%; --fx: 20vw; --fy: -12vh; --d: 0.32s; --bd: -3s; --tape: rgba(255, 191, 172, 0.85); --tape-r: 5deg; }
+  .gr-pic--3 { --w: clamp(100px, 8vw, 146px); --r: 10deg; --ar: 1.25; left: 15.5%; top: 43%; --fx: 14vw; --fy: 0px; --d: 0.44s; --bd: -5s; --tape: rgba(242, 169, 0, 0.6); }
+  .gr-pic--4 { --w: clamp(150px, 13.5vw, 236px); --r: 6deg; --ar: 4 / 5; right: 3%; top: 7%; --fx: -22vw; --fy: 18vh; --d: 0.26s; --bd: -2s; --tape: rgba(255, 191, 172, 0.85); --tape-r: 3deg; }
+  .gr-pic--5 { --w: clamp(100px, 8vw, 146px); --r: -9deg; --ar: 1; right: 15%; top: 45%; --fx: -14vw; --fy: 0px; --d: 0.5s; --bd: -4s; }
+  .gr-pic--6 { --w: clamp(136px, 12.5vw, 220px); --r: -4deg; --ar: 4 / 4.6; right: 6.5%; bottom: 6%; --fx: -20vw; --fy: -12vh; --d: 0.38s; --bd: -6s; --tape: rgba(242, 169, 0, 0.6); --tape-r: -6deg; }
+
+  /* Stickers */
+  .gr-sticker {
+    position: absolute;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 10px 22px -14px rgba(36, 33, 28, 0.55);
+    rotate: var(--r);
+    pointer-events: auto;
+    cursor: default;
+    transition: rotate 0.5s var(--spring), scale 0.5s var(--spring);
+  }
+  .gr-sticker:hover { rotate: calc(var(--r) * -1); scale: 1.08; }
+  .gr-sticker--a { --r: -9deg; background: var(--lime); color: var(--ink); left: -2%; top: 15%; }
+  .gr-sticker--b { --r: 7deg; background: var(--clay); color: var(--paper); right: -3%; top: 22%; }
+  .gr-sticker--a::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background:
+      linear-gradient(45deg, transparent 43%, currentColor 43% 57%, transparent 57%),
+      linear-gradient(-45deg, transparent 43%, currentColor 43% 57%, transparent 57%);
+  }
+  .js-motion .gr-sticker { opacity: 0; scale: 0.2; transition: opacity 0.3s ease var(--d), scale 0.8s var(--spring) var(--d), rotate 0.5s var(--spring); }
+  .is-ready .gr-sticker { opacity: 1; scale: 1; }
+  .is-ready .gr-sticker:hover { scale: 1.08; transition-delay: 0s; }
+
+  .gr-badge {
+    position: absolute;
+    z-index: 3;
+    left: 21%;
+    bottom: 8%;
+    width: clamp(104px, 8.6vw, 136px);
+    aspect-ratio: 1;
+    color: var(--ink);
+  }
+  .gr-badge svg { width: 100%; height: 100%; display: block; animation: gr-spin 22s linear infinite; overflow: visible; }
+  .gr-badge text { font-family: var(--sans); font-weight: 500; font-size: 10.5px; letter-spacing: 0.2em; fill: var(--paper); }
+  .gr-badge .gr-sun { position: absolute; inset: 31%; width: auto; color: var(--yellow); animation: gr-spin-rev 9s linear infinite; }
+  .js-motion .gr-badge { opacity: 0; scale: 0.3; rotate: -90deg; transition: opacity 0.4s ease 1.2s, scale 1s var(--spring) 1.2s, rotate 1.2s var(--ease) 1.2s; }
+  .is-ready .gr-badge { opacity: 1; scale: 1; rotate: 0deg; }
+
+  .gr-scroll {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: clamp(22px, 3vw, 34px);
+    translate: -50% 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+  .gr-scroll i {
+    display: block;
+    width: 1.5px;
+    height: 34px;
+    background: linear-gradient(var(--ink) 0 50%, transparent 50%) 0 0 / 100% 200%;
+    animation: gr-drip 1.8s var(--ease) infinite;
+  }
+  @keyframes gr-drip { 0% { background-position: 0 100%; } 100% { background-position: 0 -100%; } }
+
+  /* =========================================================
+     2. STREAMERS
+     ========================================================= */
+  .gr-streamers {
+    position: relative;
+    height: clamp(150px, 14vw, 210px);
+    overflow: hidden;
+    background: linear-gradient(var(--paper) 0 50%, var(--peach) 50% 100%);
+  }
+  .gr-streamer {
+    position: absolute;
+    left: -10vw;
+    width: 120vw;
+    top: 50%;
+    padding: clamp(10px, 1vw, 16px) 0;
+    box-shadow: 0 14px 30px -22px rgba(36, 33, 28, 0.6);
+  }
+  .gr-streamer--a { z-index: 2; background: var(--yellow); transform: translateY(-78%) rotate(-3.4deg); }
+  .gr-streamer--b { z-index: 1; background: var(--lime); transform: translateY(-14%) rotate(2.6deg); }
+  .gr-streamer-track { display: flex; width: max-content; will-change: transform; }
+  .gr-streamer-row {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: clamp(22px, 2.6vw, 40px);
+    padding-right: clamp(22px, 2.6vw, 40px);
+    margin: 0;
+    list-style: none;
+  }
+  .gr-streamer-row li {
+    display: flex;
+    align-items: center;
+    gap: clamp(22px, 2.6vw, 40px);
+    white-space: nowrap;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(24px, 2.4vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .gr-streamer--b .gr-streamer-row li {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(13px, 1vw, 15px);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .gr-streamer-row .gr-sun { width: 0.75em; color: var(--clay); }
+  .gr-streamer--b .gr-sun { width: 1.3em; color: var(--sage-deep); }
+
+  /* =========================================================
+     3. TWO LISTS: hanging tags
+     ========================================================= */
+  .gr-lists {
+    position: relative;
+    background: var(--peach);
+    padding: clamp(56px, 6vw, 96px) 0 clamp(72px, 8vw, 128px);
+    overflow: hidden;
+  }
+  .gr-lists-head { text-align: center; }
+  .gr-lists-head .gr-kicker { color: var(--clay-deep); }
+  .gr-lists-head .gr-intro { margin-inline: auto; color: var(--ink); }
+
+  .gr-tag-stage {
+    position: relative;
+    margin-top: clamp(28px, 3vw, 48px);
+    padding-top: 30px;
+  }
+  .gr-garland {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 140px;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .gr-garland path { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .js-motion .gr-garland path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 1.6s var(--ease); }
+  .js-motion .is-in .gr-garland path { stroke-dashoffset: 0; }
+  .gr-flag {
+    position: absolute;
+    width: 26px;
+    height: 32px;
+    margin-left: -13px;
+    background: var(--c);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: 50% 0;
+    rotate: var(--a, 0deg);
+    animation: gr-flutter 3.2s ease-in-out infinite;
+    animation-delay: var(--fd, 0s);
+  }
+  @keyframes gr-flutter {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+  .js-motion .gr-flag { scale: 1 0; transition: scale 0.6s var(--spring) var(--fdl, 0s); }
+  .js-motion .is-in .gr-flag { scale: 1 1; }
+
+  .gr-tags {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(28px, 7vw, 132px);
+  }
+  .gr-hang-pos { width: min(430px, 44%); transform: translateY(var(--attach, 0px)); }
+  .gr-hang-drop { display: block; }
+  .js-motion .gr-hang-drop { transform: translateY(-120%); opacity: 0; transition: transform 1.25s var(--spring) var(--dd, 0s), opacity 0.3s ease var(--dd, 0s); }
+  .js-motion .is-in .gr-hang-drop { transform: none; opacity: 1; }
+  .gr-hang {
+    --string: 64px;
+    position: relative;
+    padding-top: var(--string);
+    transform-origin: 50% 0;
+    will-change: transform;
+    filter: drop-shadow(0 26px 30px rgba(120, 50, 20, 0.22));
+  }
+  .gr-hang::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1.5px;
+    height: calc(var(--string) + 30px);
+    margin-left: -0.75px;
     background: var(--ink);
-    border-color: var(--ink);
   }
-  a.gr-deal-btn,
-  a.gr-deal-btn:focus-visible { color: var(--paper); }
-  .gr-deal-btn:hover { background: var(--paper); border-color: var(--paper); }
-  a.gr-deal-btn:hover { color: var(--ink); }
-  .tp-note a { color: #fff; }
+  .gr-pin {
+    display: none;
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    z-index: 2;
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    border-radius: 50%;
+    background: var(--ink);
+    box-shadow: inset -3px -3px 0 rgba(240, 255, 174, 0.5);
+  }
+  .gr-tag {
+    --tag: var(--yellow);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 62px clamp(24px, 2.8vw, 40px) 0;
+    background: var(--tag);
+    color: var(--ink);
+    clip-path: polygon(16% 0, 84% 0, 100% 9%, 100% 100%, 0 100%, 0 9%);
+    border-radius: 0 0 12px 12px;
+    cursor: grab;
+  }
+  .gr-tag--wish { --tag: var(--lime); }
+  .gr-tag-hole {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    margin-left: -9px;
+    border-radius: 50%;
+    background: var(--peach);
+    box-shadow: 0 0 0 5px rgba(36, 33, 28, 0.1);
+  }
+  .gr-tag-kicker {
+    margin: 0;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .gr-tag h3 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(54px, 5.4vw, 92px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin: 8px 0 16px;
+  }
+  .gr-tag-copy { margin: 0 0 26px; font-size: 16.5px; line-height: 1.55; max-width: 26em; }
+  .gr-tag .gr-btn { min-height: 48px; padding: 12px 22px; }
+  .gr-tag-stub {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin: 30px calc(clamp(24px, 2.8vw, 40px) * -1) 0;
+    padding: 18px clamp(24px, 2.8vw, 40px) 20px;
+    border-top: 2px dashed rgba(36, 33, 28, 0.35);
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .gr-tag-stub::before,
+  .gr-tag-stub::after {
+    content: "";
+    position: absolute;
+    top: -11px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--peach);
+  }
+  .gr-tag-stub::before { left: -10px; }
+  .gr-tag-stub::after { right: -10px; }
+  .gr-tag-stub strong { font-family: var(--serif); font-weight: 300; font-size: 21px; letter-spacing: -0.01em; text-transform: none; flex: 1; }
+  .gr-tag-stub span:last-child { opacity: 0.6; }
 
-  .gr-mosaic > a { display: block; min-height: 0; border-radius: 4px; overflow: hidden; }
-  .gr-mosaic > a:first-child { grid-row: 1 / span 2; }
-  .gr-mosaic > a figure { height: 100%; }
-  .gr-mosaic > a:hover img { transform: scale(1.035); }
-  .gr-note { margin: 22px 0 0; font-size: 14px; color: var(--ink-soft); }
+  .gr-lists-note {
+    margin: clamp(48px, 5vw, 72px) auto 0;
+    text-align: center;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .gr-lists-note a { text-underline-offset: 3px; }
 
-  .gr-close-ctas { justify-content: center; }
+  /* =========================================================
+     4. PARTY PICKER
+     ========================================================= */
+  .gr-party { background: var(--paper); padding: clamp(80px, 9vw, 140px) 0; }
+  .gr-party-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px 48px;
+    flex-wrap: wrap;
+    margin-bottom: clamp(28px, 3vw, 44px);
+  }
+  .gr-party-head .gr-kicker { color: var(--sage-deep); }
+  .gr-party-head .gr-h2 { max-width: 15ch; }
+
+  .gr-tabs {
+    position: relative;
+    display: flex;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 999px;
+    background: var(--paper-deep);
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .gr-tabs::-webkit-scrollbar { display: none; }
+  .gr-tabs-ink {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+    width: 0;
+    border-radius: 999px;
+    background: var(--ink);
+    transition: transform 0.6s var(--spring), width 0.6s var(--spring);
+  }
+  .gr-tab {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 46px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: color 0.4s var(--ease);
+  }
+  .gr-tab::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--dot);
+    box-shadow: 0 0 0 1px rgba(36, 33, 28, 0.25);
+    transition: scale 0.5s var(--spring);
+  }
+  .gr-tab[aria-selected="true"] { color: var(--paper); }
+  .gr-tab[aria-selected="true"]::before { scale: 1.3; }
+  .gr-tab:focus-visible { outline-offset: -2px; }
+  .no-tab-ink .gr-tab[aria-selected="true"] { background: var(--ink); }
+
+  .gr-stage {
+    --stage: var(--lime);
+    --accent: var(--sage-deep);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: clamp(20px, 2.4vw, 36px);
+    background: var(--stage);
+    transition: background-color 0.8s var(--ease);
+  }
+  .gr-stage-sun {
+    position: absolute;
+    z-index: -1;
+    right: -14%;
+    top: -38%;
+    width: min(760px, 70vw);
+    color: var(--accent);
+    opacity: 0.14;
+    transition: color 0.8s var(--ease), rotate 1.2s var(--ease);
+    rotate: var(--sun-r, 0deg);
+  }
+  .gr-stage-sun .gr-sun { width: 100%; display: block; animation: gr-spin 120s linear infinite; }
+  .gr-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(28px, 4vw, 72px);
+    align-items: center;
+    padding: clamp(28px, 4.4vw, 72px);
+  }
+  .gr-panel[hidden] { display: none; }
+  .gr-panel:focus-visible { outline-offset: -6px; }
+  .gr-panel-tag {
+    display: inline-block;
+    margin: 0 0 18px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .gr-panel h3 {
+    font-family: var(--serif);
+    font-size: clamp(38px, 4.2vw, 72px);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+  .gr-panel-copy { margin: 0 0 28px; font-size: 17px; line-height: 1.6; max-width: 30em; }
+  .gr-scene { position: relative; padding: 0 0 clamp(40px, 5vw, 64px) clamp(20px, 4vw, 60px); }
+  .gr-scene-photo {
+    margin: 0;
+    border-radius: clamp(14px, 1.6vw, 22px);
+    overflow: hidden;
+    aspect-ratio: 4 / 3.3;
+    box-shadow: 0 30px 60px -40px rgba(36, 33, 28, 0.6);
+  }
+  .gr-scene-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .gr-list {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: min(360px, 82%);
+    padding: 20px 20px 14px;
+    border-radius: 16px;
+    background: #FFFDF8;
+    color: var(--ink);
+    box-shadow: 0 30px 50px -28px rgba(36, 33, 28, 0.55), 0 1px 0 rgba(36, 33, 28, 0.04);
+    rotate: -2.5deg;
+  }
+  .gr-list-label {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: var(--paper-deep);
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .gr-list h4 {
+    margin: 10px 0 4px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 19px;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+  .gr-list-meta { margin: 0 0 10px; font-size: 13px; color: var(--ink-soft); }
+  .gr-list-bar { display: block; height: 6px; border-radius: 6px; background: var(--paper-deep); overflow: hidden; margin-bottom: 8px; }
+  .gr-list-bar span { display: block; height: 100%; width: 100%; border-radius: inherit; background: var(--accent); transform-origin: 0 50%; transform: scaleX(var(--fill)); transition: transform 1.2s var(--ease) 0.5s; }
+  .gr-list ul { list-style: none; margin: 0; padding: 0; }
+  .gr-list li {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-top: 1px solid #EEEAE0;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  .gr-check {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    transition: background-color 0.4s var(--ease) var(--cd, 0.6s), border-color 0.4s var(--ease) var(--cd, 0.6s);
+  }
+  .gr-check svg { position: absolute; inset: 2px; width: 15px; height: 15px; }
+  .gr-check path { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 16; stroke-dashoffset: 16; transition: stroke-dashoffset 0.45s var(--ease) calc(var(--cd, 0.6s) + 0.15s); }
+  .is-claimed .gr-check { background: var(--accent); border-color: var(--accent); }
+  .is-claimed .gr-check path { stroke-dashoffset: 0; }
+  .gr-item {
+    background: linear-gradient(currentColor, currentColor) 0 55% / 0 1.5px no-repeat;
+    transition: background-size 0.6s var(--ease) calc(var(--cd, 0.6s) + 0.2s), color 0.4s;
+  }
+  .is-claimed .gr-item { background-size: 100% 1.5px; color: var(--ink-soft); }
+  .gr-chip {
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    background: var(--paper-deep);
+    color: var(--ink-soft);
+  }
+  .gr-chip--open { background: var(--ink); color: var(--paper); }
+  /* Panel entrance */
+  .js-motion .gr-panel.is-entering .gr-panel-text > * { animation: gr-in-up 0.8s var(--ease) both; }
+  .js-motion .gr-panel.is-entering .gr-panel-text > *:nth-child(2) { animation-delay: 0.06s; }
+  .js-motion .gr-panel.is-entering .gr-panel-text > *:nth-child(3) { animation-delay: 0.12s; }
+  .js-motion .gr-panel.is-entering .gr-panel-text > *:nth-child(4) { animation-delay: 0.18s; }
+  .js-motion .gr-panel.is-entering .gr-scene-photo { animation: gr-photo-in 1s var(--ease) both; }
+  .js-motion .gr-panel.is-entering .gr-list { animation: gr-list-in 1s var(--spring) 0.15s both; }
+  .js-motion .gr-panel.is-entering .gr-list li { animation: gr-in-up 0.6s var(--ease) both; animation-delay: calc(0.3s + var(--i) * 0.07s); }
+  .js-motion .gr-panel.is-reset .gr-check,
+  .js-motion .gr-panel.is-reset .gr-check path,
+  .js-motion .gr-panel.is-reset .gr-item,
+  .js-motion .gr-panel.is-reset .gr-list-bar span { transition: none; }
+  .js-motion .gr-panel.is-reset .is-claimed .gr-check { background: transparent; border-color: var(--line); }
+  .js-motion .gr-panel.is-reset .is-claimed .gr-check path { stroke-dashoffset: 16; }
+  .js-motion .gr-panel.is-reset .is-claimed .gr-item { background-size: 0 1.5px; color: inherit; }
+  .js-motion .gr-panel.is-reset .gr-list-bar span { transform: scaleX(0); }
+  @keyframes gr-in-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes gr-photo-in { from { opacity: 0; clip-path: inset(12% 12% 12% 12% round 22px); scale: 1.08; } to { opacity: 1; clip-path: inset(0 0 0 0 round 0px); scale: 1; } }
+  @keyframes gr-list-in { from { opacity: 0; transform: translate(-30px, 40px) rotate(-8deg); } to { opacity: 1; transform: none; } }
+
+  /* =========================================================
+     5. HOW IT WORKS: the unwrap
+     ========================================================= */
+  .gr-how { position: relative; background: var(--lime); }
+  .gr-how-pin { padding: clamp(80px, 9vw, 130px) 0; }
+  .gr-how-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 96px);
+    align-items: center;
+  }
+  .gr-how .gr-kicker { color: var(--sage-deep); }
+  .gr-steps { list-style: none; margin: clamp(32px, 4vw, 56px) 0 0; padding: 0; position: relative; }
+  .gr-step {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1.5px solid rgba(36, 33, 28, 0.16);
+    transition: opacity 0.5s var(--ease);
+  }
+  .gr-step:last-child { border-bottom: 1.5px solid rgba(36, 33, 28, 0.16); }
+  .gr-step-n {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    font-family: var(--serif);
+    font-size: 24px;
+    line-height: 1;
+    transition: background-color 0.5s var(--ease), color 0.5s var(--ease), scale 0.6s var(--spring);
+  }
+  .gr-step h3 { font-family: var(--sans); font-weight: 500; font-size: clamp(20px, 1.7vw, 26px); letter-spacing: -0.015em; margin: 4px 0 6px; }
+  .gr-step p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ink-soft); max-width: 30em; }
+  .gr-how-stage {
+    position: relative;
+    width: min(100%, 520px);
+    justify-self: center;
+    aspect-ratio: 400 / 440;
+  }
+  .gr-box { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 1; }
+  .gr-box g { transform-box: fill-box; transform-origin: center; }
+  .gr-box .gr-box-lid { transform-origin: 0% 100%; }
+  .gr-box .gr-box-tag { transform-origin: 0% 0%; }
+  .gr-box text { font-family: var(--sans); font-weight: 500; font-size: 15px; letter-spacing: 0.02em; fill: var(--ink); }
+  .gr-box-sunwrap {
+    position: absolute;
+    z-index: 0;
+    left: 25%;
+    width: 50%;
+    top: 45.45%;
+    aspect-ratio: 1;
+    color: var(--yellow);
+    transform: translateY(var(--sy, 0%)) scale(var(--ss, 0.6));
+  }
+  .gr-box-sunwrap .gr-sun { width: 100%; display: block; animation: gr-spin 16s linear infinite; }
+  .gr-guest {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 52%;
+    padding: 7px 12px;
+    border-radius: 999px 999px 999px 4px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12.5px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  .gr-guest:nth-child(even) { background: var(--clay); }
+  .gr-guest:nth-child(3n) { background: #fff; color: var(--ink); }
+  /* Static (no scrub) final state */
+  .gr-how:not(.is-scrub) .gr-box-lid { transform: translate(-6%, -34%) rotate(-14deg); }
+  .gr-how:not(.is-scrub) .gr-box-bow,
+  .gr-how:not(.is-scrub) .gr-box-tag { opacity: 0; }
+  .gr-how:not(.is-scrub) .gr-box-sunwrap { --sy: -78%; --ss: 1.05; }
+
+  .gr-how.is-scrub { height: 330svh; }
+  .gr-how.is-scrub .gr-how-pin {
+    position: sticky;
+    top: var(--nav-h, 64px);
+    height: calc(100svh - var(--nav-h, 64px));
+    display: grid;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+  }
+  .gr-how.is-scrub .gr-step { opacity: 0.38; }
+  .gr-how.is-scrub .gr-step.is-on { opacity: 1; }
+  .gr-how.is-scrub .gr-step.is-on .gr-step-n { background: var(--ink); color: var(--lime); scale: 1.08; }
+  .gr-how-meter {
+    display: none;
+    height: 4px;
+    margin-top: 22px;
+    border-radius: 4px;
+    background: rgba(36, 33, 28, 0.12);
+    overflow: hidden;
+  }
+  .gr-how-meter span { display: block; height: 100%; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+  .gr-how.is-scrub .gr-how-meter { display: block; }
+
+  /* =========================================================
+     6. SHELF: wrapped gift ideas
+     ========================================================= */
+  .gr-shelf { background: var(--paper); padding: clamp(80px, 9vw, 140px) 0 clamp(64px, 7vw, 110px); overflow: hidden; }
+  .gr-shelf-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px 48px; flex-wrap: wrap; }
+  .gr-shelf-head .gr-kicker { color: var(--clay); }
+  .gr-shelf-nav { display: flex; gap: 10px; }
+  .gr-round {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background-color 0.35s var(--ease), color 0.35s var(--ease), scale 0.4s var(--spring), opacity 0.3s;
+  }
+  .gr-round:hover { background: var(--ink); color: var(--paper); scale: 1.06; }
+  .gr-round:disabled { opacity: 0.3; cursor: default; background: transparent; color: var(--ink); scale: 1; }
+  .gr-round svg { width: 20px; height: 20px; }
+
+  .gr-track {
+    --pad: max(var(--gutter), calc((100vw - var(--max)) / 2));
+    margin-top: clamp(36px, 4vw, 56px);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--pad);
+    scrollbar-width: none;
+    cursor: grab;
+  }
+  .gr-track::-webkit-scrollbar { display: none; }
+  .gr-track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+  .gr-track.is-dragging a { pointer-events: none; }
+  .gr-track:focus-visible { outline-offset: -4px; }
+  .gr-gifts {
+    display: flex;
+    gap: clamp(16px, 2vw, 28px);
+    list-style: none;
+    margin: 0;
+    padding: 18px var(--pad) 26px;
+    width: max-content;
+  }
+  .gr-gift {
+    width: clamp(238px, 23vw, 330px);
+    scroll-snap-align: start;
+    rotate: var(--tilt, 0deg);
+    transition: rotate 0.6s var(--spring), translate 0.6s var(--spring);
+  }
+  .gr-gift:hover { rotate: 0deg; translate: 0 -8px; }
+  .gr-gift a { display: block; text-decoration: none; -webkit-user-drag: none; }
+  .gr-gift img { -webkit-user-drag: none; user-select: none; }
+  .gr-frame {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 5;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--paper-deep);
+    box-shadow: 0 24px 40px -30px rgba(36, 33, 28, 0.6);
+  }
+  .gr-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+  .gr-gift:hover .gr-frame img { transform: scale(1.06); }
+  .gr-paper { position: absolute; inset: 0; pointer-events: none; }
+  .gr-paper-l, .gr-paper-r {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background: var(--wrap);
+    transition: transform 1.1s var(--ease);
+  }
+  .gr-paper-l { left: 0; }
+  .gr-paper-r { right: 0; }
+  /* Ribbon: vertical band at the seam, horizontal band across */
+  .gr-paper-l::before, .gr-paper-r::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 13%;
+    background: var(--ribbon);
+  }
+  .gr-paper-l::before { right: 0; }
+  .gr-paper-r::before { left: 0; }
+  .gr-paper-l::after, .gr-paper-r::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 42%;
+    height: 11%;
+    background: var(--ribbon);
+  }
+  .gr-bow {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 46%;
+    width: 46%;
+    aspect-ratio: 2.1 / 1;
+    translate: -50% -50%;
+    filter: drop-shadow(0 6px 8px rgba(36, 33, 28, 0.28));
+    transition: transform 0.7s var(--ease), opacity 0.5s ease;
+  }
+  .gr-bow::before, .gr-bow::after {
+    content: "";
+    position: absolute;
+    top: 4%;
+    width: 48%;
+    height: 92%;
+    background: var(--ribbon);
+    box-shadow: inset 0 0 0 7px rgba(0, 0, 0, 0.1), inset 10px -6px 0 rgba(0, 0, 0, 0.12);
+  }
+  .gr-bow::before { left: 2%; border-radius: 70% 20% 20% 70% / 60% 40% 40% 60%; rotate: -14deg; }
+  .gr-bow::after { right: 2%; border-radius: 20% 70% 70% 20% / 40% 60% 60% 40%; rotate: 14deg; transform: scaleX(-1); }
+  .gr-bow i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 20%;
+    height: 56%;
+    translate: -50% -50%;
+    border-radius: 8px;
+    background: var(--ribbon);
+    box-shadow: inset 0 0 0 40px rgba(0, 0, 0, 0.16);
+  }
+  .w-dots { --wrap: radial-gradient(circle at 25% 25%, var(--clay) 0 3px, transparent 3.5px) 0 0 / 22px 22px, radial-gradient(circle at 75% 75%, var(--paper) 0 2px, transparent 2.5px) 0 0 / 22px 22px, var(--peach); --ribbon: var(--ink); }
+  .w-stripe { --wrap: repeating-linear-gradient(-45deg, var(--lime) 0 14px, #DDEB97 14px 28px); --ribbon: var(--clay); }
+  .w-sun { --wrap: radial-gradient(circle, var(--paper) 0 2.5px, transparent 3px) 0 0 / 16px 16px, var(--yellow); --ribbon: var(--paper); }
+  .w-sage { --wrap: radial-gradient(circle at 30% 30%, var(--lime) 0 2.5px, transparent 3px) 0 0 / 18px 18px, radial-gradient(circle at 80% 70%, var(--peach) 0 2px, transparent 2.5px) 0 0 / 26px 26px, var(--sage-deep); --ribbon: var(--yellow); }
+  .w-clay { --wrap: repeating-linear-gradient(90deg, var(--clay) 0 10px, #CF6E3F 10px 20px); --ribbon: var(--lime); }
+  .gr-gift.is-open .gr-paper-l { transform: translateX(-104%) rotate(-5deg); }
+  .gr-gift.is-open .gr-paper-r { transform: translateX(104%) rotate(5deg); }
+  .gr-gift.is-open .gr-bow { transform: translateY(-260%) rotate(-40deg) scale(0.6); opacity: 0; }
+  .gr-gift-brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px 0 6px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .gr-gift-brand::after { content: "↗"; font-size: 16px; letter-spacing: 0; transition: transform 0.45s var(--spring); }
+  .gr-gift:hover .gr-gift-brand::after { transform: translate(3px, -3px) scale(1.2); }
+  .gr-gift-line { display: block; font-family: var(--serif); font-weight: 300; font-size: clamp(21px, 1.7vw, 25px); line-height: 1.14; letter-spacing: -0.02em; }
+  .gr-shelf-bar { width: min(var(--max), calc(100% - var(--gutter) * 2)); margin: 8px auto 0; height: 3px; border-radius: 3px; background: var(--paper-deep); overflow: hidden; }
+  .gr-shelf-bar span { display: block; height: 100%; width: var(--w, 30%); background: var(--ink); border-radius: inherit; transform: translateX(var(--x, 0%)); }
+
+  .gr-budget-wrap { margin-top: clamp(56px, 6vw, 88px); }
+  .gr-budget-title { margin: 0 0 16px; font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
+  .gr-budget { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; }
+  .gr-budget a {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 100%;
+    padding: 22px 22px 20px;
+    border-radius: 18px;
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    transition: color 0.4s var(--ease), translate 0.5s var(--spring);
+  }
+  .gr-budget a::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: var(--hx, 50%);
+    top: var(--hy, 50%);
+    width: 260%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--bc);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.7s var(--ease);
+  }
+  .gr-budget a:hover::before, .gr-budget a:focus-visible::before { transform: translate(-50%, -50%) scale(1); }
+  .gr-budget a:hover { translate: 0 -4px; }
+  .gr-budget li:nth-child(1) a { --bc: var(--lime); }
+  .gr-budget li:nth-child(2) a { --bc: var(--peach); }
+  .gr-budget li:nth-child(3) a { --bc: var(--yellow); }
+  .gr-budget li:nth-child(4) a { --bc: var(--clay); }
+  .gr-budget li:nth-child(4) a:hover, .gr-budget li:nth-child(4) a:focus-visible { color: var(--paper); }
+  .gr-budget strong { font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 2.8vw, 44px); line-height: 1; letter-spacing: -0.03em; }
+  .gr-budget span { font-family: var(--sans); font-weight: 500; font-size: 14px; }
+  .gr-shelf-note { margin: 22px 0 0; font-size: 13.5px; color: var(--ink-soft); }
+
+  /* =========================================================
+     7. FIND A LIST + POSTCARD
+     ========================================================= */
+  .gr-find {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--clay);
+    color: var(--paper);
+    padding: clamp(80px, 9vw, 140px) 0;
+  }
+  .gr-find::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(circle, rgba(241, 238, 228, 0.12) 1.5px, transparent 2px) 0 0 / 26px 26px;
+  }
+  .gr-find-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(40px, 6vw, 112px); align-items: center; }
+  .gr-find .gr-kicker { color: var(--lime); }
+  .gr-find .gr-intro { color: rgba(241, 238, 228, 0.9); }
+  .gr-search { margin-top: clamp(28px, 3vw, 40px); display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+  .gr-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .gr-field label { font-family: var(--sans); font-weight: 500; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper); }
+  .gr-field input {
+    width: 100%;
+    min-height: 56px;
+    padding: 14px 18px;
+    border: 1.5px solid transparent;
+    border-radius: 16px;
+    background: var(--paper);
+    color: var(--ink);
+    font: 500 17px/1.3 var(--sans);
+    transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .gr-field input::placeholder { color: #8C8576; }
+  .gr-field input:focus { border-color: var(--ink); box-shadow: 0 0 0 4px rgba(240, 255, 174, 0.7); outline: none; }
+  .gr-search .gr-btn { min-height: 56px; }
+  .gr-find .gr-btn:focus-visible, .gr-find a:focus-visible { outline-color: var(--lime); }
+  .gr-find-fine { margin: 14px 0 0; font-size: 13.5px; color: rgba(241, 238, 228, 0.85); }
+  .gr-find-fine a { color: var(--paper); }
+
+  .gr-postcard-wrap { perspective: 1100px; }
+  .gr-postcard {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 0;
+    aspect-ratio: 1.45;
+    padding: clamp(22px, 2.6vw, 36px);
+    border-radius: 8px;
+    background: #FBF8F0;
+    color: var(--ink);
+    box-shadow: 0 40px 70px -40px rgba(60, 20, 5, 0.75), 0 2px 0 rgba(36, 33, 28, 0.05);
+    transform: rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg)) rotate(2.5deg);
+    transition: transform 0.6s var(--ease);
+    transform-style: preserve-3d;
+  }
+  .gr-postcard::after {
+    content: "";
+    position: absolute;
+    top: 12%;
+    bottom: 12%;
+    left: 55%;
+    width: 1.5px;
+    background: var(--line);
+  }
+  .gr-pc-msg { padding-right: clamp(16px, 2vw, 28px); display: flex; flex-direction: column; justify-content: space-between; }
+  .gr-pc-msg h3 { font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 2.9vw, 46px); line-height: 0.98; letter-spacing: -0.03em; }
+  .gr-pc-msg p { margin: 12px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); }
+  .gr-pc-msg a { color: var(--clay-deep); font-weight: 500; }
+  .gr-pc-addr { padding-left: clamp(16px, 2vw, 28px); display: flex; flex-direction: column; justify-content: flex-end; }
+  .gr-pc-addr address { font-family: var(--sans); font-weight: 500; font-size: clamp(12.5px, 1vw, 14.5px); line-height: 1; }
+  .gr-pc-addr address span { display: block; padding: 10px 0 8px; border-bottom: 1.5px solid var(--line); }
+  .gr-stamp {
+    position: absolute;
+    top: clamp(16px, 2vw, 28px);
+    right: clamp(16px, 2vw, 28px);
+    width: clamp(66px, 6vw, 88px);
+    aspect-ratio: 0.84;
+    display: grid;
+    place-items: center;
+    background: var(--peach);
+    color: var(--clay);
+    -webkit-mask: radial-gradient(circle 4px at 4px 4px, transparent 98%, #000) -4px -4px / 10px 10px;
+            mask: radial-gradient(circle 4px at 4px 4px, transparent 98%, #000) -4px -4px / 10px 10px;
+    rotate: 4deg;
+  }
+  .gr-stamp .gr-sun { width: 64%; animation: gr-spin 20s linear infinite; }
+  .gr-postmark {
+    position: absolute;
+    top: clamp(24px, 2.6vw, 38px);
+    right: clamp(64px, 6.6vw, 100px);
+    width: clamp(70px, 6.4vw, 94px);
+    aspect-ratio: 1;
+    color: rgba(36, 33, 28, 0.55);
+    rotate: -14deg;
+  }
+  .gr-postmark text { font-family: var(--sans); font-weight: 500; font-size: 10px; letter-spacing: 0.18em; fill: currentColor; }
+
+  /* =========================================================
+     8. FAQ: group chat
+     ========================================================= */
+  .gr-faq {
+    background:
+      radial-gradient(circle, rgba(36, 33, 28, 0.06) 1.2px, transparent 1.6px) 0 0 / 22px 22px,
+      var(--paper-deep);
+    padding: clamp(80px, 9vw, 140px) 0;
+  }
+  .gr-faq-head { text-align: center; margin-bottom: clamp(36px, 4vw, 56px); }
+  .gr-faq-head .gr-kicker { color: var(--sage-deep); }
+  .gr-faq-head .gr-intro { margin-inline: auto; }
+  .gr-chat {
+    width: min(780px, 100%);
+    margin-inline: auto;
+    border-radius: 28px;
+    background: #FBF9F3;
+    box-shadow: 0 40px 80px -50px rgba(36, 33, 28, 0.55);
+    overflow: hidden;
+  }
+  .gr-chat-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    border-bottom: 1px solid #ECE7DA;
+    background: #fff;
+  }
+  .gr-chat-av {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--clay);
+    flex-shrink: 0;
+  }
+  .gr-chat-av .gr-sun { width: 30px; animation: gr-spin 14s linear infinite; }
+  .gr-chat-av::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 1px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #3DBE6A;
+    box-shadow: 0 0 0 2.5px #fff;
+  }
+  .gr-chat-top strong { display: block; font-family: var(--sans); font-weight: 500; font-size: 16px; }
+  .gr-chat-top span { display: block; font-size: 13px; color: var(--ink-soft); }
+  .gr-chat-body { display: flex; flex-direction: column; gap: 10px; padding: clamp(18px, 3vw, 32px); }
+  .gr-bubble {
+    display: inline-block;
+    max-width: min(84%, 34em);
+    padding: 13px 18px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: 22px;
+  }
+  .gr-bubble--us { align-self: flex-start; background: #fff; border: 1px solid #ECE7DA; border-bottom-left-radius: 6px; margin: 0; color: var(--ink); }
+  .gr-bubble--us a { color: var(--clay-deep); font-weight: 500; }
+  .gr-q { display: block; }
+  .gr-q summary {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    border-radius: 22px;
+  }
+  .gr-q summary::-webkit-details-marker { display: none; }
+  .gr-q summary .gr-bubble {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom-right-radius: 6px;
+    font-family: var(--sans);
+    font-weight: 500;
+    padding-right: 44px;
+    transition: background-color 0.35s var(--ease), color 0.35s var(--ease), scale 0.4s var(--spring);
+  }
+  .gr-q summary .gr-bubble::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    margin-top: -6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    rotate: 45deg;
+    transition: rotate 0.45s var(--ease), margin 0.45s var(--ease);
+  }
+  .gr-q summary:hover .gr-bubble { scale: 1.02; background: var(--sage-deep); }
+  .gr-q summary:focus-visible { outline: none; }
+  .gr-q summary:focus-visible .gr-bubble { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .gr-q.is-open summary .gr-bubble { background: var(--lime); color: var(--ink); }
+  .gr-q.is-open summary .gr-bubble::after { rotate: -135deg; margin-top: -2px; }
+  .gr-a { overflow: hidden; }
+  .gr-a-inner { display: flex; flex-direction: column; padding-top: 10px; }
+  .gr-typing {
+    display: none;
+    align-self: flex-start;
+    gap: 5px;
+    padding: 15px 18px;
+    border-radius: 22px 22px 22px 6px;
+    background: #fff;
+    border: 1px solid #ECE7DA;
+  }
+  .gr-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-soft); animation: gr-dot 1s ease-in-out infinite; }
+  .gr-typing i:nth-child(2) { animation-delay: 0.15s; }
+  .gr-typing i:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes gr-dot { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-5px); opacity: 1; } }
+  .gr-q.is-typing .gr-typing { display: inline-flex; }
+  .gr-q.is-typing .gr-a .gr-bubble--us { display: none; }
+  .gr-q.is-said .gr-a .gr-bubble--us { animation: gr-pop 0.55s var(--spring) both; transform-origin: 0 100%; }
+  @keyframes gr-pop { from { opacity: 0; transform: scale(0.6) translateY(8px); } to { opacity: 1; transform: none; } }
+  .js-motion .gr-chat-body > * { opacity: 0; transform: translateY(14px) scale(0.96); transition: opacity 0.5s var(--ease), transform 0.6s var(--spring); transition-delay: calc(var(--i, 0) * 70ms); }
+  .js-motion .gr-chat.is-in .gr-chat-body > * { opacity: 1; transform: none; }
+
+  /* =========================================================
+     9. CLOSE
+     ========================================================= */
+  .gr-close {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(96px, 11vw, 168px) 0 0;
+    text-align: center;
+  }
+  .gr-close canvas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+  .gr-close .gr-kicker { color: var(--lime); }
+  .gr-close h2 { font-size: clamp(52px, 8vw, 150px); line-height: 0.9; letter-spacing: -0.04em; margin: 0 auto 26px; }
+  .gr-close h2 .gr-s { font-size: 0.66em; color: var(--paper); }
+  .gr-close h2 .gr-lime { color: var(--lime); }
+  .gr-ch { display: inline-block; }
+  .js-motion .gr-ch { opacity: 0; transform: translateY(0.5em) rotate(12deg); transition: opacity 0.5s ease, transform 0.9s var(--spring); transition-delay: calc(var(--i) * 32ms); }
+  .js-motion .is-in .gr-ch { opacity: 1; transform: none; }
+  .gr-close-copy > p:not(.gr-kicker) { margin: 0 auto 34px; max-width: 32em; font-family: var(--sans); font-weight: 500; font-size: clamp(16px, 1.3vw, 19px); color: rgba(241, 238, 228, 0.86); }
+  .gr-close .gr-ctas { justify-content: center; }
+  .gr-close .gr-btn:focus-visible, .gr-close a:focus-visible { outline-color: var(--lime); }
+  .gr-close-alt { display: inline-block; margin-top: 22px; font-family: var(--sans); font-weight: 500; font-size: 14px; color: var(--paper); text-underline-offset: 4px; }
+  .gr-close-alt:hover { color: var(--lime); }
+  .gr-cheers {
+    margin-top: clamp(72px, 8vw, 120px);
+    padding: clamp(10px, 1.4vw, 22px) 0 clamp(16px, 2vw, 30px);
+    overflow: hidden;
+    border-top: 1px solid rgba(241, 238, 228, 0.14);
+  }
+  .gr-cheers-track { display: flex; width: max-content; animation: gr-marquee 38s linear infinite; }
+  .gr-cheers-row { display: flex; align-items: center; flex-shrink: 0; margin: 0; padding: 0; list-style: none; }
+  .gr-cheers-row li {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 2.4vw, 40px);
+    padding-right: clamp(20px, 2.4vw, 40px);
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(64px, 10vw, 170px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 1.2px rgba(240, 255, 174, 0.75);
+  }
+  .gr-cheers-row li:nth-child(even) { color: var(--peach); -webkit-text-stroke: 0; }
+  .gr-cheers-row .gr-sun { width: 0.5em; color: var(--yellow); -webkit-text-stroke: 0; animation: gr-spin 10s linear infinite; }
+  @keyframes gr-marquee { to { transform: translateX(-50%); } }
+
+  /* ---------- Footer ---------- */
+  .gr-foot { padding: 48px 0 64px; }
+  .gr-foot-grid { display: flex; justify-content: space-between; gap: 32px; align-items: flex-start; }
+  .gr-wordmark { height: 28px; width: auto; }
+  .gr-foot address { color: var(--ink-soft); font-size: 14px; line-height: 1.6; margin-top: 14px; }
+  .gr-foot address a { color: var(--ink); text-decoration: none; }
+  .gr-foot address a:hover { text-decoration: underline; }
+  .gr-foot nav { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+  .gr-foot nav a { font-family: var(--sans); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; }
+  .gr-foot nav a:hover { color: var(--clay); }
+  .gr-colophon { margin-top: 28px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* ---------- Section reveals ---------- */
+  .js-motion .gr-rise { opacity: 0; transform: translateY(26px); transition: opacity 0.8s var(--ease), transform 1s var(--ease); transition-delay: var(--rd, 0s); }
+  .js-motion .gr-rise.is-in { opacity: 1; transform: none; }
+  .js-motion .gr-pop { opacity: 0; transform: scale(0.88) rotate(-2deg); transition: opacity 0.6s var(--ease), transform 1s var(--spring); transition-delay: var(--rd, 0s); }
+  .js-motion .gr-pop.is-in { opacity: 1; transform: none; }
+
+  /* Confetti overlay */
+  .gr-confetti { position: fixed; inset: 0; z-index: 250; width: 100%; height: 100%; pointer-events: none; }
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+  @media (max-width: 1180px) {
+    .gr-hero-copy { width: min(760px, 58vw); }
+    .gr-pic--3, .gr-pic--5 { display: none; }
+    .gr-badge { left: 6%; bottom: auto; top: 46%; }
+    .gr-sticker--a { left: -1%; top: -3%; }
+    .gr-sticker--b { right: -1%; top: 20%; }
+    .gr-budget { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gr-postcard { aspect-ratio: auto; min-height: 320px; }
+  }
 
   @media (max-width: 900px) {
-    .gr-hero { grid-template-columns: 1fr; min-height: 0; }
-    .gr-hero-media { order: -1; aspect-ratio: 4 / 3.4; }
-    .gr-hero-copy { padding: 44px var(--gutter) 56px; }
-    .gr-hero-sun { width: 130vw; left: -40vw; top: -30%; }
-    .gr-mosaic > a:first-child { grid-row: auto; grid-column: 1 / -1; }
+    .gr-hero {
+      min-height: 0;
+      place-items: start center;
+      padding-top: calc(var(--collage-h, 300px) + 24px);
+      padding-bottom: 84px;
+      --collage-h: clamp(250px, 66vw, 420px);
+    }
+    .gr-hero-sun { top: 30%; width: 150vw; }
+    .gr-hero-copy { width: 100%; max-width: 640px; }
+    .gr-pic--1 { --w: 33vw; left: 4%; top: 22px; }
+    .gr-pic--4 { --w: 32vw; right: 4%; top: 30px; left: auto; }
+    .gr-pic--2 { --w: 25vw; left: 36%; top: calc(var(--collage-h) * 0.36); bottom: auto; --r: 4deg; }
+    .gr-pic--6 { display: none; }
+    .gr-pic-float { padding: 6px 6px 22px; }
+    .gr-pic figcaption { font-size: 8.5px; bottom: 7px; letter-spacing: 0.12em; }
+    .gr-pic-float::before { width: 46px; height: 15px; top: -7px; }
+    .gr-badge { left: auto; right: 5%; top: calc(var(--collage-h) - 58px); width: 92px; }
+    .gr-sticker { font-size: 11px; padding: 8px 12px; }
+    .gr-sticker--a { left: 4%; top: -70px; }
+    .gr-sticker--b { right: auto; left: 54%; top: calc(var(--collage-h) * -0.92); }
+    .gr-scroll { display: none; }
+
+    .gr-tags { flex-direction: column; align-items: center; gap: 56px; }
+    .gr-hang-pos { width: min(440px, 100%); transform: none !important; }
+    .gr-garland { display: none; }
+    .gr-pin { display: block; }
+    .gr-hang { --string: 40px; }
+    .gr-tag-stage { padding-top: 12px; }
+
+    .gr-panel { grid-template-columns: 1fr; }
+    .gr-scene { order: -1; padding: 0; }
+    .gr-list { position: relative; left: auto; bottom: auto; width: min(360px, 92%); margin: -64px 0 0 14px; }
+    .gr-tabs { -webkit-mask: linear-gradient(90deg, #000 85%, transparent); mask: linear-gradient(90deg, #000 85%, transparent); }
+    .gr-tabs.is-end { -webkit-mask: none; mask: none; }
+
+    .gr-how-grid { grid-template-columns: 1fr; }
+    .gr-how-stage { width: min(78vw, 400px); }
+    .gr-how.is-scrub .gr-how-grid { gap: 8px; height: 100%; align-content: center; grid-template-rows: auto auto; }
+    .gr-how.is-scrub .gr-how-stage { order: -1; width: min(66vw, 36svh, 360px); }
+    .gr-how.is-scrub .gr-h2 { font-size: clamp(32px, 8.6vw, 52px); }
+    .gr-how.is-scrub .gr-kicker { display: none; }
+    .gr-how.is-scrub .gr-steps { margin-top: 18px; display: grid; }
+    .gr-how.is-scrub .gr-step { grid-area: 1 / 1; border: 0; padding: 0; opacity: 0; transform: translateY(10px); transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
+    .gr-how.is-scrub .gr-step.is-on { opacity: 1; transform: none; }
+    .gr-how.is-scrub .gr-step-n { width: 44px; height: 44px; font-size: 20px; }
+    .gr-how.is-scrub .gr-step p { font-size: 15px; }
+    .gr-step { grid-template-columns: 44px minmax(0, 1fr); }
+
+    .gr-find-grid { grid-template-columns: 1fr; }
+    .gr-postcard-wrap { max-width: 560px; }
+    .gr-foot-grid { flex-direction: column; }
   }
+
+  @media (max-width: 640px) {
+    .gr-search { grid-template-columns: 1fr; }
+    .gr-search .gr-btn { width: 100%; }
+    .gr-postcard { grid-template-columns: 1fr; padding: 24px; rotate: none; }
+    .gr-postcard::after { display: none; }
+    .gr-pc-msg { padding-right: 0; padding-top: 64px; }
+    .gr-pc-addr { padding-left: 0; margin-top: 18px; }
+    .gr-budget a { padding: 18px 16px; }
+    .gr-budget strong { font-size: 28px; }
+    .gr-budget span { font-size: 13px; }
+    .gr-chat { border-radius: 22px; }
+    .gr-chat-body { padding: 16px 12px 20px; }
+    .gr-bubble { max-width: 90%; font-size: 15px; padding: 12px 15px; }
+    .gr-q summary .gr-bubble { padding-right: 38px; }
+    .gr-q summary .gr-bubble::after { right: 14px; }
+    .gr-gift { width: 72vw; }
+  }
+
   @media (max-width: 560px) {
-    .gr-mosaic > a, .gr-mosaic > a:first-child { height: 240px; grid-column: auto; }
-    .gr-hero h1 { font-size: clamp(46px, 13vw, 64px); }
+    .gr-ctas { flex-direction: column; align-items: stretch; }
+    .gr-btn { width: 100%; padding: 14px 18px; font-size: 12.5px; letter-spacing: 0.1em; }
+    .gr-tag .gr-btn { width: auto; }
+    .gr-h1-b { font-size: clamp(50px, 15.4vw, 72px); }
+    .gr-h1-a { font-size: clamp(26px, 8vw, 36px); }
+    .gr-tag h3 { font-size: 58px; }
+    .gr-tag-stub strong { font-size: 18px; }
+    .gr-panel { padding: 18px 18px 30px; }
+    .gr-panel h3 { font-size: 36px; }
+    .gr-list { padding: 16px 16px 10px; }
+    .gr-list li { font-size: 13px; grid-template-columns: 20px minmax(0, 1fr) auto; gap: 8px; }
+    .gr-check { width: 20px; height: 20px; }
+    .gr-check svg { inset: 1.5px; width: 14px; height: 14px; }
+    .gr-tab { padding: 10px 16px; font-size: 13.5px; }
+    .gr-shelf-nav { display: none; }
   }
+
   @media (prefers-reduced-motion: reduce) {
-    .gr-hero-sun .tp-sun { animation: none; }
+    .gr *, .gr *::before, .gr *::after { animation: none !important; transition: none !important; }
+    .gr-gift .gr-paper { display: none; }
   }
 </style>
 <script>
@@ -1134,42 +1677,42 @@
         {
           "@type": "Question",
           "name": "Is the PHYLUM registry only for weddings?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Not at all. Use it for a wedding, the holidays, a housewarming, or any occasion where people keep asking what to bring. A wishlist is there when you want a list without guest tracking." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Not even a little. Weddings, housewarmings, the holidays, a new baby, a big birthday: any time people keep asking what to bring. If you want a list without guest tracking, that is what the wishlist is for." }
         },
         {
           "@type": "Question",
-          "name": "How do I create a registry?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Choose Create a registry and sign in with a PHYLUM account. The list is built with Gift Reggie, the registry app already on the shop. You can also start one in person at the Palm Springs flagship." }
+          "name": "How do I start a registry?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Choose Start a registry and sign in with a PHYLUM account, then add the pieces you love as you shop. You can also start a list in person at the Palm Springs flagship." }
         },
         {
           "@type": "Question",
-          "name": "How do guests find a registry?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Guests search by the first or last name of the person who made the list. They do not need an account to view it or to buy from it." }
+          "name": "How do my guests find my registry?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Guests search by your first or last name on Find a registry. They do not need an account to look or to buy, and the list shows what is still needed." }
         },
         {
           "@type": "Question",
           "name": "What is the difference between a registry and a wishlist?",
-          "acceptedAnswer": { "@type": "Answer", "text": "A registry is meant to be shared. It can show what has been bought and what is still needed. A wishlist is a simpler private list, with no guest tracking. You remove things yourself once you have them." }
+          "acceptedAnswer": { "@type": "Answer", "text": "A registry is made to share: guests can see what has been bought and what is still needed. A wishlist is a private list just for you, with no guests and no tracking. You cross things off yourself." }
         },
         {
           "@type": "Question",
           "name": "Do registry gifts ship?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Registry gifts checkout like any other PHYLUM order. The shop publishes complimentary shipping on orders over $150, and Palm Springs pickup is available. Confirm the shipping offer on the order before you rely on it." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Registry gifts check out like any PHYLUM order, so they can ship or be picked up in Palm Springs. The shop offers complimentary shipping on orders over $150. Confirm the offer at checkout before you count on it." }
         },
         {
           "@type": "Question",
           "name": "Can I register in the store?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Come to the flagship at 901 N. Palm Canyon Drive, Suite 101, and the shop can help you start a list. Call (760) 424-2110 before you visit if you want someone waiting." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The flagship is at 901 N. Palm Canyon Drive, Suite 101, in the Palm Springs Design District. Call (760) 424-2110 if you would like someone ready to build the list with you." }
         },
         {
           "@type": "Question",
           "name": "What if something on the list sells out?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Guests can see what’s still needed. If a piece is gone, there’s plenty more to love in the edit. Good things go fast, so the list can’t promise every item stays in stock." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Good things go fast, so the list cannot promise every piece stays in stock. Guests always see what is still needed, and there is plenty more to love in the shop." }
         },
         {
           "@type": "Question",
           "name": "Is there a fee?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Nope. Creating a PHYLUM registry or wishlist is free, and so is the PHYLUM account you need." }
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The registry, the wishlist, and the PHYLUM account you need are all free." }
         }
       ]
     }
@@ -1182,270 +1725,556 @@
 <div id="site-chrome"></div>
 
 <!-- EDIT: Gift Reggie URLs are the standard app-proxy paths (/apps/giftregistry/create, /find, /wishlist, /manage). Confirm the proxy on shopphylum.com before launch. -->
-<main class="tp" id="main">
+<main class="gr" id="main">
+
+  <!-- 1. HERO -->
   <section class="gr-hero" aria-labelledby="registry-title">
-    <div class="gr-hero-copy tp-reveal">
-      <div class="gr-hero-sun" aria-hidden="true"><span class="tp-sun"></span></div>
-      <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Gift Registry</p>
-      <h1 id="registry-title"><span class="tp-s">Skip the toaster.</span> Register for the good stuff.</h1>
-      <p class="tp-lede">For weddings, holidays, or a fresh set of keys. Pick your favorites from our modernist mercantile in Palm Springs, share the list, and let the people who love you do the rest.</p>
-      <div class="tp-ctas">
-        <a class="tp-btn tp-btn--sun" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
-        <a class="tp-btn tp-btn--ghost" href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>
-      </div>
+    <div class="gr-hero-sun" aria-hidden="true"><span class="gr-sun"></span></div>
+
+    <div class="gr-pics" aria-hidden="true">
+      <figure class="gr-pic gr-pic--1" data-depth="0.9"><span class="gr-pic-in"><span class="gr-pic-float"><img src="assets/registry/hero-gift-wrap.jpg" width="560" height="662" alt="" fetchpriority="high" decoding="async"><figcaption>Wrapped &amp; ready</figcaption></span></span></figure>
+      <figure class="gr-pic gr-pic--2" data-depth="0.55"><span class="gr-pic-in"><span class="gr-pic-float"><img src="assets/registry/hero-barware.jpg" width="520" height="520" alt="" decoding="async"><figcaption>Cheers kit</figcaption></span></span></figure>
+      <figure class="gr-pic gr-pic--3" data-depth="0.35"><span class="gr-pic-in"><span class="gr-pic-float"><img src="assets/registry/hero-hoptimist.jpg" width="420" height="279" alt="" decoding="async"><figcaption>Bobbles</figcaption></span></span></figure>
+      <figure class="gr-pic gr-pic--4" data-depth="0.8"><span class="gr-pic-in"><span class="gr-pic-float"><img src="assets/registry/hero-vases.jpg" width="560" height="700" alt="" decoding="async"><figcaption>Vase goals</figcaption></span></span></figure>
+      <figure class="gr-pic gr-pic--5" data-depth="0.4"><span class="gr-pic-in"><span class="gr-pic-float"><img src="assets/registry/hero-earrings.jpg" width="420" height="420" alt="" decoding="async"><figcaption>Sparkly</figcaption></span></span></figure>
+      <figure class="gr-pic gr-pic--6" data-depth="0.6"><span class="gr-pic-in"><span class="gr-pic-float"><img src="assets/registry/hero-gift-pile.jpg" width="560" height="747" alt="" decoding="async"><figcaption>The pile</figcaption></span></span></figure>
     </div>
-    <figure class="gr-hero-media">
-      <img class="tp-hero-bg" src="assets/registry/gift-wrap.jpg" srcset="assets/registry/gift-wrap-800.jpg 800w, assets/registry/gift-wrap.jpg 1218w" sizes="(max-width: 900px) 100vw, 50vw" width="1218" height="1439" alt="A PHYLUM gift wrapped in marbled coral and lilac paper, tied with cream cord, a sprig of greenery, and a PHYLUM tag." fetchpriority="high" decoding="async">
-      <figcaption class="tp-hero-cap">Wrapped at the counter in Palm Springs</figcaption>
-    </figure>
+
+    <div class="gr-hero-copy">
+      <p class="gr-kicker gr-hero-fade" style="--d: 0.05s"><span class="gr-sun" aria-hidden="true"></span>The PHYLUM Gift Registry</p>
+      <h1 id="registry-title">
+        <span class="gr-h1-a"><span class="gr-w" style="--i:0"><span>Big</span></span> <span class="gr-w" style="--i:1"><span>news</span></span> <span class="gr-w" style="--i:2"><span>deserves</span></span></span>
+        <span class="gr-h1-b"><span class="gr-w" style="--i:3"><span>better</span></span> <span class="gr-w" style="--i:4"><span>gifts.</span></span><svg class="gr-ribbon" viewBox="0 0 700 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 40 C 90 22, 170 52, 260 34 S 400 14, 448 34 C 470 44, 488 30, 478 18 C 468 6, 444 18, 456 34 C 470 52, 540 50, 600 34 S 680 22, 694 28"/></svg></span>
+      </h1>
+      <p class="gr-lede gr-hero-fade" style="--d: 0.65s">Getting hitched, getting keys, or getting asked “so what do you want?” one too many times. Build a list of things you’ll actually keep, from glazed ceramics to the really good linens, and let the people who love you handle the rest.</p>
+      <div class="gr-ctas gr-hero-fade" style="--d: 0.8s">
+        <a class="gr-btn gr-btn--sun" data-magnet data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a registry <span class="gr-btn-arrow" aria-hidden="true">→</span></a>
+        <a class="gr-btn gr-btn--ghost" data-magnet href="#find">Find someone’s list</a>
+      </div>
+      <span class="gr-sticker gr-sticker--a" style="--d: 1.05s" aria-hidden="true">No toasters</span>
+      <span class="gr-sticker gr-sticker--b" style="--d: 1.2s" aria-hidden="true">RSVP: yes!</span>
+    </div>
+
+    <div class="gr-badge" aria-hidden="true">
+      <svg viewBox="0 0 120 120">
+        <defs><path id="gr-circ" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs>
+        <circle cx="60" cy="60" r="59" fill="#24211C"/>
+        <text><textPath href="#gr-circ" textLength="280" lengthAdjust="spacing">FREE TO MAKE ✦ FREE TO SHARE ✦ </textPath></text>
+      </svg>
+      <span class="gr-sun"></span>
+    </div>
+
+    <a class="gr-scroll" href="#lists">The good stuff<i aria-hidden="true"></i></a>
   </section>
 
-  <div class="tp-ticker" aria-hidden="true">
-    <div class="tp-ticker-track">
-      <ul class="tp-ticker-row">
-        <li>Weddings<span class="tp-sun"></span></li>
-        <li>Holidays<span class="tp-sun"></span></li>
-        <li>Housewarmings<span class="tp-sun"></span></li>
-        <li>Wishlists<span class="tp-sun"></span></li>
-        <li>Weddings<span class="tp-sun"></span></li>
-        <li>Holidays<span class="tp-sun"></span></li>
-        <li>Housewarmings<span class="tp-sun"></span></li>
-        <li>Wishlists<span class="tp-sun"></span></li>
-      </ul>
-      <ul class="tp-ticker-row">
-        <li>Weddings<span class="tp-sun"></span></li>
-        <li>Holidays<span class="tp-sun"></span></li>
-        <li>Housewarmings<span class="tp-sun"></span></li>
-        <li>Wishlists<span class="tp-sun"></span></li>
-        <li>Weddings<span class="tp-sun"></span></li>
-        <li>Holidays<span class="tp-sun"></span></li>
-        <li>Housewarmings<span class="tp-sun"></span></li>
-        <li>Wishlists<span class="tp-sun"></span></li>
-      </ul>
+  <!-- 2. STREAMERS -->
+  <div class="gr-streamers" aria-hidden="true">
+    <div class="gr-streamer gr-streamer--a" data-speed="44" data-dir="-1">
+      <div class="gr-streamer-track">
+        <ul class="gr-streamer-row">
+          <li>Weddings<span class="gr-sun"></span></li>
+          <li>Housewarmings<span class="gr-sun"></span></li>
+          <li>Holidays<span class="gr-sun"></span></li>
+          <li>Birthdays<span class="gr-sun"></span></li>
+          <li>New babies<span class="gr-sun"></span></li>
+          <li>Big moves<span class="gr-sun"></span></li>
+          <li>Just because<span class="gr-sun"></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="gr-streamer gr-streamer--b" data-speed="34" data-dir="1">
+      <div class="gr-streamer-track">
+        <ul class="gr-streamer-row">
+          <li>Skip the toaster<span class="gr-sun"></span></li>
+          <li>Drop some hints<span class="gr-sun"></span></li>
+          <li>Cheers to that<span class="gr-sun"></span></li>
+          <li>Register for the good stuff<span class="gr-sun"></span></li>
+          <li>Treat yourself, officially<span class="gr-sun"></span></li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <section class="tp-offer" id="lists" aria-labelledby="lists-title">
-    <div class="tp-offer-sun" aria-hidden="true"><span class="tp-sun"></span></div>
-    <div class="tp-wrap tp-reveal">
-      <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Two lists</p>
-      <h2 id="lists-title"><span class="tp-s">One to share.</span> One to keep.</h2>
-      <p class="tp-offer-intro">A registry is for sharing, and guests can see what’s still needed. A wishlist is just for you: no guest list, no tracking, no pressure.</p>
-      <div class="tp-pair">
-        <article class="tp-deal">
-          <p class="tp-num gr-num">Share</p>
-          <h3>Registry</h3>
-          <p>For a wedding, the holidays, or a new house. Guests find it by name and see what’s still up for grabs.</p>
-          <a class="tp-btn gr-deal-btn" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
-        </article>
-        <span class="tp-plus" aria-hidden="true"><span class="tp-plus-glyph gr-or">or</span></span>
-        <article class="tp-deal tp-deal--joy">
-          <p class="tp-num gr-num">Keep</p>
-          <h3>Wishlist</h3>
-          <p>A private list of things you’d love. Cross them off yourself once they’re yours.</p>
-          <a class="tp-btn gr-deal-btn" href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
-        </article>
+  <!-- 3. TWO LISTS -->
+  <section class="gr-lists" id="lists" aria-labelledby="lists-title">
+    <div class="gr-wrap gr-lists-head gr-rise">
+      <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Two ways to list</p>
+      <h2 class="gr-h2" id="lists-title"><span class="gr-s">One to share.</span> One to <span class="gr-hl" style="--hl: var(--lime)">keep</span>.</h2>
+      <p class="gr-intro">Sharing is caring. Keeping it to yourself is also caring, just for you.</p>
+    </div>
+
+    <div class="gr-wrap gr-tag-stage" data-tags>
+      <svg class="gr-garland" aria-hidden="true"><path d=""/></svg>
+      <div class="gr-flags" aria-hidden="true"></div>
+      <div class="gr-tags">
+        <div class="gr-hang-pos">
+          <span class="gr-pin" aria-hidden="true"></span>
+          <div class="gr-hang-drop" style="--dd: 0.35s">
+            <div class="gr-hang" style="--string: 64px">
+              <article class="gr-tag gr-tag--registry" aria-labelledby="tag-registry">
+                <span class="gr-tag-hole" aria-hidden="true"></span>
+                <p class="gr-tag-kicker">For sharing</p>
+                <h3 id="tag-registry">Registry</h3>
+                <p class="gr-tag-copy">For the wedding, the move, the big December. Guests look you up by name and see what’s already claimed, so you get one gravy boat, not four.</p>
+                <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a registry</a>
+                <div class="gr-tag-stub"><span>Admit</span><strong>Everyone you love</strong><span>No. 001</span></div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="gr-hang-pos">
+          <span class="gr-pin" aria-hidden="true"></span>
+          <div class="gr-hang-drop" style="--dd: 0.55s">
+            <div class="gr-hang" style="--string: 64px">
+              <article class="gr-tag gr-tag--wish" aria-labelledby="tag-wish">
+                <span class="gr-tag-hole" aria-hidden="true"></span>
+                <p class="gr-tag-kicker">For keeping</p>
+                <h3 id="tag-wish">Wishlist</h3>
+                <p class="gr-tag-copy">A private list of things you’re eyeing. No guests, no tracking, no explaining. Cross things off when they’re yours (or when you cave).</p>
+                <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
+                <div class="gr-tag-stub"><span>Admit</span><strong>Just you</strong><span>No. 002</span></div>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="tp-note">Already have a list? <a href="https://shopphylum.com/apps/giftregistry/manage">Manage your registry</a>. Questions first? Write <a href="mailto:hello@shopphylum.com">hello@shopphylum.com</a> or call <a href="tel:+17604242110">(760) 424-2110</a>.</p>
+    </div>
+
+    <p class="gr-wrap gr-lists-note gr-rise">Already have a list? <a href="https://shopphylum.com/apps/giftregistry/manage">Manage your registry</a></p>
+  </section>
+
+  <!-- 4. PARTY PICKER -->
+  <section class="gr-party" id="occasions" aria-labelledby="party-title">
+    <div class="gr-wrap">
+      <div class="gr-party-head gr-rise">
+        <div>
+          <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Pick your party</p>
+          <h2 class="gr-h2" id="party-title"><span class="gr-s">Whatever the occasion,</span> there’s a list for that.</h2>
+        </div>
+        <div class="gr-tabs" role="tablist" aria-label="Occasions">
+          <span class="gr-tabs-ink" aria-hidden="true"></span>
+          <button class="gr-tab" role="tab" id="tab-wedding" aria-controls="panel-wedding" aria-selected="true" style="--dot: #F0FFAE" data-stage="#F0FFAE" data-accent="#5F6748">Wedding</button>
+          <button class="gr-tab" role="tab" id="tab-home" aria-controls="panel-home" aria-selected="false" tabindex="-1" style="--dot: #FFBFAC" data-stage="#FFBFAC" data-accent="#A24A1F">Housewarming</button>
+          <button class="gr-tab" role="tab" id="tab-holiday" aria-controls="panel-holiday" aria-selected="false" tabindex="-1" style="--dot: #F5E4B8" data-stage="#F5E4B8" data-accent="#8A5A00">Holidays</button>
+          <button class="gr-tab" role="tab" id="tab-because" aria-controls="panel-because" aria-selected="false" tabindex="-1" style="--dot: #DCDFCB" data-stage="#DCDFCB" data-accent="#4F5739">Just because</button>
+        </div>
+      </div>
+
+      <div class="gr-stage gr-pop">
+        <div class="gr-stage-sun" aria-hidden="true"><span class="gr-sun"></span></div>
+
+        <div class="gr-panel" role="tabpanel" id="panel-wedding" aria-labelledby="tab-wedding" tabindex="0">
+          <div class="gr-panel-text">
+            <p class="gr-panel-tag">For the newlyweds</p>
+            <h3>Till death (or the dishwasher) do us part.</h3>
+            <p class="gr-panel-copy">Register for the table you’ll be hosting at for decades. Tabletop, linen, and the objects that make a first place feel like a forever one.</p>
+            <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a wedding registry</a>
+          </div>
+          <div class="gr-scene">
+            <figure class="gr-scene-photo"><img src="assets/registry/party-mud-australia.jpg" width="1000" height="666" alt="Mud Australia porcelain bowls and plates in mint, sky, and apricot on a linen-covered dinner table." loading="lazy" decoding="async"></figure>
+            <div class="gr-list">
+              <span class="gr-list-label">Example list</span>
+              <h4>Sam &amp; Rio’s wedding</h4>
+              <p class="gr-list-meta">2 of 4 claimed · 61 days to go</p>
+              <span class="gr-list-bar"><span style="--fill: 0.5"></span></span>
+              <ul>
+                <li class="is-claimed" style="--i:0; --cd: 0.8s"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">Dinner plates for twelve</span><span class="gr-chip">Aunt Jo</span></li>
+                <li style="--i:1"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">The good wine glasses</span><span class="gr-chip gr-chip--open">Still needed</span></li>
+                <li class="is-claimed" style="--i:2; --cd: 1.1s"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">A vase for all those flowers</span><span class="gr-chip">The Kims</span></li>
+                <li style="--i:3"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">One deeply weird ceramic friend</span><span class="gr-chip gr-chip--open">Still needed</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="gr-panel" role="tabpanel" id="panel-home" aria-labelledby="tab-home" tabindex="0" hidden>
+          <div class="gr-panel-text">
+            <p class="gr-panel-tag">For the new keys</p>
+            <h3>New place. Empty shelves. Let’s fix that.</h3>
+            <p class="gr-panel-copy">The first lamp, the cushion that finally makes the sofa, the bowl by the door for the keys you just got. Help is on the way.</p>
+            <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a housewarming list</a>
+          </div>
+          <div class="gr-scene">
+            <figure class="gr-scene-photo"><img src="assets/registry/party-johanna-gullichsen.jpg" width="1000" height="626" alt="Johanna Gullichsen woven cushions in rust and cream on a pale sofa beside a potted plant." loading="lazy" decoding="async"></figure>
+            <div class="gr-list">
+              <span class="gr-list-label">Example list</span>
+              <h4>Housewarming on Via Lola</h4>
+              <p class="gr-list-meta">3 of 4 claimed · party on Saturday</p>
+              <span class="gr-list-bar"><span style="--fill: 0.75"></span></span>
+              <ul>
+                <li class="is-claimed" style="--i:0; --cd: 0.8s"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">Cushions with opinions</span><span class="gr-chip">Mom</span></li>
+                <li class="is-claimed" style="--i:1; --cd: 1s"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">A lamp that sets the mood</span><span class="gr-chip">Kai</span></li>
+                <li style="--i:2"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">Cork coasters (house rules)</span><span class="gr-chip gr-chip--open">Still needed</span></li>
+                <li class="is-claimed" style="--i:3; --cd: 1.2s"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">The bowl by the door</span><span class="gr-chip">Bestie</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="gr-panel" role="tabpanel" id="panel-holiday" aria-labelledby="tab-holiday" tabindex="0" hidden>
+          <div class="gr-panel-text">
+            <p class="gr-panel-tag">For the big December</p>
+            <h3>Finally, an answer to “what do you want?”</h3>
+            <p class="gr-panel-copy">One link for everyone who asks, every single year. December in Palm Springs happens poolside, so think ice bucket before ugly sweater.</p>
+            <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a holiday list</a>
+          </div>
+          <div class="gr-scene">
+            <figure class="gr-scene-photo"><img src="assets/registry/party-koziol.jpg" width="1000" height="1001" alt="Koziol wine glasses and an ice bucket with two bottles at the edge of a swimming pool." loading="lazy" decoding="async"></figure>
+            <div class="gr-list">
+              <span class="gr-list-label">Example list</span>
+              <h4>Dana’s December list</h4>
+              <p class="gr-list-meta">1 of 4 claimed · 24 days to go</p>
+              <span class="gr-list-bar"><span style="--fill: 0.25"></span></span>
+              <ul>
+                <li class="is-claimed" style="--i:0; --cd: 0.8s"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">An ice bucket for the pool party</span><span class="gr-chip">Grandpa</span></li>
+                <li style="--i:1"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">Poolside glassware</span><span class="gr-chip gr-chip--open">Still needed</span></li>
+                <li style="--i:2"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">Something to wrap for the host</span><span class="gr-chip gr-chip--open">Still needed</span></li>
+                <li style="--i:3"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">A treat for me, obviously</span><span class="gr-chip gr-chip--open">Still needed</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="gr-panel" role="tabpanel" id="panel-because" aria-labelledby="tab-because" tabindex="0" hidden>
+          <div class="gr-panel-text">
+            <p class="gr-panel-tag">For no reason at all</p>
+            <h3>No occasion? Even better.</h3>
+            <p class="gr-panel-copy">Keep a wishlist of the things you keep circling back to. Birthdays, promotions, surviving a Tuesday. We won’t ask questions.</p>
+            <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
+          </div>
+          <div class="gr-scene">
+            <figure class="gr-scene-photo"><img src="assets/registry/party-dorsay.jpg" width="1000" height="1000" alt="A D’Orsay candle in a dark amber glass beside its copper and brown box." loading="lazy" decoding="async"></figure>
+            <div class="gr-list">
+              <span class="gr-list-label">Example wishlist</span>
+              <h4>Jordan’s list (no reason)</h4>
+              <p class="gr-list-meta">Private · only Jordan can see it</p>
+              <span class="gr-list-bar"><span style="--fill: 0.5"></span></span>
+              <ul>
+                <li class="is-claimed" style="--i:0; --cd: 0.8s"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">A candle that smells like vacation</span><span class="gr-chip">Caved</span></li>
+                <li style="--i:1"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">That bobble guy I keep visiting</span><span class="gr-chip gr-chip--open">Someday</span></li>
+                <li class="is-claimed" style="--i:2; --cd: 1.05s"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">Something colorful for the desk</span><span class="gr-chip">Got it</span></li>
+                <li style="--i:3"><span class="gr-check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-6.5"/></svg></span><span class="gr-item">The thing in the window</span><span class="gr-chip gr-chip--open">Someday</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="tp-section" aria-labelledby="who-title">
-    <div class="tp-wrap">
-      <div class="tp-reveal">
-        <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Occasions</p>
-        <h2 id="who-title"><span class="tp-s">Any occasion.</span> Even no occasion.</h2>
-        <p class="tp-intro">The same list works for a long engagement or a Saturday in December. Or skip the occasion entirely and keep a wishlist. We won’t tell.</p>
+  <!-- 5. HOW IT WORKS: the unwrap -->
+  <section class="gr-how" id="how" aria-labelledby="how-title">
+    <div class="gr-how-pin">
+      <div class="gr-wrap gr-how-grid">
+        <div class="gr-how-copy">
+          <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>How it works</p>
+          <h2 class="gr-h2" id="how-title"><span class="gr-s">Three steps.</span> Zero toasters.</h2>
+          <ol class="gr-steps">
+            <li class="gr-step is-on">
+              <span class="gr-step-n" aria-hidden="true">1</span>
+              <div>
+                <h3>Make the list</h3>
+                <p>Sign in and start adding. Tap Add to Registry as you shop online, or build it with us on the shop floor in Palm Springs.</p>
+              </div>
+            </li>
+            <li class="gr-step">
+              <span class="gr-step-n" aria-hidden="true">2</span>
+              <div>
+                <h3>Spread the word</h3>
+                <p>Guests find you by name. They don’t need an account to look, and they can see what’s still needed.</p>
+              </div>
+            </li>
+            <li class="gr-step">
+              <span class="gr-step-n" aria-hidden="true">3</span>
+              <div>
+                <h3>Unwrap</h3>
+                <p>Gifts check out like any PHYLUM order, shipped or picked up at the flagship. You handle the happy dance.</p>
+              </div>
+            </li>
+          </ol>
+          <div class="gr-how-meter" aria-hidden="true"><span></span></div>
+        </div>
+
+        <div class="gr-how-stage" aria-hidden="true">
+          <div class="gr-box-sunwrap"><span class="gr-sun"></span></div>
+          <svg class="gr-box" viewBox="0 0 400 440">
+            <defs>
+              <pattern id="gr-wrapdots" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="6" cy="6" r="3.2" fill="#C05A28" opacity="0.5"/>
+                <circle cx="18" cy="18" r="2.4" fill="#F1EEE4"/>
+              </pattern>
+            </defs>
+            <ellipse class="gr-box-shadow" cx="200" cy="410" rx="150" ry="13" fill="rgba(36,33,28,0.16)"/>
+            <rect x="74" y="198" width="252" height="16" rx="3" fill="#9E4320"/>
+            <g class="gr-box-body">
+              <rect x="70" y="206" width="260" height="196" rx="8" fill="#FFBFAC"/>
+              <rect x="70" y="206" width="260" height="196" rx="8" fill="url(#gr-wrapdots)"/>
+              <rect x="183" y="206" width="34" height="196" fill="#C05A28"/>
+              <rect x="70" y="206" width="260" height="14" fill="rgba(36,33,28,0.12)"/>
+            </g>
+            <g class="gr-box-lid">
+              <rect x="54" y="158" width="292" height="54" rx="8" fill="#FFAA92"/>
+              <rect x="54" y="158" width="292" height="54" rx="8" fill="url(#gr-wrapdots)"/>
+              <rect x="181" y="158" width="38" height="54" fill="#C05A28"/>
+            </g>
+            <g class="gr-box-bow">
+              <path d="M200 158 C 160 108, 112 118, 128 146 C 138 164, 176 162, 200 158 Z" fill="#C05A28"/>
+              <path d="M200 158 C 240 108, 288 118, 272 146 C 262 164, 224 162, 200 158 Z" fill="#C05A28"/>
+              <path d="M200 158 C 176 142, 150 138, 146 146 C 160 150, 180 154, 200 158 Z" fill="#A24A1F"/>
+              <path d="M200 158 C 224 142, 250 138, 254 146 C 240 150, 220 154, 200 158 Z" fill="#A24A1F"/>
+              <rect x="188" y="146" width="24" height="22" rx="6" fill="#A24A1F"/>
+            </g>
+            <g class="gr-box-tag">
+              <path d="M210 160 C 240 176, 262 186, 284 196" stroke="#24211C" stroke-width="1.6" fill="none"/>
+              <g class="gr-tag-front">
+                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#F0FFAE" stroke="#24211C" stroke-width="1.4"/>
+                <circle cx="296" cy="204" r="3.5" fill="#24211C"/>
+                <text x="310" y="210">To: you</text>
+              </g>
+              <g class="gr-tag-back">
+                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#f2a900" stroke="#24211C" stroke-width="1.4"/>
+                <circle cx="296" cy="204" r="3.5" fill="#24211C"/>
+                <text x="308" y="200" style="font-size: 11px; letter-spacing: 0.08em">FROM:</text>
+                <text x="308" y="218">everyone</text>
+              </g>
+            </g>
+          </svg>
+          <div class="gr-guests">
+            <span class="gr-guest" data-x="-118" data-y="-150">Mom</span>
+            <span class="gr-guest" data-x="120" data-y="-170">The Kims</span>
+            <span class="gr-guest" data-x="-160" data-y="-40">Aunt Jo</span>
+            <span class="gr-guest" data-x="168" data-y="-60">Bestie</span>
+            <span class="gr-guest" data-x="-130" data-y="80">Kai</span>
+            <span class="gr-guest" data-x="140" data-y="70">Your boss?</span>
+          </div>
+        </div>
       </div>
-      <ul class="tp-who">
-        <li class="tp-card tp-reveal">
-          <figure>
-            <img src="assets/trade/mud-australia.jpg" width="1024" height="682" alt="Mud Australia porcelain bowls and plates in mint, sky, and apricot on a linen-covered dinner table." loading="lazy" decoding="async">
-            <figcaption>Mud Australia</figcaption>
-          </figure>
-          <div class="tp-card-body">
-            <h3>Weddings</h3>
-            <div class="tp-card-foot">
-              <p class="tp-card-tag">A table for the long run.</p>
-              <p>Tabletop, linen, and objects for the house you’re actually going to live in.</p>
-            </div>
-          </div>
+    </div>
+  </section>
+
+  <!-- 6. SHELF -->
+  <section class="gr-shelf" id="ideas" aria-labelledby="ideas-title">
+    <div class="gr-wrap gr-shelf-head gr-rise">
+      <div>
+        <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Gift ideas</p>
+        <h2 class="gr-h2" id="ideas-title"><span class="gr-s">Need a nudge?</span> <span class="gr-hl" style="--hl: var(--peach)">Unwrap</span> a few.</h2>
+        <p class="gr-intro">Crowd-pleasers from the shop floor in Palm Springs. Anything with an Add to Registry button can join your list.</p>
+      </div>
+      <div class="gr-shelf-nav">
+        <button class="gr-round" type="button" data-shelf="-1" aria-label="Previous gift ideas"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12.5 4.5L7 10l5.5 5.5"/></svg></button>
+        <button class="gr-round" type="button" data-shelf="1" aria-label="Next gift ideas"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7.5 4.5L13 10l-5.5 5.5"/></svg></button>
+      </div>
+    </div>
+
+    <div class="gr-track" tabindex="0" role="region" aria-label="Gift ideas. Scroll sideways for more.">
+      <ul class="gr-gifts">
+        <li class="gr-gift" style="--tilt: -1.6deg">
+          <a href="https://shopphylum.com/collections/studio-arhoj">
+            <span class="gr-frame"><img src="assets/registry/gift-studio-arhoj.jpg" width="720" height="480" alt="Studio Arhoj glazed ceramic figures with painted eyes on a sunlit walnut table." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-dots" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-gift-brand">Studio Arhoj</span>
+            <span class="gr-gift-line">Glazed little guys with big personalities.</span>
+          </a>
         </li>
-        <li class="tp-card tp-card--sage tp-reveal">
-          <figure>
-            <img src="assets/trade/johanna-gullichsen.jpg" width="1200" height="751" alt="Johanna Gullichsen woven cushions in rust and cream on a pale sofa beside a potted plant." loading="lazy" decoding="async">
-            <figcaption>Johanna Gullichsen</figcaption>
-          </figure>
-          <div class="tp-card-body">
-            <h3>Holidays</h3>
-            <div class="tp-card-foot">
-              <p class="tp-card-tag">Finally, an answer.</p>
-              <p>A shared list for the people who ask, every single year, what you want.</p>
-            </div>
-          </div>
+        <li class="gr-gift" style="--tilt: 1.2deg">
+          <a href="https://shopphylum.com/collections/liga">
+            <span class="gr-frame"><img src="assets/registry/gift-liga.jpg" width="720" height="720" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-stripe" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-gift-brand">LIGA</span>
+            <span class="gr-gift-line">Cork coasters. Water rings? Never heard of her.</span>
+          </a>
         </li>
-        <li class="tp-card tp-card--apricot tp-reveal">
-          <figure>
-            <img src="assets/trade/koziol.jpg" width="1100" height="1101" alt="Koziol wine glasses and an ice bucket with two bottles at the edge of a swimming pool." loading="lazy" decoding="async">
-            <figcaption>Koziol</figcaption>
-          </figure>
-          <div class="tp-card-body">
-            <h3>Housewarmings</h3>
-            <div class="tp-card-foot">
-              <p class="tp-card-tag">New keys, new bowls.</p>
-              <p>The first bowls, a blanket, a lamp. Still welcome long after the boxes are gone.</p>
-            </div>
-          </div>
+        <li class="gr-gift" style="--tilt: -0.8deg">
+          <a href="https://shopphylum.com/collections/mungo">
+            <span class="gr-frame"><img src="assets/registry/gift-peek-mungo.jpg" width="720" height="900" alt="A Mungo check blanket in soft pastels spread across a made bed." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-sun" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-gift-brand">Mungo</span>
+            <span class="gr-gift-line">Blankets for the three cold nights a year in Palm Springs.</span>
+          </a>
         </li>
-        <li class="tp-card tp-card--sun tp-reveal">
-          <figure>
-            <img src="assets/trade/hoptimist.jpg" width="1200" height="796" alt="Hoptimist bobble figures in bright colors lined up on concrete steps." loading="lazy" decoding="async">
-            <figcaption>Hoptimist</figcaption>
-          </figure>
-          <div class="tp-card-body">
-            <h3>Just because</h3>
-            <div class="tp-card-foot">
-              <p class="tp-card-tag">Treat yourself, officially.</p>
-              <p>Use the wishlist for a private list of things you’d like. No tracking, no explaining.</p>
-            </div>
-          </div>
+        <li class="gr-gift" style="--tilt: 1.8deg">
+          <a href="https://shopphylum.com/collections/ekobo">
+            <span class="gr-frame"><img src="assets/registry/gift-ekobo.jpg" width="720" height="320" alt="Ekobo plates in teal, coral, and sand arranged with sliced citrus on a blush backdrop." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-sage" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-gift-brand">Ekobo</span>
+            <span class="gr-gift-line">Plates in sorbet colors, made for passing around.</span>
+          </a>
+        </li>
+        <li class="gr-gift" style="--tilt: -1.4deg">
+          <a href="https://shopphylum.com/collections/forma-art-studio">
+            <span class="gr-frame"><img src="assets/registry/gift-peek-forma.jpg" width="720" height="720" alt="A Forma Art Studio woven rug in navy, rust, and tan blocks." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-clay" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-gift-brand">Forma Art Studio</span>
+            <span class="gr-gift-line">Rugs that are basically art you can stand on.</span>
+          </a>
+        </li>
+        <li class="gr-gift" style="--tilt: 1deg">
+          <a href="https://shopphylum.com/collections/chilewich">
+            <span class="gr-frame"><img src="assets/registry/gift-chilewich.jpg" width="720" height="352" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-dots" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-gift-brand">Chilewich</span>
+            <span class="gr-gift-line">Woven runners that can handle the hallway.</span>
+          </a>
+        </li>
+        <!-- EDIT: No confirmed Londji collection handle yet, so this tile points at a search. -->
+        <li class="gr-gift" style="--tilt: -1.8deg">
+          <a href="https://shopphylum.com/search?q=londji">
+            <span class="gr-frame"><img src="assets/registry/gift-londji.jpg" width="720" height="720" alt="A Londji Happy Birthday Unicorn puzzle box surrounded by puzzle pieces on a yellow background." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-stripe" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-gift-brand">Londji</span>
+            <span class="gr-gift-line">Puzzles and games for the smallest guests.</span>
+          </a>
         </li>
       </ul>
     </div>
-  </section>
+    <div class="gr-shelf-bar" aria-hidden="true"><span></span></div>
 
-  <section class="tp-section tp-section--deep" id="how" aria-labelledby="how-title">
-    <div class="tp-wrap tp-reveal">
-      <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>How it works</p>
-      <h2 id="how-title"><span class="tp-s">A list in minutes.</span> Gifts for years.</h2>
-      <ol class="tp-steps">
-        <li>
-          <span class="tp-step-num">01</span>
-          <h3>Create</h3>
-          <p>Sign in and start a registry. Add pieces as you shop online, or build the list with us in the store.</p>
-        </li>
-        <li>
-          <span class="tp-step-num">02</span>
-          <h3>Share</h3>
-          <p>Guests search by your name. No account needed to look, and the list shows what’s still needed.</p>
-        </li>
-        <li>
-          <span class="tp-step-num">03</span>
-          <h3>Give</h3>
-          <p>Gifts check out like any other PHYLUM order, shipped or picked up at the Palm Springs flagship. Happy unwrapping.</p>
-        </li>
-      </ol>
+    <div class="gr-wrap gr-budget-wrap gr-rise">
+      <p class="gr-budget-title">Shopping for someone? Browse gifts by budget</p>
+      <ul class="gr-budget">
+        <li><a href="https://shopphylum.com/collections/gifts?filter.v.price.lte=49.99"><strong>Under $50</strong><span>for the coworker</span></a></li>
+        <li><a href="https://shopphylum.com/collections/gifts?filter.v.price.gte=50&amp;filter.v.price.lte=149.99"><strong>$50–150</strong><span>for the cousin</span></a></li>
+        <li><a href="https://shopphylum.com/collections/gifts?filter.v.price.gte=150&amp;filter.v.price.lte=299.99"><strong>$150–300</strong><span>for the best friend</span></a></li>
+        <li><a href="https://shopphylum.com/collections/gifts?filter.v.price.gte=300"><strong>$300+</strong><span>for the parents, probably</span></a></li>
+      </ul>
+      <p class="gr-shelf-note">Ideas, not a set list. Prices, stock, and which pieces can be added are confirmed on each product page.</p>
     </div>
   </section>
 
-  <section class="tp-section tp-edit" id="ideas" aria-labelledby="ideas-title">
-    <div class="tp-wrap tp-reveal">
-      <div class="tp-edit-head">
-        <div>
-          <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Gift ideas</p>
-          <h2 id="ideas-title"><span class="tp-s">Need a nudge?</span> Start here.</h2>
-          <p class="tp-intro">Crowd-pleasers from the shop floor in Palm Springs. Anything with an Add to Registry button can join the list.</p>
+  <!-- 7. FIND -->
+  <section class="gr-find" id="find" aria-labelledby="find-title">
+    <div class="gr-wrap gr-find-grid">
+      <div class="gr-rise">
+        <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>For the guests</p>
+        <h2 class="gr-h2" id="find-title"><span class="gr-s">Whose big day</span> is it?</h2>
+        <p class="gr-intro">Search by the first or last name of whoever made the list. No account needed to snoop. Sorry, browse.</p>
+        <!-- EDIT: Confirm the Gift Reggie search field names on /apps/giftregistry/find before launch. The form degrades to the plain find page if they differ. -->
+        <form class="gr-search" action="https://shopphylum.com/apps/giftregistry/find" method="get" role="search" aria-label="Find a registry">
+          <div class="gr-field">
+            <label for="gr-first">First name</label>
+            <input id="gr-first" name="firstname" type="text" autocomplete="off" placeholder="Rio" data-names="Rio,Sam,Dana,Jordan,Mira">
+          </div>
+          <div class="gr-field">
+            <label for="gr-last">Last name</label>
+            <input id="gr-last" name="lastname" type="text" autocomplete="off" placeholder="Castillo" data-names="Castillo,Nguyen,Okafor,Bloom,Park">
+          </div>
+          <button class="gr-btn gr-btn--lime" type="submit">Find their list</button>
+        </form>
+        <p class="gr-find-fine">Made a list already? <a href="https://shopphylum.com/apps/giftregistry/manage">Manage it here</a>.</p>
+      </div>
+
+      <div class="gr-postcard-wrap gr-pop" style="--rd: 0.15s">
+        <div class="gr-postcard">
+          <span class="gr-stamp" aria-hidden="true"><span class="gr-sun"></span></span>
+          <svg class="gr-postmark" viewBox="0 0 100 100" aria-hidden="true">
+            <defs><path id="gr-pm" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
+            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="27" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text><textPath href="#gr-pm" textLength="222" lengthAdjust="spacing">PALM SPRINGS ✦ CA 92262 ✦ </textPath></text>
+            <path d="M-30 42 q 10 -6 20 0 t 20 0 t 20 0 M-30 58 q 10 -6 20 0 t 20 0 t 20 0" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <div class="gr-pc-msg">
+            <div>
+              <h3>Wish you were here.</h3>
+              <p>Rather touch everything first? Same. Come by the flagship and we’ll walk the floor and start the list with you. Call <a href="tel:+17604242110">(760) 424-2110</a> so someone’s ready.</p>
+            </div>
+          </div>
+          <div class="gr-pc-addr">
+            <address>
+              <span>PHYLUM</span>
+              <span>901 N. Palm Canyon Dr., Suite 101</span>
+              <span>Palm Springs, CA 92262</span>
+            </address>
+          </div>
         </div>
-        <a class="tp-text-link" href="https://shopphylum.com">Shop the edit</a>
-      </div>
-      <!-- EDIT: The wrap tile still points at a search; swap in a gifts collection URL if there is one. -->
-      <div class="tp-mosaic gr-mosaic">
-        <a href="https://shopphylum.com/collections/studio-arhoj">
-          <figure>
-            <img src="assets/trade/studio-arhoj.jpg" width="1400" height="934" alt="Studio Arhoj glazed ceramic figures with painted eyes, scattered across a sunlit walnut table." loading="lazy" decoding="async">
-            <figcaption>Studio Arhoj</figcaption>
-          </figure>
-        </a>
-        <a href="https://shopphylum.com/collections/chilewich">
-          <figure>
-            <img src="assets/trade/chilewich.jpg" width="1056" height="517" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async">
-            <figcaption>Chilewich</figcaption>
-          </figure>
-        </a>
-        <a href="https://shopphylum.com/collections/liga">
-          <figure>
-            <img src="assets/trade/liga.jpg" width="1000" height="1000" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async">
-            <figcaption>LIGA</figcaption>
-          </figure>
-        </a>
-        <a href="https://shopphylum.com/collections/ekobo">
-          <figure>
-            <img src="assets/trade/ekobo.jpg" width="1400" height="622" alt="Ekobo plates in teal, coral, and sand arranged with sliced citrus on a blush backdrop." loading="lazy" decoding="async">
-            <figcaption>Ekobo</figcaption>
-          </figure>
-        </a>
-        <a href="https://shopphylum.com/search?q=gift">
-          <figure>
-            <img src="assets/mega-nav/gifts-wrapping.png" width="768" height="1024" alt="Gifts wrapped in marbled paper and tied with cream rope on a concrete ledge outside the shop." loading="lazy" decoding="async">
-            <figcaption>The wrap</figcaption>
-          </figure>
-        </a>
-      </div>
-      <p class="gr-note">These are not a set registry. Prices, stock, and which pieces can be added are confirmed on the product page.</p>
-    </div>
-  </section>
-
-  <section class="tp-faq" aria-labelledby="faq-title">
-    <div class="tp-wrap tp-faq-grid">
-      <div class="tp-faq-head tp-reveal">
-        <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>FAQ</p>
-        <h2 id="faq-title"><span class="tp-s">Good questions.</span> Straight answers.</h2>
-      </div>
-      <div class="tp-faq-list tp-reveal">
-        <details class="tp-faq-item">
-          <summary><h3>Is the PHYLUM registry only for weddings?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Not at all. Use it for a wedding, the holidays, a housewarming, or any occasion where people keep asking what to bring. A wishlist is there when you want a list without guest tracking.</p></div></div>
-        </details>
-        <details class="tp-faq-item">
-          <summary><h3>How do I create a registry?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Choose <a href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a> and sign in with a PHYLUM account. You can also start one in person at the Palm Springs flagship.</p></div></div>
-        </details>
-        <details class="tp-faq-item">
-          <summary><h3>How do guests find a registry?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Guests search by first or last name on <a href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>. They don’t need an account to view the list or to buy from it.</p></div></div>
-        </details>
-        <details class="tp-faq-item">
-          <summary><h3>What’s the difference between a registry and a wishlist?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>A registry is meant to be shared. It can show what has been bought and what is still needed. A <a href="https://shopphylum.com/apps/giftregistry/wishlist">wishlist</a> is a simpler private list, with no guest tracking. You remove things yourself once you have them.</p></div></div>
-        </details>
-        <details class="tp-faq-item">
-          <summary><h3>Do registry gifts ship?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>They check out like any other PHYLUM order. The shop publishes complimentary shipping on orders over $150, and Palm Springs pickup is available. Confirm the shipping offer on the order before you rely on it.</p></div></div>
-        </details>
-        <details class="tp-faq-item">
-          <summary><h3>Can I register in the store?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Yes. The flagship is at 901 N. Palm Canyon Drive, Suite 101, in the Palm Springs Design District. Call <a href="tel:+17604242110">(760) 424-2110</a> if you’d like someone there to start the list with you.</p></div></div>
-        </details>
-        <details class="tp-faq-item">
-          <summary><h3>What if something on the list sells out?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Guests can see what’s still needed. If a piece is gone, there’s plenty more to love in the edit. Good things go fast, so the list can’t promise every item stays in stock.</p></div></div>
-        </details>
-        <details class="tp-faq-item">
-          <summary><h3>Is there a fee?</h3><span class="tp-pm" aria-hidden="true"></span></summary>
-          <div class="tp-faq-a"><div class="tp-faq-a-inner"><p>Nope. Creating a PHYLUM registry or wishlist is free, and so is the PHYLUM account you need. Return to a list you’ve already made from <a href="https://shopphylum.com/apps/giftregistry/manage">your account</a>.</p></div></div>
-        </details>
       </div>
     </div>
   </section>
 
-  <section class="tp-close" aria-labelledby="close-title">
-    <div class="tp-wrap tp-close-copy tp-reveal">
-      <p class="tp-eyebrow"><span class="tp-sun" aria-hidden="true"></span>Gift Registry</p>
-      <h2 id="close-title"><span class="tp-s">Make a list.</span> Drop some hints.</h2>
-      <p>Create a registry, or look one up by name. Not ready to share? The wishlist keeps it between us.</p>
-      <div class="tp-ctas gr-close-ctas">
-        <a class="tp-btn tp-btn--sun" href="https://shopphylum.com/apps/giftregistry/create">Create a registry</a>
-        <a class="tp-btn tp-btn--light" href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>
+  <!-- 8. FAQ -->
+  <section class="gr-faq" id="faq" aria-labelledby="faq-title">
+    <div class="gr-wrap">
+      <div class="gr-faq-head gr-rise">
+        <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>FAQ</p>
+        <h2 class="gr-h2" id="faq-title"><span class="gr-s">Ask away.</span> We love a group chat.</h2>
+      </div>
+      <div class="gr-chat" data-chat>
+        <div class="gr-chat-top">
+          <span class="gr-chat-av" aria-hidden="true"><span class="gr-sun"></span></span>
+          <div><strong>PHYLUM Registry Desk</strong><span>Palm Springs · replies in a flash</span></div>
+        </div>
+        <div class="gr-chat-body">
+          <p class="gr-bubble gr-bubble--us" style="--i:0">Hi! Ask us anything. Well, these eight things. Tap a question.</p>
+          <details class="gr-q is-open is-said" style="--i:1" open>
+            <summary><span class="gr-bubble">Wait, is this only for weddings?</span></summary>
+            <div class="gr-a"><div class="gr-a-inner"><span class="gr-typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="gr-bubble gr-bubble--us">Not even a little. Weddings, housewarmings, the holidays, a new baby, a big birthday: any time people keep asking what to bring. Want a list without guest tracking? That’s what the <a href="https://shopphylum.com/apps/giftregistry/wishlist">wishlist</a> is for.</p></div></div>
+          </details>
+          <details class="gr-q" style="--i:2">
+            <summary><span class="gr-bubble">How do I start one?</span></summary>
+            <div class="gr-a"><div class="gr-a-inner"><span class="gr-typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="gr-bubble gr-bubble--us">Tap <a href="https://shopphylum.com/apps/giftregistry/create">Start a registry</a> and sign in with a PHYLUM account, then add the pieces you love as you shop. Rather do it in person? The Palm Springs flagship can start the list with you.</p></div></div>
+          </details>
+          <details class="gr-q" style="--i:3">
+            <summary><span class="gr-bubble">How do my guests find it?</span></summary>
+            <div class="gr-a"><div class="gr-a-inner"><span class="gr-typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="gr-bubble gr-bubble--us">They search by your first or last name on <a href="https://shopphylum.com/apps/giftregistry/find">Find a registry</a>. No account needed to look or to buy, and the list shows what’s still needed.</p></div></div>
+          </details>
+          <details class="gr-q" style="--i:4">
+            <summary><span class="gr-bubble">Registry vs. wishlist. Explain like I’m five.</span></summary>
+            <div class="gr-a"><div class="gr-a-inner"><span class="gr-typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="gr-bubble gr-bubble--us">A registry is made to share: guests can see what’s been bought and what’s still needed. A wishlist is a private list just for you, no guests, no tracking. You cross things off yourself.</p></div></div>
+          </details>
+          <details class="gr-q" style="--i:5">
+            <summary><span class="gr-bubble">Do the gifts ship?</span></summary>
+            <div class="gr-a"><div class="gr-a-inner"><span class="gr-typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="gr-bubble gr-bubble--us">They check out like any PHYLUM order, so they can ship or be picked up in Palm Springs. The shop offers complimentary shipping on orders over $150. Check the offer at checkout before you count on it.</p></div></div>
+          </details>
+          <details class="gr-q" style="--i:6">
+            <summary><span class="gr-bubble">Can I register in the store?</span></summary>
+            <div class="gr-a"><div class="gr-a-inner"><span class="gr-typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="gr-bubble gr-bubble--us">Yes, and we love it when you do. We’re at 901 N. Palm Canyon Drive, Suite 101, in the Palm Springs Design District. Call <a href="tel:+17604242110">(760) 424-2110</a> if you’d like someone ready to build the list with you.</p></div></div>
+          </details>
+          <details class="gr-q" style="--i:7">
+            <summary><span class="gr-bubble">What if something sells out?</span></summary>
+            <div class="gr-a"><div class="gr-a-inner"><span class="gr-typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="gr-bubble gr-bubble--us">Good things go fast, so the list can’t promise every piece stays in stock. Guests always see what’s still needed, and there’s plenty more to love in the shop.</p></div></div>
+          </details>
+          <details class="gr-q" style="--i:8">
+            <summary><span class="gr-bubble">Okay but what does it cost?</span></summary>
+            <div class="gr-a"><div class="gr-a-inner"><span class="gr-typing" aria-hidden="true"><i></i><i></i><i></i></span><p class="gr-bubble gr-bubble--us">Nothing. The registry, the wishlist, and the PHYLUM account you need are all free. Already have a list? Find it in <a href="https://shopphylum.com/apps/giftregistry/manage">your account</a>.</p></div></div>
+          </details>
+        </div>
       </div>
     </div>
-    <div class="tp-close-sun" aria-hidden="true"><span class="tp-sun"></span></div>
   </section>
 
-  <footer class="tp-foot">
-    <div class="tp-wrap">
-      <div class="tp-foot-grid">
+  <!-- 9. CLOSE -->
+  <section class="gr-close" aria-labelledby="close-title">
+    <canvas data-ambient aria-hidden="true"></canvas>
+    <div class="gr-wrap gr-close-copy gr-rise">
+      <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Gift Registry</p>
+      <h2 id="close-title" data-chars><span class="gr-s">Go on,</span> <span class="gr-lime">make it official.</span></h2>
+      <p>Start a registry, look up a friend’s, or keep a wishlist all to yourself. Cake not included.</p>
+      <div class="gr-ctas">
+        <a class="gr-btn gr-btn--sun" data-magnet data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a registry <span class="gr-btn-arrow" aria-hidden="true">→</span></a>
+        <a class="gr-btn gr-btn--light" data-magnet href="#find">Find a registry</a>
+      </div>
+      <a class="gr-close-alt" href="https://shopphylum.com/apps/giftregistry/wishlist">Or start a wishlist, just for you</a>
+    </div>
+    <div class="gr-cheers" aria-hidden="true">
+      <div class="gr-cheers-track">
+        <ul class="gr-cheers-row">
+          <li>Cheers<span class="gr-sun"></span></li>
+          <li>Congrats<span class="gr-sun"></span></li>
+          <li>Mazel tov<span class="gr-sun"></span></li>
+          <li>Salud<span class="gr-sun"></span></li>
+          <li>Santé<span class="gr-sun"></span></li>
+          <li>Hooray<span class="gr-sun"></span></li>
+        </ul>
+        <ul class="gr-cheers-row">
+          <li>Cheers<span class="gr-sun"></span></li>
+          <li>Congrats<span class="gr-sun"></span></li>
+          <li>Mazel tov<span class="gr-sun"></span></li>
+          <li>Salud<span class="gr-sun"></span></li>
+          <li>Santé<span class="gr-sun"></span></li>
+          <li>Hooray<span class="gr-sun"></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="gr-foot">
+    <div class="gr-wrap">
+      <div class="gr-foot-grid">
         <div>
-          <img class="tp-wordmark" src="assets/event/phylum-wordmark.png" width="296" height="102" alt="PHYLUM">
+          <img class="gr-wordmark" src="assets/event/phylum-wordmark.png" width="296" height="102" alt="PHYLUM">
           <address>
             901 N. Palm Canyon Dr., Suite 101<br>
             Palm Springs, CA 92262<br>
@@ -1463,100 +2292,728 @@
           <a href="https://shopphylum.com/apps/giftregistry/create">Create</a>
         </nav>
       </div>
-      <p class="tp-colophon">© 2026 PHYLUM · Gift Registry</p>
+      <p class="gr-colophon">© 2026 PHYLUM · Gift Registry</p>
     </div>
   </footer>
 </main>
 
-
 <script src="site-chrome.js"></script>
 <script>
-  (function () {
-    if (!document.documentElement.classList.contains('js-motion')) return;
-    if (!('IntersectionObserver' in window)) {
-      document.documentElement.classList.remove('js-motion');
-      return;
+(function () {
+  var root = document.documentElement;
+  var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var motion = root.classList.contains('js-motion');
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var COLORS = ['#f2a900', '#C05A28', '#FFBFAC', '#F0FFAE', '#7C8360', '#F1EEE4'];
+  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
+  function smooth(a, b, v) { var t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  /* ---------- Frame loop + scroll velocity ---------- */
+  var tickers = [];
+  var scrollY = window.scrollY, lastY = scrollY, scrollVel = 0;
+  window.addEventListener('scroll', function () { scrollY = window.scrollY; }, { passive: true });
+  var lastT = performance.now();
+  function frame(now) {
+    var dt = Math.min(0.05, (now - lastT) / 1000) || 0.016;
+    lastT = now;
+    var dy = scrollY - lastY;
+    lastY = scrollY;
+    scrollVel = lerp(scrollVel, dy / dt, 0.18);
+    for (var i = 0; i < tickers.length; i++) tickers[i](dt, now / 1000);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  function watch(el, cb, opts) {
+    if (!('IntersectionObserver' in window)) { cb(true); return; }
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { cb(e.isIntersecting, e); });
+    }, opts || { threshold: 0 }).observe(el);
+  }
+
+  /* ---------- Confetti ---------- */
+  var Confetti = (function () {
+    var canvas, ctx, parts = [], running = false, dpr = 1;
+    function ensure() {
+      if (canvas) return;
+      canvas = document.createElement('canvas');
+      canvas.className = 'gr-confetti';
+      canvas.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(canvas);
+      ctx = canvas.getContext('2d');
+      size();
+      window.addEventListener('resize', size);
     }
-    var nodes = document.querySelectorAll('.tp-reveal');
-    var seen = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-in');
-        seen.unobserve(entry.target);
-      });
-    }, { threshold: 0.16, rootMargin: '0px 0px -6% 0px' });
-    nodes.forEach(function (node) { seen.observe(node); });
+    function size() {
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = innerWidth * dpr;
+      canvas.height = innerHeight * dpr;
+    }
+    function burst(x, y, o) {
+      if (!motion) return;
+      ensure();
+      o = o || {};
+      var n = o.count || 90, spread = o.spread || 70, power = o.power || 13, angle = (o.angle == null ? -90 : o.angle);
+      for (var i = 0; i < n; i++) {
+        var a = (angle + (Math.random() - 0.5) * spread * 2) * Math.PI / 180;
+        var v = power * (0.45 + Math.random() * 0.75);
+        var shape = Math.random();
+        parts.push({
+          x: x, y: y,
+          vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+          w: shape < 0.55 ? 7 + Math.random() * 6 : (shape < 0.8 ? 5 + Math.random() * 3 : 3),
+          h: shape < 0.55 ? 4 + Math.random() * 3 : (shape < 0.8 ? 5 + Math.random() * 3 : 14 + Math.random() * 8),
+          round: shape >= 0.55 && shape < 0.8,
+          rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.35,
+          tilt: Math.random() * 6.28, vt: 0.08 + Math.random() * 0.12,
+          c: COLORS[(Math.random() * COLORS.length) | 0],
+          life: 0, max: 150 + Math.random() * 90
+        });
+      }
+      if (!running) { running = true; requestAnimationFrame(step); }
+    }
+    function step() {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var p = parts[i];
+        p.life++;
+        p.vx *= 0.985; p.vy = p.vy * 0.985 + 0.32;
+        p.x += p.vx + Math.sin(p.life * 0.08 + p.tilt) * 0.6; p.y += p.vy;
+        p.rot += p.vr; p.tilt += p.vt;
+        var fade = clamp((p.max - p.life) / 30, 0, 1);
+        if (p.life > p.max || p.y > innerHeight + 40) { parts.splice(i, 1); continue; }
+        ctx.save();
+        ctx.globalAlpha = fade;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.scale(1, Math.cos(p.tilt));
+        ctx.fillStyle = p.c;
+        if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.w / 2, 0, 6.283); ctx.fill(); }
+        else ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+      if (parts.length) requestAnimationFrame(step);
+      else { running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+    }
+    function fromEl(el, o) {
+      var r = el.getBoundingClientRect();
+      burst(r.left + r.width / 2, r.top + r.height / 2, o);
+    }
+    return { burst: burst, fromEl: fromEl };
   })();
 
-  requestAnimationFrame(function () {
-    document.documentElement.classList.add('is-ready');
+  /* ---------- Ready: wait for the shared nav ---------- */
+  var readyDone = false;
+  function ready() {
+    if (readyDone) return;
+    readyDone = true;
+    requestAnimationFrame(function () {
+      root.classList.add('is-ready');
+      if (!motion) return;
+      setTimeout(function () {
+        var h1 = document.querySelector('.gr-h1-b');
+        if (!h1 || window.scrollY > innerHeight) return;
+        var r = h1.getBoundingClientRect();
+        Confetti.burst(r.left + r.width * 0.2, r.top + r.height * 0.5, { count: 70, angle: -110, spread: 40, power: 15 });
+        Confetti.burst(r.left + r.width * 0.8, r.top + r.height * 0.5, { count: 70, angle: -70, spread: 40, power: 15 });
+      }, 950);
+    });
+  }
+  if (document.body.classList.contains('chrome-loading')) {
+    new MutationObserver(function (m, obs) {
+      if (!document.body.classList.contains('chrome-loading')) { obs.disconnect(); ready(); }
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    setTimeout(ready, 2600);
+  } else ready();
+
+  /* ---------- Reveals ---------- */
+  var revealIO = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      revealIO.unobserve(e.target);
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' }) : null;
+  document.querySelectorAll('.gr-rise, .gr-pop, [data-tags], [data-chat], .gr-close-copy').forEach(function (el) {
+    if (revealIO) revealIO.observe(el); else el.classList.add('is-in');
   });
-  (function () {
-    var pair = document.querySelector('.tp-pair');
-    if (!pair) return;
-    var deals = pair.querySelectorAll('.tp-deal');
-    var wide = window.matchMedia('(min-width: 901px)');
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    function measure() {
-      var on = wide.matches && !reduce.matches;
-      pair.classList.toggle('is-scrolly', on);
-      if (!on) return;
-      var mid = pair.offsetWidth / 2;
-      deals.forEach(function (deal) {
-        deal.style.setProperty('--dx', (mid - (deal.offsetLeft + deal.offsetWidth / 2)) + 'px');
+
+  /* ---------- Split close heading into letters ---------- */
+  document.querySelectorAll('[data-chars]').forEach(function (h) {
+    if (!motion) return;
+    var i = 0;
+    Array.prototype.forEach.call(h.children, function (part) {
+      var text = part.textContent;
+      part.setAttribute('aria-hidden', 'true');
+      part.textContent = '';
+      text.split(/(\s+)/).forEach(function (word) {
+        if (/^\s+$/.test(word)) { part.appendChild(document.createTextNode(word)); return; }
+        var w = document.createElement('span');
+        w.style.display = 'inline-block';
+        w.style.whiteSpace = 'nowrap';
+        word.split('').forEach(function (ch) {
+          var s = document.createElement('span');
+          s.className = 'gr-ch';
+          s.style.setProperty('--i', i++);
+          s.textContent = ch;
+          w.appendChild(s);
+        });
+        part.appendChild(w);
       });
-      update();
-    }
-    function update() {
-      if (!pair.classList.contains('is-scrolly')) return;
-      var top = pair.getBoundingClientRect().top;
-      var vh = window.innerHeight;
-      var t = Math.min(1, Math.max(0, (vh * 0.95 - top) / (vh * 0.6)));
-      var eased = t * t * (3 - 2 * t);
-      pair.style.setProperty('--p', eased.toFixed(4));
-    }
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', measure);
-    wide.addEventListener('change', measure);
-    reduce.addEventListener('change', measure);
-    measure();
-  })();
+    });
+    h.setAttribute('aria-label', 'Go on, make it official.');
+  });
 
+  /* ---------- Party pops on primary buttons ---------- */
+  document.querySelectorAll('[data-pop]').forEach(function (btn) {
+    var last = 0;
+    btn.addEventListener('pointerenter', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      var now = Date.now();
+      if (now - last < 1800) return;
+      last = now;
+      Confetti.fromEl(btn, { count: 26, spread: 55, power: 8 });
+    });
+  });
+
+  /* ---------- Magnetic buttons ---------- */
+  if (motion && finePointer) {
+    document.querySelectorAll('[data-magnet]').forEach(function (btn) {
+      btn.addEventListener('pointermove', function (e) {
+        var r = btn.getBoundingClientRect();
+        btn.style.setProperty('--mx', ((e.clientX - r.left - r.width / 2) * 0.18).toFixed(1) + 'px');
+        btn.style.setProperty('--my', ((e.clientY - r.top - r.height / 2) * 0.3).toFixed(1) + 'px');
+      });
+      btn.addEventListener('pointerleave', function () {
+        btn.style.setProperty('--mx', '0px');
+        btn.style.setProperty('--my', '0px');
+      });
+    });
+  }
+
+  /* ---------- Hero parallax ---------- */
   (function () {
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    document.querySelectorAll('.tp-faq-item').forEach(function (item) {
-      var summary = item.querySelector('summary');
-      var panel = item.querySelector('.tp-faq-a');
-      var anim = null;
-      if (!summary || !panel) return;
-      if (item.open) item.classList.add('is-open');
-
-      summary.addEventListener('click', function (event) {
-        event.preventDefault();
-        var opening = !item.classList.contains('is-open');
-        item.classList.toggle('is-open', opening);
-
-        if (reduce.matches || !panel.animate) {
-          item.open = opening;
-          return;
-        }
-
-        var from = anim ? panel.getBoundingClientRect().height : (opening ? 0 : panel.offsetHeight);
-        if (anim) anim.cancel();
-        if (opening) item.open = true;
-        var to = opening ? panel.scrollHeight : 0;
-
-        anim = panel.animate(
-          { height: [from + 'px', to + 'px'], opacity: opening ? [0.2, 1] : [1, 0] },
-          { duration: opening ? 520 : 380, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
-        );
-        anim.onfinish = function () {
-          anim = null;
-          if (!opening) item.open = false;
-        };
+    var hero = document.querySelector('.gr-hero');
+    var pics = Array.prototype.slice.call(document.querySelectorAll('.gr-pic'));
+    if (!hero || !motion) return;
+    var mx = 0, my = 0, cx = 0, cy = 0, visible = true;
+    if (finePointer) {
+      hero.addEventListener('pointermove', function (e) {
+        var r = hero.getBoundingClientRect();
+        mx = (e.clientX - r.left) / r.width - 0.5;
+        my = (e.clientY - r.top) / r.height - 0.5;
+      });
+      hero.addEventListener('pointerleave', function () { mx = 0; my = 0; });
+    }
+    watch(hero, function (on) { visible = on; });
+    tickers.push(function () {
+      if (!visible) return;
+      cx = lerp(cx, mx, 0.07);
+      cy = lerp(cy, my, 0.07);
+      var sy = Math.min(scrollY, innerHeight);
+      pics.forEach(function (p) {
+        var d = parseFloat(p.dataset.depth) || 0.5;
+        p.style.setProperty('--px', (cx * d * -46).toFixed(2) + 'px');
+        p.style.setProperty('--py', (cy * d * -34 - sy * d * 0.32).toFixed(2) + 'px');
       });
     });
   })();
+
+  /* ---------- Streamers: speed + direction follow the scroll ---------- */
+  (function () {
+    var bands = Array.prototype.slice.call(document.querySelectorAll('.gr-streamer'));
+    if (!bands.length || !motion) return;
+    var visible = false, dirSign = 1;
+    watch(document.querySelector('.gr-streamers'), function (on) { visible = on; });
+    bands.forEach(function (b) {
+      var track = b.querySelector('.gr-streamer-track');
+      var row = track.querySelector('.gr-streamer-row');
+      // Fill enough copies to cover two viewport widths.
+      var copies = 1;
+      while (copies < 6 && row.scrollWidth * copies < innerWidth * 2.6) {
+        track.appendChild(row.cloneNode(true));
+        copies++;
+      }
+      b._track = track; b._row = row; b._x = 0;
+      b._speed = parseFloat(b.dataset.speed) || 40;
+      b._dir = parseFloat(b.dataset.dir) || 1;
+    });
+    tickers.push(function (dt) {
+      if (!visible) return;
+      if (Math.abs(scrollVel) > 40) dirSign = scrollVel > 0 ? 1 : -1;
+      var boost = Math.min(Math.abs(scrollVel) * 0.35, 900);
+      bands.forEach(function (b) {
+        var w = b._row.offsetWidth;
+        b._x += (b._speed + boost) * b._dir * dirSign * dt;
+        var x = ((b._x % w) + w) % w;
+        var skew = clamp(scrollVel * -0.004, -7, 7);
+        b._track.style.transform = 'translate3d(' + (-x).toFixed(2) + 'px,0,0) skewX(' + skew.toFixed(2) + 'deg)';
+      });
+    });
+  })();
+
+  /* ---------- Garland + swinging tags ---------- */
+  (function () {
+    var stage = document.querySelector('[data-tags]');
+    if (!stage) return;
+    var svg = stage.querySelector('.gr-garland');
+    var path = svg.querySelector('path');
+    var flagsBox = stage.querySelector('.gr-flags');
+    var positions = Array.prototype.slice.call(stage.querySelectorAll('.gr-hang-pos'));
+    var hangs = positions.map(function (p) { return p.querySelector('.gr-hang'); });
+    var wide = window.matchMedia('(min-width: 901px)');
+    var flagColors = ['#f2a900', '#F0FFAE', '#C05A28', '#F1EEE4', '#7C8360'];
+
+    function layout() {
+      flagsBox.innerHTML = '';
+      if (!wide.matches) return;
+      var W = stage.clientWidth;
+      var sag = Math.min(70, W * 0.05);
+      var top = 8;
+      function yAt(x) { var u = x / W * 2 - 1; return top + sag * (1 - u * u); }
+      svg.setAttribute('viewBox', '0 0 ' + W + ' 140');
+      var d = 'M0 ' + yAt(0).toFixed(1);
+      for (var x = 20; x <= W; x += 20) d += ' L' + x + ' ' + yAt(x).toFixed(1);
+      path.setAttribute('d', d);
+      var len = path.getTotalLength();
+      path.style.setProperty('--len', len.toFixed(0));
+      var count = Math.floor(W / 46);
+      var sr = stage.getBoundingClientRect();
+      var skip = positions.map(function (p) {
+        var r = p.getBoundingClientRect();
+        return r.left - sr.left + r.width / 2;
+      });
+      for (var i = 0; i <= count; i++) {
+        var fx = (i + 0.5) * (W / (count + 1));
+        if (skip.some(function (s) { return Math.abs(s - fx) < 22; })) continue;
+        var slope = Math.atan2(yAt(fx + 1) - yAt(fx - 1), 2) * 180 / Math.PI;
+        var f = document.createElement('span');
+        f.className = 'gr-flag';
+        f.style.left = fx + 'px';
+        f.style.top = (yAt(fx) - 1) + 'px';
+        f.style.setProperty('--c', flagColors[i % flagColors.length]);
+        f.style.setProperty('--a', slope.toFixed(1) + 'deg');
+        f.style.setProperty('--fd', (-(i * 0.37) % 3).toFixed(2) + 's');
+        f.style.setProperty('--fdl', (0.2 + i * 0.03).toFixed(2) + 's');
+        flagsBox.appendChild(f);
+      }
+      positions.forEach(function (p, idx) {
+        p.style.setProperty('--attach', (yAt(skip[idx]) - 30).toFixed(1) + 'px');
+      });
+    }
+    layout();
+    window.addEventListener('resize', layout);
+    wide.addEventListener('change', layout);
+
+    if (!motion) return;
+    var visible = false;
+    watch(stage, function (on) { visible = on; });
+    var states = hangs.map(function (h, i) { return { a: 0, v: i ? -30 : 30, phase: i * 1.7, el: h }; });
+    states.forEach(function (s) {
+      s.el.addEventListener('pointermove', function (e) {
+        if (e.pointerType === 'mouse') s.v += clamp(e.movementX, -30, 30) * 0.9;
+      });
+      s.el.addEventListener('pointerdown', function () { s.v += (Math.random() > 0.5 ? 1 : -1) * 70; });
+    });
+    var dropped = false;
+    stage.addEventListener('transitionend', function () {}, { once: true });
+    tickers.push(function (dt, t) {
+      if (!visible) return;
+      if (!dropped && stage.classList.contains('is-in')) {
+        dropped = true;
+        setTimeout(function () { states.forEach(function (s, i) { s.v += (i ? -1 : 1) * 55; }); }, 700);
+      }
+      states.forEach(function (s) {
+        var breeze = Math.sin(t * 0.9 + s.phase) * 1.4;
+        var force = -38 * (s.a - breeze) - 2.6 * s.v;
+        s.v += force * dt + scrollVel * 0.0022 * (s.phase ? -1 : 1);
+        s.a = clamp(s.a + s.v * dt, -16, 16);
+        s.el.style.transform = 'rotate(' + s.a.toFixed(3) + 'deg)';
+      });
+    });
+  })();
+
+  /* ---------- Party picker tabs ---------- */
+  (function () {
+    var list = document.querySelector('.gr-tabs');
+    if (!list) return;
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    var ink = list.querySelector('.gr-tabs-ink');
+    var stage = document.querySelector('.gr-stage');
+    var sun = stage.querySelector('.gr-stage-sun');
+    var turns = 0;
+    function placeInk(tab) {
+      ink.style.width = tab.offsetWidth + 'px';
+      ink.style.transform = 'translateX(' + tab.offsetLeft + 'px)';
+    }
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (on) {
+          panel.hidden = false;
+          panel.classList.remove('is-entering');
+          panel.classList.add('is-reset');
+          void panel.offsetWidth;
+          panel.classList.remove('is-reset');
+          panel.classList.add('is-entering');
+        } else panel.hidden = true;
+      });
+      stage.style.setProperty('--stage', tab.dataset.stage);
+      stage.style.setProperty('--accent', tab.dataset.accent);
+      turns += 60;
+      sun.style.setProperty('--sun-r', turns + 'deg');
+      placeInk(tab);
+      if (focus) tab.focus();
+      var sel = tab.getBoundingClientRect(), lr = list.getBoundingClientRect();
+      if (sel.left < lr.left || sel.right > lr.right) list.scrollTo({ left: tab.offsetLeft - 16, behavior: motion ? 'smooth' : 'auto' });
+    }
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { if (tab.getAttribute('aria-selected') !== 'true') select(tab); });
+      tab.addEventListener('keydown', function (e) {
+        var n = null;
+        if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+        if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (e.key === 'Home') n = tabs[0];
+        if (e.key === 'End') n = tabs[tabs.length - 1];
+        if (n) { e.preventDefault(); select(n, true); }
+      });
+    });
+    var first = tabs[0];
+    placeInk(first);
+    function edge() { list.classList.toggle('is-end', list.scrollLeft + list.clientWidth >= list.scrollWidth - 4); }
+    list.addEventListener('scroll', edge, { passive: true });
+    window.addEventListener('resize', edge);
+    edge();
+    window.addEventListener('resize', function () {
+      placeInk(tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0]);
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeInk(tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0]); });
+    // Play the first panel's checklist when the stage scrolls in.
+    var firstPanel = document.getElementById(first.getAttribute('aria-controls'));
+    if (motion) {
+      firstPanel.classList.add('is-reset');
+      watch(stage, function (on) {
+        if (!on || firstPanel.dataset.played) return;
+        firstPanel.dataset.played = '1';
+        firstPanel.classList.remove('is-reset');
+        firstPanel.classList.add('is-entering');
+      }, { threshold: 0.35 });
+    }
+  })();
+
+  /* ---------- The unwrap (scroll-scrubbed) ---------- */
+  (function () {
+    var sec = document.querySelector('.gr-how');
+    if (!sec || !motion) return;
+    var pin = sec.querySelector('.gr-how-pin');
+    var steps = Array.prototype.slice.call(sec.querySelectorAll('.gr-step'));
+    var meter = sec.querySelector('.gr-how-meter');
+    var body = sec.querySelector('.gr-box-body');
+    var lid = sec.querySelector('.gr-box-lid');
+    var bow = sec.querySelector('.gr-box-bow');
+    var tag = sec.querySelector('.gr-box-tag');
+    var front = sec.querySelector('.gr-tag-front');
+    var back = sec.querySelector('.gr-tag-back');
+    var shadow = sec.querySelector('.gr-box-shadow');
+    var sun = sec.querySelector('.gr-box-sunwrap');
+    var stageEl = sec.querySelector('.gr-how-stage');
+    var guests = Array.prototype.slice.call(sec.querySelectorAll('.gr-guest'));
+    sec.classList.add('is-scrub');
+    var visible = false, fired = false, current = -1, shown = -1;
+    watch(sec, function (on) { visible = on; });
+
+    tickers.push(function () {
+      if (!visible) return;
+      var r = sec.getBoundingClientRect();
+      var navH = pin.getBoundingClientRect().top - r.top >= 0 ? parseFloat(getComputedStyle(pin).top) || 0 : 0;
+      var total = sec.offsetHeight - pin.offsetHeight;
+      var target = clamp((navH - r.top) / total, 0, 1);
+      current = current < 0 ? target : lerp(current, target, 0.16);
+      var p = current;
+      if (Math.abs(p - shown) < 0.0004) return;
+      shown = p;
+
+      var s1 = smooth(0.0, 0.2, p);
+      var s2 = smooth(0.36, 0.52, p);
+      var s3 = smooth(0.7, 0.9, p);
+      var scale = (stageEl.offsetWidth / 400) || 1;
+
+      body.style.transform = 'translateY(' + ((1 - s1) * -40) + 'px) scale(' + (0.86 + 0.14 * s1) + ')';
+      lid.style.transform = 'translate(' + (-26 * s3) + 'px,' + ((1 - s1) * -70 - 150 * s3) + 'px) rotate(' + (-18 * s3) + 'deg)';
+      var wiggle = Math.sin(s2 * Math.PI * 3) * 6 * (1 - s3);
+      bow.style.transform = 'translateY(' + ((1 - s1) * -90 - 120 * s3) + 'px) rotate(' + (wiggle - 40 * s3) + 'deg) scale(' + (s1 * (1 - 0.4 * s3)) + ')';
+      bow.style.opacity = 1 - s3;
+      tag.style.transform = 'rotate(' + ((1 - s1) * 40 + Math.sin(s2 * Math.PI) * -8 + 30 * s3) + 'deg)';
+      tag.style.opacity = s1 * (1 - s3);
+      front.style.transform = 'scaleX(' + Math.max(0, 1 - s2 * 2) + ')';
+      back.style.transform = 'scaleX(' + Math.max(0, s2 * 2 - 1) + ')';
+      shadow.style.transform = 'scale(' + (0.6 + 0.4 * s1 + 0.12 * s3) + ', 1)';
+      sun.style.setProperty('--sy', (-78 * s3) + '%');
+      sun.style.setProperty('--ss', (0.6 + 0.48 * s3).toFixed(3));
+      sun.style.opacity = smooth(0.66, 0.74, p);
+
+      guests.forEach(function (g, i) {
+        var a = smooth(0.34 + i * 0.02, 0.44 + i * 0.02, p) * (1 - smooth(0.7, 0.8, p));
+        var gx = parseFloat(g.dataset.x) * scale * a, gy = parseFloat(g.dataset.y) * scale * a;
+        g.style.opacity = a;
+        g.style.transform = 'translate(calc(-50% + ' + gx.toFixed(1) + 'px), calc(-50% + ' + gy.toFixed(1) + 'px)) scale(' + (0.3 + 0.7 * a).toFixed(3) + ')';
+      });
+
+      var idx = p < 0.33 ? 0 : (p < 0.66 ? 1 : 2);
+      steps.forEach(function (s, i) { s.classList.toggle('is-on', i === idx); });
+      meter.style.setProperty('--p', p.toFixed(3));
+
+      if (!fired && p > 0.84) {
+        fired = true;
+        var sr = stageEl.getBoundingClientRect();
+        Confetti.burst(sr.left + sr.width / 2, sr.top + sr.height * 0.4, { count: 120, spread: 60, power: 16 });
+      }
+      if (fired && p < 0.6) fired = false;
+    });
+  })();
+
+  /* ---------- Shelf: wrapped gifts, drag, progress ---------- */
+  (function () {
+    var track = document.querySelector('.gr-track');
+    if (!track) return;
+    var gifts = Array.prototype.slice.call(track.querySelectorAll('.gr-gift'));
+    var bar = document.querySelector('.gr-shelf-bar span');
+    var prev = document.querySelector('[data-shelf="-1"]');
+    var next = document.querySelector('[data-shelf="1"]');
+    var sectionIn = false;
+    var pending = new Set();
+
+    function openGift(g, delay) {
+      if (g.classList.contains('is-open')) return;
+      setTimeout(function () { g.classList.add('is-open'); }, delay || 0);
+    }
+    if (!motion || !('IntersectionObserver' in window)) {
+      gifts.forEach(function (g) { g.classList.add('is-open'); });
+    } else {
+      var cardIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) pending.add(e.target); else pending.delete(e.target);
+        });
+        flush();
+      }, { root: track, threshold: 0.6 });
+      gifts.forEach(function (g) { cardIO.observe(g); });
+      watch(track, function (on) { sectionIn = on; flush(); }, { threshold: 0.45 });
+    }
+    function flush() {
+      if (!sectionIn) return;
+      var i = 0;
+      gifts.forEach(function (g) {
+        if (pending.has(g) && !g.classList.contains('is-open')) { openGift(g, 140 * i++); pending.delete(g); }
+      });
+    }
+
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      var ratio = track.clientWidth / track.scrollWidth;
+      var pos = max > 0 ? track.scrollLeft / max : 0;
+      bar.style.setProperty('--w', (ratio * 100).toFixed(2) + '%');
+      bar.style.setProperty('--x', (pos * (1 / ratio - 1) * 100).toFixed(2) + '%');
+      if (prev) prev.disabled = track.scrollLeft < 4;
+      if (next) next.disabled = track.scrollLeft > max - 4;
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+
+    [prev, next].forEach(function (b) {
+      if (!b) return;
+      b.addEventListener('click', function () {
+        var step = gifts[0].getBoundingClientRect().width + 24;
+        track.scrollBy({ left: step * 2 * parseFloat(b.dataset.shelf), behavior: motion ? 'smooth' : 'auto' });
+      });
+    });
+
+    // Mouse drag with a little momentum. Touch uses native scrolling.
+    var down = false, moved = 0, startX = 0, startL = 0, v = 0, lastX = 0, glide = null;
+    track.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = 0; startX = lastX = e.clientX; startL = track.scrollLeft; v = 0;
+      if (glide) cancelAnimationFrame(glide);
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      if (moved > 5) track.classList.add('is-dragging');
+      v = e.clientX - lastX; lastX = e.clientX;
+      track.scrollLeft = startL - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!down) return;
+      down = false;
+      var vel = -v * 1.6;
+      (function coast() {
+        if (Math.abs(vel) < 0.4 || !motion) { track.classList.remove('is-dragging'); return; }
+        track.scrollLeft += vel; vel *= 0.93;
+        glide = requestAnimationFrame(coast);
+      })();
+    });
+    track.addEventListener('click', function (e) { if (moved > 5) { e.preventDefault(); e.stopPropagation(); } }, true);
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { track.scrollBy({ left: 280, behavior: 'smooth' }); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { track.scrollBy({ left: -280, behavior: 'smooth' }); e.preventDefault(); }
+    });
+  })();
+
+  /* ---------- Budget chips: fill grows from the pointer ---------- */
+  document.querySelectorAll('.gr-budget a').forEach(function (a) {
+    a.addEventListener('pointerenter', function (e) {
+      var r = a.getBoundingClientRect();
+      a.style.setProperty('--hx', (e.clientX - r.left) + 'px');
+      a.style.setProperty('--hy', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  /* ---------- Search placeholders type themselves ---------- */
+  (function () {
+    var inputs = Array.prototype.slice.call(document.querySelectorAll('[data-names]'));
+    if (!inputs.length || !motion) return;
+    var form = inputs[0].form;
+    var active = false, timer = null, focused = false;
+    inputs.forEach(function (inp) {
+      inp.addEventListener('focus', function () { focused = true; });
+      inp.addEventListener('blur', function () { focused = false; });
+    });
+    function typeName(inp, name, done) {
+      var i = 0;
+      (function t() {
+        inp.placeholder = name.slice(0, i) || ' ';
+        if (i++ < name.length) setTimeout(t, 70 + Math.random() * 60); else setTimeout(done, 1700);
+      })();
+    }
+    var k = 0;
+    function cycle() {
+      if (!active) return;
+      if (focused) { timer = setTimeout(cycle, 1200); return; }
+      var a = inputs[0].dataset.names.split(','), b = inputs[1].dataset.names.split(',');
+      k = (k + 1) % a.length;
+      typeName(inputs[0], a[k], function () {});
+      setTimeout(function () { typeName(inputs[1], b[k], function () { timer = setTimeout(cycle, 300); }); }, 400);
+    }
+    watch(form, function (on) {
+      if (on && !active) { active = true; timer = setTimeout(cycle, 900); }
+      if (!on) { active = false; clearTimeout(timer); }
+    });
+  })();
+
+  /* ---------- Postcard tilt ---------- */
+  (function () {
+    var card = document.querySelector('.gr-postcard');
+    if (!card || !motion || !finePointer) return;
+    var wrap = card.parentElement;
+    wrap.addEventListener('pointermove', function (e) {
+      var r = wrap.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--ty', (x * 12).toFixed(2) + 'deg');
+      card.style.setProperty('--tx', (y * -10).toFixed(2) + 'deg');
+    });
+    wrap.addEventListener('pointerleave', function () {
+      card.style.setProperty('--ty', '0deg');
+      card.style.setProperty('--tx', '0deg');
+    });
+  })();
+
+  /* ---------- FAQ chat ---------- */
+  (function () {
+    document.querySelectorAll('.gr-q').forEach(function (item) {
+      var summary = item.querySelector('summary');
+      var panel = item.querySelector('.gr-a');
+      var anim = null, typingTimer = null;
+      summary.addEventListener('click', function (e) {
+        e.preventDefault();
+        var opening = !item.classList.contains('is-open');
+        item.classList.toggle('is-open', opening);
+        clearTimeout(typingTimer);
+        if (!motion || !panel.animate) {
+          item.open = opening;
+          return;
+        }
+        var from = anim ? panel.getBoundingClientRect().height : (opening ? 0 : panel.offsetHeight);
+        if (anim) anim.cancel();
+        if (opening) {
+          item.open = true;
+          item.classList.remove('is-said');
+          item.classList.add('is-typing');
+          var toTyping = panel.scrollHeight;
+          anim = panel.animate({ height: [from + 'px', toTyping + 'px'] }, { duration: 320, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+          anim.onfinish = function () { anim = null; };
+          typingTimer = setTimeout(function () {
+            var h0 = panel.offsetHeight;
+            item.classList.remove('is-typing');
+            item.classList.add('is-said');
+            var h1 = panel.scrollHeight;
+            if (anim) anim.cancel();
+            anim = panel.animate({ height: [h0 + 'px', h1 + 'px'] }, { duration: 420, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+            anim.onfinish = function () { anim = null; };
+          }, 620);
+        } else {
+          anim = panel.animate({ height: [from + 'px', '0px'], opacity: [1, 0] }, { duration: 340, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+          anim.onfinish = function () { anim = null; item.open = false; item.classList.remove('is-said', 'is-typing'); };
+        }
+      });
+    });
+  })();
+
+  /* ---------- Close: ambient falling confetti ---------- */
+  (function () {
+    var canvas = document.querySelector('[data-ambient]');
+    if (!canvas || !motion) return;
+    var ctx = canvas.getContext('2d');
+    var sec = canvas.parentElement;
+    var W = 0, H = 0, dpr = 1, bits = [], visible = false;
+    function size() {
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = sec.offsetWidth; H = sec.offsetHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      var n = Math.round(clamp(W / 18, 26, 80));
+      bits = [];
+      for (var i = 0; i < n; i++) bits.push(make(true));
+    }
+    function make(anywhere) {
+      return {
+        x: Math.random() * W, y: anywhere ? Math.random() * H : -20,
+        s: 4 + Math.random() * 6, vy: 18 + Math.random() * 34, sway: Math.random() * 6.28,
+        rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 2, c: COLORS[(Math.random() * 5) | 0],
+        round: Math.random() > 0.6
+      };
+    }
+    size();
+    window.addEventListener('resize', size);
+    watch(sec, function (on) { visible = on; });
+    tickers.push(function (dt, t) {
+      if (!visible) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      bits.forEach(function (b, i) {
+        b.y += b.vy * dt;
+        b.rot += b.vr * dt;
+        var x = b.x + Math.sin(t * 1.2 + b.sway) * 14;
+        if (b.y > H + 20) bits[i] = make(false);
+        ctx.save();
+        ctx.globalAlpha = 0.75;
+        ctx.translate(x, b.y);
+        ctx.rotate(b.rot);
+        ctx.scale(1, Math.cos(t * 2 + b.sway));
+        ctx.fillStyle = b.c;
+        if (b.round) { ctx.beginPath(); ctx.arc(0, 0, b.s / 2, 0, 6.283); ctx.fill(); }
+        else ctx.fillRect(-b.s / 2, -b.s / 4, b.s, b.s / 2);
+        ctx.restore();
+      });
+    });
+  })();
+
+  reduceMQ.addEventListener && reduceMQ.addEventListener('change', function () { location.reload(); });
+})();
 </script>
 </body>
 </html>
