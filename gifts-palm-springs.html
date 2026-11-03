@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gifts in Palm Springs: Local Delivery, Gift Wrap &amp; Pickup | PHYLUM</title>
-<meta name="description" content="The Coachella Valley’s gift shop. Host gifts under $50 and from $50 to $150, gift wrap, in-store pickup, and local delivery from PHYLUM on N. Palm Canyon Dr. in Palm Springs.">
+<meta name="description" content="The Coachella Valley’s gift shop. Gifts from under $50 to $300 and up, gift wrap, in-store pickup, and local delivery from PHYLUM on N. Palm Canyon Dr. in Palm Springs.">
 <link rel="canonical" href="https://phylum-menu.onrender.com/gifts-palm-springs.html">
 <!-- EDIT: Switch to "index, follow" once Phylum signs off on the exclusives, delivery terms, and hours. -->
 <meta name="robots" content="noindex, follow">
@@ -627,6 +627,9 @@
     box-shadow: inset 0 0 0 1.5px rgba(36, 33, 28, 0.25);
   }
   .lg-band--delight .lg-tag { --tag: var(--peach); }
+  .lg-band--memorable .lg-tag { --tag: var(--aqua); }
+  .lg-band--exceptional .lg-tag { --tag: var(--yellow); }
+  .lg-band--exceptional .lg-tag-for { color: var(--ink); }
   .lg-tag-label {
     margin-top: 22px;
     font-family: var(--sans);
@@ -644,6 +647,7 @@
     letter-spacing: -0.04em;
   }
   .lg-tag-price { font-family: var(--sans); font-weight: 500; font-size: clamp(20px, 1.6vw, 24px); letter-spacing: -0.02em; }
+  .lg-tag .lg-tag-price { white-space: nowrap; }
   .lg-tag-for { margin: 14px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
   .lg-tag .lg-link { margin-top: auto; align-self: flex-start; justify-self: start; }
   .lg-tag-for { margin-bottom: 16px; }
@@ -920,7 +924,7 @@
      ========================================================= */
   @media (max-width: 1100px) {
     .lg-band { grid-template-columns: 1fr; }
-    .lg-tag { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: end; gap: 4px 28px; padding-top: 34px; clip-path: none; }
+    .lg-tag { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: end; gap: 4px 28px; padding-top: 34px; clip-path: none; }
     .lg-tag::before { display: none; }
     .lg-tag-label { margin-top: 0; grid-column: 1 / -1; }
     .lg-tag h3 { margin: 0; }
@@ -1026,9 +1030,9 @@
     .lg-stamp { width: 124px; right: -6px; top: -26px; }
     .lg-ticker-label .lg-ticker-text { display: none; }
     .lg-ticker-inner { min-height: 64px; }
-    .lg-tag { padding: 24px 20px 20px; }
+    .lg-tag { grid-template-columns: minmax(0, 1fr); padding: 24px 20px 20px; }
     .lg-tag h3 { font-size: 40px; }
-    .lg-tag .lg-link { grid-column: 1 / -1; grid-row: auto; }
+    .lg-tag .lg-link { grid-column: 1; grid-row: auto; margin-top: 4px; }
     .lg-gift { flex-basis: 68vw; }
     .lg-boxes li:nth-child(2) { translate: 0 18px; }
     .lg-box-cap { font-size: 14px; }
@@ -1262,14 +1266,14 @@
   </section>
 
   <!-- 4. HOST GIFTS -->
-  <!-- EDIT: These eight picks use brands and photos already on the site as stand-ins. Phylum to confirm the product, price, and link for each band. -->
+  <!-- EDIT: These sixteen picks use brands and collection photos already on the site as stand-ins. Phylum to confirm the product, price, and link for each band. -->
   <section class="lg-host" id="host-gifts" aria-labelledby="host-title">
     <div class="lg-wrap">
       <div class="lg-host-head lg-reveal">
         <div>
           <p class="lg-kicker"><span class="lg-sun" aria-hidden="true"></span>Host gifts</p>
           <h2 class="lg-h2" id="host-title"><span class="lg-s">Never show up</span> empty-handed.</h2>
-          <p class="lg-intro">Two price bands, zero guesswork. Pick a lane, grab something bottle-adjacent, and you’re officially the favorite guest.</p>
+          <p class="lg-intro">Four price bands, zero guesswork. Pick a lane, grab something bottle-adjacent, and you’re officially the favorite guest.</p>
         </div>
       </div>
 
@@ -1352,9 +1356,97 @@
           </li>
           <li class="lg-gift">
             <a href="https://shopphylum.com/collections/aaron-probyn" data-track="product" data-track-location="delightful" data-track-label="aaron-probyn">
-              <figure><img src="assets/local/gift-aaron-probyn-640.webp" srcset="assets/local/gift-aaron-probyn-360.webp 360w, assets/local/gift-aaron-probyn-640.webp 640w" sizes="(min-width: 901px) 18vw, 68vw" width="640" height="800" alt="Aaron Probyn stainless steel barware, a shaker and glasses, on a pale counter." loading="lazy" decoding="async"></figure>
+              <figure><img src="assets/local/gift-aaron-probyn-588.webp" srcset="assets/local/gift-aaron-probyn-360.webp 360w, assets/local/gift-aaron-probyn-588.webp 588w" sizes="(min-width: 901px) 18vw, 68vw" width="588" height="735" alt="Aaron Probyn glass tumblers and a carafe of amber drink on a white tiled counter." loading="lazy" decoding="async"></figure>
               <span class="lg-gift-brand">Aaron Probyn <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
-              <span class="lg-gift-line">Barware for the friend who makes it a double.</span>
+              <span class="lg-gift-line">Glassware for the friend who makes it a double.</span>
+              <span class="lg-todo">Pick &amp; price: TODO</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg-band lg-band--memorable lg-reveal">
+        <div class="lg-tag">
+          <p class="lg-tag-label">Gift tier</p>
+          <h3>Memorable</h3>
+          <p class="lg-tag-price">$150 to $300</p>
+          <p class="lg-tag-for">For the housewarming, the wedding, and the best friend who helped you move. Twice.</p>
+          <a class="lg-link" href="https://shopphylum.com/collections/gifts?filter.v.price.gte=150&amp;filter.v.price.lte=299.99" data-track="tier-memorable" data-track-location="host-gifts">Shop $150 to $300 <span class="lg-btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <ul class="lg-row" aria-label="Memorable gifts from $150 to $300">
+          <li class="lg-gift">
+            <a href="https://shopphylum.com/collections/johanna-gullichsen" data-track="product" data-track-location="memorable" data-track-label="johanna-gullichsen">
+              <figure><img src="assets/local/gift-johanna-gullichsen-450.webp" srcset="assets/local/gift-johanna-gullichsen-360.webp 360w, assets/local/gift-johanna-gullichsen-450.webp 450w" sizes="(min-width: 901px) 18vw, 68vw" width="450" height="562" alt="Johanna Gullichsen woven cushions in rust and cream on a linen sofa." loading="lazy" decoding="async"></figure>
+              <span class="lg-gift-brand">Johanna Gullichsen <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
+              <span class="lg-gift-line">Finnish weaves for a sofa that deserves better.</span>
+              <span class="lg-todo">Pick &amp; price: TODO</span>
+            </a>
+          </li>
+          <li class="lg-gift">
+            <a href="https://shopphylum.com/collections/chilewich" data-track="product" data-track-location="memorable" data-track-label="chilewich">
+              <figure><img src="assets/local/gift-chilewich-640.webp" srcset="assets/local/gift-chilewich-360.webp 360w, assets/local/gift-chilewich-640.webp 640w" sizes="(min-width: 901px) 18vw, 68vw" width="640" height="800" alt="Chilewich woven placemats in wavy, checked, and speckled patterns laid out together." loading="lazy" decoding="async"></figure>
+              <span class="lg-gift-brand">Chilewich <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
+              <span class="lg-gift-line">Placemats that survive margarita night.</span>
+              <span class="lg-todo">Pick &amp; price: TODO</span>
+            </a>
+          </li>
+          <li class="lg-gift">
+            <a href="https://shopphylum.com/collections/geometry" data-track="product" data-track-location="memorable" data-track-label="geometry">
+              <figure><img src="assets/local/gift-geometry-433.webp" srcset="assets/local/gift-geometry-360.webp 360w, assets/local/gift-geometry-433.webp 433w" sizes="(min-width: 901px) 18vw, 68vw" width="433" height="541" alt="A Geometry towel printed with bright flowers in pink, orange, green, and blue." loading="lazy" decoding="async"></figure>
+              <span class="lg-gift-brand">Geometry <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
+              <span class="lg-gift-line">Towels loud enough for poolside.</span>
+              <span class="lg-todo">Pick &amp; price: TODO</span>
+            </a>
+          </li>
+          <li class="lg-gift">
+            <a href="https://shopphylum.com/collections/pablo-designs" data-track="product" data-track-location="memorable" data-track-label="pablo-designs">
+              <figure><img src="assets/local/gift-pablo-480.webp" srcset="assets/local/gift-pablo-360.webp 360w, assets/local/gift-pablo-480.webp 480w" sizes="(min-width: 901px) 18vw, 68vw" width="480" height="600" alt="A hand reaching for a glowing Pablo globe lantern on a dark table." loading="lazy" decoding="async"></figure>
+              <span class="lg-gift-brand">Pablo Designs <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
+              <span class="lg-gift-line">California lighting for long desert nights.</span>
+              <span class="lg-todo">Pick &amp; price: TODO</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg-band lg-band--exceptional lg-reveal">
+        <div class="lg-tag">
+          <p class="lg-tag-label">Gift tier</p>
+          <h3>Exceptional</h3>
+          <p class="lg-tag-price">$300 and up</p>
+          <p class="lg-tag-for">For milestones, big thank-yous, and anyone you plan to impress. Yes, including you.</p>
+          <a class="lg-link" href="https://shopphylum.com/collections/gifts?filter.v.price.gte=300" data-track="tier-exceptional" data-track-location="host-gifts">Shop $300 and up <span class="lg-btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <ul class="lg-row" aria-label="Exceptional gifts from $300">
+          <li class="lg-gift">
+            <a href="https://shopphylum.com/collections/georg-jensen" data-track="product" data-track-location="exceptional" data-track-label="georg-jensen">
+              <figure><img src="assets/local/gift-georg-jensen-516.webp" srcset="assets/local/gift-georg-jensen-360.webp 360w, assets/local/gift-georg-jensen-516.webp 516w" sizes="(min-width: 901px) 18vw, 68vw" width="516" height="645" alt="Georg Jensen stainless steel barware, a shaker, ice bucket, and coupe, on a pale counter." loading="lazy" decoding="async"></figure>
+              <span class="lg-gift-brand">Georg Jensen <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
+              <span class="lg-gift-line">Danish barware for a very good martini.</span>
+              <span class="lg-todo">Pick &amp; price: TODO</span>
+            </a>
+          </li>
+          <li class="lg-gift">
+            <a href="https://shopphylum.com/collections/david-mellor" data-track="product" data-track-location="exceptional" data-track-label="david-mellor">
+              <figure><img src="assets/local/gift-david-mellor-640.webp" srcset="assets/local/gift-david-mellor-360.webp 360w, assets/local/gift-david-mellor-640.webp 640w" sizes="(min-width: 901px) 18vw, 68vw" width="640" height="800" alt="A David Mellor stainless steel cafetière, sugar bowl, and milk jug on a round tray." loading="lazy" decoding="async"></figure>
+              <span class="lg-gift-brand">David Mellor <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
+              <span class="lg-gift-line">Sheffield steel for a seriously good morning.</span>
+              <span class="lg-todo">Pick &amp; price: TODO</span>
+            </a>
+          </li>
+          <li class="lg-gift">
+            <a href="https://shopphylum.com/collections/garza-marfa" data-track="product" data-track-location="exceptional" data-track-label="garza-marfa">
+              <figure><img src="assets/local/gift-garza-marfa-640.webp" srcset="assets/local/gift-garza-marfa-360.webp 360w, assets/local/gift-garza-marfa-640.webp 640w" sizes="(min-width: 901px) 18vw, 68vw" width="640" height="800" alt="A woman in the high desert holding up a striped Garza Marfa blanket in the wind." loading="lazy" decoding="async"></figure>
+              <span class="lg-gift-brand">Garza Marfa <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
+              <span class="lg-gift-line">Made in Marfa, at home in the Coachella Valley.</span>
+              <span class="lg-todo">Pick &amp; price: TODO</span>
+            </a>
+          </li>
+          <li class="lg-gift">
+            <a href="https://shopphylum.com/collections/octaevo" data-track="product" data-track-location="exceptional" data-track-label="octaevo">
+              <figure><img src="assets/local/gift-octaevo-591.webp" srcset="assets/local/gift-octaevo-360.webp 360w, assets/local/gift-octaevo-591.webp 591w" sizes="(min-width: 901px) 18vw, 68vw" width="591" height="739" alt="A mint green wire basket holding an eggplant and bok choy beside a blue plate and lemon." loading="lazy" decoding="async"></figure>
+              <span class="lg-gift-brand">Octaevo <span class="lg-btn-arrow" aria-hidden="true">↗</span></span>
+              <span class="lg-gift-line">Barcelona design that makes produce look styled.</span>
               <span class="lg-todo">Pick &amp; price: TODO</span>
             </a>
           </li>
