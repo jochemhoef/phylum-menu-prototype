@@ -51,6 +51,7 @@
     --butter: #F5E4B8;
     --paper: #F1EEE4;
     --paper-deep: #E8E3D5;
+    --paper-light: #FBFAF6;
     --ink: #24211C;
     --ink-soft: #5A554A;
     --line: #CFC8B6;
@@ -357,7 +358,10 @@
   .lg-stars svg { width: 15px; height: 15px; }
   .lg-proof-score { font-family: var(--serif); font-weight: 300; font-size: 28px; letter-spacing: -0.03em; line-height: 1; }
   .lg-proof-count { color: var(--ink-soft); }
-  .lg-proof img { width: 44px; height: 44px; border-radius: 50%; }
+  .lg-proof-g { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1.5px rgba(36, 33, 28, 0.12); }
+  .lg-proof-g .lg-g { width: 22px; height: 22px; }
+  .lg-proof img { width: 64px; height: 64px; border-radius: 50%; }
+  .lg-proof-award { font-size: 16px; }
   .lg-proof-sep { width: 1px; height: 32px; background: var(--line); }
 
   .js-motion .lg-in {
@@ -367,7 +371,7 @@
   }
   .is-ready .lg-in { opacity: 1; transform: none; }
 
-  .lg-hero-art { position: relative; padding: 0 0 clamp(36px, 4vw, 56px) clamp(28px, 4vw, 64px); }
+  .lg-hero-art { position: relative; }
   .lg-hero-photo {
     position: relative;
     overflow: hidden;
@@ -391,28 +395,6 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
-  .lg-hero-store {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: clamp(168px, 17vw, 248px);
-    padding: 8px 8px 0;
-    background: #FFFDF8;
-    border-radius: 4px;
-    box-shadow: 0 24px 40px -24px rgba(36, 33, 28, 0.5), 0 2px 6px rgba(36, 33, 28, 0.08);
-    rotate: -4deg;
-  }
-  .lg-hero-store .lg-ph { aspect-ratio: 5 / 4; }
-  .lg-hero-store p {
-    padding: 8px 2px 10px;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--ink-soft);
-  }
   .lg-stamp {
     position: absolute;
     top: clamp(-36px, -2.6vw, -20px);
@@ -434,7 +416,7 @@
     letter-spacing: 0.12em;
     fill: var(--ink);
   }
-  .lg-stamp .lg-sun { width: 34%; }
+  .lg-stamp .lg-sun { width: 54%; }
 
   /* =========================================================
      2. TICKER
@@ -594,7 +576,7 @@
   /* =========================================================
      4. HOST GIFTS
      ========================================================= */
-  .lg-host { background: var(--paper-deep); padding: clamp(72px, 9vw, 136px) 0; }
+  .lg-host { background: var(--paper-light); padding: clamp(72px, 9vw, 136px) 0; }
   .lg-host-head { margin-bottom: clamp(40px, 5vw, 72px); display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
   .lg-band {
     display: grid;
@@ -623,7 +605,7 @@
     height: 12px;
     margin-left: -6px;
     border-radius: 50%;
-    background: var(--paper-deep);
+    background: var(--paper-light);
     box-shadow: inset 0 0 0 1.5px rgba(36, 33, 28, 0.25);
   }
   .lg-band--delight .lg-tag { --tag: var(--peach); }
@@ -906,7 +888,6 @@
     overflow: hidden;
     aspect-ratio: 5 / 4;
     background: var(--paper-deep);
-    border: 1.5px solid var(--ink);
     box-shadow: 0 30px 50px -36px rgba(36, 33, 28, 0.6);
   }
   .lg-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: saturate(0.75) contrast(1.02); }
@@ -914,7 +895,7 @@
   .lg-map-pin {
     position: absolute;
     z-index: 2;
-    left: 16px;
+    right: 16px;
     top: 16px;
     display: inline-flex;
     align-items: center;
@@ -1089,7 +1070,7 @@
 
   @media (max-width: 1023px) {
     .lg-hero-grid { grid-template-columns: 1fr; }
-    .lg-hero-art { max-width: 620px; padding-left: 40px; }
+    .lg-hero-art { max-width: 620px; }
     .lg-bento { grid-template-columns: 1fr; }
     .lg-perk--delivery, .lg-perk--wrap, .lg-perk--pickup { grid-column: auto; }
     .lg-perk--wrap { display: grid; grid-template-columns: 1fr 1fr; }
@@ -1173,11 +1154,10 @@
     .lg-btn { width: 100%; font-size: 12px; letter-spacing: 0.1em; padding: 14px 16px; min-height: 52px; }
     .lg-proof { gap: 8px 16px; margin-top: 14px; font-size: 13px; }
     .lg-proof-score { font-size: 24px; }
-    .lg-proof img { width: 40px; height: 40px; }
-    .lg-proof-sep { display: none; }
-    .lg-hero-art { padding-left: 20px; padding-bottom: 40px; }
+    .lg-proof img { width: 54px; height: 54px; }
+    .lg-proof-award { font-size: 14px; }
+    .lg-proof .lg-proof-sep { display: none; }
     .lg-hero-photo { aspect-ratio: 1 / 1; }
-    .lg-hero-store { width: 156px; }
     .lg-stamp { width: 124px; right: -6px; top: -26px; }
     .lg-ticker-label .lg-ticker-text { display: none; }
     .lg-ticker-inner { min-height: 64px; }
@@ -1246,9 +1226,9 @@
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
           "opens": "10:00",
-          "closes": "18:00"
+          "closes": "17:00"
         }
       ],
       "areaServed": ["Palm Springs", "Coachella Valley"]
@@ -1301,6 +1281,7 @@
         <ul class="lg-proof lg-in" style="--d: 240ms">
           <li>
             <a href="#reviews" data-track="reviews" data-track-location="hero">
+              <span class="lg-proof-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span>
               <span class="lg-proof-score" aria-hidden="true">5.0</span>
               <span>
                 <span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span>
@@ -1310,8 +1291,8 @@
           </li>
           <li class="lg-proof-sep" aria-hidden="true"></li>
           <li>
-            <img src="assets/local/best-of-the-best-160.webp" width="44" height="44" alt="" decoding="async">
-            <span>Voted Best of the Best<br><span class="lg-proof-count">Palm Springs Life</span></span>
+            <img src="assets/local/best-of-the-best-160.webp" width="64" height="64" alt="" decoding="async">
+            <span class="lg-proof-award">Voted Best of the Best<br><span class="lg-proof-count">Palm Springs Life</span></span>
           </li>
         </ul>
       </div>
@@ -1320,11 +1301,6 @@
         <figure class="lg-hero-photo">
           <img src="assets/local/hero-wrapped-gifts-768.webp" srcset="assets/local/hero-wrapped-gifts-480.webp 480w, assets/local/hero-wrapped-gifts-768.webp 768w" sizes="(min-width: 1024px) 40vw, 100vw" width="768" height="1024" alt="A stack of gifts wrapped in blue and pink marbled PHYLUM paper, tied with cotton cord, on a sunny concrete ledge by a glass storefront." fetchpriority="high" decoding="async">
           <figcaption>The PHYLUM wrap</figcaption>
-        </figure>
-        <!-- EDIT: Swap in a real storefront photo from Phylum. Ideally this becomes the hero photo, with the wrap shot moving here. -->
-        <figure class="lg-hero-store">
-          <div class="lg-ph" role="img" aria-label="Placeholder: storefront photo to come from Phylum"><span><strong>Photo: storefront</strong>TODO from Phylum</span></div>
-          <p>901 N. Palm Canyon</p>
         </figure>
         <div class="lg-stamp" aria-hidden="true">
           <svg viewBox="0 0 120 120">
@@ -1744,8 +1720,8 @@
           </div>
           <div>
             <dt>Hours</dt>
-            <!-- EDIT: Hours come from the brands page ("Tue to Sun, 10am to 6pm"). Confirm them, plus holiday hours, before publish. -->
-            <dd>Tuesday to Sunday<br>10am to 6pm<br><span class="lg-todo">Confirm hours + holiday hours</span></dd>
+            <!-- EDIT: Hours match PHYLUM's Google Business Profile and shopphylum.com (daily, 10am to 5pm) as of November 2026. Add holiday hours when Phylum shares them. -->
+            <dd>Open daily<br>10am to 5pm<br><span class="lg-todo">Holiday hours: TODO</span></dd>
           </div>
           <div>
             <dt>Call</dt>
