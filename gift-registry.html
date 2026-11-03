@@ -46,6 +46,9 @@
     --paper: #F1EEE4;
     --paper-deep: #E8E3D5;
     --light: #FAF9F5;
+    --teal: #407575;
+    --citrus: #F1EE80;
+    --terracotta: #CC6118;
     --ink: #24211C;
     --ink-soft: #5A554A;
     --line: #CFC8B6;
@@ -143,7 +146,7 @@
     align-items: center;
     gap: 9px;
     margin: 0 0 22px;
-    padding: 7px 14px 7px 10px;
+    padding: 7px 14px;
     border: 1.5px solid currentColor;
     border-radius: 999px;
     font-family: var(--sans);
@@ -153,7 +156,6 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
-  .gr-kicker .gr-sun { width: 15px; animation: gr-spin 12s linear infinite; }
 
   /* ---------- Buttons: fill sweeps up from below ---------- */
   .gr-btn {
@@ -395,7 +397,7 @@
     box-shadow: 0 14px 30px -22px rgba(36, 33, 28, 0.6);
   }
   .gr-streamer--a { z-index: 2; background: var(--clay); color: #fff; transform: translateY(-78%) rotate(-3.4deg); }
-  .gr-streamer--b { z-index: 1; background: var(--lime); transform: translateY(-14%) rotate(2.6deg); }
+  .gr-streamer--b { z-index: 1; background: var(--teal); color: var(--citrus); transform: translateY(-14%) rotate(2.6deg); }
   .gr-streamer-track { display: flex; width: max-content; will-change: transform; }
   .gr-streamer-row {
     display: flex;
@@ -425,7 +427,7 @@
     text-transform: uppercase;
   }
   .gr-streamer-row .gr-sun { width: 0.75em; color: var(--yellow); }
-  .gr-streamer--b .gr-sun { width: 1.3em; color: var(--sage-deep); }
+  .gr-streamer--b .gr-sun { width: 1.3em; color: var(--citrus); }
 
   /* =========================================================
      3. TWO LISTS: hanging tags
@@ -576,7 +578,8 @@
     margin: 8px 0 16px;
   }
   .gr-tag-copy { margin: 0 0 26px; font-size: 16.5px; line-height: 1.55; max-width: 26em; }
-  .gr-tag .gr-btn { min-height: 48px; padding: 12px 22px; }
+  .gr-tag .gr-btn { min-height: 48px; padding: 12px 22px; --bg-h: var(--terracotta); --fg-h: #fff; }
+  .gr-tag--wish .gr-btn { --bg-h: var(--teal); --fg-h: var(--citrus); }
   .gr-tag-stub {
     position: relative;
     align-self: stretch;
@@ -611,11 +614,43 @@
   .gr-lists-note {
     margin: clamp(48px, 5vw, 72px) auto 0;
     text-align: center;
+  }
+  .gr-manage {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 7px 7px 7px 26px;
+    border: 1.5px solid rgba(36, 33, 28, 0.18);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
     font-family: var(--sans);
     font-weight: 500;
-    font-size: 15px;
+    font-size: clamp(16px, 1.25vw, 18px);
+    text-decoration: none;
+    box-shadow: 0 18px 34px -24px rgba(36, 33, 28, 0.45);
+    transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), translate 0.4s var(--ease);
   }
-  .gr-lists-note a { text-underline-offset: 3px; }
+  .gr-manage-go {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 22px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+  }
+  .gr-manage:hover, .gr-manage:focus-visible { border-color: var(--ink); translate: 0 -2px; box-shadow: 0 22px 38px -22px rgba(36, 33, 28, 0.5); text-decoration: none; }
+  .gr-manage:hover .gr-manage-go, .gr-manage:focus-visible .gr-manage-go { background: var(--terracotta); color: #fff; }
+  .gr-manage:hover .gr-btn-arrow, .gr-manage:focus-visible .gr-btn-arrow { transform: translateX(4px); }
+  @media (max-width: 560px) {
+    .gr-manage { flex-direction: column; gap: 10px; padding: 18px 7px 7px; border-radius: 28px; width: 100%; }
+    .gr-manage-go { width: 100%; justify-content: center; }
+  }
 
   /* =========================================================
      4. PARTY PICKER
@@ -820,7 +855,7 @@
   /* =========================================================
      5. HOW IT WORKS: the unwrap
      ========================================================= */
-  .gr-how { position: relative; background: var(--lime); }
+  .gr-how { position: relative; background: var(--teal); color: var(--citrus); }
   .gr-how-pin { padding: clamp(80px, 9vw, 130px) 0; }
   .gr-how-grid {
     display: grid;
@@ -828,7 +863,10 @@
     gap: clamp(28px, 5vw, 96px);
     align-items: center;
   }
-  .gr-how .gr-kicker { color: var(--sage-deep); }
+  .gr-how .gr-kicker { color: var(--citrus); }
+  .gr-how .gr-step { border-color: rgba(241, 238, 128, 0.28); }
+  .gr-how .gr-step-n { border-color: var(--citrus); }
+  .gr-how .gr-step p { color: rgba(241, 238, 128, 0.82); }
   .gr-steps { list-style: none; margin: clamp(32px, 4vw, 56px) 0 0; padding: 0; position: relative; }
   .gr-step {
     display: grid;
@@ -871,7 +909,7 @@
     width: 50%;
     top: 45.45%;
     aspect-ratio: 1;
-    color: var(--yellow);
+    color: var(--citrus);
     transform: translateY(var(--sy, 0%)) scale(var(--ss, 0.6));
   }
   .gr-box-sunwrap .gr-sun { width: 100%; display: block; animation: gr-spin 16s linear infinite; }
@@ -882,7 +920,7 @@
   .gr-how:not(.is-scrub) .gr-gts { opacity: 0; }
   .gr-box .gr-gts, .gr-box .gr-gts g { transform-box: view-box; transform-origin: 0 0; }
   .gr-box .gr-gt text { font-size: 14.5px; letter-spacing: 0.01em; }
-  .gr-gt-line { fill: none; stroke: var(--ink); stroke-width: 1.3; }
+  .gr-gt-line { fill: none; stroke: var(--citrus); stroke-width: 1.4; opacity: 0.85; }
   .gr-how:not(.is-scrub) .gr-box-sunwrap { --sy: -78%; --ss: 1.05; }
 
   .gr-how.is-scrub { height: 330svh; }
@@ -897,16 +935,16 @@
   }
   .gr-how.is-scrub .gr-step { opacity: 0.38; }
   .gr-how.is-scrub .gr-step.is-on { opacity: 1; }
-  .gr-how.is-scrub .gr-step.is-on .gr-step-n { background: var(--ink); color: var(--lime); scale: 1.08; }
+  .gr-how.is-scrub .gr-step.is-on .gr-step-n { background: var(--citrus); color: var(--teal); scale: 1.08; }
   .gr-how-meter {
     display: none;
     height: 4px;
     margin-top: 22px;
     border-radius: 4px;
-    background: rgba(36, 33, 28, 0.12);
+    background: rgba(241, 238, 128, 0.22);
     overflow: hidden;
   }
-  .gr-how-meter span { display: block; height: 100%; background: var(--ink); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+  .gr-how-meter span { display: block; height: 100%; background: var(--citrus); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
   .gr-how.is-scrub .gr-how-meter { display: block; }
 
   /* =========================================================
@@ -1577,7 +1615,7 @@
     </div>
 
     <div class="gr-hero-copy">
-      <p class="gr-kicker gr-hero-fade" style="--d: 0.05s"><span class="gr-sun" aria-hidden="true"></span>The PHYLUM Gift Registry</p>
+      <p class="gr-kicker gr-hero-fade" style="--d: 0.05s">The PHYLUM Gift Registry</p>
       <h1 id="registry-title">
         <span class="gr-h1-a"><span class="gr-w" style="--i:0"><span>Big</span></span> <span class="gr-w" style="--i:1"><span>news</span></span> <span class="gr-w" style="--i:2"><span>deserves</span></span></span>
         <span class="gr-h1-b"><span class="gr-w" style="--i:3"><span>better</span></span> <span class="gr-w" style="--i:4"><span>gifts.</span></span></span>
@@ -1623,7 +1661,7 @@
   <!-- 3. TWO LISTS -->
   <section class="gr-lists" id="lists" aria-labelledby="lists-title">
     <div class="gr-wrap gr-lists-head gr-rise">
-      <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Two ways to list</p>
+      <p class="gr-kicker">Two ways to list</p>
       <h2 class="gr-h2" id="lists-title"><span class="gr-s">One to share.</span> One to keep.</h2>
       <p class="gr-intro">Sharing is caring. Keeping it to yourself is also caring, just for you.</p>
     </div>
@@ -1665,7 +1703,7 @@
       </div>
     </div>
 
-    <p class="gr-wrap gr-lists-note gr-rise">Already have a list? <a href="https://shopphylum.com/apps/giftregistry/manage">Manage your registry</a></p>
+    <p class="gr-wrap gr-lists-note gr-rise"><a class="gr-manage" href="https://shopphylum.com/apps/giftregistry/manage"><span>Already have a list?</span><span class="gr-manage-go">Manage your registry <span class="gr-btn-arrow" aria-hidden="true">→</span></span></a></p>
   </section>
 
   <!-- 4. PARTY PICKER -->
@@ -1673,7 +1711,7 @@
     <div class="gr-wrap">
       <div class="gr-party-head gr-rise">
         <div>
-          <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Pick your party</p>
+          <p class="gr-kicker">Pick your party</p>
           <h2 class="gr-h2" id="party-title"><span class="gr-s">Whatever the occasion,</span> there’s a list for that.</h2>
         </div>
         <div class="gr-tabs" role="tablist" aria-label="Occasions">
@@ -1786,7 +1824,7 @@
     <div class="gr-how-pin">
       <div class="gr-wrap gr-how-grid">
         <div class="gr-how-copy">
-          <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>How it works</p>
+          <p class="gr-kicker">How it works</p>
           <h2 class="gr-h2" id="how-title"><span class="gr-s">Three steps.</span> Zero toasters.</h2>
           <ol class="gr-steps">
             <li class="gr-step is-on">
@@ -1819,12 +1857,12 @@
           <svg class="gr-box" viewBox="0 0 400 440">
             <defs>
               <pattern id="gr-wrapdots" width="24" height="24" patternUnits="userSpaceOnUse">
-                <circle cx="6" cy="6" r="3.2" fill="#C05A28" opacity="0.5"/>
-                <circle cx="18" cy="18" r="2.4" fill="#F1EEE4"/>
+                <circle cx="6" cy="6" r="3.2" fill="#CC6118" opacity="0.55"/>
+                <circle cx="18" cy="18" r="2.4" fill="#EEEEE5" opacity="0.9"/>
               </pattern>
             </defs>
-            <ellipse class="gr-box-shadow" cx="200" cy="410" rx="150" ry="13" fill="rgba(36,33,28,0.16)"/>
-            <rect x="74" y="198" width="252" height="16" rx="3" fill="#9E4320"/>
+            <ellipse class="gr-box-shadow" cx="200" cy="410" rx="150" ry="13" fill="rgba(20,40,40,0.35)"/>
+            <rect x="74" y="198" width="252" height="16" rx="3" fill="#A84E12"/>
             <g class="gr-gts">
               <path class="gr-gt-line" d=""/>
               <path class="gr-gt-line" d=""/>
@@ -1832,40 +1870,40 @@
               <path class="gr-gt-line" d=""/>
               <path class="gr-gt-line" d=""/>
               <path class="gr-gt-line" d=""/>
-              <g class="gr-gt" data-x="-20" data-y="70" data-r="-6" opacity="0"><path class="gr-gt-shape" fill="#5F6748" d=""/><circle cx="13" cy="18" r="3.5" fill="#F0FFAE"/><text x="25" y="23.2" style="fill: #F0FFAE">Mom</text></g>
-              <g class="gr-gt" data-x="300" data-y="40" data-r="5" opacity="0"><path class="gr-gt-shape" fill="#C05A28" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #F1EEE4">The Kims</text></g>
-              <g class="gr-gt" data-x="-74" data-y="204" data-r="-4" opacity="0"><path class="gr-gt-shape" fill="#FAF9F5" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Aunt Jo</text></g>
-              <g class="gr-gt" data-x="392" data-y="272" data-r="6" opacity="0"><path class="gr-gt-shape" fill="#f2a900" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Bestie</text></g>
-              <g class="gr-gt" data-x="-40" data-y="334" data-r="4" opacity="0"><path class="gr-gt-shape" fill="#FFBFAC" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Kai</text></g>
-              <g class="gr-gt" data-x="354" data-y="382" data-r="-5" opacity="0"><path class="gr-gt-shape" fill="#24211C" d=""/><circle cx="13" cy="18" r="3.5" fill="#F1EEE4"/><text x="25" y="23.2" style="fill: #F0FFAE">Your boss?</text></g>
+              <g class="gr-gt" data-x="-20" data-y="70" data-r="-6" opacity="0"><path class="gr-gt-shape" fill="#F1EE80" d=""/><circle cx="13" cy="18" r="3.5" fill="#407575"/><text x="25" y="23.2" style="fill: #407575">Mom</text></g>
+              <g class="gr-gt" data-x="300" data-y="40" data-r="5" opacity="0"><path class="gr-gt-shape" fill="#FFBFAC" d=""/><circle cx="13" cy="18" r="3.5" fill="#535538"/><text x="25" y="23.2" style="fill: #535538">The Kims</text></g>
+              <g class="gr-gt" data-x="-74" data-y="204" data-r="-4" opacity="0"><path class="gr-gt-shape" fill="#EEEEE5" d=""/><circle cx="13" cy="18" r="3.5" fill="#3E2B30"/><text x="25" y="23.2" style="fill: #3E2B30">Aunt Jo</text></g>
+              <g class="gr-gt" data-x="392" data-y="272" data-r="6" opacity="0"><path class="gr-gt-shape" fill="#B6E4E5" d=""/><circle cx="13" cy="18" r="3.5" fill="#407575"/><text x="25" y="23.2" style="fill: #407575">Bestie</text></g>
+              <g class="gr-gt" data-x="-40" data-y="334" data-r="4" opacity="0"><path class="gr-gt-shape" fill="#F2A900" d=""/><circle cx="13" cy="18" r="3.5" fill="#CC6118"/><text x="25" y="23.2" style="fill: #CC6118">Kai</text></g>
+              <g class="gr-gt" data-x="354" data-y="382" data-r="-5" opacity="0"><path class="gr-gt-shape" fill="#3E2B30" d=""/><circle cx="13" cy="18" r="3.5" fill="#EEEEE5"/><text x="25" y="23.2" style="fill: #EEEEE5">Your boss?</text></g>
             </g>
             <g class="gr-box-body">
-              <rect x="70" y="206" width="260" height="196" rx="8" fill="#FFBFAC"/>
+              <rect x="70" y="206" width="260" height="196" rx="8" fill="#F2A900"/>
               <rect x="70" y="206" width="260" height="196" rx="8" fill="url(#gr-wrapdots)"/>
-              <rect x="183" y="206" width="34" height="196" fill="#C05A28"/>
+              <rect x="183" y="206" width="34" height="196" fill="#CC6118"/>
               <rect x="70" y="206" width="260" height="14" fill="rgba(36,33,28,0.12)"/>
             </g>
             <g class="gr-box-lid">
-              <rect x="54" y="158" width="292" height="54" rx="8" fill="#FFAA92"/>
+              <rect x="54" y="158" width="292" height="54" rx="8" fill="#F7B91E"/>
               <rect x="54" y="158" width="292" height="54" rx="8" fill="url(#gr-wrapdots)"/>
-              <rect x="181" y="158" width="38" height="54" fill="#C05A28"/>
+              <rect x="181" y="158" width="38" height="54" fill="#CC6118"/>
             </g>
             <g class="gr-box-bow">
-              <path d="M200 158 C 160 108, 112 118, 128 146 C 138 164, 176 162, 200 158 Z" fill="#C05A28"/>
-              <path d="M200 158 C 240 108, 288 118, 272 146 C 262 164, 224 162, 200 158 Z" fill="#C05A28"/>
-              <path d="M200 158 C 176 142, 150 138, 146 146 C 160 150, 180 154, 200 158 Z" fill="#A24A1F"/>
-              <path d="M200 158 C 224 142, 250 138, 254 146 C 240 150, 220 154, 200 158 Z" fill="#A24A1F"/>
-              <rect x="188" y="146" width="24" height="22" rx="6" fill="#A24A1F"/>
+              <path d="M200 158 C 160 108, 112 118, 128 146 C 138 164, 176 162, 200 158 Z" fill="#CC6118"/>
+              <path d="M200 158 C 240 108, 288 118, 272 146 C 262 164, 224 162, 200 158 Z" fill="#CC6118"/>
+              <path d="M200 158 C 176 142, 150 138, 146 146 C 160 150, 180 154, 200 158 Z" fill="#A84E12"/>
+              <path d="M200 158 C 224 142, 250 138, 254 146 C 240 150, 220 154, 200 158 Z" fill="#A84E12"/>
+              <rect x="188" y="146" width="24" height="22" rx="6" fill="#A84E12"/>
             </g>
             <g class="gr-box-tag">
-              <path d="M210 160 C 240 176, 262 186, 284 196" stroke="#24211C" stroke-width="1.6" fill="none"/>
+              <path d="M210 160 C 240 176, 262 186, 284 196" stroke="#F1EE80" stroke-width="1.6" fill="none"/>
               <g class="gr-tag-front">
-                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#FAF9F5"/>
+                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#EEEEE5"/>
                 <circle cx="296" cy="204" r="3.5" fill="#24211C"/>
                 <text x="310" y="210">To: you</text>
               </g>
               <g class="gr-tag-back">
-                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#f2a900"/>
+                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#F1EE80"/>
                 <circle cx="296" cy="204" r="3.5" fill="#24211C"/>
                 <text x="308" y="200" style="font-size: 11px; letter-spacing: 0.08em">FROM:</text>
                 <text x="308" y="218">everyone</text>
@@ -1881,7 +1919,7 @@
   <section class="gr-shelf" id="ideas" aria-labelledby="ideas-title">
     <div class="gr-wrap gr-shelf-head gr-rise">
       <div>
-        <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Gift ideas</p>
+        <p class="gr-kicker">Gift ideas</p>
         <h2 class="gr-h2" id="ideas-title"><span class="gr-s">Need a nudge?</span> Unwrap a few.</h2>
         <p class="gr-intro">Crowd-pleasers from the shop floor in Palm Springs. Anything with an Add to Registry button can join your list.</p>
         <p class="gr-hint" aria-hidden="true"><i></i>Hover a gift to unwrap it</p>
@@ -1964,7 +2002,7 @@
   <section class="gr-find" id="find" aria-labelledby="find-title">
     <div class="gr-wrap gr-find-grid">
       <div class="gr-rise">
-        <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>For the guests</p>
+        <p class="gr-kicker">For the guests</p>
         <h2 class="gr-h2" id="find-title"><span class="gr-s">Whose big day</span> is it?</h2>
         <p class="gr-intro">Search by the first or last name of whoever made the list. No account needed to snoop. Sorry, browse.</p>
         <!-- EDIT: Confirm the Gift Reggie search field names on /apps/giftregistry/find before launch. The form degrades to the plain find page if they differ. -->
@@ -2014,7 +2052,7 @@
   <section class="gr-faq" id="faq" aria-labelledby="faq-title">
     <div class="gr-wrap">
       <div class="gr-faq-head gr-rise">
-        <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>FAQ</p>
+        <p class="gr-kicker">FAQ</p>
         <h2 class="gr-h2" id="faq-title"><span class="gr-s">Ask away.</span> We love a group chat.</h2>
       </div>
       <div class="gr-chat" data-chat>
@@ -2065,7 +2103,7 @@
   <section class="gr-close" aria-labelledby="close-title">
     <canvas data-ambient aria-hidden="true"></canvas>
     <div class="gr-wrap gr-close-copy gr-rise">
-      <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Gift Registry</p>
+      <p class="gr-kicker">Gift Registry</p>
       <h2 id="close-title" data-chars><span class="gr-s">Go on,</span> <span class="gr-lime">make it official.</span></h2>
       <p>Start a registry, look up a friend’s, or keep a wishlist all to yourself. Cake not included.</p>
       <div class="gr-ctas">
