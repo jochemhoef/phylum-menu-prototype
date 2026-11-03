@@ -45,6 +45,7 @@
     --peach: #FFBFAC;
     --paper: #F1EEE4;
     --paper-deep: #E8E3D5;
+    --light: #FAF9F5;
     --ink: #24211C;
     --ink-soft: #5A554A;
     --line: #CFC8B6;
@@ -222,9 +223,7 @@
     min-height: max(700px, calc(100svh - var(--nav-h, 78px) - 34px));
     padding: clamp(96px, 9vw, 132px) var(--gutter) clamp(104px, 9vw, 132px);
     text-align: center;
-    background:
-      radial-gradient(60% 55% at 50% 52%, rgba(255, 191, 172, 0.55) 0%, rgba(255, 191, 172, 0) 70%),
-      var(--paper);
+    background: var(--paper);
     overflow: hidden;
   }
   .gr-hero-copy {
@@ -385,7 +384,7 @@
     position: relative;
     height: clamp(150px, 14vw, 210px);
     overflow: hidden;
-    background: linear-gradient(var(--paper) 0 50%, var(--peach) 50% 100%);
+    background: linear-gradient(var(--paper) 0 50%, var(--light) 50% 100%);
   }
   .gr-streamer {
     position: absolute;
@@ -395,7 +394,7 @@
     padding: clamp(10px, 1vw, 16px) 0;
     box-shadow: 0 14px 30px -22px rgba(36, 33, 28, 0.6);
   }
-  .gr-streamer--a { z-index: 2; background: var(--yellow); transform: translateY(-78%) rotate(-3.4deg); }
+  .gr-streamer--a { z-index: 2; background: var(--clay); color: #fff; transform: translateY(-78%) rotate(-3.4deg); }
   .gr-streamer--b { z-index: 1; background: var(--lime); transform: translateY(-14%) rotate(2.6deg); }
   .gr-streamer-track { display: flex; width: max-content; will-change: transform; }
   .gr-streamer-row {
@@ -425,7 +424,7 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
   }
-  .gr-streamer-row .gr-sun { width: 0.75em; color: var(--clay); }
+  .gr-streamer-row .gr-sun { width: 0.75em; color: var(--yellow); }
   .gr-streamer--b .gr-sun { width: 1.3em; color: var(--sage-deep); }
 
   /* =========================================================
@@ -433,7 +432,7 @@
      ========================================================= */
   .gr-lists {
     position: relative;
-    background: var(--peach);
+    background: var(--light);
     padding: clamp(56px, 6vw, 96px) 0 clamp(72px, 8vw, 128px);
     overflow: hidden;
   }
@@ -457,10 +456,6 @@
   .gr-garland { height: 160px; overflow: visible; }
   .gr-garland path { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
   .gr-garland circle { fill: var(--ink); }
-  .js-motion .gr-garland path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 1.8s var(--ease); }
-  .js-motion .is-in .gr-garland path { stroke-dashoffset: 0; }
-  .js-motion .gr-garland circle { opacity: 0; transition: opacity 0.4s ease 1.2s; }
-  .js-motion .is-in .gr-garland circle { opacity: 1; }
   .gr-flag {
     position: absolute;
     width: var(--fw);
@@ -479,7 +474,8 @@
   }
   /* Fabric flags: a folded hem and a stitch line across the top. */
   .gr-flag--pennant i,
-  .gr-flag--swallow i {
+  .gr-flag--swallow i,
+  .gr-flag--round i {
     background:
       linear-gradient(rgba(36, 33, 28, 0.14) 0 1px, transparent 1px) 0 5px / 100% 100% no-repeat,
       repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.75) 0 3px, transparent 3px 6px) 0 8px / 100% 1px no-repeat,
@@ -489,46 +485,13 @@
   .gr-flag--pennant i { clip-path: polygon(0 0, 100% 0, 50% 100%); }
   .gr-flag--swallow { --fw: 24px; --fh: 40px; }
   .gr-flag--swallow i { clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%); }
-  /* The PHYLUM sun, hung on a short drop. */
-  .gr-flag--sun { --fw: 34px; --fh: 44px; }
-  .gr-flag--sun::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 1.5px;
-    height: 10px;
-    margin-left: -0.75px;
-    background: var(--ink);
-  }
-  .gr-flag--sun i {
-    position: absolute;
-    top: 10px;
-    height: 34px;
-    background: repeating-conic-gradient(var(--c) 0 9deg, transparent 9deg 30deg);
-    -webkit-mask: radial-gradient(circle, #000 0 27%, transparent 28% 37%, #000 38% 49%, transparent 50%);
-            mask: radial-gradient(circle, #000 0 27%, transparent 28% 37%, #000 38% 49%, transparent 50%);
-    transform-origin: 50% 0;
-    animation-name: gr-flutter-sun;
-    animation-duration: 6s;
-  }
-  .gr-flag--sun i::after {
-    content: "";
-    position: absolute;
-    inset: 22%;
-    border-radius: 50%;
-    background: var(--c);
-  }
+  .gr-flag--round { --fw: 28px; --fh: 34px; }
+  .gr-flag--round i { border-radius: 0 0 50% 50% / 0 0 46% 46%; }
+  .gr-flag { filter: drop-shadow(0 3px 3px rgba(36, 33, 28, 0.1)); }
   @keyframes gr-flutter {
     0%, 100% { transform: rotate(-4deg); }
     50% { transform: rotate(4deg); }
   }
-  @keyframes gr-flutter-sun {
-    0%, 100% { transform: rotate(-10deg); }
-    50% { transform: rotate(10deg); }
-  }
-  .js-motion .gr-flag { scale: 1 0; transition: scale 0.7s var(--spring) var(--fdl, 0s); }
-  .js-motion .is-in .gr-flag { scale: 1 1; }
 
   .gr-tags {
     position: relative;
@@ -540,15 +503,13 @@
   }
   .gr-hang-pos { width: min(430px, 44%); transform: translateY(var(--attach, 0px)); }
   .gr-hang-drop { display: block; }
-  .js-motion .gr-hang-drop { transform: translateY(-120%); opacity: 0; transition: transform 1.25s var(--spring) var(--dd, 0s), opacity 0.3s ease var(--dd, 0s); }
-  .js-motion .is-in .gr-hang-drop { transform: none; opacity: 1; }
   .gr-hang {
     --string: 64px;
     position: relative;
     padding-top: var(--string);
     transform-origin: 50% 0;
     will-change: transform;
-    filter: drop-shadow(0 26px 30px rgba(120, 50, 20, 0.22));
+    filter: drop-shadow(0 26px 30px rgba(36, 33, 28, 0.16));
   }
   .gr-hang::before {
     content: "";
@@ -595,7 +556,7 @@
     height: 18px;
     margin-left: -9px;
     border-radius: 50%;
-    background: var(--peach);
+    background: var(--light);
     box-shadow: 0 0 0 5px rgba(36, 33, 28, 0.1);
   }
   .gr-tag-kicker {
@@ -640,7 +601,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: var(--peach);
+    background: var(--light);
   }
   .gr-tag-stub::before { left: -10px; }
   .gr-tag-stub::after { right: -10px; }
@@ -963,7 +924,7 @@
   /* =========================================================
      6. SHELF: wrapped gift ideas
      ========================================================= */
-  .gr-shelf { background: var(--paper); padding: clamp(80px, 9vw, 140px) 0 clamp(64px, 7vw, 110px); overflow: hidden; }
+  .gr-shelf { background: var(--light); padding: clamp(80px, 9vw, 140px) 0 clamp(64px, 7vw, 110px); overflow: hidden; }
   .gr-shelf-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px 48px; flex-wrap: wrap; }
   .gr-shelf-head .gr-kicker { color: var(--clay); }
   .gr-shelf-nav { display: flex; gap: 10px; }
@@ -1022,96 +983,59 @@
     background: var(--paper-deep);
     box-shadow: 0 24px 40px -30px rgba(36, 33, 28, 0.6);
   }
-  .gr-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .gr-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s cubic-bezier(0.22, 1, 0.36, 1); }
   .js-motion .gr-gift:not(.is-open) .gr-frame img { transform: scale(1.1); }
   .gr-gift.is-done:hover .gr-frame img { transform: scale(1.05); }
 
-  /* Wrapping: two torn halves, two ribbons, one bow. */
-  .gr-paper { position: absolute; inset: 0; pointer-events: none; }
+  /* Wrapping: flat paper in two halves, one ribbon cross, a sun sticker on the seam. */
+  .gr-paper { position: absolute; inset: 0; pointer-events: none; overflow: hidden; border-radius: inherit; }
   .gr-paper-l, .gr-paper-r {
     position: absolute;
-    inset: -1px;
-    background: var(--wrap);
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background:
+      linear-gradient(var(--ribbon), var(--ribbon)) 0 44% / 100% 9% no-repeat,
+      var(--wrap);
+    transition: transform 1.05s cubic-bezier(0.76, 0, 0.24, 1) 0.28s;
   }
-  .gr-paper-l { clip-path: polygon(0 0, 51% 0%, 47.5% 5%, 51% 10%, 47.5% 15%, 51% 20%, 47.5% 25%, 51% 30%, 47.5% 35%, 51% 40%, 47.5% 45%, 51% 50%, 47.5% 55%, 51% 60%, 47.5% 65%, 51% 70%, 47.5% 75%, 51% 80%, 47.5% 85%, 51% 90%, 47.5% 95%, 51% 100%, 0 100%); transform-origin: 0 100%; }
-  .gr-paper-r { clip-path: polygon(51% 0%, 47.5% 5%, 51% 10%, 47.5% 15%, 51% 20%, 47.5% 25%, 51% 30%, 47.5% 35%, 51% 40%, 47.5% 45%, 51% 50%, 47.5% 55%, 51% 60%, 47.5% 65%, 51% 70%, 47.5% 75%, 51% 80%, 47.5% 85%, 51% 90%, 47.5% 95%, 51% 100%, 100% 100%, 100% 0); transform-origin: 100% 100%; }
-  .gr-rib-v, .gr-rib-h { position: absolute; background: var(--ribbon); }
-  .gr-rib-v { top: -1px; bottom: -1px; left: 43.5%; width: 13%; transform-origin: 50% 0; }
-  .gr-rib-h { left: -1px; right: -1px; top: 42%; height: 11%; transform-origin: 50% 50%; }
-  .gr-bow {
-    display: block;
+  .gr-paper-l { left: 0; background: linear-gradient(var(--ribbon), var(--ribbon)) 100% 0 / 12% 100% no-repeat, linear-gradient(var(--ribbon), var(--ribbon)) 0 44% / 100% 9% no-repeat, var(--wrap); }
+  .gr-paper-r { right: 0; background: linear-gradient(var(--ribbon), var(--ribbon)) 0 0 / 12% 100% no-repeat, linear-gradient(var(--ribbon), var(--ribbon)) 0 44% / 100% 9% no-repeat, var(--wrap); }
+  .gr-seal {
     position: absolute;
     left: 50%;
-    top: 46%;
-    width: 46%;
-    aspect-ratio: 2.1 / 1;
-    translate: -50% -50%;
-    filter: drop-shadow(0 6px 8px rgba(36, 33, 28, 0.28));
-    transition: transform 0.5s var(--spring);
-  }
-  .gr-bow::before, .gr-bow::after {
-    content: "";
-    position: absolute;
-    top: 4%;
-    width: 48%;
-    height: 92%;
-    background: var(--ribbon);
-    box-shadow: inset 0 0 0 7px rgba(0, 0, 0, 0.1), inset 10px -6px 0 rgba(0, 0, 0, 0.12);
-  }
-  .gr-bow::before { left: 2%; border-radius: 70% 20% 20% 70% / 60% 40% 40% 60%; rotate: -14deg; }
-  .gr-bow::after { right: 2%; border-radius: 20% 70% 70% 20% / 40% 60% 60% 40%; rotate: 14deg; transform: scaleX(-1); }
-  .gr-bow i {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    top: 48.5%;
     z-index: 1;
-    width: 20%;
-    height: 56%;
+    display: grid;
+    place-items: center;
+    width: 27%;
+    aspect-ratio: 1;
     translate: -50% -50%;
-    border-radius: 8px;
-    background: var(--ribbon);
-    box-shadow: inset 0 0 0 40px rgba(0, 0, 0, 0.16);
+    rotate: -8deg;
+    border-radius: 50%;
+    background: var(--light);
+    color: var(--seal, var(--clay));
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(14px, 1.3vw, 18px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-align: center;
+    box-shadow: 0 8px 14px -8px rgba(36, 33, 28, 0.45), inset 0 0 0 4px var(--light), inset 0 0 0 5.5px currentColor;
+    transition: transform 0.55s cubic-bezier(0.5, -0.4, 0.6, 1), opacity 0.3s ease 0.22s;
   }
-  .w-dots { --wrap: radial-gradient(circle at 25% 25%, var(--clay) 0 3px, transparent 3.5px) 0 0 / 22px 22px, radial-gradient(circle at 75% 75%, var(--paper) 0 2px, transparent 2.5px) 0 0 / 22px 22px, var(--peach); --ribbon: var(--ink); }
-  .w-stripe { --wrap: repeating-linear-gradient(-45deg, var(--lime) 0 14px, #DDEB97 14px 28px); --ribbon: var(--clay); }
-  .w-sun { --wrap: radial-gradient(circle, var(--paper) 0 2.5px, transparent 3px) 0 0 / 16px 16px, var(--yellow); --ribbon: var(--paper); }
-  .w-sage { --wrap: radial-gradient(circle at 30% 30%, var(--lime) 0 2.5px, transparent 3px) 0 0 / 18px 18px, radial-gradient(circle at 80% 70%, var(--peach) 0 2px, transparent 2.5px) 0 0 / 26px 26px, var(--sage-deep); --ribbon: var(--yellow); }
-  .w-clay { --wrap: repeating-linear-gradient(90deg, var(--clay) 0 10px, #CF6E3F 10px 20px); --ribbon: var(--lime); }
+  .w-peach  { --wrap: var(--peach);     --ribbon: var(--clay);      --seal: var(--clay); }
+  .w-lime   { --wrap: var(--lime);      --ribbon: var(--sage-deep); --seal: var(--sage-deep); }
+  .w-yellow { --wrap: var(--yellow);    --ribbon: var(--light);     --seal: var(--clay); }
+  .w-sage   { --wrap: var(--sage-deep); --ribbon: var(--lime);      --seal: var(--sage-deep); }
+  .w-clay   { --wrap: var(--clay);      --ribbon: var(--peach);     --seal: var(--clay); }
 
-  /* The unwrap: bow wiggles and pops, ribbons snap, paper tears and falls away. */
-  .gr-gift.is-open .gr-bow { animation: gr-bow-pop 0.75s cubic-bezier(0.5, 0, 0.75, 0.4) forwards; }
-  .gr-gift.is-open .gr-rib-h { animation: gr-rib-snap 0.42s var(--ease) 0.32s forwards; }
-  .gr-gift.is-open .gr-rib-v { animation: gr-rib-zip 0.5s cubic-bezier(0.6, 0, 0.4, 1) 0.36s forwards; }
-  .gr-gift.is-open .gr-paper-l { animation: gr-tear-l 1s cubic-bezier(0.45, 0, 0.8, 0.5) 0.58s forwards; }
-  .gr-gift.is-open .gr-paper-r { animation: gr-tear-r 1s cubic-bezier(0.45, 0, 0.8, 0.5) 0.66s forwards; }
-  .gr-gift.is-open .gr-frame img { transition-delay: 0.6s; }
+  /* The unwrap: the sticker peels off, then the paper glides open like a pair of doors. */
+  .gr-gift.is-open .gr-seal { transform: translateY(-40%) scale(1.25) rotate(28deg); opacity: 0; }
+  .gr-gift.is-open .gr-paper-l { transform: translateX(-102%); }
+  .gr-gift.is-open .gr-paper-r { transform: translateX(102%); }
+  .gr-gift.is-open .gr-frame img { transition-delay: 0.3s; }
   .gr-gift.is-done .gr-paper { display: none; }
-  @keyframes gr-bow-pop {
-    0% { transform: none; opacity: 1; }
-    18% { transform: scale(1.22) rotate(-14deg); }
-    34% { transform: scale(1.18) rotate(12deg); }
-    48% { transform: scale(1.2) rotate(-6deg); opacity: 1; }
-    100% { transform: translateY(-340%) rotate(240deg) scale(0.35); opacity: 0; }
-  }
-  @keyframes gr-rib-snap {
-    0% { transform: none; }
-    30% { transform: scaleX(1.03) scaleY(1.15); }
-    100% { transform: scaleX(0) scaleY(0.6); }
-  }
-  @keyframes gr-rib-zip {
-    0% { transform: none; }
-    100% { transform: translateY(-110%) scaleX(0.7); }
-  }
-  @keyframes gr-tear-l {
-    0% { transform: none; }
-    22% { transform: translateX(-5%) rotate(-5deg); }
-    100% { transform: translate(-38%, 125%) rotate(-32deg); }
-  }
-  @keyframes gr-tear-r {
-    0% { transform: none; }
-    22% { transform: translateX(5%) rotate(5deg); }
-    100% { transform: translate(38%, 125%) rotate(32deg); }
-  }
   .gr-hint {
     display: inline-flex;
     align-items: center;
@@ -1125,11 +1049,10 @@
     color: var(--clay);
   }
   .gr-hint i {
-    width: 22px;
-    height: 12px;
-    background:
-      radial-gradient(ellipse at 25% 50%, currentColor 0 45%, transparent 48%),
-      radial-gradient(ellipse at 75% 50%, currentColor 0 45%, transparent 48%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px currentColor, inset 0 0 0 4px var(--light), inset 0 0 0 7px currentColor;
     animation: gr-hint-wiggle 2.4s var(--ease) infinite;
   }
   @keyframes gr-hint-wiggle { 0%, 70%, 100% { transform: none; } 78% { transform: rotate(-14deg) scale(1.15); } 86% { transform: rotate(12deg) scale(1.15); } 94% { transform: rotate(-6deg); } }
@@ -1670,7 +1593,7 @@
       </h1>
       <p class="gr-lede gr-hero-fade" style="--d: 0.65s">Getting hitched, getting keys, or getting asked “so what do you want?” one too many times. Build a list of things you’ll actually keep, from glazed ceramics to the really good linens, and let the people who love you handle the rest.</p>
       <div class="gr-ctas gr-hero-fade" style="--d: 0.8s">
-        <a class="gr-btn gr-btn--sun" data-magnet data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a registry <span class="gr-btn-arrow" aria-hidden="true">→</span></a>
+        <a class="gr-btn gr-btn--sun" data-magnet href="https://shopphylum.com/apps/giftregistry/create">Start a registry <span class="gr-btn-arrow" aria-hidden="true">→</span></a>
         <a class="gr-btn gr-btn--ghost" data-magnet href="#find">Find someone’s list</a>
       </div>
     </div>
@@ -1727,7 +1650,7 @@
                 <p class="gr-tag-kicker">For sharing</p>
                 <h3 id="tag-registry">Registry</h3>
                 <p class="gr-tag-copy">For the wedding, the move, the big December. Guests look you up by name and see what’s already claimed, so you get one gravy boat, not four.</p>
-                <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a registry</a>
+                <a class="gr-btn" href="https://shopphylum.com/apps/giftregistry/create">Start a registry</a>
                 <div class="gr-tag-stub"><span>Admit</span><strong>Everyone you love</strong><span>No. 001</span></div>
               </article>
             </div>
@@ -1742,7 +1665,7 @@
                 <p class="gr-tag-kicker">For keeping</p>
                 <h3 id="tag-wish">Wishlist</h3>
                 <p class="gr-tag-copy">A private list of things you’re eyeing. No guests, no tracking, no explaining. Cross things off when they’re yours (or when you cave).</p>
-                <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
+                <a class="gr-btn" href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
                 <div class="gr-tag-stub"><span>Admit</span><strong>Just you</strong><span>No. 002</span></div>
               </article>
             </div>
@@ -1777,7 +1700,7 @@
             <p class="gr-panel-tag">For the newlyweds</p>
             <h3>Till death (or the dishwasher) do us part.</h3>
             <p class="gr-panel-copy">Register for the table you’ll be hosting at for decades. Tabletop, linen, and the objects that make a first place feel like a forever one.</p>
-            <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a wedding registry</a>
+            <a class="gr-btn" href="https://shopphylum.com/apps/giftregistry/create">Start a wedding registry</a>
           </div>
           <div class="gr-scene">
             <figure class="gr-scene-photo"><img src="assets/registry/party-mud-australia.jpg" width="1000" height="666" alt="Mud Australia porcelain bowls and plates in mint, sky, and apricot on a linen-covered dinner table." loading="lazy" decoding="async"></figure>
@@ -1801,7 +1724,7 @@
             <p class="gr-panel-tag">For the new keys</p>
             <h3>New place. Empty shelves. Let’s fix that.</h3>
             <p class="gr-panel-copy">The first lamp, the cushion that finally makes the sofa, the bowl by the door for the keys you just got. Help is on the way.</p>
-            <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a housewarming list</a>
+            <a class="gr-btn" href="https://shopphylum.com/apps/giftregistry/create">Start a housewarming list</a>
           </div>
           <div class="gr-scene">
             <figure class="gr-scene-photo"><img src="assets/registry/party-johanna-gullichsen.jpg" width="1000" height="626" alt="Johanna Gullichsen woven cushions in rust and cream on a pale sofa beside a potted plant." loading="lazy" decoding="async"></figure>
@@ -1825,7 +1748,7 @@
             <p class="gr-panel-tag">For the big December</p>
             <h3>Finally, an answer to “what do you want?”</h3>
             <p class="gr-panel-copy">One link for everyone who asks, every single year. December in Palm Springs happens poolside, so think ice bucket before ugly sweater.</p>
-            <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a holiday list</a>
+            <a class="gr-btn" href="https://shopphylum.com/apps/giftregistry/create">Start a holiday list</a>
           </div>
           <div class="gr-scene">
             <figure class="gr-scene-photo"><img src="assets/registry/party-koziol.jpg" width="1000" height="1001" alt="Koziol wine glasses and an ice bucket with two bottles at the edge of a swimming pool." loading="lazy" decoding="async"></figure>
@@ -1849,7 +1772,7 @@
             <p class="gr-panel-tag">For no reason at all</p>
             <h3>No occasion? Even better.</h3>
             <p class="gr-panel-copy">Keep a wishlist of the things you keep circling back to. Birthdays, promotions, surviving a Tuesday. We won’t ask questions.</p>
-            <a class="gr-btn" data-pop href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
+            <a class="gr-btn" href="https://shopphylum.com/apps/giftregistry/wishlist">Start a wishlist</a>
           </div>
           <div class="gr-scene">
             <figure class="gr-scene-photo"><img src="assets/registry/party-dorsay.jpg" width="1000" height="1000" alt="A D’Orsay candle in a dark amber glass beside its copper and brown box." loading="lazy" decoding="async"></figure>
@@ -1922,12 +1845,12 @@
               <path class="gr-gt-line" d=""/>
               <path class="gr-gt-line" d=""/>
               <path class="gr-gt-line" d=""/>
-              <g class="gr-gt" data-x="-20" data-y="70" data-r="-6" opacity="0"><path class="gr-gt-shape" fill="#F0FFAE" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Mom</text></g>
-              <g class="gr-gt" data-x="300" data-y="40" data-r="5" opacity="0"><path class="gr-gt-shape" fill="#C05A28" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #F1EEE4">The Kims</text></g>
-              <g class="gr-gt" data-x="-74" data-y="204" data-r="-4" opacity="0"><path class="gr-gt-shape" fill="#F1EEE4" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Aunt Jo</text></g>
-              <g class="gr-gt" data-x="392" data-y="272" data-r="6" opacity="0"><path class="gr-gt-shape" fill="#f2a900" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Bestie</text></g>
-              <g class="gr-gt" data-x="-40" data-y="334" data-r="4" opacity="0"><path class="gr-gt-shape" fill="#FFBFAC" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Kai</text></g>
-              <g class="gr-gt" data-x="354" data-y="382" data-r="-5" opacity="0"><path class="gr-gt-shape" fill="#24211C" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#F1EEE4"/><text x="25" y="23.2" style="fill: #F0FFAE">Your boss?</text></g>
+              <g class="gr-gt" data-x="-20" data-y="70" data-r="-6" opacity="0"><path class="gr-gt-shape" fill="#5F6748" d=""/><circle cx="13" cy="18" r="3.5" fill="#F0FFAE"/><text x="25" y="23.2" style="fill: #F0FFAE">Mom</text></g>
+              <g class="gr-gt" data-x="300" data-y="40" data-r="5" opacity="0"><path class="gr-gt-shape" fill="#C05A28" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #F1EEE4">The Kims</text></g>
+              <g class="gr-gt" data-x="-74" data-y="204" data-r="-4" opacity="0"><path class="gr-gt-shape" fill="#FAF9F5" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Aunt Jo</text></g>
+              <g class="gr-gt" data-x="392" data-y="272" data-r="6" opacity="0"><path class="gr-gt-shape" fill="#f2a900" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Bestie</text></g>
+              <g class="gr-gt" data-x="-40" data-y="334" data-r="4" opacity="0"><path class="gr-gt-shape" fill="#FFBFAC" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Kai</text></g>
+              <g class="gr-gt" data-x="354" data-y="382" data-r="-5" opacity="0"><path class="gr-gt-shape" fill="#24211C" d=""/><circle cx="13" cy="18" r="3.5" fill="#F1EEE4"/><text x="25" y="23.2" style="fill: #F0FFAE">Your boss?</text></g>
             </g>
             <g class="gr-box-body">
               <rect x="70" y="206" width="260" height="196" rx="8" fill="#FFBFAC"/>
@@ -1950,12 +1873,12 @@
             <g class="gr-box-tag">
               <path d="M210 160 C 240 176, 262 186, 284 196" stroke="#24211C" stroke-width="1.6" fill="none"/>
               <g class="gr-tag-front">
-                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#F0FFAE" stroke="#24211C" stroke-width="1.4"/>
+                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#FAF9F5"/>
                 <circle cx="296" cy="204" r="3.5" fill="#24211C"/>
                 <text x="310" y="210">To: you</text>
               </g>
               <g class="gr-tag-back">
-                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#f2a900" stroke="#24211C" stroke-width="1.4"/>
+                <path d="M284 186 l14 -10 h74 a6 6 0 0 1 6 6 v44 a6 6 0 0 1 -6 6 h-74 l-14 -10 z" fill="#f2a900"/>
                 <circle cx="296" cy="204" r="3.5" fill="#24211C"/>
                 <text x="308" y="200" style="font-size: 11px; letter-spacing: 0.08em">FROM:</text>
                 <text x="308" y="218">everyone</text>
@@ -1986,42 +1909,42 @@
       <ul class="gr-gifts">
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/studio-arhoj">
-            <span class="gr-frame"><img src="assets/registry/gift-studio-arhoj.jpg" width="720" height="480" alt="Studio Arhoj glazed ceramic figures with painted eyes on a sunlit walnut table." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-dots" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-rib-h"></span><span class="gr-rib-v"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-studio-arhoj.jpg" width="720" height="480" alt="Studio Arhoj glazed ceramic figures with painted eyes on a sunlit walnut table." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-peach" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Studio Arhoj</span>
             <span class="gr-gift-line">Glazed little guys with big personalities.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/liga">
-            <span class="gr-frame"><img src="assets/registry/gift-liga.jpg" width="720" height="720" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-stripe" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-rib-h"></span><span class="gr-rib-v"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-liga.jpg" width="720" height="720" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-lime" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">LIGA</span>
             <span class="gr-gift-line">Cork coasters. Water rings? Never heard of her.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/mungo">
-            <span class="gr-frame"><img src="assets/registry/gift-peek-mungo.jpg" width="720" height="900" alt="A Mungo check blanket in soft pastels spread across a made bed." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-sun" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-rib-h"></span><span class="gr-rib-v"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-peek-mungo.jpg" width="720" height="900" alt="A Mungo check blanket in soft pastels spread across a made bed." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-yellow" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Mungo</span>
             <span class="gr-gift-line">Blankets for the three cold nights a year in Palm Springs.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/ekobo">
-            <span class="gr-frame"><img src="assets/registry/gift-ekobo.jpg" width="720" height="320" alt="Ekobo plates in teal, coral, and sand arranged with sliced citrus on a blush backdrop." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-sage" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-rib-h"></span><span class="gr-rib-v"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-ekobo.jpg" width="720" height="320" alt="Ekobo plates in teal, coral, and sand arranged with sliced citrus on a blush backdrop." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-sage" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Ekobo</span>
             <span class="gr-gift-line">Plates in sorbet colors, made for passing around.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/forma-art-studio">
-            <span class="gr-frame"><img src="assets/registry/gift-peek-forma.jpg" width="720" height="720" alt="A Forma Art Studio woven rug in navy, rust, and tan blocks." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-clay" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-rib-h"></span><span class="gr-rib-v"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-peek-forma.jpg" width="720" height="720" alt="A Forma Art Studio woven rug in navy, rust, and tan blocks." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-clay" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Forma Art Studio</span>
             <span class="gr-gift-line">Rugs that are basically art you can stand on.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/chilewich">
-            <span class="gr-frame"><img src="assets/registry/gift-chilewich.jpg" width="720" height="352" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-dots" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-rib-h"></span><span class="gr-rib-v"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-chilewich.jpg" width="720" height="352" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-yellow" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Chilewich</span>
             <span class="gr-gift-line">Woven runners that can handle the hallway.</span>
           </a>
@@ -2029,7 +1952,7 @@
         <!-- EDIT: No confirmed Londji collection handle yet, so this tile points at a search. -->
         <li class="gr-gift">
           <a href="https://shopphylum.com/search?q=londji">
-            <span class="gr-frame"><img src="assets/registry/gift-londji.jpg" width="720" height="720" alt="A Londji Happy Birthday Unicorn puzzle box surrounded by puzzle pieces on a yellow background." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-stripe" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-rib-h"></span><span class="gr-rib-v"></span><span class="gr-bow"><i></i></span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-londji.jpg" width="720" height="720" alt="A Londji Happy Birthday Unicorn puzzle box surrounded by puzzle pieces on a yellow background." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-peach" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Londji</span>
             <span class="gr-gift-line">Puzzles and games for the smallest guests.</span>
           </a>
@@ -2159,7 +2082,7 @@
       <h2 id="close-title" data-chars><span class="gr-s">Go on,</span> <span class="gr-lime">make it official.</span></h2>
       <p>Start a registry, look up a friend’s, or keep a wishlist all to yourself. Cake not included.</p>
       <div class="gr-ctas">
-        <a class="gr-btn gr-btn--sun" data-magnet data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a registry <span class="gr-btn-arrow" aria-hidden="true">→</span></a>
+        <a class="gr-btn gr-btn--sun" data-magnet href="https://shopphylum.com/apps/giftregistry/create">Start a registry <span class="gr-btn-arrow" aria-hidden="true">→</span></a>
         <a class="gr-btn gr-btn--light" data-magnet href="#find">Find a registry</a>
       </div>
       <a class="gr-close-alt" href="https://shopphylum.com/apps/giftregistry/wishlist">Or start a wishlist, just for you</a>
@@ -2380,18 +2303,6 @@
     h.setAttribute('aria-label', 'Go on, make it official.');
   });
 
-  /* ---------- Party pops on primary buttons ---------- */
-  document.querySelectorAll('[data-pop]').forEach(function (btn) {
-    var last = 0;
-    btn.addEventListener('pointerenter', function (e) {
-      if (e.pointerType !== 'mouse') return;
-      var now = Date.now();
-      if (now - last < 1800) return;
-      last = now;
-      Confetti.fromEl(btn, { count: 26, spread: 55, power: 8 });
-    });
-  });
-
   /* ---------- Magnetic buttons ---------- */
   if (motion && finePointer) {
     document.querySelectorAll('[data-magnet]').forEach(function (btn) {
@@ -2480,9 +2391,8 @@
     var wide = window.matchMedia('(min-width: 901px)');
     var tagsEl = stage.querySelector('.gr-tags');
     var knots = svg.querySelector('.gr-knots');
-    var FABRIC = ['#f2a900', '#F0FFAE', '#C05A28', '#F1EEE4', '#5F6748', '#F0FFAE', '#f2a900', '#F1EEE4'];
-    var SUNS = ['#C05A28', '#f2a900'];
-    var SEQ = ['pennant', 'swallow', 'pennant', 'sun', 'swallow', 'pennant', 'swallow', 'sun'];
+    var FABRIC = ['#f2a900', '#FFBFAC', '#5F6748', '#C05A28', '#F0FFAE', '#f2a900', '#C05A28', '#FFBFAC', '#5F6748', '#F0FFAE', '#C05A28'];
+    var SEQ = ['pennant', 'swallow', 'round', 'pennant', 'swallow', 'pennant', 'round', 'swallow'];
     var SVGNS = 'http://www.w3.org/2000/svg';
 
     function layout() {
@@ -2530,7 +2440,7 @@
         knots.appendChild(c);
       });
       var gap = wide.matches ? 54 : 46;
-      var n = 0, fab = 0, sun = 0;
+      var n = 0;
       for (var fx = gap * 0.6; fx < W - 12; fx += gap) {
         if (anchors.some(function (a, k) { return k > 0 && k < anchors.length - 1 && Math.abs(a.x - fx) < 30; })) continue;
         var kind = SEQ[n % SEQ.length];
@@ -2539,10 +2449,9 @@
         f.className = 'gr-flag gr-flag--' + kind;
         f.style.left = fx.toFixed(1) + 'px';
         f.style.top = (yAt(fx) - 0.5).toFixed(1) + 'px';
-        f.style.setProperty('--c', kind === 'sun' ? SUNS[sun++ % SUNS.length] : FABRIC[fab++ % FABRIC.length]);
-        f.style.setProperty('--a', (kind === 'sun' ? 0 : slope).toFixed(1) + 'deg');
+        f.style.setProperty('--c', FABRIC[n % FABRIC.length]);
+        f.style.setProperty('--a', slope.toFixed(1) + 'deg');
         f.style.setProperty('--fd', (-(n * 0.41) % 3.4).toFixed(2) + 's');
-        f.style.setProperty('--fdl', (0.25 + Math.abs(fx - W / 2) / W * 1.1).toFixed(2) + 's');
         f.appendChild(document.createElement('i'));
         flagsBox.appendChild(f);
         n++;
@@ -2559,26 +2468,20 @@
     if (!motion) return;
     var visible = false;
     watch(stage, function (on) { visible = on; });
-    var states = hangs.map(function (h, i) { return { a: 0, v: i ? -30 : 30, phase: i * 1.7, el: h }; });
+    var states = hangs.map(function (h, i) { return { a: 0, v: 0, phase: i * 1.7, el: h }; });
     states.forEach(function (s) {
       s.el.addEventListener('pointermove', function (e) {
         if (e.pointerType === 'mouse') s.v += clamp(e.movementX, -30, 30) * 0.9;
       });
       s.el.addEventListener('pointerdown', function () { s.v += (Math.random() > 0.5 ? 1 : -1) * 70; });
     });
-    var dropped = false;
-    stage.addEventListener('transitionend', function () {}, { once: true });
     tickers.push(function (dt, t) {
       if (!visible) return;
-      if (!dropped && stage.classList.contains('is-in')) {
-        dropped = true;
-        setTimeout(function () { states.forEach(function (s, i) { s.v += (i ? -1 : 1) * 55; }); }, 700);
-      }
       states.forEach(function (s) {
         var breeze = Math.sin(t * 0.9 + s.phase) * 1.4;
         var force = -38 * (s.a - breeze) - 2.6 * s.v;
-        s.v += force * dt + scrollVel * 0.0022 * (s.phase ? -1 : 1);
-        s.a = clamp(s.a + s.v * dt, -16, 16);
+        s.v += force * dt + clamp(scrollVel, -2500, 2500) * 0.0012 * (s.phase ? -1 : 1);
+        s.a = clamp(s.a + s.v * dt, -7, 7);
         s.el.style.transform = 'rotate(' + s.a.toFixed(3) + 'deg)';
       });
     });
@@ -2753,9 +2656,9 @@
       g.classList.add('is-open');
       setTimeout(function () {
         var f = g.querySelector('.gr-frame').getBoundingClientRect();
-        Confetti.burst(f.left + f.width / 2, f.top + f.height * 0.45, { count: 30, spread: 60, power: 9 });
-      }, 560);
-      setTimeout(function () { g.classList.add('is-done'); }, 1750);
+        Confetti.burst(f.left + f.width / 2, f.top + f.height * 0.45, { count: 22, spread: 55, power: 8 });
+      }, 420);
+      setTimeout(function () { g.classList.add('is-done'); }, 1500);
     }
     if (!motion || !('IntersectionObserver' in window)) {
       gifts.forEach(function (g) { g.classList.add('is-open', 'is-done'); });
