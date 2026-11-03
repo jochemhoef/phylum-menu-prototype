@@ -552,15 +552,17 @@
 
   .lg-perk--pickup {
     grid-column: 1 / -1;
-    background: var(--lime);
+    background: var(--olive);
+    color: #FFC844;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 20px clamp(24px, 4vw, 72px);
     padding-block: clamp(24px, 2.8vw, 40px);
   }
-  .lg-perk--pickup .lg-perk-big { max-width: none; font-size: clamp(34px, 3.6vw, 58px); margin-bottom: 10px; }
+  .lg-perk--pickup .lg-perk-big { color: var(--yellow); max-width: none; font-size: clamp(34px, 3.6vw, 58px); margin-bottom: 10px; }
   .lg-perk--pickup .lg-perk-copy { max-width: 36em; }
+  .lg-perk--pickup .lg-todo { color: inherit; background: rgba(36, 33, 28, 0.25); }
   .lg-pickup-where {
     display: flex;
     flex-direction: column;
@@ -568,7 +570,7 @@
     gap: 6px;
     min-width: 260px;
     padding-left: clamp(20px, 3vw, 44px);
-    border-left: 1.5px solid rgba(36, 33, 28, 0.18);
+    border-left: 1.5px solid rgba(242, 169, 0, 0.35);
   }
   .lg-pickup-where address { font-family: var(--sans); font-weight: 500; font-size: 17px; line-height: 1.4; }
   .lg-perk-todo { margin-top: 14px; }
@@ -1101,7 +1103,7 @@
     .lg-tag-for { grid-column: 1 / -1; grid-row: 4; margin-top: 8px; }
     .lg-tag .lg-link { grid-column: 2; grid-row: 2 / span 2; align-self: end; }
     .lg-perk--pickup { grid-template-columns: 1fr; }
-    .lg-pickup-where { padding-left: 0; padding-top: 18px; border-left: 0; border-top: 1.5px solid rgba(36, 33, 28, 0.18); min-width: 0; }
+    .lg-pickup-where { padding-left: 0; padding-top: 18px; border-left: 0; border-top: 1.5px solid rgba(242, 169, 0, 0.35); min-width: 0; }
     .lg-foot-grid { flex-direction: column; }
     .lg-foot nav { justify-content: flex-start; }
   }
