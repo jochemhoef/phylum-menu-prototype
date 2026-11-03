@@ -747,36 +747,132 @@
   /* =========================================================
      6. REVIEWS
      ========================================================= */
-  .lg-reviews { padding: clamp(72px, 9vw, 136px) 0; }
+  .lg-reviews { padding: clamp(72px, 9vw, 136px) 0; overflow: hidden; }
   .lg-nowrap { white-space: nowrap; }
   .lg-block { display: block; }
-  .lg-reviews-grid {
+  .lg-g { display: block; flex: none; width: 1em; height: 1em; }
+  .lg-reviews .lg-kicker .lg-g { font-size: 15px; }
+  .lg-reviews-head {
     display: grid;
-    grid-template-columns: minmax(0, 0.5fr) minmax(0, 1fr);
-    gap: clamp(36px, 6vw, 104px);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 32px clamp(32px, 5vw, 80px);
+    align-items: end;
+    margin-bottom: clamp(32px, 3.4vw, 52px);
   }
-  .lg-score { display: flex; align-items: center; gap: 16px; margin-top: 32px; }
-  .lg-score-num { font-family: var(--serif); font-weight: 300; font-size: clamp(72px, 7vw, 112px); line-height: 0.85; letter-spacing: -0.05em; }
-  .lg-score .lg-stars svg { width: 20px; height: 20px; }
-  .lg-score-count { margin-top: 6px; font-family: var(--sans); font-weight: 500; font-size: 15px; color: var(--ink-soft); }
-  .lg-reviews-links { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 20px; }
+  .lg-gscore {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 6px 18px;
+    padding: 22px 26px 18px;
+    background: #fff;
+    border: 1.5px solid var(--ink);
+    border-radius: 18px;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .lg-gscore > .lg-g { font-size: 52px; grid-row: span 2; }
+  .lg-gscore-num { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-weight: 300; font-size: clamp(56px, 5vw, 76px); line-height: 0.9; letter-spacing: -0.05em; }
+  .lg-gscore-num .lg-stars { color: var(--yellow); }
+  .lg-gscore-num .lg-stars svg { width: 20px; height: 20px; }
+  .lg-gscore-count { font-family: var(--sans); font-weight: 500; font-size: 16px; letter-spacing: -0.01em; }
+  .lg-gscore-links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 8px; padding-top: 6px; border-top: 1.5px solid var(--line); }
+  .lg-gscore-links .lg-link { font-size: 12px; }
+  .lg-rv-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 18px; }
+  .lg-rv-hint { font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+  .lg-rv-nav { display: flex; gap: 10px; }
+  .lg-arrow {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    font: 20px/1 var(--sans);
+    cursor: pointer;
+    transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease), opacity var(--fast) var(--ease);
+  }
+  .lg-arrow:hover:not(:disabled) { background: var(--yellow); border-color: var(--yellow); }
+  .lg-arrow:disabled { opacity: 0.3; cursor: default; }
+  .lg-arrow:focus-visible, .lg-rv-track:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
-  .lg-quotes { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 3vw, 48px) clamp(24px, 3vw, 56px); }
-  .lg-quote { border-top: 1.5px solid var(--ink); padding-top: 22px; }
-  .lg-quote blockquote p {
+  .lg-rv-track {
+    --edge: max(var(--gutter), calc((100vw - var(--max)) / 2));
+    display: flex;
+    gap: clamp(14px, 1.4vw, 22px);
+    list-style: none;
+    padding: 16px var(--edge) 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .lg-rv-track::-webkit-scrollbar { display: none; }
+  .lg-rv {
+    --card: var(--paper-deep);
+    --fg: var(--ink);
+    --star: var(--ink);
+    flex: 0 0 clamp(290px, 29vw, 420px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    min-height: clamp(380px, 30vw, 440px);
+    padding: clamp(26px, 2.4vw, 38px);
+    background: var(--card);
+    color: var(--fg);
+    border-radius: 18px;
+    transition: transform var(--base) var(--ease);
+  }
+  .lg-rv:nth-child(odd) { rotate: -0.8deg; }
+  .lg-rv:nth-child(even) { rotate: 0.8deg; }
+  .lg-rv:hover { transform: translateY(-6px); }
+  .lg-rv--teal { --card: var(--teal); --fg: var(--paper); --star: var(--lime); }
+  .lg-rv--sun { --card: #F1EE80; }
+  .lg-rv--peach { --card: var(--peach); }
+  .lg-rv--aqua { --card: var(--aqua); }
+  .lg-rv--lime { --card: var(--lime); }
+  .lg-rv--yellow { --card: var(--yellow); }
+  .lg-rv-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 26px; }
+  .lg-rv-top .lg-stars { color: var(--star); }
+  .lg-rv-top .lg-stars svg { width: 18px; height: 18px; }
+  .lg-rv-g { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1.5px rgba(36, 33, 28, 0.12); }
+  .lg-rv-g .lg-g { font-size: 20px; }
+  .lg-rv blockquote { margin-bottom: 28px; }
+  .lg-rv blockquote p {
     font-family: var(--serif);
     font-weight: 300;
-    font-size: clamp(22px, 1.8vw, 28px);
+    font-size: clamp(22px, 1.75vw, 28px);
     line-height: 1.2;
     letter-spacing: -0.02em;
     text-indent: -0.4em;
   }
-  .lg-quote--lead { grid-column: 1 / -1; border-top: 0; padding-top: 0; }
-  .lg-quote--lead blockquote p { font-size: clamp(30px, 3.4vw, 52px); line-height: 1.08; letter-spacing: -0.03em; max-width: 22ch; }
-  .lg-quote footer { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-family: var(--sans); font-weight: 500; font-size: 15px; }
-  .lg-quote footer span { color: var(--ink-soft); }
-  .lg-quote footer .lg-stars svg { width: 13px; height: 13px; }
+  .lg-rv footer { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+  .lg-rv-mono {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--fg);
+    color: var(--card);
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+  }
+  .lg-rv cite { display: block; font-style: normal; font-family: var(--sans); font-weight: 500; font-size: 17px; }
+  .lg-rv-src { display: block; font-size: 14px; opacity: 0.8; }
+  .lg-rv--teal .lg-rv-src { opacity: 1; }
+  .lg-rv--more { --card: var(--ink); --fg: var(--paper); justify-content: space-between; }
+  .lg-rv--more .lg-rv-g { width: 64px; height: 64px; }
+  .lg-rv--more .lg-rv-g .lg-g { font-size: 32px; }
+  .lg-rv-more-num { font-family: var(--serif); font-weight: 300; font-size: clamp(72px, 7vw, 112px); line-height: 0.85; letter-spacing: -0.05em; color: var(--lime); }
+  .lg-rv-more-line { margin-top: 10px; font-family: var(--sans); font-weight: 500; font-size: clamp(20px, 1.6vw, 24px); line-height: 1.2; letter-spacing: -0.02em; }
+  .lg-rv--more .lg-ctas { flex-direction: column; align-items: stretch; gap: 8px; }
+  .lg-rv--more .lg-link { justify-content: center; }
 
   /* =========================================================
      7. VISIT
@@ -840,22 +936,77 @@
   /* =========================================================
      8. TRADE
      ========================================================= */
-  .lg-trade { padding: clamp(56px, 6vw, 88px) 0 0; }
-  .lg-trade-card {
+  .lg-trade { background: var(--paper-deep); padding: clamp(72px, 9vw, 136px) 0; overflow: hidden; }
+  .lg-trade-grid {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: clamp(40px, 5vw, 88px);
     align-items: center;
-    gap: clamp(18px, 3vw, 44px);
-    padding: clamp(16px, 1.6vw, 22px);
-    padding-right: clamp(20px, 3vw, 44px);
-    border: 1.5px solid var(--ink);
-    border-radius: var(--radius);
-    transition: background-color var(--base) var(--ease);
   }
-  .lg-trade-card:hover { background: #F7F5EE; }
-  .lg-trade-card img { width: clamp(88px, 9vw, 128px); height: auto; aspect-ratio: 1; border-radius: 6px; object-fit: cover; }
-  .lg-trade-card h2 { font-size: clamp(26px, 2.6vw, 40px); line-height: 1.02; letter-spacing: -0.03em; }
-  .lg-trade-card p { margin-top: 6px; font-size: 16px; color: var(--ink-soft); max-width: 40em; }
+  .lg-trade-art { position: relative; padding: 0 clamp(28px, 4vw, 64px) clamp(56px, 6vw, 88px) 0; }
+  .lg-trade-art::before {
+    content: "";
+    position: absolute;
+    inset: clamp(28px, 3vw, 44px) 0 clamp(28px, 3vw, 44px) clamp(28px, 3vw, 44px);
+    background: var(--lime);
+    border-radius: 18px;
+  }
+  .lg-trade-photo { position: relative; overflow: hidden; border-radius: 18px; aspect-ratio: 4 / 3; background: var(--paper); }
+  .lg-trade-photo img, .lg-trade-inset img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .lg-trade-photo img { transition: transform 900ms var(--ease); }
+  .lg-trade-art:hover .lg-trade-photo img { transform: scale(1.03); }
+  .lg-trade-inset {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: clamp(140px, 17vw, 240px);
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 6px solid var(--paper);
+    border-radius: 14px;
+    box-shadow: 0 24px 40px -24px rgba(36, 33, 28, 0.55);
+    rotate: 4deg;
+  }
+  .lg-trade-sticker {
+    position: absolute;
+    left: clamp(-12px, -1vw, -4px);
+    bottom: clamp(16px, 2vw, 28px);
+    display: grid;
+    place-content: center;
+    width: clamp(118px, 11vw, 156px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--ink);
+    text-align: center;
+    rotate: -10deg;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.15;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .lg-trade-sticker strong { display: block; font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 3.8vw, 54px); line-height: 0.9; letter-spacing: -0.04em; text-transform: none; }
+  .lg-trade-copy .lg-intro { color: var(--ink-soft); }
+  .lg-trade .lg-h2 { font-size: clamp(44px, 4.6vw, 76px); }
+  .lg-trade-perks { list-style: none; margin: 30px 0 26px; border-top: 1.5px solid rgba(36, 33, 28, 0.2); counter-reset: perk; }
+  .lg-trade-perks li {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1.5px solid rgba(36, 33, 28, 0.2);
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    counter-increment: perk;
+  }
+  .lg-trade-perks li::before { content: "0" counter(perk); font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.14em; color: var(--ink); padding-top: 4px; }
+  .lg-trade-perks strong { display: block; font-family: var(--sans); font-weight: 500; font-size: 18px; letter-spacing: -0.01em; color: var(--ink); }
+  .lg-trade-roles { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin-bottom: 30px; }
+  .lg-trade-roles li { padding: 8px 14px; border-radius: 999px; background: var(--paper); font-family: var(--sans); font-weight: 500; font-size: 14px; }
+  .lg-trade .lg-ctas { align-items: center; gap: 12px 24px; }
 
   /* =========================================================
      9. CLOSE
@@ -932,7 +1083,8 @@
     .lg-tag .lg-link { padding-top: 0; }
     .lg-excl-grid { grid-template-columns: 1fr; }
     .lg-excl-todo { grid-column: auto; }
-    .lg-reviews-grid { grid-template-columns: 1fr; }
+    .lg-reviews-head { grid-template-columns: 1fr; align-items: start; }
+    .lg-gscore { justify-self: start; }
   }
 
   @media (max-width: 1023px) {
@@ -943,6 +1095,8 @@
     .lg-perk--wrap { display: grid; grid-template-columns: 1fr 1fr; }
     .lg-perk--wrap figure { min-height: 320px; }
     .lg-visit-grid { grid-template-columns: 1fr; }
+    .lg-trade-grid { grid-template-columns: 1fr; }
+    .lg-trade-art { max-width: 720px; }
     .lg-host-head { flex-direction: column; align-items: flex-start; }
   }
 
@@ -965,8 +1119,6 @@
     .lg-tag .lg-link { grid-column: 2; grid-row: 2 / span 2; align-self: end; }
     .lg-perk--pickup { grid-template-columns: 1fr; }
     .lg-pickup-where { padding-left: 0; padding-top: 18px; border-left: 0; border-top: 1.5px solid rgba(36, 33, 28, 0.18); min-width: 0; }
-    .lg-trade-card { grid-template-columns: auto minmax(0, 1fr); }
-    .lg-trade-card .lg-link { grid-column: 1 / -1; justify-self: start; }
     .lg-foot-grid { flex-direction: column; }
     .lg-foot nav { justify-content: flex-start; }
   }
@@ -974,7 +1126,6 @@
   @media (max-width: 767px) {
     .lg-perk--wrap { display: flex; }
     .lg-perk--wrap figure { min-height: 0; aspect-ratio: 4 / 3; flex: none; }
-    .lg-quotes { grid-template-columns: 1fr; }
     .lg-boxes { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
     .lg-box-tag { font-size: 12px; padding: 6px 8px 6px 18px; letter-spacing: 0.08em; translate: -30% 14px; }
     .lg-box::before { width: 10px; margin-left: -5px; }
@@ -1039,8 +1190,17 @@
     .lg-box-tag { translate: -50% 12px; rotate: 4deg; }
     .lg-facts > div { grid-template-columns: 1fr; gap: 4px; }
     .lg-map { aspect-ratio: 1 / 1; }
-    .lg-trade-card { grid-template-columns: 1fr; padding: 20px; }
-    .lg-trade-card img { width: 100%; aspect-ratio: 16 / 9; }
+    .lg-rv { flex-basis: 82vw; min-height: 360px; }
+    .lg-rv-hint { display: none; }
+    .lg-gscore { justify-self: stretch; padding: 18px 20px 14px; }
+    .lg-gscore > .lg-g { font-size: 44px; }
+    .lg-trade-art { padding-right: 20px; padding-bottom: 64px; }
+    .lg-trade-photo { aspect-ratio: 4 / 3; }
+    .lg-trade-inset { width: 128px; border-width: 4px; }
+    .lg-trade-sticker { width: 104px; left: -6px; bottom: 6px; font-size: 11px; }
+    .lg-trade-sticker strong { font-size: 36px; }
+    .lg-trade .lg-ctas { align-items: stretch; }
+    .lg-trade .lg-link { align-self: center; }
     .lg-close .lg-ctas { flex-direction: column; }
   }
 
@@ -1049,6 +1209,8 @@
     .lg *, .lg *::before, .lg *::after, .lg-dock { transition-duration: 0.01ms !important; animation: none !important; }
     .js-motion .lg-in, .js-motion .lg-reveal { opacity: 1; transform: none; }
     .js-motion .lg-mark::before, .js-motion .lg-hero-photo img { transform: none; }
+    .lg-rv-track { scroll-behavior: auto; }
+    .lg-rv:hover { transform: none; }
     .lg-ticker-scroll { overflow-x: auto; scrollbar-width: none; }
     .lg-ticker-toggle { display: none; }
   }
@@ -1483,38 +1645,90 @@
   </section>
 
   <!-- 6. REVIEWS -->
-  <!-- EDIT: These are the Google reviews already on the homepage. Swap in reviews from Coachella Valley locals if Phylum has favorites. -->
+  <!-- EDIT: The eight quotes are the Google reviews already on the homepage. Confirm the live average and count (5.0 from 115 in October 2026) before publish, and swap in reviews from Coachella Valley locals if Phylum has favorites. -->
   <section class="lg-reviews" id="reviews" aria-labelledby="reviews-title">
-    <div class="lg-wrap lg-reviews-grid">
-      <div class="lg-reveal">
-        <p class="lg-kicker"><span class="lg-sun" aria-hidden="true"></span>Google reviews</p>
-        <h2 class="lg-h2" id="reviews-title"><span class="lg-s">The word on</span> <span class="lg-nowrap">Palm Canyon.</span></h2>
-        <div class="lg-score">
-          <p class="lg-score-num" aria-hidden="true">5.0</p>
-          <div>
-            <span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span>
-            <p class="lg-score-count">Rated 5.0 from 115 Google reviews</p>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="lg-g" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.4v3.1C3.4 21.3 7.4 24 12 24z"/><path fill="#FBBC05" d="M5.4 14.4c-.2-.7-.4-1.4-.4-2.4s.1-1.7.4-2.4V6.5H1.4C.5 8.3 0 10.1 0 12s.5 3.7 1.4 5.5l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4C17.9 1.1 15.2 0 12 0 7.4 0 3.4 2.7 1.4 6.5l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></symbol></svg>
+    <div class="lg-wrap">
+      <div class="lg-reviews-head lg-reveal">
+        <div>
+          <p class="lg-kicker"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg>Google reviews</p>
+          <h2 class="lg-h2" id="reviews-title"><span class="lg-s">The word on</span> <span class="lg-nowrap">Palm Canyon.</span></h2>
+          <p class="lg-intro">Shoppers keep saying nice things. We keep blushing. Here are a few of our favorites, straight from Google.</p>
+        </div>
+        <div>
+          <div class="lg-gscore">
+            <svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg>
+            <p class="lg-gscore-num"><span class="lg-vh">Rated </span>5.0<span class="lg-vh"> out of 5</span> <span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span></p>
+            <p class="lg-gscore-count">from 115+ Google reviews</p>
+            <div class="lg-gscore-links">
+              <a class="lg-link" href="https://maps.app.goo.gl/4PkCwBXmNPtHUFLD7" target="_blank" rel="noopener" data-track="reviews" data-track-location="reviews">Read them all <span class="lg-btn-arrow" aria-hidden="true">↗</span></a>
+              <a class="lg-link" href="https://search.google.com/local/writereview?placeid=ChIJG0yPFW4b24AR5IJs-1PoPao" target="_blank" rel="noopener" data-track="write-review" data-track-location="reviews">Leave one <span class="lg-btn-arrow" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="lg-rv-bar">
+            <p class="lg-rv-hint">Swipe for more</p>
+            <div class="lg-rv-nav">
+              <button class="lg-arrow" type="button" data-dir="-1" aria-label="Previous reviews" aria-controls="rvTrack"><span aria-hidden="true">←</span></button>
+              <button class="lg-arrow" type="button" data-dir="1" aria-label="Next reviews" aria-controls="rvTrack"><span aria-hidden="true">→</span></button>
+            </div>
           </div>
         </div>
-        <div class="lg-reviews-links">
-          <a class="lg-link" href="https://maps.app.goo.gl/4PkCwBXmNPtHUFLD7" target="_blank" rel="noopener" data-track="reviews" data-track-location="reviews">Read them all <span class="lg-btn-arrow" aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-      <div class="lg-quotes">
-        <figure class="lg-quote lg-quote--lead lg-reveal">
-          <blockquote><p>“Those thoughtful personal touches are so rare today and made the experience feel truly special.”</p></blockquote>
-          <footer><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><cite>Inna Palissa</cite> <span>· Google review</span></footer>
-        </figure>
-        <figure class="lg-quote lg-reveal" style="--rd: 60ms">
-          <blockquote><p>“Every time I’m in Palm Springs I look forward to going to Phylum! They have unique gifts and a beautiful selection of items for the home.”</p></blockquote>
-          <footer><cite>John Davis</cite> <span>· Google review</span></footer>
-        </figure>
-        <figure class="lg-quote lg-reveal" style="--rd: 120ms">
-          <blockquote><p>“Jory is the loveliest human with the best eye! I literally went back 3x to buy something. Highly recommend this Palm Springs gem!”</p></blockquote>
-          <footer><cite>Melanie Tuazon</cite> <span>· Google review</span></footer>
-        </figure>
       </div>
     </div>
+    <ul class="lg-rv-track lg-reveal" id="rvTrack" tabindex="0" aria-label="Google reviews of PHYLUM">
+      <li class="lg-rv lg-rv--teal">
+        <div class="lg-rv-top"><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span></div>
+        <blockquote><p>“I had an absolutely outstanding experience with Phylum from beginning to end. Those thoughtful personal touches are so rare today and made the experience feel truly special.”</p></blockquote>
+        <footer><span class="lg-rv-mono" aria-hidden="true">IP</span><span><cite>Inna Palissa</cite><span class="lg-rv-src">5 stars on Google</span></span></footer>
+      </li>
+      <li class="lg-rv lg-rv--sun">
+        <div class="lg-rv-top"><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span></div>
+        <blockquote><p>“We were convinced to check out Phylum by their lovely colorful window display, and we also just love a bits &amp; bobs store. But Phylum has a lot more than bits &amp; bobs!”</p></blockquote>
+        <footer><span class="lg-rv-mono" aria-hidden="true">DH</span><span><cite>Dave Heal</cite><span class="lg-rv-src">5 stars on Google</span></span></footer>
+      </li>
+      <li class="lg-rv lg-rv--peach">
+        <div class="lg-rv-top"><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span></div>
+        <blockquote><p>“Jory is the loveliest human with the best eye! I literally went back 3x to buy something. Highly recommend this Palm Springs gem!”</p></blockquote>
+        <footer><span class="lg-rv-mono" aria-hidden="true">MT</span><span><cite>Melanie Tuazon</cite><span class="lg-rv-src">5 stars on Google</span></span></footer>
+      </li>
+      <li class="lg-rv lg-rv--aqua">
+        <div class="lg-rv-top"><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span></div>
+        <blockquote><p>“This is one of those stores that I walk into and all of my friends can tell immediately how much I love it. It was beautifully merchandised and so dang colorful.”</p></blockquote>
+        <footer><span class="lg-rv-mono" aria-hidden="true">CB</span><span><cite>Carlee Bird</cite><span class="lg-rv-src">5 stars on Google</span></span></footer>
+      </li>
+      <li class="lg-rv lg-rv--lime">
+        <div class="lg-rv-top"><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span></div>
+        <blockquote><p>“Every time I’m in Palm Springs I look forward to going to Phylum! They have unique gifts and a beautiful selection of items for the home.”</p></blockquote>
+        <footer><span class="lg-rv-mono" aria-hidden="true">JD</span><span><cite>John Davis</cite><span class="lg-rv-src">5 stars on Google</span></span></footer>
+      </li>
+      <li class="lg-rv lg-rv--yellow">
+        <div class="lg-rv-top"><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span></div>
+        <blockquote><p>“Incredible hospitality! Amazing selection of all sorts of home goods. Well curated with a vision for high quality sourcing and eye for color.”</p></blockquote>
+        <footer><span class="lg-rv-mono" aria-hidden="true">MY</span><span><cite>meesh yeesh</cite><span class="lg-rv-src">5 stars on Google</span></span></footer>
+      </li>
+      <li class="lg-rv lg-rv--peach">
+        <div class="lg-rv-top"><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span></div>
+        <blockquote><p>“A gorgeously curated store with the most delightful staff. They were incredibly kind to my kids and we can’t wait to return on our next trip to Palm Springs!”</p></blockquote>
+        <footer><span class="lg-rv-mono" aria-hidden="true">SM</span><span><cite>Stephanie MacKeen</cite><span class="lg-rv-src">5 stars on Google</span></span></footer>
+      </li>
+      <li class="lg-rv lg-rv--aqua">
+        <div class="lg-rv-top"><span class="lg-stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg><svg viewBox="0 0 20 20"><path fill="currentColor" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L10 14.8 4.6 17.7l1.2-5.9L1.4 7.7l6-.7z"/></svg></span><span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span></div>
+        <blockquote><p>“Phylum is not to be missed. I live in Northern CA and found this store last year. They have a wide variety of high-quality housewares, clothes, and kids’ items.”</p></blockquote>
+        <footer><span class="lg-rv-mono" aria-hidden="true">LD</span><span><cite>Linda Drew</cite><span class="lg-rv-src">5 stars on Google</span></span></footer>
+      </li>
+      <li class="lg-rv lg-rv--more">
+        <div>
+          <span class="lg-rv-g"><svg class="lg-g" aria-hidden="true"><use href="#lg-g"/></svg></span>
+        </div>
+        <div>
+          <p class="lg-rv-more-num">115+</p>
+          <p class="lg-rv-more-line">Google reviews and counting. Come see what the fuss is about.</p>
+        </div>
+        <div class="lg-ctas">
+          <a class="lg-btn lg-btn--sun" href="https://maps.app.goo.gl/4PkCwBXmNPtHUFLD7" target="_blank" rel="noopener" data-track="reviews" data-track-location="reviews-carousel">Read them on Google <span class="lg-btn-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </li>
+    </ul>
   </section>
 
   <!-- 7. VISIT -->
@@ -1554,16 +1768,34 @@
   </section>
 
   <!-- 8. TRADE -->
-  <section class="lg-trade" aria-labelledby="trade-title">
-    <div class="lg-wrap lg-reveal">
-      <a class="lg-trade-card" href="trade.html" data-track="trade" data-track-location="trade-strip">
-        <img src="assets/local/trade-stoneware-618.webp" srcset="assets/local/trade-stoneware-400.webp 400w, assets/local/trade-stoneware-618.webp 618w" sizes="(max-width: 560px) 90vw, 128px" width="618" height="618" alt="" loading="lazy" decoding="async">
-        <div>
-          <h2 id="trade-title">Designing a desert house?</h2>
-          <p>Interior designers, architects, stylists, and stagers get 15% off plus PHYLUM Rewards with our Trade Program.</p>
+  <!-- EDIT: The house photo is the Fair Circle shot from the Desert Dreaming event page. Confirm PHYLUM can use it here, or swap in a desert interior styled with PHYLUM pieces. -->
+  <section class="lg-trade" id="trade" aria-labelledby="trade-title">
+    <div class="lg-wrap lg-trade-grid">
+      <div class="lg-trade-art lg-reveal">
+        <figure class="lg-trade-photo"><img src="assets/local/trade-desert-house-1024.webp" srcset="assets/local/trade-desert-house-640.webp 640w, assets/local/trade-desert-house-1024.webp 1024w" sizes="(min-width: 1024px) 56vw, 92vw" width="1024" height="684" alt="A Palmer &amp; Krisel butterfly-roof house and pool on Fair Circle, Palm Springs, at golden hour." loading="lazy" decoding="async"></figure>
+        <figure class="lg-trade-inset"><img src="assets/local/trade-stoneware-618.webp" srcset="assets/local/trade-stoneware-400.webp 400w, assets/local/trade-stoneware-618.webp 618w" sizes="240px" width="618" height="618" alt="Striped stoneware bowls stacked on a sunny wooden shelf." loading="lazy" decoding="async"></figure>
+        <p class="lg-trade-sticker" aria-hidden="true"><strong>15%</strong>off for<br>the trade</p>
+      </div>
+      <div class="lg-trade-copy lg-reveal" style="--rd: 80ms">
+        <p class="lg-kicker"><span class="lg-sun" aria-hidden="true"></span>PHYLUM Trade Program</p>
+        <h2 class="lg-h2" id="trade-title"><span class="lg-s">Designing a</span> desert house?</h2>
+        <p class="lg-intro">You bring the floor plan. We bring the finishing pieces your clients notice first. Joining is the easiest yes of the whole project.</p>
+        <ul class="lg-trade-perks">
+          <li><span><strong>15% off qualifying purchases</strong>Approved members save on every qualifying order.</span></li>
+          <li><span><strong>PHYLUM Rewards on top</strong>Points stack with the discount. Yes, both.</span></li>
+          <li><span><strong>Color and texture, edited</strong>Unique, high-quality pieces at a more accessible price.</span></li>
+        </ul>
+        <ul class="lg-trade-roles" aria-label="Who it’s for">
+          <li>Interior designers</li>
+          <li>Architects</li>
+          <li>Stylists</li>
+          <li>Stagers</li>
+        </ul>
+        <div class="lg-ctas">
+          <a class="lg-btn" href="trade.html#apply" data-track="trade" data-track-location="trade-feature" data-track-label="apply">Apply for trade <span class="lg-btn-arrow" aria-hidden="true">→</span></a>
+          <a class="lg-link" href="trade.html" data-track="trade" data-track-location="trade-feature" data-track-label="learn">See how it works <span class="lg-btn-arrow" aria-hidden="true">→</span></a>
         </div>
-        <span class="lg-link">See the Trade Program <span class="lg-btn-arrow" aria-hidden="true">→</span></span>
-      </a>
+      </div>
     </div>
   </section>
 
@@ -1659,6 +1891,31 @@
       toggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
       toggle.setAttribute('aria-label', paused ? 'Play the scrolling list' : 'Pause the scrolling list');
     });
+  }
+
+  var rvTrack = document.getElementById('rvTrack');
+  if (rvTrack) {
+    var rvButtons = document.querySelectorAll('.lg-arrow[aria-controls="rvTrack"]');
+    var rvReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var rvStep = function () {
+      var card = rvTrack.querySelector('.lg-rv');
+      var gap = parseFloat(getComputedStyle(rvTrack).columnGap) || 0;
+      return card ? card.offsetWidth + gap : rvTrack.clientWidth;
+    };
+    var rvSync = function () {
+      var max = rvTrack.scrollWidth - rvTrack.clientWidth - 2;
+      rvButtons.forEach(function (button) {
+        button.disabled = Number(button.dataset.dir) < 0 ? rvTrack.scrollLeft <= 2 : rvTrack.scrollLeft >= max;
+      });
+    };
+    rvButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        rvTrack.scrollBy({ left: Number(button.dataset.dir) * rvStep(), behavior: rvReduce.matches ? 'auto' : 'smooth' });
+      });
+    });
+    rvTrack.addEventListener('scroll', rvSync, { passive: true });
+    window.addEventListener('resize', rvSync);
+    rvSync();
   }
 
   /* Mobile dock: shows once the hero buttons scroll away, hides at the close so actions never double up. */
