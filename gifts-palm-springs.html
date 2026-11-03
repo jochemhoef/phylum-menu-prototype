@@ -52,6 +52,7 @@
     --paper: #F1EEE4;
     --paper-deep: #E8E3D5;
     --paper-light: #FBFAF6;
+    --espresso: #3B3125;
     --ink: #24211C;
     --ink-soft: #5A554A;
     --line: #CFC8B6;
@@ -421,7 +422,7 @@
   /* =========================================================
      2. TICKER
      ========================================================= */
-  .lg-ticker { background: var(--lime); color: var(--ink); overflow: hidden; }
+  .lg-ticker { background: var(--espresso); color: var(--yellow); overflow: hidden; }
   .lg-ticker-inner { display: flex; align-items: center; min-height: 72px; }
   .lg-ticker-label {
     display: flex;
@@ -429,7 +430,7 @@
     gap: 10px;
     flex-shrink: 0;
     padding: 0 clamp(14px, 2vw, 28px) 0 max(var(--gutter), calc((100vw - var(--max)) / 2));
-    border-right: 1.5px solid rgba(36, 33, 28, 0.16);
+    border-right: 1.5px solid rgba(242, 169, 0, 0.3);
     font-family: var(--sans);
     font-weight: 500;
     font-size: clamp(13px, 1.1vw, 16px);
@@ -440,14 +441,15 @@
     place-items: center;
     width: 44px;
     height: 44px;
-    border: 1.5px solid var(--ink);
+    border: 1.5px solid currentColor;
     border-radius: 50%;
     background: transparent;
-    color: var(--ink);
+    color: inherit;
     cursor: pointer;
-    transition: background-color var(--fast) var(--ease);
+    transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
   }
-  .lg-ticker-toggle:hover { background: var(--paper); }
+  .lg-ticker-toggle:hover { background: var(--yellow); color: var(--espresso); }
+  .lg-ticker-toggle:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
   .lg-ticker-toggle svg { width: 14px; height: 14px; }
   .lg-ticker-toggle .i-play { display: none; }
   .lg-ticker.is-paused .lg-ticker-toggle .i-play { display: block; }
@@ -474,7 +476,7 @@
     letter-spacing: -0.02em;
     white-space: nowrap;
   }
-  .lg-ticker-row .lg-sun { width: 0.7em; color: var(--clay); }
+  .lg-ticker-row .lg-sun { width: 0.7em; color: var(--yellow); }
   @keyframes lg-marquee { to { transform: translateX(-50%); } }
 
   /* =========================================================
