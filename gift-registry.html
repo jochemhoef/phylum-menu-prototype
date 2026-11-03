@@ -123,29 +123,6 @@
     margin: 22px 0 0;
   }
 
-  /* Highlighter swipe behind a word. Grows when its section reveals. */
-  .gr-hl {
-    position: relative;
-    z-index: 0;
-    white-space: nowrap;
-  }
-  .gr-hl::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    left: -0.06em;
-    right: -0.08em;
-    bottom: 0.06em;
-    height: 0.42em;
-    border-radius: 0.2em;
-    background: var(--hl, var(--lime));
-    transform-origin: 0 50%;
-    rotate: -1.5deg;
-  }
-  .js-motion .gr-hl::before { transform: scaleX(0); transition: transform 0.9s var(--ease) 0.35s; }
-  .js-motion .is-in .gr-hl::before,
-  .js-motion .gr-hl.is-in::before { transform: scaleX(1); }
-
   @keyframes gr-spin { to { rotate: 360deg; } }
   @keyframes gr-spin-rev { to { rotate: -360deg; } }
 
@@ -174,7 +151,6 @@
     line-height: 1;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    rotate: -2deg;
   }
   .gr-kicker .gr-sun { width: 15px; animation: gr-spin 12s linear infinite; }
 
@@ -251,21 +227,6 @@
       var(--paper);
     overflow: hidden;
   }
-  .gr-hero-sun {
-    position: absolute;
-    z-index: -3;
-    left: 50%;
-    top: 52%;
-    width: min(1120px, 96vw);
-    aspect-ratio: 1;
-    translate: -50% -50%;
-    color: rgba(242, 169, 0, 0.36);
-    pointer-events: none;
-  }
-  .gr-hero-sun .gr-sun { width: 100%; display: block; animation: gr-spin 150s linear infinite; }
-  .js-motion .gr-hero-sun { scale: 0.6; opacity: 0; transition: scale 2.2s var(--ease), opacity 1.4s ease; }
-  .is-ready .gr-hero-sun { scale: 1; opacity: 1; }
-
   .gr-hero-copy {
     position: relative;
     z-index: 2;
@@ -279,6 +240,9 @@
   }
   .gr-h1-a {
     display: block;
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
     font-family: var(--sans);
     font-weight: 500;
     font-size: clamp(30px, 3.9vw, 66px);
@@ -289,29 +253,11 @@
   .gr-h1-b {
     position: relative;
     display: inline-block;
-    font-size: clamp(60px, 7.8vw, 140px);
-    padding-bottom: 0.1em;
+    font-size: clamp(64px, 8.8vw, 156px);
+    letter-spacing: -0.068em;
+    word-spacing: -0.02em;
+    padding-right: 0.06em;
   }
-  .gr-ribbon {
-    position: absolute;
-    left: -2%;
-    width: 104%;
-    bottom: -0.12em;
-    height: 0.34em;
-    overflow: visible;
-    pointer-events: none;
-  }
-  .gr-ribbon path {
-    fill: none;
-    stroke: var(--clay);
-    stroke-width: 5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
-  }
-  .js-motion .gr-ribbon path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--ease) 1s; }
-  .is-ready .gr-ribbon path { stroke-dashoffset: 0; }
-
   /* Word-by-word rise */
   .gr-w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.04em 0.03em 0.14em; margin: -0.04em -0.03em -0.14em; }
   .gr-w > span { display: inline-block; }
@@ -402,60 +348,8 @@
   .gr-pic--2 { --w: clamp(132px, 12vw, 212px); --r: 6deg; --ar: 1; left: 7%; bottom: 7%; --fx: 20vw; --fy: -12vh; --d: 0.32s; --bd: -3s; --tape: rgba(255, 191, 172, 0.85); --tape-r: 5deg; }
   .gr-pic--3 { --w: clamp(100px, 8vw, 146px); --r: 10deg; --ar: 1.25; left: 15.5%; top: 43%; --fx: 14vw; --fy: 0px; --d: 0.44s; --bd: -5s; --tape: rgba(242, 169, 0, 0.6); }
   .gr-pic--4 { --w: clamp(150px, 13.5vw, 236px); --r: 6deg; --ar: 4 / 5; right: 3%; top: 7%; --fx: -22vw; --fy: 18vh; --d: 0.26s; --bd: -2s; --tape: rgba(255, 191, 172, 0.85); --tape-r: 3deg; }
-  .gr-pic--5 { --w: clamp(100px, 8vw, 146px); --r: -9deg; --ar: 1; right: 15%; top: 45%; --fx: -14vw; --fy: 0px; --d: 0.5s; --bd: -4s; }
+  .gr-pic--5 { --w: clamp(100px, 8vw, 146px); --r: -9deg; --ar: 1; right: 15.5%; top: 38%; z-index: 2; --fx: -14vw; --fy: 0px; --d: 0.5s; --bd: -4s; }
   .gr-pic--6 { --w: clamp(136px, 12.5vw, 220px); --r: -4deg; --ar: 4 / 4.6; right: 6.5%; bottom: 6%; --fx: -20vw; --fy: -12vh; --d: 0.38s; --bd: -6s; --tape: rgba(242, 169, 0, 0.6); --tape-r: -6deg; }
-
-  /* Stickers */
-  .gr-sticker {
-    position: absolute;
-    z-index: 3;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 1;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    box-shadow: 0 10px 22px -14px rgba(36, 33, 28, 0.55);
-    rotate: var(--r);
-    pointer-events: auto;
-    cursor: default;
-    transition: rotate 0.5s var(--spring), scale 0.5s var(--spring);
-  }
-  .gr-sticker:hover { rotate: calc(var(--r) * -1); scale: 1.08; }
-  .gr-sticker--a { --r: -9deg; background: var(--lime); color: var(--ink); left: -2%; top: 15%; }
-  .gr-sticker--b { --r: 7deg; background: var(--clay); color: var(--paper); right: -3%; top: 22%; }
-  .gr-sticker--a::before {
-    content: "";
-    width: 15px;
-    height: 15px;
-    background:
-      linear-gradient(45deg, transparent 43%, currentColor 43% 57%, transparent 57%),
-      linear-gradient(-45deg, transparent 43%, currentColor 43% 57%, transparent 57%);
-  }
-  .js-motion .gr-sticker { opacity: 0; scale: 0.2; transition: opacity 0.3s ease var(--d), scale 0.8s var(--spring) var(--d), rotate 0.5s var(--spring); }
-  .is-ready .gr-sticker { opacity: 1; scale: 1; }
-  .is-ready .gr-sticker:hover { scale: 1.08; transition-delay: 0s; }
-
-  .gr-badge {
-    position: absolute;
-    z-index: 3;
-    left: 21%;
-    bottom: 8%;
-    width: clamp(104px, 8.6vw, 136px);
-    aspect-ratio: 1;
-    color: var(--ink);
-  }
-  .gr-badge svg { width: 100%; height: 100%; display: block; animation: gr-spin 22s linear infinite; overflow: visible; }
-  .gr-badge text { font-family: var(--sans); font-weight: 500; font-size: 10.5px; letter-spacing: 0.2em; fill: var(--paper); }
-  .gr-badge .gr-sun { position: absolute; inset: 31%; width: auto; color: var(--yellow); animation: gr-spin-rev 9s linear infinite; }
-  .js-motion .gr-badge { opacity: 0; scale: 0.3; rotate: -90deg; transition: opacity 0.4s ease 1.2s, scale 1s var(--spring) 1.2s, rotate 1.2s var(--ease) 1.2s; }
-  .is-ready .gr-badge { opacity: 1; scale: 1; rotate: 0deg; }
 
   .gr-scroll {
     position: absolute;
@@ -552,39 +446,93 @@
     margin-top: clamp(28px, 3vw, 48px);
     padding-top: 30px;
   }
-  .gr-garland {
+  .gr-garland,
+  .gr-flags {
     position: absolute;
-    left: 0;
     top: 0;
-    width: 100%;
-    height: 140px;
+    left: var(--gl, 0px);
+    width: var(--gw, 100%);
     pointer-events: none;
-    overflow: visible;
   }
-  .gr-garland path { fill: none; stroke: var(--ink); stroke-width: 1.5; }
-  .js-motion .gr-garland path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 1.6s var(--ease); }
+  .gr-garland { height: 160px; overflow: visible; }
+  .gr-garland path { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+  .gr-garland circle { fill: var(--ink); }
+  .js-motion .gr-garland path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 1.8s var(--ease); }
   .js-motion .is-in .gr-garland path { stroke-dashoffset: 0; }
+  .js-motion .gr-garland circle { opacity: 0; transition: opacity 0.4s ease 1.2s; }
+  .js-motion .is-in .gr-garland circle { opacity: 1; }
   .gr-flag {
     position: absolute;
-    width: 26px;
-    height: 32px;
-    margin-left: -13px;
-    background: var(--c);
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    width: var(--fw);
+    height: var(--fh);
+    margin-left: calc(var(--fw) / -2);
     transform-origin: 50% 0;
     rotate: var(--a, 0deg);
-    animation: gr-flutter 3.2s ease-in-out infinite;
+  }
+  .gr-flag i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 0;
+    animation: gr-flutter 3.4s ease-in-out infinite;
     animation-delay: var(--fd, 0s);
   }
-  @keyframes gr-flutter {
-    0%, 100% { transform: rotate(-5deg); }
-    50% { transform: rotate(5deg); }
+  /* Fabric flags: a folded hem and a stitch line across the top. */
+  .gr-flag--pennant i,
+  .gr-flag--swallow i {
+    background:
+      linear-gradient(rgba(36, 33, 28, 0.14) 0 1px, transparent 1px) 0 5px / 100% 100% no-repeat,
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.75) 0 3px, transparent 3px 6px) 0 8px / 100% 1px no-repeat,
+      var(--c);
   }
-  .js-motion .gr-flag { scale: 1 0; transition: scale 0.6s var(--spring) var(--fdl, 0s); }
+  .gr-flag--pennant { --fw: 30px; --fh: 40px; }
+  .gr-flag--pennant i { clip-path: polygon(0 0, 100% 0, 50% 100%); }
+  .gr-flag--swallow { --fw: 24px; --fh: 40px; }
+  .gr-flag--swallow i { clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%); }
+  /* The PHYLUM sun, hung on a short drop. */
+  .gr-flag--sun { --fw: 34px; --fh: 44px; }
+  .gr-flag--sun::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1.5px;
+    height: 10px;
+    margin-left: -0.75px;
+    background: var(--ink);
+  }
+  .gr-flag--sun i {
+    position: absolute;
+    top: 10px;
+    height: 34px;
+    background: repeating-conic-gradient(var(--c) 0 9deg, transparent 9deg 30deg);
+    -webkit-mask: radial-gradient(circle, #000 0 27%, transparent 28% 37%, #000 38% 49%, transparent 50%);
+            mask: radial-gradient(circle, #000 0 27%, transparent 28% 37%, #000 38% 49%, transparent 50%);
+    transform-origin: 50% 0;
+    animation-name: gr-flutter-sun;
+    animation-duration: 6s;
+  }
+  .gr-flag--sun i::after {
+    content: "";
+    position: absolute;
+    inset: 22%;
+    border-radius: 50%;
+    background: var(--c);
+  }
+  @keyframes gr-flutter {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
+  }
+  @keyframes gr-flutter-sun {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+  }
+  .js-motion .gr-flag { scale: 1 0; transition: scale 0.7s var(--spring) var(--fdl, 0s); }
   .js-motion .is-in .gr-flag { scale: 1 1; }
 
   .gr-tags {
     position: relative;
+    padding-bottom: 64px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -789,18 +737,6 @@
     background: var(--stage);
     transition: background-color 0.8s var(--ease);
   }
-  .gr-stage-sun {
-    position: absolute;
-    z-index: -1;
-    right: -14%;
-    top: -38%;
-    width: min(760px, 70vw);
-    color: var(--accent);
-    opacity: 0.14;
-    transition: color 0.8s var(--ease), rotate 1.2s var(--ease);
-    rotate: var(--sun-r, 0deg);
-  }
-  .gr-stage-sun .gr-sun { width: 100%; display: block; animation: gr-spin 120s linear infinite; }
   .gr-panel {
     display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -848,7 +784,6 @@
     background: #FFFDF8;
     color: var(--ink);
     box-shadow: 0 30px 50px -28px rgba(36, 33, 28, 0.55), 0 1px 0 rgba(36, 33, 28, 0.04);
-    rotate: -2.5deg;
   }
   .gr-list-label {
     display: inline-block;
@@ -931,7 +866,7 @@
   .js-motion .gr-panel.is-reset .gr-list-bar span { transform: scaleX(0); }
   @keyframes gr-in-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes gr-photo-in { from { opacity: 0; clip-path: inset(12% 12% 12% 12% round 22px); scale: 1.08; } to { opacity: 1; clip-path: inset(0 0 0 0 round 0px); scale: 1; } }
-  @keyframes gr-list-in { from { opacity: 0; transform: translate(-30px, 40px) rotate(-8deg); } to { opacity: 1; transform: none; } }
+  @keyframes gr-list-in { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
 
   /* =========================================================
      5. HOW IT WORKS: the unwrap
@@ -991,28 +926,14 @@
     transform: translateY(var(--sy, 0%)) scale(var(--ss, 0.6));
   }
   .gr-box-sunwrap .gr-sun { width: 100%; display: block; animation: gr-spin 16s linear infinite; }
-  .gr-guest {
-    position: absolute;
-    z-index: 2;
-    left: 50%;
-    top: 52%;
-    padding: 7px 12px;
-    border-radius: 999px 999px 999px 4px;
-    background: var(--ink);
-    color: var(--paper);
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 12.5px;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.2);
-  }
-  .gr-guest:nth-child(even) { background: var(--clay); }
-  .gr-guest:nth-child(3n) { background: #fff; color: var(--ink); }
   /* Static (no scrub) final state */
   .gr-how:not(.is-scrub) .gr-box-lid { transform: translate(-6%, -34%) rotate(-14deg); }
   .gr-how:not(.is-scrub) .gr-box-bow,
-  .gr-how:not(.is-scrub) .gr-box-tag { opacity: 0; }
+  .gr-how:not(.is-scrub) .gr-box-tag,
+  .gr-how:not(.is-scrub) .gr-gts { opacity: 0; }
+  .gr-box .gr-gts, .gr-box .gr-gts g { transform-box: view-box; transform-origin: 0 0; }
+  .gr-box .gr-gt text { font-size: 14.5px; letter-spacing: 0.01em; }
+  .gr-gt-line { fill: none; stroke: var(--ink); stroke-width: 1.3; }
   .gr-how:not(.is-scrub) .gr-box-sunwrap { --sy: -78%; --ss: 1.05; }
 
   .gr-how.is-scrub { height: 330svh; }
@@ -1231,8 +1152,8 @@
   .gr-budget li:nth-child(3) a { --bc: var(--yellow); }
   .gr-budget li:nth-child(4) a { --bc: var(--clay); }
   .gr-budget li:nth-child(4) a:hover, .gr-budget li:nth-child(4) a:focus-visible { color: var(--paper); }
-  .gr-budget strong { font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 2.8vw, 44px); line-height: 1; letter-spacing: -0.03em; }
-  .gr-budget span { font-family: var(--sans); font-weight: 500; font-size: 14px; }
+  .gr-budget strong { font-family: var(--sans); font-weight: 500; font-size: clamp(28px, 2.6vw, 40px); line-height: 1; letter-spacing: -0.04em; }
+  .gr-budget span { font-family: var(--serif); font-weight: 300; font-size: clamp(17px, 1.3vw, 19px); letter-spacing: -0.01em; }
   .gr-shelf-note { margin: 22px 0 0; font-size: 13.5px; color: var(--ink-soft); }
 
   /* =========================================================
@@ -1465,7 +1386,7 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: var(--ink);
+    background: #535538;
     color: var(--paper);
     padding: clamp(96px, 11vw, 168px) 0 0;
     text-align: center;
@@ -1478,7 +1399,7 @@
   .gr-ch { display: inline-block; }
   .js-motion .gr-ch { opacity: 0; transform: translateY(0.5em) rotate(12deg); transition: opacity 0.5s ease, transform 0.9s var(--spring); transition-delay: calc(var(--i) * 32ms); }
   .js-motion .is-in .gr-ch { opacity: 1; transform: none; }
-  .gr-close-copy > p:not(.gr-kicker) { margin: 0 auto 34px; max-width: 32em; font-family: var(--sans); font-weight: 500; font-size: clamp(16px, 1.3vw, 19px); color: rgba(241, 238, 228, 0.86); }
+  .gr-close-copy > p:not(.gr-kicker) { margin: 0 auto 34px; max-width: 32em; font-family: var(--sans); font-weight: 500; font-size: clamp(16px, 1.3vw, 19px); color: rgba(241, 238, 228, 0.92); }
   .gr-close .gr-ctas { justify-content: center; }
   .gr-close .gr-btn:focus-visible, .gr-close a:focus-visible { outline-color: var(--lime); }
   .gr-close-alt { display: inline-block; margin-top: 22px; font-family: var(--sans); font-weight: 500; font-size: 14px; color: var(--paper); text-underline-offset: 4px; }
@@ -1487,7 +1408,7 @@
     margin-top: clamp(72px, 8vw, 120px);
     padding: clamp(10px, 1.4vw, 22px) 0 clamp(16px, 2vw, 30px);
     overflow: hidden;
-    border-top: 1px solid rgba(241, 238, 228, 0.14);
+    border-top: 1px solid rgba(241, 238, 228, 0.2);
   }
   .gr-cheers-track { display: flex; width: max-content; animation: gr-marquee 38s linear infinite; }
   .gr-cheers-row { display: flex; align-items: center; flex-shrink: 0; margin: 0; padding: 0; list-style: none; }
@@ -1536,9 +1457,6 @@
   @media (max-width: 1180px) {
     .gr-hero-copy { width: min(760px, 58vw); }
     .gr-pic--3, .gr-pic--5 { display: none; }
-    .gr-badge { left: 6%; bottom: auto; top: 46%; }
-    .gr-sticker--a { left: -1%; top: -3%; }
-    .gr-sticker--b { right: -1%; top: 20%; }
     .gr-budget { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .gr-postcard { aspect-ratio: auto; min-height: 320px; }
   }
@@ -1551,7 +1469,6 @@
       padding-bottom: 84px;
       --collage-h: clamp(250px, 66vw, 420px);
     }
-    .gr-hero-sun { top: 30%; width: 150vw; }
     .gr-hero-copy { width: 100%; max-width: 640px; }
     .gr-pic--1 { --w: 33vw; left: 4%; top: 22px; }
     .gr-pic--4 { --w: 32vw; right: 4%; top: 30px; left: auto; }
@@ -1560,18 +1477,15 @@
     .gr-pic-float { padding: 6px 6px 22px; }
     .gr-pic figcaption { font-size: 8.5px; bottom: 7px; letter-spacing: 0.12em; }
     .gr-pic-float::before { width: 46px; height: 15px; top: -7px; }
-    .gr-badge { left: auto; right: 5%; top: calc(var(--collage-h) - 58px); width: 92px; }
-    .gr-sticker { font-size: 11px; padding: 8px 12px; }
-    .gr-sticker--a { left: 4%; top: -70px; }
-    .gr-sticker--b { right: auto; left: 54%; top: calc(var(--collage-h) * -0.92); }
     .gr-scroll { display: none; }
 
     .gr-tags { flex-direction: column; align-items: center; gap: 56px; }
-    .gr-hang-pos { width: min(440px, 100%); transform: none !important; }
-    .gr-garland { display: none; }
+    .gr-tags { gap: 96px; }
+    .gr-hang-pos { width: min(440px, 100%); }
     .gr-pin { display: block; }
+    .gr-hang-pos:first-child .gr-pin { display: none; }
     .gr-hang { --string: 40px; }
-    .gr-tag-stage { padding-top: 12px; }
+    .gr-tag-stage { padding-top: 24px; }
 
     .gr-panel { grid-template-columns: 1fr; }
     .gr-scene { order: -1; padding: 0; }
@@ -1605,8 +1519,8 @@
     .gr-pc-msg { padding-right: 0; padding-top: 64px; }
     .gr-pc-addr { padding-left: 0; margin-top: 18px; }
     .gr-budget a { padding: 18px 16px; }
-    .gr-budget strong { font-size: 28px; }
-    .gr-budget span { font-size: 13px; }
+    .gr-budget strong { font-size: 26px; }
+    .gr-budget span { font-size: 16px; }
     .gr-chat { border-radius: 22px; }
     .gr-chat-body { padding: 16px 12px 20px; }
     .gr-bubble { max-width: 90%; font-size: 15px; padding: 12px 15px; }
@@ -1619,7 +1533,7 @@
     .gr-ctas { flex-direction: column; align-items: stretch; }
     .gr-btn { width: 100%; padding: 14px 18px; font-size: 12.5px; letter-spacing: 0.1em; }
     .gr-tag .gr-btn { width: auto; }
-    .gr-h1-b { font-size: clamp(50px, 15.4vw, 72px); }
+    .gr-h1-b { font-size: clamp(56px, 17vw, 80px); }
     .gr-h1-a { font-size: clamp(26px, 8vw, 36px); }
     .gr-tag h3 { font-size: 58px; }
     .gr-tag-stub strong { font-size: 18px; }
@@ -1729,8 +1643,6 @@
 
   <!-- 1. HERO -->
   <section class="gr-hero" aria-labelledby="registry-title">
-    <div class="gr-hero-sun" aria-hidden="true"><span class="gr-sun"></span></div>
-
     <div class="gr-pics" aria-hidden="true">
       <figure class="gr-pic gr-pic--1" data-depth="0.9"><span class="gr-pic-in"><span class="gr-pic-float"><img src="assets/registry/hero-gift-wrap.jpg" width="560" height="662" alt="" fetchpriority="high" decoding="async"><figcaption>Wrapped &amp; ready</figcaption></span></span></figure>
       <figure class="gr-pic gr-pic--2" data-depth="0.55"><span class="gr-pic-in"><span class="gr-pic-float"><img src="assets/registry/hero-barware.jpg" width="520" height="520" alt="" decoding="async"><figcaption>Cheers kit</figcaption></span></span></figure>
@@ -1744,24 +1656,13 @@
       <p class="gr-kicker gr-hero-fade" style="--d: 0.05s"><span class="gr-sun" aria-hidden="true"></span>The PHYLUM Gift Registry</p>
       <h1 id="registry-title">
         <span class="gr-h1-a"><span class="gr-w" style="--i:0"><span>Big</span></span> <span class="gr-w" style="--i:1"><span>news</span></span> <span class="gr-w" style="--i:2"><span>deserves</span></span></span>
-        <span class="gr-h1-b"><span class="gr-w" style="--i:3"><span>better</span></span> <span class="gr-w" style="--i:4"><span>gifts.</span></span><svg class="gr-ribbon" viewBox="0 0 700 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 40 C 90 22, 170 52, 260 34 S 400 14, 448 34 C 470 44, 488 30, 478 18 C 468 6, 444 18, 456 34 C 470 52, 540 50, 600 34 S 680 22, 694 28"/></svg></span>
+        <span class="gr-h1-b"><span class="gr-w" style="--i:3"><span>better</span></span> <span class="gr-w" style="--i:4"><span>gifts.</span></span></span>
       </h1>
       <p class="gr-lede gr-hero-fade" style="--d: 0.65s">Getting hitched, getting keys, or getting asked “so what do you want?” one too many times. Build a list of things you’ll actually keep, from glazed ceramics to the really good linens, and let the people who love you handle the rest.</p>
       <div class="gr-ctas gr-hero-fade" style="--d: 0.8s">
         <a class="gr-btn gr-btn--sun" data-magnet data-pop href="https://shopphylum.com/apps/giftregistry/create">Start a registry <span class="gr-btn-arrow" aria-hidden="true">→</span></a>
         <a class="gr-btn gr-btn--ghost" data-magnet href="#find">Find someone’s list</a>
       </div>
-      <span class="gr-sticker gr-sticker--a" style="--d: 1.05s" aria-hidden="true">No toasters</span>
-      <span class="gr-sticker gr-sticker--b" style="--d: 1.2s" aria-hidden="true">RSVP: yes!</span>
-    </div>
-
-    <div class="gr-badge" aria-hidden="true">
-      <svg viewBox="0 0 120 120">
-        <defs><path id="gr-circ" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs>
-        <circle cx="60" cy="60" r="59" fill="#24211C"/>
-        <text><textPath href="#gr-circ" textLength="280" lengthAdjust="spacing">FREE TO MAKE ✦ FREE TO SHARE ✦ </textPath></text>
-      </svg>
-      <span class="gr-sun"></span>
     </div>
 
     <a class="gr-scroll" href="#lists">The good stuff<i aria-hidden="true"></i></a>
@@ -1799,12 +1700,12 @@
   <section class="gr-lists" id="lists" aria-labelledby="lists-title">
     <div class="gr-wrap gr-lists-head gr-rise">
       <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Two ways to list</p>
-      <h2 class="gr-h2" id="lists-title"><span class="gr-s">One to share.</span> One to <span class="gr-hl" style="--hl: var(--lime)">keep</span>.</h2>
+      <h2 class="gr-h2" id="lists-title"><span class="gr-s">One to share.</span> One to keep.</h2>
       <p class="gr-intro">Sharing is caring. Keeping it to yourself is also caring, just for you.</p>
     </div>
 
     <div class="gr-wrap gr-tag-stage" data-tags>
-      <svg class="gr-garland" aria-hidden="true"><path d=""/></svg>
+      <svg class="gr-garland" aria-hidden="true"><path d=""/><g class="gr-knots"></g></svg>
       <div class="gr-flags" aria-hidden="true"></div>
       <div class="gr-tags">
         <div class="gr-hang-pos">
@@ -1861,8 +1762,6 @@
       </div>
 
       <div class="gr-stage gr-pop">
-        <div class="gr-stage-sun" aria-hidden="true"><span class="gr-sun"></span></div>
-
         <div class="gr-panel" role="tabpanel" id="panel-wedding" aria-labelledby="tab-wedding" tabindex="0">
           <div class="gr-panel-text">
             <p class="gr-panel-tag">For the newlyweds</p>
@@ -2006,6 +1905,20 @@
             </defs>
             <ellipse class="gr-box-shadow" cx="200" cy="410" rx="150" ry="13" fill="rgba(36,33,28,0.16)"/>
             <rect x="74" y="198" width="252" height="16" rx="3" fill="#9E4320"/>
+            <g class="gr-gts">
+              <path class="gr-gt-line" d=""/>
+              <path class="gr-gt-line" d=""/>
+              <path class="gr-gt-line" d=""/>
+              <path class="gr-gt-line" d=""/>
+              <path class="gr-gt-line" d=""/>
+              <path class="gr-gt-line" d=""/>
+              <g class="gr-gt" data-x="-20" data-y="70" data-r="-6" opacity="0"><path class="gr-gt-shape" fill="#F0FFAE" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Mom</text></g>
+              <g class="gr-gt" data-x="300" data-y="40" data-r="5" opacity="0"><path class="gr-gt-shape" fill="#C05A28" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #F1EEE4">The Kims</text></g>
+              <g class="gr-gt" data-x="-74" data-y="204" data-r="-4" opacity="0"><path class="gr-gt-shape" fill="#F1EEE4" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Aunt Jo</text></g>
+              <g class="gr-gt" data-x="392" data-y="272" data-r="6" opacity="0"><path class="gr-gt-shape" fill="#f2a900" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Bestie</text></g>
+              <g class="gr-gt" data-x="-40" data-y="334" data-r="4" opacity="0"><path class="gr-gt-shape" fill="#FFBFAC" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#24211C"/><text x="25" y="23.2" style="fill: #24211C">Kai</text></g>
+              <g class="gr-gt" data-x="354" data-y="382" data-r="-5" opacity="0"><path class="gr-gt-shape" fill="#24211C" stroke="#24211C" stroke-width="1.4" d=""/><circle cx="13" cy="18" r="3.5" fill="#F1EEE4"/><text x="25" y="23.2" style="fill: #F0FFAE">Your boss?</text></g>
+            </g>
             <g class="gr-box-body">
               <rect x="70" y="206" width="260" height="196" rx="8" fill="#FFBFAC"/>
               <rect x="70" y="206" width="260" height="196" rx="8" fill="url(#gr-wrapdots)"/>
@@ -2039,14 +1952,6 @@
               </g>
             </g>
           </svg>
-          <div class="gr-guests">
-            <span class="gr-guest" data-x="-118" data-y="-150">Mom</span>
-            <span class="gr-guest" data-x="120" data-y="-170">The Kims</span>
-            <span class="gr-guest" data-x="-160" data-y="-40">Aunt Jo</span>
-            <span class="gr-guest" data-x="168" data-y="-60">Bestie</span>
-            <span class="gr-guest" data-x="-130" data-y="80">Kai</span>
-            <span class="gr-guest" data-x="140" data-y="70">Your boss?</span>
-          </div>
         </div>
       </div>
     </div>
@@ -2057,7 +1962,7 @@
     <div class="gr-wrap gr-shelf-head gr-rise">
       <div>
         <p class="gr-kicker"><span class="gr-sun" aria-hidden="true"></span>Gift ideas</p>
-        <h2 class="gr-h2" id="ideas-title"><span class="gr-s">Need a nudge?</span> <span class="gr-hl" style="--hl: var(--peach)">Unwrap</span> a few.</h2>
+        <h2 class="gr-h2" id="ideas-title"><span class="gr-s">Need a nudge?</span> Unwrap a few.</h2>
         <p class="gr-intro">Crowd-pleasers from the shop floor in Palm Springs. Anything with an Add to Registry button can join your list.</p>
       </div>
       <div class="gr-shelf-nav">
@@ -2428,6 +2333,24 @@
     setTimeout(ready, 2600);
   } else ready();
 
+  /* ---------- Hero: lead line matches the width of the serif line ---------- */
+  (function () {
+    var a = document.querySelector('.gr-h1-a'), b = document.querySelector('.gr-h1-b');
+    if (!a || !b) return;
+    function fit() {
+      a.style.fontSize = '';
+      for (var k = 0; k < 2; k++) {
+        var aw = a.getBoundingClientRect().width, bw = b.getBoundingClientRect().width;
+        if (!aw || !bw) return;
+        var fs = parseFloat(getComputedStyle(a).fontSize);
+        a.style.fontSize = (fs * bw / aw).toFixed(2) + 'px';
+      }
+    }
+    fit();
+    window.addEventListener('resize', fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  })();
+
   /* ---------- Reveals ---------- */
   var revealIO = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
@@ -2564,43 +2487,78 @@
     var positions = Array.prototype.slice.call(stage.querySelectorAll('.gr-hang-pos'));
     var hangs = positions.map(function (p) { return p.querySelector('.gr-hang'); });
     var wide = window.matchMedia('(min-width: 901px)');
-    var flagColors = ['#f2a900', '#F0FFAE', '#C05A28', '#F1EEE4', '#7C8360'];
+    var tagsEl = stage.querySelector('.gr-tags');
+    var knots = svg.querySelector('.gr-knots');
+    var FABRIC = ['#f2a900', '#F0FFAE', '#C05A28', '#F1EEE4', '#5F6748', '#F0FFAE', '#f2a900', '#F1EEE4'];
+    var SUNS = ['#C05A28', '#f2a900'];
+    var SEQ = ['pennant', 'swallow', 'pennant', 'sun', 'swallow', 'pennant', 'swallow', 'sun'];
+    var SVGNS = 'http://www.w3.org/2000/svg';
 
     function layout() {
       flagsBox.innerHTML = '';
-      if (!wide.matches) return;
-      var W = stage.clientWidth;
-      var sag = Math.min(70, W * 0.05);
-      var top = 8;
-      function yAt(x) { var u = x / W * 2 - 1; return top + sag * (1 - u * u); }
-      svg.setAttribute('viewBox', '0 0 ' + W + ' 140');
-      var d = 'M0 ' + yAt(0).toFixed(1);
-      for (var x = 20; x <= W; x += 20) d += ' L' + x + ' ' + yAt(x).toFixed(1);
-      path.setAttribute('d', d);
-      var len = path.getTotalLength();
-      path.style.setProperty('--len', len.toFixed(0));
-      var count = Math.floor(W / 46);
+      knots.innerHTML = '';
+      // Full-bleed: the cord runs from one edge of the window to the other.
+      var vw = document.documentElement.clientWidth;
       var sr = stage.getBoundingClientRect();
-      var skip = positions.map(function (p) {
+      var W = vw;
+      stage.style.setProperty('--gl', (-sr.left).toFixed(1) + 'px');
+      stage.style.setProperty('--gw', W + 'px');
+      var top = 10;
+      var drop = wide.matches ? 64 : 46;
+      // Anchors: both window edges, plus every tag that hangs from the cord.
+      var hang = positions.map(function (p, idx) {
         var r = p.getBoundingClientRect();
-        return r.left - sr.left + r.width / 2;
+        return { idx: idx, x: r.left + r.width / 2, on: wide.matches || idx === 0 };
       });
-      for (var i = 0; i <= count; i++) {
-        var fx = (i + 0.5) * (W / (count + 1));
-        if (skip.some(function (s) { return Math.abs(s - fx) < 22; })) continue;
-        var slope = Math.atan2(yAt(fx + 1) - yAt(fx - 1), 2) * 180 / Math.PI;
-        var f = document.createElement('span');
-        f.className = 'gr-flag';
-        f.style.left = fx + 'px';
-        f.style.top = (yAt(fx) - 1) + 'px';
-        f.style.setProperty('--c', flagColors[i % flagColors.length]);
-        f.style.setProperty('--a', slope.toFixed(1) + 'deg');
-        f.style.setProperty('--fd', (-(i * 0.37) % 3).toFixed(2) + 's');
-        f.style.setProperty('--fdl', (0.2 + i * 0.03).toFixed(2) + 's');
-        flagsBox.appendChild(f);
+      var anchors = [{ x: 0, y: top }];
+      hang.forEach(function (h) { if (h.on) anchors.push({ x: h.x, y: top + drop }); });
+      anchors.push({ x: W, y: top });
+      function yAt(x) {
+        for (var k = 0; k < anchors.length - 1; k++) {
+          var A = anchors[k], B = anchors[k + 1];
+          if (x <= B.x || k === anchors.length - 2) {
+            var t = clamp((x - A.x) / ((B.x - A.x) || 1), 0, 1);
+            var sag = Math.min(34, (B.x - A.x) * 0.06);
+            return lerp(A.y, B.y, t) + sag * 4 * t * (1 - t);
+          }
+        }
+        return top;
       }
+      svg.setAttribute('viewBox', '0 0 ' + W + ' 160');
+      svg.setAttribute('width', W);
+      var d = 'M0 ' + yAt(0).toFixed(1);
+      for (var x = 8; x <= W; x += 8) d += ' L' + x + ' ' + yAt(x).toFixed(1);
+      d += ' L' + W + ' ' + yAt(W).toFixed(1);
+      path.setAttribute('d', d);
+      path.style.setProperty('--len', path.getTotalLength().toFixed(0));
+      anchors.slice(1, -1).forEach(function (a) {
+        var c = document.createElementNS(SVGNS, 'circle');
+        c.setAttribute('cx', a.x.toFixed(1));
+        c.setAttribute('cy', a.y.toFixed(1));
+        c.setAttribute('r', '4.5');
+        knots.appendChild(c);
+      });
+      var gap = wide.matches ? 54 : 46;
+      var n = 0, fab = 0, sun = 0;
+      for (var fx = gap * 0.6; fx < W - 12; fx += gap) {
+        if (anchors.some(function (a, k) { return k > 0 && k < anchors.length - 1 && Math.abs(a.x - fx) < 30; })) continue;
+        var kind = SEQ[n % SEQ.length];
+        var slope = Math.atan2(yAt(fx + 2) - yAt(fx - 2), 4) * 180 / Math.PI;
+        var f = document.createElement('span');
+        f.className = 'gr-flag gr-flag--' + kind;
+        f.style.left = fx.toFixed(1) + 'px';
+        f.style.top = (yAt(fx) - 0.5).toFixed(1) + 'px';
+        f.style.setProperty('--c', kind === 'sun' ? SUNS[sun++ % SUNS.length] : FABRIC[fab++ % FABRIC.length]);
+        f.style.setProperty('--a', (kind === 'sun' ? 0 : slope).toFixed(1) + 'deg');
+        f.style.setProperty('--fd', (-(n * 0.41) % 3.4).toFixed(2) + 's');
+        f.style.setProperty('--fdl', (0.25 + Math.abs(fx - W / 2) / W * 1.1).toFixed(2) + 's');
+        f.appendChild(document.createElement('i'));
+        flagsBox.appendChild(f);
+        n++;
+      }
+      var tagsTop = tagsEl.offsetTop;
       positions.forEach(function (p, idx) {
-        p.style.setProperty('--attach', (yAt(skip[idx]) - 30).toFixed(1) + 'px');
+        p.style.setProperty('--attach', hang[idx].on ? (yAt(hang[idx].x) - tagsTop - 2).toFixed(1) + 'px' : '0px');
       });
     }
     layout();
@@ -2642,8 +2600,6 @@
     var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
     var ink = list.querySelector('.gr-tabs-ink');
     var stage = document.querySelector('.gr-stage');
-    var sun = stage.querySelector('.gr-stage-sun');
-    var turns = 0;
     function placeInk(tab) {
       ink.style.width = tab.offsetWidth + 'px';
       ink.style.transform = 'translateX(' + tab.offsetLeft + 'px)';
@@ -2665,8 +2621,6 @@
       });
       stage.style.setProperty('--stage', tab.dataset.stage);
       stage.style.setProperty('--accent', tab.dataset.accent);
-      turns += 60;
-      sun.style.setProperty('--sun-r', turns + 'deg');
       placeInk(tab);
       if (focus) tab.focus();
       var sel = tab.getBoundingClientRect(), lr = list.getBoundingClientRect();
@@ -2722,7 +2676,21 @@
     var shadow = sec.querySelector('.gr-box-shadow');
     var sun = sec.querySelector('.gr-box-sunwrap');
     var stageEl = sec.querySelector('.gr-how-stage');
-    var guests = Array.prototype.slice.call(sec.querySelectorAll('.gr-guest'));
+    var KNOT = [200, 182];
+    var lineEls = sec.querySelectorAll('.gr-gt-line');
+    var guests = Array.prototype.slice.call(sec.querySelectorAll('.gr-gt')).map(function (el, i) {
+      return { el: el, line: lineEls[i], x: +el.dataset.x, y: +el.dataset.y, r: +el.dataset.r };
+    });
+    function shapeTags() {
+      guests.forEach(function (g) {
+        var tw = g.el.querySelector('text').getComputedTextLength() || 60;
+        var W = 25 + tw + 13;
+        g.el.querySelector('.gr-gt-shape').setAttribute('d',
+          'M0 9 L10 0 H' + (W - 6) + ' A6 6 0 0 1 ' + W + ' 6 V30 A6 6 0 0 1 ' + (W - 6) + ' 36 H10 L0 27 Z');
+      });
+    }
+    shapeTags();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(shapeTags);
     sec.classList.add('is-scrub');
     var visible = false, fired = false, current = -1, shown = -1;
     watch(sec, function (on) { visible = on; });
@@ -2741,7 +2709,6 @@
       var s1 = smooth(0.0, 0.2, p);
       var s2 = smooth(0.36, 0.52, p);
       var s3 = smooth(0.7, 0.9, p);
-      var scale = (stageEl.offsetWidth / 400) || 1;
 
       body.style.transform = 'translateY(' + ((1 - s1) * -40) + 'px) scale(' + (0.86 + 0.14 * s1) + ')';
       lid.style.transform = 'translate(' + (-26 * s3) + 'px,' + ((1 - s1) * -70 - 150 * s3) + 'px) rotate(' + (-18 * s3) + 'deg)';
@@ -2758,10 +2725,13 @@
       sun.style.opacity = smooth(0.66, 0.74, p);
 
       guests.forEach(function (g, i) {
-        var a = smooth(0.34 + i * 0.02, 0.44 + i * 0.02, p) * (1 - smooth(0.7, 0.8, p));
-        var gx = parseFloat(g.dataset.x) * scale * a, gy = parseFloat(g.dataset.y) * scale * a;
-        g.style.opacity = a;
-        g.style.transform = 'translate(calc(-50% + ' + gx.toFixed(1) + 'px), calc(-50% + ' + gy.toFixed(1) + 'px)) scale(' + (0.3 + 0.7 * a).toFixed(3) + ')';
+        var a = smooth(0.34 + i * 0.018, 0.44 + i * 0.018, p) * (1 - smooth(0.7, 0.8, p));
+        var x = lerp(KNOT[0] + (g.x > 200 ? 40 : -40), g.x, a), y = lerp(KNOT[1] + 40, g.y, a);
+        g.el.setAttribute('opacity', a.toFixed(3));
+        g.el.setAttribute('transform', 'translate(' + x.toFixed(2) + ' ' + y.toFixed(2) + ') rotate(' + (g.r * a).toFixed(2) + ') scale(' + (0.35 + 0.65 * a).toFixed(3) + ') translate(-13 -18)');
+        var mx = (KNOT[0] + x) / 2, my = (KNOT[1] + y) / 2 + 26 * a;
+        g.line.setAttribute('d', 'M' + KNOT[0] + ' ' + KNOT[1] + ' Q' + mx.toFixed(1) + ' ' + my.toFixed(1) + ' ' + x.toFixed(1) + ' ' + y.toFixed(1));
+        g.line.style.opacity = a > 0.02 ? Math.min(1, a * 1.4) : 0;
       });
 
       var idx = p < 0.33 ? 0 : (p < 0.66 ? 1 : 2);
