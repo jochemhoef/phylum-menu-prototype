@@ -1001,22 +1001,25 @@
     translate: -50% -50%;
     rotate: -8deg;
     border-radius: 50%;
-    background: var(--light);
-    color: var(--seal, var(--clay));
+    background: var(--ribbon);
+    color: var(--wrap);
     font-family: var(--serif);
     font-weight: 300;
     font-size: clamp(14px, 1.3vw, 18px);
     line-height: 0.95;
     letter-spacing: -0.02em;
     text-align: center;
-    box-shadow: 0 8px 14px -8px rgba(36, 33, 28, 0.45), inset 0 0 0 4px var(--light), inset 0 0 0 5.5px currentColor;
+    box-shadow: 0 8px 14px -8px rgba(36, 33, 28, 0.45), inset 0 0 0 4px var(--ribbon), inset 0 0 0 5.5px currentColor;
     transition: transform 0.55s cubic-bezier(0.5, -0.4, 0.6, 1), opacity 0.3s ease 0.22s;
   }
-  .w-peach  { --wrap: var(--peach);     --ribbon: var(--clay);      --seal: var(--clay); }
-  .w-lime   { --wrap: var(--lime);      --ribbon: var(--sage-deep); --seal: var(--sage-deep); }
-  .w-yellow { --wrap: var(--yellow);    --ribbon: var(--light);     --seal: var(--clay); }
-  .w-sage   { --wrap: var(--sage-deep); --ribbon: var(--lime);      --seal: var(--sage-deep); }
-  .w-clay   { --wrap: var(--clay);      --ribbon: var(--peach);     --seal: var(--clay); }
+  /* Approved PHYLUM pairings only: wrap = ground, ribbon + sticker = the partner colour. */
+  .w-olive-apricot   { --wrap: #535538; --ribbon: #FFBFAC; }
+  .w-sun-terracotta  { --wrap: #F2A900; --ribbon: #CC6118; }
+  .w-aqua-teal       { --wrap: #B6E4E5; --ribbon: #407575; }
+  .w-teal-citrus     { --wrap: #407575; --ribbon: #F1EE80; }
+  .w-sage-aqua       { --wrap: #8A8E4F; --ribbon: #B6E4E5; }
+  .w-espresso-linen  { --wrap: #3E2B30; --ribbon: #EEEEE5; }
+  .w-linen-olive     { --wrap: #EEEEE5; --ribbon: #535538; }
 
   /* The unwrap: the sticker peels off, then the paper glides open like a pair of doors. */
   .gr-gift.is-open .gr-seal { transform: translateY(-40%) scale(1.25) rotate(28deg); opacity: 0; }
@@ -1893,42 +1896,42 @@
       <ul class="gr-gifts">
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/studio-arhoj">
-            <span class="gr-frame"><img src="assets/registry/gift-studio-arhoj.jpg" width="720" height="480" alt="Studio Arhoj glazed ceramic figures with painted eyes on a sunlit walnut table." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-peach" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-studio-arhoj.jpg" width="720" height="480" alt="Studio Arhoj glazed ceramic figures with painted eyes on a sunlit walnut table." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-olive-apricot" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Studio Arhoj</span>
             <span class="gr-gift-line">Glazed little guys with big personalities.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/liga">
-            <span class="gr-frame"><img src="assets/registry/gift-liga.jpg" width="720" height="720" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-lime" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-liga.jpg" width="720" height="720" alt="LIGA cork placemats and coasters under cream plates and bowls." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-sun-terracotta" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">LIGA</span>
             <span class="gr-gift-line">Cork coasters. Water rings? Never heard of her.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/mungo">
-            <span class="gr-frame"><img src="assets/registry/gift-peek-mungo.jpg" width="720" height="900" alt="A Mungo check blanket in soft pastels spread across a made bed." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-yellow" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-peek-mungo.jpg" width="720" height="900" alt="A Mungo check blanket in soft pastels spread across a made bed." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-aqua-teal" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Mungo</span>
             <span class="gr-gift-line">Blankets for the three cold nights a year in Palm Springs.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/ekobo">
-            <span class="gr-frame"><img src="assets/registry/gift-ekobo.jpg" width="720" height="320" alt="Ekobo plates in teal, coral, and sand arranged with sliced citrus on a blush backdrop." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-sage" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-ekobo.jpg" width="720" height="320" alt="Ekobo plates in teal, coral, and sand arranged with sliced citrus on a blush backdrop." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-teal-citrus" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Ekobo</span>
             <span class="gr-gift-line">Plates in sorbet colors, made for passing around.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/forma-art-studio">
-            <span class="gr-frame"><img src="assets/registry/gift-peek-forma.jpg" width="720" height="720" alt="A Forma Art Studio woven rug in navy, rust, and tan blocks." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-clay" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-peek-forma.jpg" width="720" height="720" alt="A Forma Art Studio woven rug in navy, rust, and tan blocks." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-sage-aqua" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Forma Art Studio</span>
             <span class="gr-gift-line">Rugs that are basically art you can stand on.</span>
           </a>
         </li>
         <li class="gr-gift">
           <a href="https://shopphylum.com/collections/chilewich">
-            <span class="gr-frame"><img src="assets/registry/gift-chilewich.jpg" width="720" height="352" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-yellow" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-chilewich.jpg" width="720" height="352" alt="A striped blue Chilewich runner on a pale floor in front of glass doors." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-espresso-linen" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Chilewich</span>
             <span class="gr-gift-line">Woven runners that can handle the hallway.</span>
           </a>
@@ -1936,7 +1939,7 @@
         <!-- EDIT: No confirmed Londji collection handle yet, so this tile points at a search. -->
         <li class="gr-gift">
           <a href="https://shopphylum.com/search?q=londji">
-            <span class="gr-frame"><img src="assets/registry/gift-londji.jpg" width="720" height="720" alt="A Londji Happy Birthday Unicorn puzzle box surrounded by puzzle pieces on a yellow background." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-peach" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
+            <span class="gr-frame"><img src="assets/registry/gift-londji.jpg" width="720" height="720" alt="A Londji Happy Birthday Unicorn puzzle box surrounded by puzzle pieces on a yellow background." loading="lazy" decoding="async" draggable="false"><span class="gr-paper w-linen-olive" aria-hidden="true"><span class="gr-paper-l"></span><span class="gr-paper-r"></span><span class="gr-seal">Open<br>me</span></span></span>
             <span class="gr-gift-brand">Londji</span>
             <span class="gr-gift-line">Puzzles and games for the smallest guests.</span>
           </a>
@@ -2170,7 +2173,7 @@
           round: shape >= 0.55 && shape < 0.8,
           rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.35,
           tilt: Math.random() * 6.28, vt: 0.08 + Math.random() * 0.12,
-          c: COLORS[(Math.random() * COLORS.length) | 0],
+          c: (o.colors || COLORS)[(Math.random() * (o.colors || COLORS).length) | 0],
           life: 0, max: 150 + Math.random() * 90
         });
       }
@@ -2640,7 +2643,9 @@
       g.classList.add('is-open');
       setTimeout(function () {
         var f = g.querySelector('.gr-frame').getBoundingClientRect();
-        Confetti.burst(f.left + f.width / 2, f.top + f.height * 0.45, { count: 22, spread: 55, power: 8 });
+        var cs = getComputedStyle(g.querySelector('.gr-paper'));
+        var pair = [cs.getPropertyValue('--wrap').trim(), cs.getPropertyValue('--ribbon').trim()];
+        Confetti.burst(f.left + f.width / 2, f.top + f.height * 0.45, { count: 22, spread: 55, power: 8, colors: pair });
       }, 420);
       setTimeout(function () { g.classList.add('is-done'); }, 1500);
     }
