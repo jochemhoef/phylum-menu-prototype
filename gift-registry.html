@@ -537,19 +537,20 @@
     box-shadow: inset -3px -3px 0 rgba(240, 255, 174, 0.5);
   }
   .gr-tag {
-    --tag: var(--yellow);
+    --tag: #535538;
+    --ink-tag: #FFBFAC;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 62px clamp(24px, 2.8vw, 40px) 0;
     background: var(--tag);
-    color: var(--ink);
+    color: var(--ink-tag);
     clip-path: polygon(16% 0, 84% 0, 100% 9%, 100% 100%, 0 100%, 0 9%);
     border-radius: 0 0 12px 12px;
     cursor: grab;
   }
-  .gr-tag--wish { --tag: var(--lime); }
+  .gr-tag--wish { --tag: #B6E4E5; --ink-tag: #407575; }
   .gr-tag-hole {
     position: absolute;
     top: 22px;
@@ -559,7 +560,7 @@
     margin-left: -9px;
     border-radius: 50%;
     background: var(--light);
-    box-shadow: 0 0 0 5px rgba(36, 33, 28, 0.1);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--ink-tag) 22%, transparent);
   }
   .gr-tag-kicker {
     margin: 0;
@@ -578,8 +579,8 @@
     margin: 8px 0 16px;
   }
   .gr-tag-copy { margin: 0 0 26px; font-size: 16.5px; line-height: 1.55; max-width: 26em; }
-  .gr-tag .gr-btn { min-height: 48px; padding: 12px 22px; --bg-h: var(--terracotta); --fg-h: #fff; }
-  .gr-tag--wish .gr-btn { --bg-h: var(--teal); --fg-h: var(--citrus); }
+  .gr-tag .gr-btn { min-height: 48px; padding: 12px 22px; --bg: #FFBFAC; --fg: #535538; --bg-h: #EEEEE5; --fg-h: #535538; }
+  .gr-tag--wish .gr-btn { --bg: #407575; --fg: #B6E4E5; --bg-h: #F1EE80; --fg-h: #407575; }
   .gr-tag-stub {
     position: relative;
     align-self: stretch;
@@ -589,7 +590,7 @@
     gap: 12px;
     margin: 30px calc(clamp(24px, 2.8vw, 40px) * -1) 0;
     padding: 18px clamp(24px, 2.8vw, 40px) 20px;
-    border-top: 2px dashed rgba(36, 33, 28, 0.35);
+    border-top: 2px dashed color-mix(in srgb, var(--ink-tag) 45%, transparent);
     font-family: var(--sans);
     font-weight: 500;
     font-size: 11px;
@@ -1116,9 +1117,9 @@
     min-height: 100%;
     padding: 22px 22px 20px;
     border-radius: 18px;
-    border: 1.5px solid var(--ink);
+    border: 1px solid rgba(36, 33, 28, 0.14);
     text-decoration: none;
-    transition: color 0.4s var(--ease), translate 0.5s var(--spring);
+    transition: color 0.4s var(--ease), translate 0.5s var(--spring), border-color 0.4s var(--ease);
   }
   .gr-budget a::before {
     content: "";
@@ -1134,7 +1135,7 @@
     transition: transform 0.7s var(--ease);
   }
   .gr-budget a:hover::before, .gr-budget a:focus-visible::before { transform: translate(-50%, -50%) scale(1); }
-  .gr-budget a:hover { translate: 0 -4px; }
+  .gr-budget a:hover, .gr-budget a:focus-visible { translate: 0 -4px; border-color: transparent; }
   .gr-budget li:nth-child(1) a { --bc: var(--lime); }
   .gr-budget li:nth-child(2) a { --bc: var(--peach); }
   .gr-budget li:nth-child(3) a { --bc: var(--yellow); }
