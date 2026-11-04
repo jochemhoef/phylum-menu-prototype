@@ -114,13 +114,21 @@
     font-size: clamp(40px, 4.6vw, 74px);
     line-height: 1.02;
   }
+  /* Two-tone headings: a sans lead-in over a serif finish. */
+  .rv-s {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.86em;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+    margin-bottom: 0.06em;
+  }
   .rv-h2--md { font-size: clamp(36px, 3.7vw, 60px); line-height: 1.04; }
 
   /* Eyebrow: a quiet label with a tiny sun, not a sticker. */
   .rv-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
+    display: block;
     margin: 0 0 28px !important;
     font-family: var(--sans);
     font-weight: 500;
@@ -129,15 +137,6 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--terracotta);
-  }
-  .rv-eyebrow::before {
-    content: "";
-    width: 13px;
-    aspect-ratio: 1;
-    flex-shrink: 0;
-    background: currentColor;
-    -webkit-mask: var(--sun-solid) center / contain no-repeat;
-            mask: var(--sun-solid) center / contain no-repeat;
   }
   .rv-eyebrow--sun { color: var(--sun); }
 
@@ -981,7 +980,7 @@
     <div class="rv-wrap rv-hero-inner">
       <p class="rv-eyebrow rv-hero-fade" style="--d: 0.4s">The PHYLUM Registry</p>
       <h1 class="rv-h1" id="rv-title">
-        <span class="rv-line"><span style="--i: 0">Begin with the things</span></span>
+        <span class="rv-line rv-s"><span style="--i: 0">Begin with the things</span></span>
         <span class="rv-line"><span style="--i: 1">you’ll keep.</span></span>
       </h1>
       <p class="rv-hero-sub rv-hero-fade" style="--d: 1s">A registry of fewer, better pieces, chosen together and made for the home you’re building. Worth carrying to every home after this one.</p>
@@ -1014,7 +1013,7 @@
     <div class="rv-wrap rv-why-grid">
       <div class="rv-why-copy">
         <p class="rv-eyebrow rv-eyebrow--sun" data-reveal>Why a PHYLUM registry</p>
-        <h2 class="rv-h2" id="why-title" data-split>A registry should read like the beginning of a home.</h2>
+        <h2 class="rv-h2" id="why-title" data-split><span class="rv-s">A registry should read</span> like the beginning of a&nbsp;home.</h2>
         <p data-reveal style="--d: 0.15s">Most registries are lists. Ours is a conversation. We sit down with you and help choose the pieces your life together will actually be lived with: the vase that moves from apartment to house, the tray that hosts twenty years of birthdays, the objects your kids will one day argue over, fondly.</p>
         <p class="rv-why-kicker" data-reveal style="--d: 0.25s">Fewer things. Better things. Chosen with intent, by people who do this for a living and love it.</p>
       </div>
@@ -1032,7 +1031,7 @@
       <header class="rv-head rv-head--split">
         <div>
           <p class="rv-eyebrow" data-reveal>How it works</p>
-          <h2 class="rv-h2" id="how-title" data-split>You talk. We build. Guests give.</h2>
+          <h2 class="rv-h2" id="how-title" data-split><span class="rv-s">You talk. We build.</span> Guests give.</h2>
         </div>
         <p class="rv-lede" data-reveal style="--d: 0.2s">Five steps, and only the first one is yours. The rest is our pleasure.</p>
       </header>
@@ -1072,7 +1071,7 @@
       <header class="rv-head rv-head--split">
         <div>
           <p class="rv-eyebrow" data-reveal>Ways to begin</p>
-          <h2 class="rv-h2" id="ways-title" data-split>This engagement is on your terms, too.</h2>
+          <h2 class="rv-h2" id="ways-title" data-split><span class="rv-s">This engagement is</span> on your terms, too.</h2>
         </div>
         <p class="rv-lede" data-reveal style="--d: 0.2s">Three ways in. Two are open now, and the third is nearly ready.</p>
       </header>
@@ -1118,7 +1117,7 @@
       </figure>
       <div class="rv-give-copy">
         <p class="rv-eyebrow" data-reveal>For the givers</p>
-        <h2 class="rv-h2" id="give-title" data-split>Giving well, made simple.</h2>
+        <h2 class="rv-h2" id="give-title" data-split><span class="rv-s">Giving well,</span> made simple.</h2>
         <p data-reveal style="--d: 0.15s">Open the couple’s registry page, choose a piece, and we take it from there. It ships to them free of charge and wrapped by hand, no exceptions.</p>
         <p class="rv-give-ribbon" data-reveal style="--d: 0.25s">You get the credit. We’ll do the ribbon.</p>
       </div>
@@ -1130,7 +1129,7 @@
     <div class="rv-wrap rv-faq-grid">
       <div class="rv-faq-head">
         <p class="rv-eyebrow" data-reveal>Questions, answered</p>
-        <h2 class="rv-h2 rv-h2--md" id="faq-title" data-split>The short version of everything we get asked.</h2>
+        <h2 class="rv-h2 rv-h2--md" id="faq-title" data-split><span class="rv-s">The short version</span> of everything we get asked.</h2>
         <div class="rv-faq-sun" data-spin="-0.04" aria-hidden="true"></div>
       </div>
       <div class="rv-faq-list" data-reveal style="--d: 0.15s">
@@ -1164,7 +1163,7 @@
     <div class="rv-wrap rv-consult-grid">
       <div>
         <p class="rv-eyebrow" data-reveal>Book a consultation</p>
-        <h2 class="rv-h2 rv-h2--md" id="consult-title" data-split>Tell us a little. We’ll take it from there.</h2>
+        <h2 class="rv-h2 rv-h2--md" id="consult-title" data-split><span class="rv-s">Tell us a little.</span> We’ll take it from there.</h2>
         <p class="rv-lede" data-reveal style="--d: 0.15s">A couple of details and a date or two that suit you. We’ll reply to set up your consultation, in person or on screen.</p>
         <p class="rv-consult-talk" data-reveal style="--d: 0.25s">Prefer to talk? So do we. <a class="rv-link" href="tel:+17604242110">Call or text (760) 424-2110 <span class="rv-arrow" aria-hidden="true">→</span></a></p>
       </div>
@@ -1210,7 +1209,7 @@
       </figure>
       <div>
         <p class="rv-eyebrow" data-reveal>Visit the flagship</p>
-        <h2 class="rv-h2" id="visit-title" data-split>Come see us in the desert.</h2>
+        <h2 class="rv-h2" id="visit-title" data-split><span class="rv-s">Come see us</span> in the desert.</h2>
         <div class="rv-visit-meta" data-reveal style="--d: 0.15s">
           <div>
             <h3>Find us</h3>
@@ -1232,7 +1231,7 @@
     <div class="rv-close-sun" aria-hidden="true"></div>
     <div class="rv-wrap">
       <p class="rv-eyebrow" data-reveal>Shall we?</p>
-      <h2 class="rv-h2" id="close-title" data-split>The registry begins with a conversation.</h2>
+      <h2 class="rv-h2" id="close-title" data-split><span class="rv-s">The registry begins</span> with a conversation.</h2>
       <p data-reveal style="--d: 0.2s">One call, and the rest is our pleasure. Every gift ships free and arrives beautifully wrapped.</p>
       <div class="rv-ctas" data-reveal style="--d: 0.3s">
         <a class="rv-btn rv-btn--sun" href="tel:+17604242110">Call or text (760) 424-2110</a>
@@ -1278,10 +1277,18 @@
   /* ---------- Split headlines into words for the rise ---------- */
   document.querySelectorAll('[data-split]').forEach(function (el) {
     var text = el.textContent.trim().replace(/\s+/g, ' ');
-    var words = text.split(' ');
-    el.innerHTML = '<span class="rv-sr">' + esc(text) + '</span>' + words.map(function (w, i) {
-      return '<span class="rv-w" aria-hidden="true"><span style="--i:' + i + '">' + esc(w) + '</span></span>';
-    }).join(' ');
+    var n = 0;
+    function words(str) {
+      return str.trim().split(/[ \t\n\r]+/).filter(Boolean).map(function (w) {
+        return '<span class="rv-w"><span style="--i:' + (n++) + '">' + esc(w) + '</span></span>';
+      }).join(' ');
+    }
+    var html = [];
+    el.childNodes.forEach(function (node) {
+      if (node.nodeType === 3) { if (node.textContent.trim()) html.push(words(node.textContent)); }
+      else if (node.nodeType === 1) html.push('<span class="' + node.className + '">' + words(node.textContent) + '</span>');
+    });
+    el.innerHTML = '<span class="rv-sr">' + esc(text) + '</span><span aria-hidden="true">' + html.join(' ') + '</span>';
   });
 
   /* ---------- Reveal on scroll ---------- */
