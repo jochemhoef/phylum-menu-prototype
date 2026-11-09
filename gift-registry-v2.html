@@ -68,6 +68,8 @@
     --pad: clamp(96px, 11vw, 168px);
     --sun-ring: url("assets/registry/v2-sun-ring.png");
     --sun-solid: url("assets/registry/v2-sun-solid.png");
+    /* Vector sun for the very large background suns (stays crisp at any size). */
+    --sun-vector: url("assets/event/phylum-sun.svg");
   }
 
   /* ---------- Shared chrome hooks ---------- */
@@ -386,10 +388,11 @@
      2. WHY
      ========================================================= */
   .rv-why {
-    background: var(--espresso);
+    background: var(--teal);
     color: var(--linen);
     padding: var(--pad) 0;
   }
+  .rv-why .rv-eyebrow--sun { color: var(--citrus); }
   .rv-why-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
@@ -401,7 +404,7 @@
     max-width: 33em;
     font-size: clamp(16px, 1.2vw, 18px);
     line-height: 1.75;
-    color: rgba(238, 238, 229, 0.78);
+    color: rgba(238, 238, 229, 0.86);
   }
   .rv-why-copy p + p { margin-top: 20px; }
   .rv-why-copy .rv-why-kicker {
@@ -438,7 +441,7 @@
     font-size: 11.5px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(238, 238, 229, 0.6);
+    color: rgba(238, 238, 229, 0.72);
   }
 
   /* =========================================================
@@ -520,8 +523,7 @@
   }
   .rv-card:hover { transform: translateY(-6px); box-shadow: 0 34px 60px -38px rgba(62, 43, 48, 0.55); }
   .rv-card--teal { --cbg: var(--teal); --chead: var(--citrus); }
-  .rv-card--linen { --cbg: var(--linen); --chead: var(--espresso); --ctext: var(--espresso); box-shadow: inset 0 0 0 1px var(--hair-strong); }
-  .rv-card--linen:hover { box-shadow: inset 0 0 0 1px var(--hair-strong), 0 34px 60px -38px rgba(62, 43, 48, 0.4); }
+  .rv-card--espresso { --cbg: var(--espresso); --chead: var(--sun); }
   .rv-card-sun {
     position: absolute;
     z-index: -1;
@@ -588,7 +590,7 @@
      ========================================================= */
   .rv-give {
     padding: var(--pad) 0;
-    background: var(--sun);
+    background: var(--apricot);
     color: var(--espresso);
     overflow: hidden;
   }
@@ -604,8 +606,8 @@
     border-radius: 999px 999px 4px 4px;
   }
   .rv-arch img { object-position: 50% 40%; }
-  .rv-give .rv-eyebrow { color: var(--terracotta); }
-  .rv-give .rv-h2 { color: var(--terracotta); margin-bottom: 36px; }
+  .rv-give .rv-eyebrow { color: var(--espresso); }
+  .rv-give .rv-h2 { color: var(--espresso); margin-bottom: 36px; }
   .rv-give-copy { max-width: 30em; }
   .rv-give-copy p:not(.rv-eyebrow) { font-size: clamp(17px, 1.3vw, 19px); line-height: 1.65; }
   .rv-give-ribbon {
@@ -623,7 +625,8 @@
   /* =========================================================
      6. FAQ
      ========================================================= */
-  .rv-faq { padding: var(--pad) 0; }
+  /* overflow: clip (not hidden) keeps the sticky heading working. */
+  .rv-faq { position: relative; isolation: isolate; overflow: clip; padding: var(--pad) 0; }
   .rv-faq-grid {
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
@@ -632,16 +635,21 @@
   }
   .rv-faq-head { position: sticky; top: calc(var(--nav-h, 78px) + 40px); }
   .rv-faq-sun {
-    width: clamp(88px, 8vw, 128px);
+    position: absolute;
+    z-index: -1;
+    left: max(-300px, -20vw);
+    bottom: max(-560px, -36vw);
+    width: min(1000px, 62vw);
     aspect-ratio: 1;
-    margin-top: 56px;
-    background: var(--terracotta);
-    -webkit-mask: var(--sun-solid) center / contain no-repeat;
-            mask: var(--sun-solid) center / contain no-repeat;
+    background: var(--sun);
+    opacity: 0.3;
+    -webkit-mask: var(--sun-vector) center / contain no-repeat;
+            mask: var(--sun-vector) center / contain no-repeat;
     rotate: var(--rot, 0deg);
+    pointer-events: none;
   }
-  .rv-faq-list { border-top: 1px solid var(--hair-strong); }
-  .rv-faq details { border-bottom: 1px solid var(--hair-strong); }
+  .rv-faq-list { border-top: 1px solid var(--hair); }
+  .rv-faq details { border-bottom: 1px solid var(--hair); }
   .rv-faq summary {
     display: flex;
     justify-content: space-between;
@@ -806,7 +814,8 @@
   /* =========================================================
      8. VISIT
      ========================================================= */
-  .rv-visit { padding: var(--pad) 0; }
+  .rv-visit { padding: var(--pad) 0; background: var(--aqua); color: var(--espresso); }
+  .rv-visit .rv-eyebrow { color: var(--espresso); }
   .rv-visit-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -828,7 +837,7 @@
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--terracotta);
+    color: var(--teal);
   }
   .rv-visit-meta p, .rv-visit-meta address { font-style: normal; font-size: 16px; line-height: 1.7; }
   .rv-visit-note {
@@ -837,7 +846,7 @@
     font-family: var(--body);
     font-size: 14.5px;
     line-height: 1.7;
-    color: var(--ink-soft);
+    color: rgba(62, 43, 48, 0.8);
   }
   .rv-visit-note a { color: var(--espresso); text-underline-offset: 3px; }
   .rv-visit-go { margin-top: 36px !important; }
@@ -849,7 +858,7 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    padding: clamp(120px, 13vw, 200px) 0 clamp(240px, 24vw, 340px);
+    padding: clamp(120px, 13vw, 200px) 0 clamp(300px, 44vw, 660px);
     background: var(--espresso);
     color: var(--linen);
     text-align: center;
@@ -859,20 +868,19 @@
     z-index: -1;
     left: 50%;
     bottom: 0;
-    width: min(96vw, 760px);
+    width: clamp(640px, 118vw, 2000px);
     aspect-ratio: 1;
     background: var(--sun);
-    opacity: 0.9;
-    -webkit-mask: var(--sun-ring) center / contain no-repeat;
-            mask: var(--sun-ring) center / contain no-repeat;
-    transform: translate(-50%, calc(72% - var(--rise, 0) * 18%)) rotate(var(--rot, 0deg));
+    -webkit-mask: var(--sun-vector) center / contain no-repeat;
+            mask: var(--sun-vector) center / contain no-repeat;
+    transform: translate(-50%, calc(77% - var(--rise, 0) * 12%)) rotate(var(--rot, 0deg));
   }
   .rv-close::after {
     content: "";
     position: absolute;
     z-index: -1;
     inset: 0;
-    background: linear-gradient(180deg, var(--espresso) 34%, rgba(62, 43, 48, 0.3) 100%);
+    background: linear-gradient(180deg, var(--espresso) 40%, rgba(62, 43, 48, 0.5) 64%, rgba(62, 43, 48, 0) 100%);
   }
   .rv-close .rv-eyebrow { color: var(--sun); }
   .rv-close .rv-h2 {
@@ -917,7 +925,7 @@
     .rv-head--split .rv-lede { justify-self: start; }
     .rv-quote { padding: 40px 0 0; border-left: 0; border-top: 1px solid var(--hair-light); }
     .rv-faq-head { position: static; }
-    .rv-faq-sun { display: none; }
+    .rv-faq-sun { width: 120vw; left: auto; right: -50vw; bottom: -60vw; opacity: 0.24; }
     .rv-arch { max-width: 360px; width: 78%; }
     .rv-visit-img { aspect-ratio: 5 / 4; }
   }
@@ -1096,7 +1104,7 @@
             <a class="rv-card-link" href="#consult">Book a call <span class="rv-arrow" aria-hidden="true">→</span></a>
           </div>
         </article></div>
-        <div class="rv-card-cell" data-reveal style="--d: 0.24s"><article class="rv-card rv-card--linen">
+        <div class="rv-card-cell" data-reveal style="--d: 0.24s"><article class="rv-card rv-card--espresso">
           <span class="rv-card-sun" aria-hidden="true"></span>
           <span class="rv-badge">Coming soon</span>
           <h3>Start online, yourself</h3>
@@ -1126,11 +1134,11 @@
 
   <!-- 6. FAQ -->
   <section class="rv-faq" aria-labelledby="faq-title">
+    <div class="rv-faq-sun" data-spin="-0.03" aria-hidden="true"></div>
     <div class="rv-wrap rv-faq-grid">
       <div class="rv-faq-head">
         <p class="rv-eyebrow" data-reveal>Questions, answered</p>
         <h2 class="rv-h2 rv-h2--md" id="faq-title" data-split><span class="rv-s">The short version</span> of everything we get asked.</h2>
-        <div class="rv-faq-sun" data-spin="-0.04" aria-hidden="true"></div>
       </div>
       <div class="rv-faq-list" data-reveal style="--d: 0.15s">
         <details>
