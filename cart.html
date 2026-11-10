@@ -162,8 +162,8 @@
   .rw-head.is-in { animation: rwIn .9s var(--ease); }
   @keyframes rwIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-  .rw-track { position: relative; margin: 30px 0 0; height: 74px; }
-  .rw-line { position: absolute; left: 0; right: calc(var(--node) / 2); top: calc(var(--node) / 2); height: 0; }
+  .rw-track { --tag: 24px; position: relative; margin: 22px 0 0; height: calc(var(--tag) + 74px); }
+  .rw-line { position: absolute; left: 0; right: calc(var(--node) / 2); top: calc(var(--tag) + var(--node) / 2); height: 0; }
   .rw-dots { position: absolute; left: 0; right: 0; top: -1px; height: 2px;
     background: radial-gradient(circle, var(--hair-strong) 0 .8px, transparent 1.1px) 0 50% / 8px 2px repeat-x; }
   .rw-prog { position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--terra); border-radius: 2px;
@@ -175,6 +175,9 @@
   .rw-stops { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0 calc(var(--node) / 2) 0 0; }
   .rw-stop { position: absolute; top: 0; left: var(--x); transform: translateX(-50%); display: grid; justify-items: center; text-align: center; }
   .rw-stop:last-child { transform: translateX(calc(-100% + var(--node) / 2)); justify-items: end; text-align: right; }
+  .rw-tag { height: var(--tag); display: flex; align-items: flex-start; font-size: 9.5px; line-height: 1; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--terra); white-space: nowrap; opacity: 0; transform: translateY(4px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .rw-stop.is-on .rw-tag { opacity: 1; transform: none; }
   .rw-node { position: relative; z-index: 1; width: var(--node); height: var(--node); border-radius: 50%; background: var(--light);
     box-shadow: inset 0 0 0 1.25px var(--hair-strong); margin-bottom: 14px;
     transition: background-color .6s var(--ease), box-shadow .8s var(--ease), scale .8s var(--ease); }
@@ -186,6 +189,10 @@
   .rw-at { margin-top: 7px; font-size: 10px; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); white-space: nowrap; }
   .rw-stop.is-on .rw-amt { color: var(--terra); }
   .rw-stop.is-next .rw-amt { color: var(--espresso); }
+  /* Passed rewards are replaced, not added: a quiet filled dot and a struck amount */
+  .rw-stop.is-past .rw-node { background: rgba(204,97,24,.55); box-shadow: none; scale: .7; }
+  .rw-stop.is-past .rw-amt { color: rgba(62,43,48,.3); text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: rgba(62,43,48,.35); }
+  .rw-stop.is-past .rw-at { color: rgba(106,93,95,.55); }
 
   .rw-ship { display: flex; align-items: center; gap: 10px; margin: 6px 0 0; padding: 16px 0; border-top: 1px solid var(--hair);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 13.5px; color: var(--ink2); }
@@ -205,10 +212,16 @@
   .rw-how-p { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .7s var(--ease); }
   .rw-how.is-open .rw-how-p { grid-template-rows: 1fr; }
   .rw-how-p > div { overflow: hidden; }
-  .rw-steps { list-style: none; margin: 0; padding: 2px 0 6px; display: grid; gap: 16px; }
-  .rw-steps li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: baseline; }
-  .rw-steps .n { font-family: var(--serif); font-weight: 300; font-size: 22px; line-height: 1; letter-spacing: -.03em; color: var(--terra); }
-  .rw-steps b { display: block; font-weight: 500; font-size: 14.5px; letter-spacing: -.01em; margin-bottom: 3px; }
+  .rw-steps { list-style: none; margin: 0; padding: 4px 0 8px; display: grid; gap: 22px; }
+  .rw-steps li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: baseline; }
+  .rw-steps .n { font-family: var(--serif); font-weight: 300; font-size: 26px; line-height: 1; letter-spacing: -.03em; color: var(--terra); }
+  .rw-steps b { display: block; font-weight: 500; font-size: 19px; line-height: 1.25; letter-spacing: -.02em; margin-bottom: 6px; color: var(--espresso); }
+  .rw-table { margin: 12px 0 2px; border-top: 1px solid var(--hair); }
+  .rw-table div { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--hair);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 13.5px; color: var(--ink2); }
+  .rw-table strong { font-family: var(--serif); font-weight: 300; font-size: 20px; letter-spacing: -.02em; color: var(--espresso); }
+  .rw-table .is-cur strong { color: var(--terra); }
+  .rw-table .is-cur span::after { content: "  ·  this order"; color: var(--terra); }
   .rw-steps p, .rw-fine { margin: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 13.5px; line-height: 1.6; color: var(--ink2); }
   .rw-fine { padding: 14px 0 20px; margin-top: 12px; border-top: 1px solid var(--hair); font-size: 12.5px; }
 
@@ -786,6 +799,7 @@
           <ol class="rw-stops">
             ${pr.tiers.map((t, i) => `
               <li class="rw-stop" style="--x:${((i + 1) / n) * 100}%" data-stop="${i}">
+                <span class="rw-tag">Your credit</span>
                 <span class="rw-node"></span>
                 <span class="rw-amt">${fmt(t.credit, false)}</span>
                 <span class="rw-at">at ${fmt(t.at, false)}</span>
@@ -797,11 +811,12 @@
           <button type="button" class="rw-how-t" aria-expanded="false" data-how>How it works<span class="rw-ico" aria-hidden="true"></span></button>
           <div class="rw-how-p"><div>
             <ol class="rw-steps">
-              <li><span class="n">01</span><div><b>Spend in one order</b><p>Reach ${spends} before tax and shipping.</p></div></li>
-              <li><span class="n">02</span><div><b>We add your credit</b><p>${credits} goes into your PHYLUM account ${RETURN_DAYS} days after your order ships. We'll email you when it's there.</p></div></li>
+              <li><span class="n">01</span><div><b>One order, one reward</b><p>The more you spend in a single order, the bigger your credit. Each reward replaces the one before it. They don't add up.</p>
+                <div class="rw-table" data-table>${pr.tiers.map((t, i) => `<div data-row="${i}"><span>Spend ${fmt(t.at, false)}</span><strong>${fmt(t.credit, false)} credit</strong></div>`).join('')}</div></div></li>
+              <li><span class="n">02</span><div><b>We add it after shipping</b><p>Your credit goes into your PHYLUM account ${RETURN_DAYS} days after your order ships. We'll email you when it's there.</p></div></li>
               <li><span class="n">03</span><div><b>Spend it within ${EXPIRY_DAYS} days</b><p>Sign in at checkout and it comes off your total, online or in our Palm Springs store.</p></div></li>
             </ol>
-            <p class="rw-fine">Each order earns its highest reward only; rewards don't add up. If a return takes an order below its reward, the credit changes to match.</p>
+            <p class="rw-fine">Spend is counted before tax and shipping. If a return takes an order below its reward, the credit changes to match.</p>
           </div></div>
         </div>
       </div>`;
@@ -823,8 +838,8 @@
       return [`Spend ${usd(next.at - s)} more`, `to earn ${fmt(next.credit, false)} in store credit.`];
     }
     const cur = fmt(pr.tiers[k].credit, false);
-    if (next) return [`${cur} in store credit.`, `Add ${usd(next.at - s)} to make it ${fmt(next.credit, false)}.`];
-    return [`${cur} in store credit.`, 'Our highest reward. Thank you.'];
+    if (next) return [`Your credit: ${cur}.`, `Add ${usd(next.at - s)} and it becomes ${fmt(next.credit, false)}.`];
+    return [`Your credit: ${cur}.`, 'Our highest reward. Thank you.'];
   }
 
   function updateRewards(m, s, animate) {
@@ -843,14 +858,16 @@
 
     el.querySelectorAll('[data-stop]').forEach(li => {
       const i = +li.dataset.stop;
-      const on = k >= i;
+      const on = i === k;
       const wasOn = li.classList.contains('is-on');
       li.classList.toggle('is-on', on);
+      li.classList.toggle('is-past', i < k);
       li.classList.toggle('is-next', i === k + 1);
       li.classList.remove('is-new');
       if (on && !wasOn && animate && m.shown.tier !== null) { void li.offsetWidth; li.classList.add('is-new'); }
     });
 
+    el.querySelectorAll('[data-row]').forEach(r => r.classList.toggle('is-cur', +r.dataset.row === k));
     const head = el.querySelector('[data-head]');
     const [a, b] = headFor(s);
     const html = `<span class="rw-s">${a}</span><span class="rw-f">${b}</span>`;
