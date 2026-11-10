@@ -132,12 +132,12 @@
   .pc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
   .pc:hover .pc-img img { transform: scale(1.04); }
   .pc-chip {
-    position: absolute; left: 10px; top: 10px; z-index: 1;
-    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
-    padding: 6px 9px 5px; border-radius: 3px; background: var(--paper); color: var(--ink);
+    position: absolute; left: 10px; top: 10px; z-index: 1; display: inline-flex; align-items: center; gap: 7px;
+    font-size: 10px; line-height: 1; letter-spacing: .16em; text-transform: uppercase;
+    padding: 8px 11px; border-radius: 999px; background: rgba(247,246,240,.94); color: #3E2B30;
+    box-shadow: 0 6px 16px -10px rgba(62,43,48,.35);
   }
-  .pc-chip--unlock { background: var(--clay); color: #fff; }
-  .pc-chip--unlock::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sun); margin-right: 6px; vertical-align: 0; box-shadow: 0 0 0 2px rgba(255,255,255,.35); }
+  .pc-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--sun); }
   .pc-meta { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
   .pc-vendor { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 2px; }
   .pc-title { font-size: 16px; margin: 0; line-height: 1.25; }
@@ -148,97 +148,75 @@
   }
   .pc-add:hover { background: var(--ink); color: var(--paper); }
 
-  /* ---------- Rewards module ---------- */
+  /* ---------- PHYLUM credit module (registry v2 language) ---------- */
   .rw {
-    --node: 38px;
-    position: relative; background: var(--paper-soft); border: 1px solid var(--line); border-radius: 14px;
-    padding: 20px 20px 16px; overflow: hidden; isolation: isolate;
+    --espresso: #3E2B30; --ink2: #6A5D5F; --terra: #CC6118; --hair: rgba(62,43,48,.16); --hair-strong: rgba(62,43,48,.32);
+    --light: #F7F6F0; --node: 13px;
+    position: relative; color: var(--espresso); background: var(--light);
+    border: 1px solid var(--hair); border-radius: 15px; padding: 28px 28px 0;
   }
-  .rw::before { /* soft sun glow that warms as you climb */
-    content: ""; position: absolute; inset: auto -30% -60% auto; width: 80%; aspect-ratio: 1; border-radius: 50%;
-    background: radial-gradient(circle, rgba(242,169,0,.28), rgba(242,169,0,0) 65%);
-    opacity: var(--glow, 0); transition: opacity 1.2s var(--ease); z-index: -1; pointer-events: none;
-  }
-  .rw-top { display: flex; gap: 14px; align-items: flex-start; justify-content: space-between; }
-  .rw-eyebrow { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage-deep); margin: 0 0 6px; display: flex; align-items: center; gap: 6px; }
-  .rw-eyebrow svg { width: 14px; height: 14px; }
-  .rw-msg { font-family: var(--serif); font-weight: 300; font-size: 19px; line-height: 1.3; margin: 0; min-height: 2.6em; text-wrap: balance; }
-  .rw-msg b { font-family: var(--sans); font-weight: 500; font-size: .92em; }
-  .rw-msg.is-pop { animation: msgPop .6s var(--ease); }
-  @keyframes msgPop { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: none; } }
-  .rw-earned {
-    flex: none; text-align: center; min-width: 86px; padding: 8px 10px 7px; border-radius: 10px;
-    background: var(--paper); border: 1px dashed var(--line); transition: background .5s, border-color .5s, color .5s;
-  }
-  .rw-earned.is-on { background: var(--olive); border-color: var(--olive); color: var(--paper); }
-  .rw-earned small { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
-  .rw-earned strong { display: block; font-family: var(--serif); font-weight: 300; font-size: 26px; line-height: 1.1; }
-  .rw-earned.is-bump { animation: bump .6s var(--spring); }
-  @keyframes bump { 0% { transform: scale(1); } 40% { transform: scale(1.14) rotate(-2deg); } 100% { transform: scale(1); } }
+  .rw-eyebrow { margin: 0 0 18px; font-family: var(--sans); font-size: 11px; line-height: 1; letter-spacing: .2em; text-transform: uppercase; color: var(--terra); }
+  .rw-head { margin: 0; font-size: 25px; line-height: 1.12; letter-spacing: -.025em; min-height: 2.3em; }
+  .rw-head .rw-s { display: block; font-family: var(--sans); font-weight: 500; font-size: .94em; letter-spacing: -.03em; }
+  .rw-head .rw-f { display: block; font-family: var(--serif); font-weight: 300; }
+  .rw-head.is-in { animation: rwIn .9s var(--ease); }
+  @keyframes rwIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-  .rw-track { position: relative; margin: 20px 0 0; padding: 0 calc(var(--node) / 2) 0; height: calc(var(--node) + 50px); }
-  .rw-rail {
-    position: absolute; left: calc(var(--node) / 2); right: calc(var(--node) / 2); top: calc(var(--node) / 2 - 4px);
-    height: 8px; border-radius: 99px; background: var(--paper-deep); box-shadow: inset 0 1px 2px rgba(36,33,28,.12);
-  }
-  .rw-fill {
-    position: absolute; inset: 0; border-radius: inherit;
-    background: linear-gradient(90deg, var(--sage) 0%, #A9A453 30%, var(--sun) 62%, var(--clay) 100%);
-    clip-path: inset(0 100% 0 0 round 99px);
-    transition: clip-path 1.1s var(--ease);
-    overflow: hidden;
-  }
-  .rw-fill::after { /* travelling glint */
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.55) 50%, transparent 60% 100%);
-    background-size: 220% 100%; animation: glint 2.8s linear infinite;
-  }
-  @keyframes glint { from { background-position: 120% 0; } to { background-position: -120% 0; } }
-  .rw-rider {
-    position: absolute; top: 50%; left: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px;
-    transition: left 1.1s var(--ease); z-index: 2; pointer-events: none;
-    filter: drop-shadow(0 2px 4px rgba(192,102,47,.35));
-  }
-  .rw-rider svg { width: 100%; height: 100%; animation: spin 9s linear infinite; }
-  .rw-rider.is-hop { animation: hop .9s var(--ease); }
-  @keyframes hop { 0%,100% { transform: translateY(0); } 35% { transform: translateY(-9px) scale(1.12); } 60% { transform: translateY(0) scale(.96); } }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .rw-rider[hidden] { display: none; }
+  .rw-track { position: relative; margin: 30px 0 0; height: 74px; }
+  .rw-line { position: absolute; left: 0; right: calc(var(--node) / 2); top: calc(var(--node) / 2); height: 0; }
+  .rw-dots { position: absolute; left: 0; right: 0; top: -1px; height: 2px;
+    background: radial-gradient(circle, var(--hair-strong) 0 .8px, transparent 1.1px) 0 50% / 8px 2px repeat-x; }
+  .rw-prog { position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--terra); border-radius: 2px;
+    transform-origin: left center; transform: scaleX(0); transition: transform 1.4s var(--ease); }
+  .rw-sun { position: absolute; top: 0; left: 0; width: 24px; height: 24px; margin: -12px 0 0 -12px; z-index: 2; background: var(--sun);
+    -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat; mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+    transition: left 1.4s var(--ease), rotate 1.4s var(--ease), opacity .6s var(--ease); pointer-events: none; }
+  .rw-sun.is-off { opacity: 0; }
+  .rw-stops { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0 calc(var(--node) / 2) 0 0; }
+  .rw-stop { position: absolute; top: 0; left: var(--x); transform: translateX(-50%); display: grid; justify-items: center; text-align: center; }
+  .rw-stop:last-child { transform: translateX(calc(-100% + var(--node) / 2)); justify-items: end; text-align: right; }
+  .rw-node { position: relative; z-index: 1; width: var(--node); height: var(--node); border-radius: 50%; background: var(--light);
+    box-shadow: inset 0 0 0 1.25px var(--hair-strong); margin-bottom: 14px;
+    transition: background-color .6s var(--ease), box-shadow .8s var(--ease), scale .8s var(--ease); }
+  .rw-node::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 1px var(--sun); opacity: 0; pointer-events: none; }
+  .rw-stop.is-on .rw-node { background: var(--sun); box-shadow: inset 0 0 0 1.25px var(--sun), 0 0 0 7px rgba(242,169,0,.18); scale: 1.15; }
+  .rw-stop.is-new .rw-node::after { animation: rwRing 1.8s var(--ease) .5s; }
+  @keyframes rwRing { from { opacity: .9; transform: scale(1); } to { opacity: 0; transform: scale(3.2); } }
+  .rw-amt { font-family: var(--serif); font-weight: 300; font-size: 22px; line-height: 1; letter-spacing: -.02em; color: rgba(62,43,48,.32); transition: color .8s var(--ease); }
+  .rw-at { margin-top: 7px; font-size: 10px; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); white-space: nowrap; }
+  .rw-stop.is-on .rw-amt { color: var(--terra); }
+  .rw-stop.is-next .rw-amt { color: var(--espresso); }
 
-  .rw-stops { list-style: none; margin: 0; padding: 0; position: absolute; left: calc(var(--node) / 2); right: calc(var(--node) / 2); top: 0; height: 100%; }
-  .rw-stop { position: absolute; top: 0; left: var(--x); transform: translateX(-50%); display: grid; justify-items: center; gap: 10px; width: calc(25% - 4px); min-width: 60px; }
-  .rw-stop:last-child { transform: translateX(calc(-100% + var(--node) / 2)); justify-items: end; }
-  .rw-stop:last-child .rw-lbl { text-align: right; }
-  .rw-node {
-    position: relative; width: var(--node); height: var(--node); display: grid; place-items: center;
-    border-radius: 50%; background: var(--paper); border: 1.5px solid var(--line); color: var(--ink-mute);
-    font-size: 11.5px; letter-spacing: -.01em; transition: background .5s var(--ease), border-color .5s, color .5s, transform .5s var(--spring);
-    z-index: 3;
-  }
-  .rw-node svg.rays { position: absolute; inset: -11px; width: calc(100% + 22px); height: calc(100% + 22px); opacity: 0; transform: scale(.4) rotate(-30deg); transition: opacity .5s, transform .8s var(--spring); pointer-events: none; }
-  .rw-node svg.rays line { stroke: var(--sun); stroke-width: 2.2; stroke-linecap: round; }
-  .rw-node .ico { width: 16px; height: 16px; }
-  .rw-stop.is-next .rw-node { border-color: var(--ink-soft); color: var(--ink); box-shadow: 0 0 0 4px rgba(242,169,0,.0); animation: nextPulse 2.4s ease-in-out infinite; }
-  @keyframes nextPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(242,169,0,.0); } 50% { box-shadow: 0 0 0 6px rgba(242,169,0,.22); } }
-  .rw-stop.is-on .rw-node { background: var(--sun); border-color: var(--sun); color: var(--ink); }
-  .rw-stop.is-on.is-ship .rw-node { background: var(--sage); border-color: var(--sage); color: #fff; }
-  .rw-stop.is-on .rw-node svg.rays { opacity: 1; transform: scale(1) rotate(0); }
-  .rw-stop.is-on .rw-node svg.rays g { transform-origin: 50% 50%; animation: spin 14s linear infinite; }
-  .rw-stop.is-on.is-ship .rw-node svg.rays { display: none; }
-  .rw-stop.is-burst .rw-node { animation: nodePop .8s var(--spring); }
-  @keyframes nodePop { 0% { transform: scale(.7); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
-  .rw-lbl { text-align: center; line-height: 1.15; max-width: 72px; }
-  .rw-lbl b { display: block; font-weight: 500; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
-  .rw-lbl small { display: block; font-family: var(--serif); font-weight: 300; font-size: 13px; color: var(--ink-mute); }
-  .rw-stop.is-on .rw-lbl b { color: var(--ink); }
+  .rw-ship { display: flex; align-items: center; gap: 10px; margin: 6px 0 0; padding: 16px 0; border-top: 1px solid var(--hair);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 13.5px; color: var(--ink2); }
+  .rw-ship i { flex: none; width: 7px; height: 7px; border-radius: 50%; box-shadow: inset 0 0 0 1.25px var(--hair-strong); transition: background .6s, box-shadow .6s; }
+  .rw-ship.is-on i { background: var(--sage); box-shadow: none; }
+  .rw-ship b { font-weight: 500; color: var(--espresso); }
 
-  .rw-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 4px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 12px; color: var(--ink-mute); }
-  .rw-foot .linkbtn { color: var(--ink-soft); font-size: 12px; white-space: nowrap; }
-  .rw-how { display: none; font-family: var(--serif); font-weight: 300; font-size: 14px; color: var(--ink-soft); margin: 10px 0 0; line-height: 1.45; }
-  .rw.show-how .rw-how { display: block; }
-  .rw-how ul { margin: 6px 0 0; padding-left: 18px; }
+  .rw-how { border-top: 1px solid var(--hair); }
+  .rw-how-t { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0 16px; border: 0; background: none;
+    font-family: var(--sans); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--espresso) !important; text-align: left; }
+  .rw-ico { position: relative; flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--hair-strong);
+    transition: rotate .6s var(--ease), background-color .4s var(--ease), border-color .4s var(--ease); }
+  .rw-ico::before, .rw-ico::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1px; background: currentColor; translate: -50% -50%; }
+  .rw-ico::after { rotate: 90deg; }
+  .rw-how-t:hover .rw-ico { border-color: var(--terra); color: var(--terra); }
+  .rw-how.is-open .rw-ico { rotate: 135deg; background: var(--terra); border-color: var(--terra); color: #fff; }
+  .rw-how-p { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .7s var(--ease); }
+  .rw-how.is-open .rw-how-p { grid-template-rows: 1fr; }
+  .rw-how-p > div { overflow: hidden; }
+  .rw-steps { list-style: none; margin: 0; padding: 2px 0 6px; display: grid; gap: 16px; }
+  .rw-steps li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: baseline; }
+  .rw-steps .n { font-family: var(--serif); font-weight: 300; font-size: 22px; line-height: 1; letter-spacing: -.03em; color: var(--terra); }
+  .rw-steps b { display: block; font-weight: 500; font-size: 14.5px; letter-spacing: -.01em; margin-bottom: 3px; }
+  .rw-steps p, .rw-fine { margin: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 13.5px; line-height: 1.6; color: var(--ink2); }
+  .rw-fine { padding: 14px 0 20px; margin-top: 12px; border-top: 1px solid var(--hair); font-size: 12.5px; }
 
-  .confetti { position: absolute; width: 7px; height: 11px; border-radius: 2px; pointer-events: none; z-index: 5; }
+  /* Credit note beside the subtotal */
+  .credit-note { display: flex; gap: 10px; align-items: baseline; margin: 12px 0 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 13.5px; line-height: 1.5; color: #6A5D5F; }
+  .credit-note::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--sun); transform: translateY(-1px); }
+  .credit-note b { font-weight: 500; color: #3E2B30; }
+  .credit-note[hidden] { display: none; }
 
   /* ---------- Drawer ---------- */
   .cd-overlay { position: fixed; inset: 0; background: rgba(36,33,28,.38); backdrop-filter: blur(2px); opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility .45s; z-index: 900; }
@@ -256,11 +234,8 @@
   .cd-x:hover { background: var(--paper-deep); }
   .cd-x svg { width: 18px; height: 18px; }
   .cd-body { flex: 1; overflow-y: auto; padding: 18px 24px 24px; overscroll-behavior: contain; }
-  .cd .rw { --node: 32px; padding: 16px 14px 12px; }
-  .cd .rw-msg { font-size: 17px; }
-  .cd .rw-earned { min-width: 74px; }
-  .cd .rw-earned strong { font-size: 22px; }
-  .cd .rw-node { font-size: 10.5px; }
+  .cd .rw { padding: 22px 22px 0; }
+  .cd .rw-head { font-size: 22px; }
   .cd .ln { grid-template-columns: 76px minmax(0, 1fr) auto; grid-template-areas: "img info price" "img qty qty"; gap: 6px 14px; padding: 16px 0; }
   .cd .ln-img { grid-area: img; width: 76px; }
   .cd .ln-info { grid-area: info; }
@@ -276,7 +251,7 @@
   .rail { display: grid; grid-auto-flow: column; grid-auto-columns: 148px; gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
   .rail .pc { scroll-snap-align: start; gap: 7px; }
   .rail .pc-img { aspect-ratio: 1; }
-  .rail .pc-chip { font-size: 9.5px; left: 6px; top: 6px; padding: 5px 7px 4px; }
+  .rail .pc-chip { font-size: 9px; left: 6px; top: 6px; padding: 6px 8px; gap: 5px; }
   .rail .pc-title { font-size: 13.5px; }
   .rail .pc-price { font-size: 15px; }
   .rail .pc-add { height: 34px; font-size: 11px; }
@@ -323,7 +298,7 @@
   .lad dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--ink-soft); }
   .lad dd { margin: 0; text-align: right; color: var(--ink); }
   .lad--ship { background: transparent; border-style: dashed; }
-  .lad-sun { position: absolute; right: -18px; top: -18px; width: 74px; height: 74px; opacity: .9; }
+  .lad-sun { position: absolute; right: -22px; top: -22px; width: 84px; height: 84px; background: var(--sun); -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat; mask: url("assets/event/phylum-sun.svg") center / contain no-repeat; }
   .tv-note { margin: 16px 0 0; font-family: var(--serif); font-weight: 300; font-size: 15px; color: var(--ink-soft); max-width: 860px; line-height: 1.5; }
 
   .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
@@ -451,12 +426,11 @@
     .grid .pc:nth-child(n+3) { display: flex; }
     .grid .pc:nth-child(n+5) { display: none; }
     .pc-meta { flex-direction: column; gap: 4px; }
-    .rw { --node: 32px; padding: 16px 14px 12px; }
-    .rw-msg { font-size: 17px; }
     body.cd-open .cc-demo { display: none; }
-    .rw-node { font-size: 10.5px; }
     .ladder { grid-template-columns: minmax(0, 1fr); }
     .cc-foot .in { grid-template-columns: minmax(0, 1fr); }
+    .rw { padding: 22px 20px 0; }
+    .rw-head { font-size: 22px; }
     .cc-demo { left: 12px; right: 12px; transform: none; justify-content: space-between; flex-wrap: nowrap; overflow-x: auto; border-radius: 16px; }
     .cc-demo .tag-proto { display: none; }
     .cc-demo button, .cc-demo select { padding: 9px 10px; }
@@ -490,6 +464,7 @@
       <aside class="cc-side" aria-label="Order summary">
         <div data-rewards="page"></div>
         <div class="cc-subtotal"><span>Subtotal</span><strong data-subtotal>$0.00 USD</strong></div>
+        <p class="credit-note" data-credit-note hidden></p>
         <div class="cc-acc">
           <details><summary>Add order notes</summary><textarea aria-label="Order notes"></textarea></details>
           <details><summary>Is this a gift? Add a note.</summary><textarea aria-label="Gift note"></textarea></details>
@@ -660,6 +635,7 @@
   </div>
   <div class="cd-foot">
     <div class="cd-sub"><span>Subtotal</span><strong data-subtotal>$0.00</strong></div>
+    <p class="credit-note" data-credit-note hidden style="margin:2px 0 8px"></p>
     <p class="cd-note">Shipping &amp; taxes calculated at checkout</p>
     <button class="btn btn--clay" type="button" data-checkout>Checkout</button>
     <a class="cd-viewcart" href="#" data-view-cart>View full cart</a>
@@ -734,18 +710,18 @@
     recommended: {
       ship: 150,
       tiers: [
-        { at: 250, credit: 25, name: 'Sunrise' },
-        { at: 400, credit: 100, name: 'High Noon' },
-        { at: 750, credit: 250, name: 'Golden Hour' }
+        { at: 250, credit: 25, name: 'Tier 1' },
+        { at: 400, credit: 100, name: 'Tier 2' },
+        { at: 750, credit: 250, name: 'Tier 3' }
       ],
-      note: 'Built on the brief ($100 at $400, $250 at $750) plus a $25 Sunrise tier at $250. That puts a reachable first win right after free shipping ($150). Most PHYLUM pieces cost $40 to $200, so one or two more items moves a typical cart up a step. The rate climbs from 10% to 25% to 33%, so each step feels worth chasing. What it really costs is the wholesale cost of what customers later spend the credit on, and only if they spend it.'
+      note: 'Built on the brief ($100 at $400, $250 at $750) plus a $25 first tier at $250. That puts a reachable first win right after free shipping ($150). Most PHYLUM pieces cost $40 to $200, so one or two more items moves a typical cart up a step. The rate climbs from 10% to 25% to 33%, so each step feels worth chasing. What it really costs is the wholesale cost of what customers later spend the credit on, and only if they spend it.'
     },
     lean: {
       ship: 150,
       tiers: [
-        { at: 300, credit: 30, name: 'Sunrise' },
-        { at: 500, credit: 75, name: 'High Noon' },
-        { at: 800, credit: 150, name: 'Golden Hour' }
+        { at: 300, credit: 30, name: 'Tier 1' },
+        { at: 500, credit: 75, name: 'Tier 2' },
+        { at: 800, credit: 150, name: 'Tier 3' }
       ],
       note: 'Same shape with a gentler give-back (10%, 15%, 19%). Choose this if margins on throws, lighting and watches are tight, or to test the mechanic before going bigger. Store credit can be raised later. Lowering it after launch feels like a takeaway.'
     }
@@ -779,10 +755,9 @@
     return k;
   }
 
-  /* Evenly spaced stops; progress interpolates within each segment */
+  /* Credit stops are evenly spaced; progress interpolates within each segment */
   function progress(s) {
-    const pr = preset();
-    const pts = [0, pr.ship, ...pr.tiers.map(t => t.at)];
+    const pts = [0, ...preset().tiers.map(t => t.at)];
     const n = pts.length - 1;
     if (s >= pts[n]) return 1;
     for (let i = 0; i < n; i++) {
@@ -792,170 +767,106 @@
   }
 
   /* ------------------------------------------------------------
-     SVG helpers
+     PHYLUM credit module (one per mount, updated in place)
      ------------------------------------------------------------ */
-  const RAYS = (() => {
-    let l = '';
-    for (let i = 0; i < 12; i++) {
-      const a = (i / 12) * Math.PI * 2;
-      const r1 = 25, r2 = i % 2 ? 29 : 31;
-      l += `<line x1="${30 + Math.cos(a) * r1}" y1="${30 + Math.sin(a) * r1}" x2="${30 + Math.cos(a) * r2}" y2="${30 + Math.sin(a) * r2}"/>`;
-    }
-    return `<svg class="rays" viewBox="0 0 60 60" aria-hidden="true"><g>${l}</g></svg>`;
-  })();
-  const RIDER = (() => {
-    let l = '';
-    for (let i = 0; i < 10; i++) {
-      const a = (i / 10) * Math.PI * 2;
-      l += `<line x1="${20 + Math.cos(a) * 12}" y1="${20 + Math.sin(a) * 12}" x2="${20 + Math.cos(a) * 18}" y2="${20 + Math.sin(a) * 18}" stroke="#F2A900" stroke-width="3" stroke-linecap="round"/>`;
-    }
-    return `<svg viewBox="0 0 40 40" aria-hidden="true">${l}<circle cx="20" cy="20" r="9" fill="#F2A900" stroke="#fff" stroke-width="2"/></svg>`;
-  })();
-  const ICON_SHIP = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg>';
-  const ICON_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M5.3 18.7L7 17M17 7l1.7-1.7"/></svg>';
-
-  /* ------------------------------------------------------------
-     Rewards module (one per mount, updated in place)
-     ------------------------------------------------------------ */
-  const rewardMounts = [...document.querySelectorAll('[data-rewards]')].map(el => ({ el, shown: { tier: null, ship: null, earned: 0 } }));
+  const rewardMounts = [...document.querySelectorAll('[data-rewards]')].map(el => ({ el, shown: { tier: null } }));
+  const list = arr => arr.length > 1 ? arr.slice(0, -1).join(', ') + ' or ' + arr[arr.length - 1] : arr[0];
 
   function buildRewards(m) {
     const pr = preset();
-    const stops = [{ at: pr.ship, ship: true }, ...pr.tiers];
-    const n = stops.length;
+    const n = pr.tiers.length;
+    const spends = list(pr.tiers.map(t => fmt(t.at, false)));
+    const credits = list(pr.tiers.map(t => fmt(t.credit, false)));
     m.el.innerHTML = `
       <div class="rw" data-rw>
-        <div class="rw-top">
-          <div>
-            <p class="rw-eyebrow">${ICON_SUN}PHYLUM credit</p>
-            <p class="rw-msg" data-msg aria-live="polite"></p>
-          </div>
-          <div class="rw-earned" data-earned-box><small>You earn</small><strong data-earned>$0</strong></div>
-        </div>
-        <div class="rw-track" role="img" data-track>
-          <div class="rw-rail"><div class="rw-fill" data-fill></div><div class="rw-rider" data-rider>${RIDER}</div></div>
+        <p class="rw-eyebrow">PHYLUM Credit</p>
+        <p class="rw-head" data-head aria-live="polite"></p>
+        <div class="rw-track" data-track role="img">
+          <div class="rw-line"><span class="rw-dots"></span><span class="rw-prog" data-prog></span><span class="rw-sun is-off" data-sun></span></div>
           <ol class="rw-stops">
-            ${stops.map((s, i) => `
-              <li class="rw-stop${s.ship ? ' is-ship' : ''}" style="--x:${((i + 1) / n) * 100}%" data-stop="${i}">
-                <span class="rw-node">${RAYS}${s.ship ? ICON_SHIP : '$' + s.credit}</span>
-                <span class="rw-lbl"><b>${s.ship ? 'Free ship' : s.name}</b><small>${fmt(s.at, false)}</small></span>
+            ${pr.tiers.map((t, i) => `
+              <li class="rw-stop" style="--x:${((i + 1) / n) * 100}%" data-stop="${i}">
+                <span class="rw-node"></span>
+                <span class="rw-amt">${fmt(t.credit, false)}</span>
+                <span class="rw-at">at ${fmt(t.at, false)}</span>
               </li>`).join('')}
           </ol>
         </div>
-        <div class="rw-foot">
-          <span>Lands ${RETURN_DAYS} days after shipping · use within ${EXPIRY_DAYS} days</span>
-          <button type="button" class="linkbtn" data-how>How it works</button>
-        </div>
+        <p class="rw-ship" data-ship><i></i><span></span></p>
         <div class="rw-how">
-          Spend more, earn store credit for your next visit:
-          <ul>${pr.tiers.map(t => `<li>Spend ${fmt(t.at, false)}, earn ${fmt(t.credit, false)} (${t.name})</li>`).join('')}</ul>
-          You get the highest tier you reach. Credit goes to your PHYLUM account ${RETURN_DAYS} days after your order ships, and you can spend it online or in store.
+          <button type="button" class="rw-how-t" aria-expanded="false" data-how>How it works<span class="rw-ico" aria-hidden="true"></span></button>
+          <div class="rw-how-p"><div>
+            <ol class="rw-steps">
+              <li><span class="n">01</span><div><b>Spend in one order</b><p>Reach ${spends} before tax and shipping.</p></div></li>
+              <li><span class="n">02</span><div><b>We add your credit</b><p>${credits} goes into your PHYLUM account ${RETURN_DAYS} days after your order ships. We'll email you when it's there.</p></div></li>
+              <li><span class="n">03</span><div><b>Spend it within ${EXPIRY_DAYS} days</b><p>Sign in at checkout and it comes off your total, online or in our Palm Springs store.</p></div></li>
+            </ol>
+            <p class="rw-fine">Each order earns its highest reward only; rewards don't add up. If a return takes an order below its reward, the credit changes to match.</p>
+          </div></div>
         </div>
       </div>`;
-    m.shown = { tier: null, ship: null, earned: 0 };
+    m.shown = { tier: null };
+    const how = m.el.querySelector('.rw-how');
     m.el.querySelector('[data-how]').addEventListener('click', e => {
-      const rw = m.el.querySelector('[data-rw]');
-      rw.classList.toggle('show-how');
-      e.currentTarget.textContent = rw.classList.contains('show-how') ? 'Hide' : 'How it works';
+      const open = how.classList.toggle('is-open');
+      e.currentTarget.setAttribute('aria-expanded', String(open));
     });
   }
 
-  function messageFor(s) {
+  /* Two-tone headline: a sans statement over a serif next step */
+  function headFor(s) {
     const pr = preset();
     const k = tierIndex(s);
     const next = pr.tiers[k + 1];
-    if (s === 0) return `Add <b>${fmt(pr.ship, false)}</b> for free U.S. shipping. Spend ${fmt(pr.tiers[0].at, false)} and you start earning store credit.`;
-    if (s < pr.ship) return `You're <b>${usd(pr.ship - s)}</b> from free U.S. shipping. At ${fmt(pr.tiers[0].at, false)}, you earn ${fmt(pr.tiers[0].credit, false)} in credit.`;
-    if (k < 0) return `Free shipping is on us. <b>${usd(next.at - s)}</b> more earns you <b>${fmt(next.credit, false)}</b> in credit.`;
-    if (next) return `<b>${fmt(pr.tiers[k].credit, false)} credit</b> unlocked. Add <b>${usd(next.at - s)}</b> to make it <b>${fmt(next.credit, false)}</b>.`;
-    return `${pr.tiers[k].name} reached. <b>${fmt(pr.tiers[k].credit, false)} in PHYLUM credit</b> is yours, plus free shipping.`;
-  }
-
-  function countUp(el, from, to) {
-    if (reduceMotion || from === to) { el.textContent = fmt(to, false); return; }
-    const t0 = performance.now(), dur = 900;
-    const step = now => {
-      const p = Math.min(1, (now - t0) / dur);
-      const e = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(Math.round(from + (to - from) * e), false);
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-
-  function burst(node) {
-    if (reduceMotion) return;
-    const rw = node.closest('.rw');
-    const r = rw.getBoundingClientRect(), nr = node.getBoundingClientRect();
-    const cx = nr.left - r.left + nr.width / 2, cy = nr.top - r.top + nr.height / 2;
-    const colors = ['#F2A900', '#C0662F', '#7C8360', '#FFBFAC', '#F0FFAE', '#525638'];
-    for (let i = 0; i < 22; i++) {
-      const c = document.createElement('i');
-      c.className = 'confetti';
-      c.style.left = cx + 'px'; c.style.top = cy + 'px';
-      c.style.background = colors[i % colors.length];
-      if (i % 3 === 0) { c.style.borderRadius = '50%'; c.style.width = c.style.height = '7px'; }
-      rw.appendChild(c);
-      const a = -Math.PI / 2 + (Math.random() - .5) * Math.PI * 1.5;
-      const d = 40 + Math.random() * 70;
-      const dx = Math.cos(a) * d, dy = Math.sin(a) * d;
-      c.animate([
-        { transform: 'translate(-50%,-50%) rotate(0) scale(1)', opacity: 1 },
-        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${Math.random() * 540}deg) scale(1)`, opacity: 1, offset: .55 },
-        { transform: `translate(calc(-50% + ${dx * 1.15}px), calc(-50% + ${dy + 60}px)) rotate(${Math.random() * 720}deg) scale(.6)`, opacity: 0 }
-      ], { duration: 1100 + Math.random() * 500, easing: 'cubic-bezier(.2,.7,.3,1)' }).onfinish = () => c.remove();
+    if (k < 0) {
+      if (s === 0) return ['Earn store credit', `on orders from ${fmt(next.at, false)}.`];
+      return [`Spend ${usd(next.at - s)} more`, `to earn ${fmt(next.credit, false)} in store credit.`];
     }
+    const cur = fmt(pr.tiers[k].credit, false);
+    if (next) return [`${cur} in store credit.`, `Add ${usd(next.at - s)} to make it ${fmt(next.credit, false)}.`];
+    return [`${cur} in store credit.`, 'Our highest reward. Thank you.'];
   }
 
   function updateRewards(m, s, animate) {
     const pr = preset();
     const k = tierIndex(s);
-    const shipOn = s >= pr.ship;
-    const credit = k >= 0 ? pr.tiers[k].credit : 0;
     const p = progress(s);
     const el = m.el;
 
-    const fill = el.querySelector('[data-fill]');
-    fill.style.clipPath = `inset(0 ${(100 - p * 100).toFixed(2)}% 0 0 round 99px)`;
-    const rider = el.querySelector('[data-rider]');
-    rider.style.left = (p * 100).toFixed(2) + '%';
-    rider.hidden = p <= 0 || p >= 1;
-    el.querySelector('[data-rw]').style.setProperty('--glow', String(Math.min(1, p * 1.1)));
+    el.querySelector('[data-prog]').style.transform = `scaleX(${p.toFixed(4)})`;
+    const sun = el.querySelector('[data-sun]');
+    sun.style.left = (p * 100).toFixed(2) + '%';
+    sun.style.rotate = Math.round(p * 270) + 'deg';
+    sun.classList.toggle('is-off', p <= 0 || p >= 1);
     el.querySelector('[data-track]').setAttribute('aria-label',
-      `Progress: ${usd(s)} of ${fmt(pr.tiers[pr.tiers.length - 1].at, false)}. ` + (k >= 0 ? `${fmt(credit, false)} credit unlocked.` : 'No credit unlocked yet.'));
+      `${usd(s)} toward store credit rewards. ` + (k >= 0 ? `${fmt(pr.tiers[k].credit, false)} earned.` : 'No credit earned yet.'));
 
-    const nextIdx = !shipOn ? 0 : (k + 2 <= pr.tiers.length ? k + 2 : -1);
     el.querySelectorAll('[data-stop]').forEach(li => {
       const i = +li.dataset.stop;
-      const on = i === 0 ? shipOn : (k >= i - 1);
+      const on = k >= i;
       const wasOn = li.classList.contains('is-on');
       li.classList.toggle('is-on', on);
-      li.classList.toggle('is-next', i === nextIdx);
-      if (on && !wasOn && animate && m.shown.tier !== null) {
-        li.classList.remove('is-burst'); void li.offsetWidth; li.classList.add('is-burst');
-        setTimeout(() => burst(li.querySelector('.rw-node')), 420);
-      }
+      li.classList.toggle('is-next', i === k + 1);
+      li.classList.remove('is-new');
+      if (on && !wasOn && animate && m.shown.tier !== null) { void li.offsetWidth; li.classList.add('is-new'); }
     });
 
-    const msg = el.querySelector('[data-msg]');
-    const html = messageFor(s);
-    if (msg.innerHTML !== html) {
-      msg.innerHTML = html;
-      if (animate) { msg.classList.remove('is-pop'); void msg.offsetWidth; msg.classList.add('is-pop'); }
+    const head = el.querySelector('[data-head]');
+    const [a, b] = headFor(s);
+    const html = `<span class="rw-s">${a}</span><span class="rw-f">${b}</span>`;
+    if (head.innerHTML !== html) {
+      head.innerHTML = html;
+      if (animate) { head.classList.remove('is-in'); void head.offsetWidth; head.classList.add('is-in'); }
     }
 
-    const box = el.querySelector('[data-earned-box]');
-    box.classList.toggle('is-on', credit > 0);
-    const earnedEl = el.querySelector('[data-earned]');
-    if (credit !== m.shown.earned) {
-      if (animate) {
-        setTimeout(() => countUp(earnedEl, m.shown.earnedFrom ?? 0, credit), 380);
-        if (credit > m.shown.earned) { box.classList.remove('is-bump'); void box.offsetWidth; setTimeout(() => box.classList.add('is-bump'), 380); }
-      } else earnedEl.textContent = fmt(credit, false);
-    } else if (!animate) earnedEl.textContent = fmt(credit, false);
+    const ship = el.querySelector('[data-ship]');
+    const shipOn = s >= pr.ship;
+    ship.classList.toggle('is-on', shipOn);
+    ship.querySelector('span').innerHTML = shipOn
+      ? '<b>Free U.S. shipping</b> is included.'
+      : `<b>${usd(pr.ship - s)}</b> away from free U.S. shipping.`;
 
-    if (animate && p > 0 && p < 1) { rider.classList.remove('is-hop'); void rider.offsetWidth; rider.classList.add('is-hop'); }
-    m.shown = { tier: k, ship: shipOn, earned: credit, earnedFrom: credit };
+    m.shown = { tier: k };
   }
 
   /* ------------------------------------------------------------
@@ -992,8 +903,8 @@
     const items = [...over, ...under].slice(0, max).map(p => ({
       p,
       chip: p.price >= gap
-        ? (target ? `Unlocks ${fmt(target.credit, false)}${short ? '' : ' credit'}` : (short ? 'Free shipping' : 'Unlocks free shipping'))
-        : `${usd(p.price)} closer`,
+        ? (target ? `${short ? '' : 'Reaches '}${fmt(target.credit, false)} credit` : 'Ships free')
+        : '',
       unlock: p.price >= gap
     }));
     return { items, target, gap };
@@ -1022,6 +933,11 @@
     document.querySelectorAll('[data-checkout]').forEach(b => { b.disabled = cart.length === 0; b.style.opacity = cart.length ? '' : '.5'; });
 
     rewardMounts.forEach(m => updateRewards(m, s, animate));
+    const kk = tierIndex(s);
+    document.querySelectorAll('[data-credit-note]').forEach(el => {
+      el.hidden = kk < 0;
+      if (kk >= 0) el.innerHTML = `<span>This order earns <b>${fmt(preset().tiers[kk].credit, false)} in PHYLUM credit</b>, added to your account ${RETURN_DAYS} days after it ships.</span>`;
+    });
 
     const page = pickUpsells(s, 4);
     const rail = pickUpsells(s, 8, true);
@@ -1031,15 +947,15 @@
     const rt = document.querySelector('[data-rail-title]');
     if (page.target) {
       gt.textContent = `${usd(page.gap)} from ${fmt(page.target.credit, false)} in credit`;
-      gs.textContent = `Pieces that get you to ${page.target.name}. Credit lands ${RETURN_DAYS} days after shipping.`;
-      rt.textContent = `${usd(rail.gap)} to ${fmt(rail.target.credit, false)} credit. Get there with:`;
+      gs.textContent = `Marked pieces take this order to ${fmt(page.target.credit, false)} on their own.`;
+      rt.textContent = `${usd(rail.gap)} from ${fmt(rail.target.credit, false)} in credit`;
     } else if (s < preset().ship) {
       gt.textContent = `${usd(page.gap)} from free shipping`;
       gs.textContent = 'A few small things our regulars love.';
       rt.textContent = 'Get there with';
     } else {
       gt.textContent = 'You might also love';
-      gs.textContent = 'You hit the top tier. These are just good.';
+      gs.textContent = 'This order already earns our highest reward.';
       rt.textContent = 'You might also love';
     }
 
@@ -1222,9 +1138,7 @@
   function renderTeam() {
     const pr = preset();
     document.querySelectorAll('[data-preset]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.preset === presetKey)));
-    const sunSVG = '<svg class="lad-sun" viewBox="0 0 60 60" aria-hidden="true"><g stroke="#F2A900" stroke-width="2.4" stroke-linecap="round">' +
-      Array.from({ length: 12 }, (_, i) => { const a = i / 12 * Math.PI * 2; return `<line x1="${30 + Math.cos(a) * 20}" y1="${30 + Math.sin(a) * 20}" x2="${30 + Math.cos(a) * 27}" y2="${30 + Math.sin(a) * 27}"/>`; }).join('') +
-      '</g><circle cx="30" cy="30" r="14" fill="#F2A900"/></svg>';
+    const sunSVG = '<span class="lad-sun" aria-hidden="true"></span>';
     document.querySelector('[data-ladder]').innerHTML =
       `<div class="lad lad--ship"><h3>Free shipping</h3><span class="spend">Spend ${fmt(pr.ship, false)}</span><div class="get">✓<small>already live</small></div>
         <dl><dt>Where</dt><dd>U.S. orders</dd><dt>Set in</dt><dd>Theme settings</dd></dl></div>` +
