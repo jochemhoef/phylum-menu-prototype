@@ -151,11 +151,30 @@
   /* ---------- PHYLUM credit module (registry v2 language) ---------- */
   .rw {
     --espresso: #3E2B30; --ink2: #6A5D5F; --terra: #CC6118; --hair: rgba(62,43,48,.16); --hair-strong: rgba(62,43,48,.32);
-    --light: #F7F6F0; --node: 13px;
+    --light: #F7F6F0; --node: 13px; --gold: #E8AE3B; --linen: #EEEEE5;
     position: relative; color: var(--espresso); background: var(--light);
-    border: 1px solid var(--hair); border-radius: 15px; padding: 28px 28px 0;
+    border: 1px solid var(--hair); border-radius: 15px; overflow: hidden;
   }
-  .rw-eyebrow { margin: 0 0 18px; font-family: var(--sans); font-size: 11px; line-height: 1; letter-spacing: .2em; text-transform: uppercase; color: var(--terra); }
+  /* Campaign band: the Black Friday poster in miniature */
+  .rw-band { position: relative; isolation: isolate; overflow: hidden; padding: 24px 28px 22px; background: var(--espresso); color: var(--linen); }
+  .rw-band-sun { position: absolute; z-index: -1; top: -78px; right: -78px; width: 190px; aspect-ratio: 1; background: var(--gold);
+    -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat; mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+    rotate: var(--sunrot, 0deg); transition: rotate 1.6s var(--ease); pointer-events: none; }
+  .rw-band .rw-eyebrow { color: var(--gold); margin-bottom: 14px; }
+  .rw-title { margin: 0; font-family: var(--sans); font-weight: 500; font-size: 26px; line-height: 1.02; letter-spacing: -.035em; color: var(--linen); }
+  .rw-dates { margin: 10px 0 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 12.5px; letter-spacing: .01em; color: rgba(238,238,229,.72); }
+  .rw-body { padding: 24px 28px 0; }
+  .rw-where::before { content: " · "; }
+  .rw { container-type: inline-size; }
+  @container (max-width: 400px) {
+    .rw-band-sun { width: 150px; top: -64px; right: -64px; }
+    .rw-where { display: block; margin-top: 3px; }
+    .rw-where::before { content: none; }
+    .rw-at-w { display: none; }
+    .rw-at { letter-spacing: .1em; }
+    .rw-amt { font-size: 20px; }
+  }
+  .rw-eyebrow { margin: 0 0 16px; font-family: var(--sans); font-size: 11px; line-height: 1; letter-spacing: .2em; text-transform: uppercase; color: var(--terra); }
   .rw-head { margin: 0; font-size: 25px; line-height: 1.12; letter-spacing: -.025em; min-height: 2.3em; }
   .rw-head .rw-s { display: block; font-family: var(--sans); font-weight: 500; font-size: .94em; letter-spacing: -.03em; }
   .rw-head .rw-f { display: block; font-family: var(--serif); font-weight: 300; }
@@ -216,12 +235,17 @@
   .rw-steps li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: baseline; }
   .rw-steps .n { font-family: var(--serif); font-weight: 300; font-size: 26px; line-height: 1; letter-spacing: -.03em; color: var(--terra); }
   .rw-steps b { display: block; font-weight: 500; font-size: 19px; line-height: 1.25; letter-spacing: -.02em; margin-bottom: 6px; color: var(--espresso); }
-  .rw-table { margin: 12px 0 2px; border-top: 1px solid var(--hair); }
-  .rw-table div { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--hair);
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 13.5px; color: var(--ink2); }
-  .rw-table strong { font-family: var(--serif); font-weight: 300; font-size: 20px; letter-spacing: -.02em; color: var(--espresso); }
-  .rw-table .is-cur strong { color: var(--terra); }
-  .rw-table .is-cur span::after { content: "  ·  this order"; color: var(--terra); }
+  .rw-table { margin: 14px 0 2px; border-radius: 10px; overflow: hidden; }
+  .rw-table div { --bg: #F1EE80; --fg: #3E2B30; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 14px;
+    background: var(--bg); color: var(--fg); font-family: var(--sans); font-weight: 500; font-size: 15px; letter-spacing: -.015em; }
+  .rw-table div:nth-child(2) { --bg: #B6E4E5; }
+  .rw-table div:nth-child(3) { --bg: #E8AE3B; }
+  .rw-table div:nth-child(4) { --bg: #535538; --fg: #FFBFAC; }
+  .rw-table span { display: inline-flex; align-items: center; gap: 8px; }
+  .rw-table strong { font-family: var(--serif); font-weight: 300; font-size: 19px; letter-spacing: -.02em; }
+  .rw-table em { font-style: normal; display: none; padding: 4px 7px 3px; border-radius: 99px; background: #3E2B30; color: #EEEEE5; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
+  .rw-table div:nth-child(4) em { background: #FFBFAC; color: #3E2B30; }
+  .rw-table .is-cur em { display: inline-block; }
   .rw-steps p, .rw-fine { margin: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 13.5px; line-height: 1.6; color: var(--ink2); }
   .rw-fine { padding: 14px 0 20px; margin-top: 12px; border-top: 1px solid var(--hair); font-size: 12.5px; }
 
@@ -247,7 +271,7 @@
   .cd-x:hover { background: var(--paper-deep); }
   .cd-x svg { width: 18px; height: 18px; }
   .cd-body { flex: 1; overflow-y: auto; padding: 18px 24px 24px; overscroll-behavior: contain; }
-  .cd .rw { padding: 22px 22px 0; }
+  .cd .rw-band, .cd .rw-body { padding-left: 22px; padding-right: 22px; }
   .cd .rw-head { font-size: 22px; }
   .cd .ln { grid-template-columns: 76px minmax(0, 1fr) auto; grid-template-areas: "img info price" "img qty qty"; gap: 6px 14px; padding: 16px 0; }
   .cd .ln-img { grid-area: img; width: 76px; }
@@ -302,7 +326,7 @@
   .seg button { border: 0; background: transparent; padding: 8px 16px; border-radius: 99px; font-size: 13px; letter-spacing: .04em; }
   .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 
-  .ladder { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .ladder { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
   .lad { border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: var(--paper-soft); position: relative; overflow: hidden; }
   .lad h3 { margin: 0 0 2px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; }
   .lad .spend { font-family: var(--serif); font-weight: 300; font-size: 15px; color: var(--ink-soft); }
@@ -311,6 +335,15 @@
   .lad dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--ink-soft); }
   .lad dd { margin: 0; text-align: right; color: var(--ink); }
   .lad--ship { background: transparent; border-style: dashed; }
+  .lad--t0 { background: #F1EE80; border-color: #F1EE80; }
+  .lad--t1 { background: #B6E4E5; border-color: #B6E4E5; }
+  .lad--t2 { background: #E8AE3B; border-color: #E8AE3B; }
+  .lad--t3 { background: #535538; border-color: #535538; color: #FFBFAC; }
+  .lad--t3 .spend, .lad--t3 dl, .lad--t3 .get small { color: rgba(255,191,172,.8); }
+  .lad--t3 dd { color: #FFBFAC; }
+  .lad--t3 .tag { color: #3E2B30; background: #FFBFAC; }
+  .lad--t0 dl, .lad--t1 dl, .lad--t2 dl { border-color: rgba(62,43,48,.22); }
+  .tv-sub { margin: 28px 0 12px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--clay); }
   .lad-sun { position: absolute; right: -22px; top: -22px; width: 84px; height: 84px; background: var(--sun); -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat; mask: url("assets/event/phylum-sun.svg") center / contain no-repeat; }
   .tv-note { margin: 16px 0 0; font-family: var(--serif); font-weight: 300; font-size: 15px; color: var(--ink-soft); max-width: 860px; line-height: 1.5; }
 
@@ -442,7 +475,7 @@
     body.cd-open .cc-demo { display: none; }
     .ladder { grid-template-columns: minmax(0, 1fr); }
     .cc-foot .in { grid-template-columns: minmax(0, 1fr); }
-    .rw { padding: 22px 20px 0; }
+    .rw-band, .rw-body { padding-left: 20px; padding-right: 20px; }
     .rw-head { font-size: 22px; }
     .cc-demo { left: 12px; right: 12px; transform: none; justify-content: space-between; flex-wrap: nowrap; overflow-x: auto; border-radius: 16px; }
     .cc-demo .tag-proto { display: none; }
@@ -500,19 +533,16 @@
   <div class="tv" id="teamView" hidden>
     <header class="tv-hero">
       <div>
-        <p class="tv-eyebrow">For the PHYLUM team</p>
-        <h1>Behind the cart: how PHYLUM credit gets issued</h1>
+        <p class="tv-eyebrow">For the PHYLUM team · Black Friday Weekend</p>
+        <h1>Behind the cart: how the weekend's credit gets issued</h1>
       </div>
-      <p>Customers see a sunny progress bar. Your team sees one list in Shopify Orders that shows who has credit due, how much, and when it's safe to issue. Issuing takes about 20 seconds per order, and it can be automated later.</p>
+      <p>The campaign runs Wed, Nov 25 to Mon, Nov 30. Shopify Flow tags every qualifying order as it comes in, online and in store. On Tuesday, Dec 1 the team works through one list in Shopify Orders, or one scheduled Flow issues every credit at once.</p>
     </header>
 
     <section class="tv-sec" aria-labelledby="tvLadder">
       <header>
         <h2 id="tvLadder"><span class="n">01</span>The ladder</h2>
-        <div class="seg" role="group" aria-label="Tier preset" data-preset-seg>
-          <button type="button" data-preset="recommended" aria-pressed="true">Recommended</button>
-          <button type="button" data-preset="lean" aria-pressed="false">Leaner margin</button>
-        </div>
+        <p>One credit per transaction, on the amount paid. The credit is added on Tuesday, Dec 1 and never expires.</p>
       </header>
       <div class="ladder" data-ladder></div>
       <p class="tv-note" data-ladder-note></p>
@@ -520,8 +550,8 @@
 
     <section class="tv-sec" aria-labelledby="tvDue">
       <header>
-        <h2 id="tvDue"><span class="n">02</span>The "Store credit due" list</h2>
-        <p>A saved view in Shopify Orders. Shopify Flow tags every qualifying order the moment it's paid, so the list fills itself. Try issuing one.</p>
+        <h2 id="tvDue"><span class="n">02</span>Tuesday, Dec 1: the "Store credit due" list</h2>
+        <p>A saved view in Shopify Orders. Flow has tagged every qualifying weekend order, so on Dec 1 the list is ready to work through. Try issuing one.</p>
       </header>
       <div class="stats" data-stats></div>
       <div class="admin">
@@ -531,7 +561,7 @@
         </div>
         <div class="admin-scroll">
           <table>
-            <thead><tr><th>Order</th><th>Customer</th><th>Subtotal</th><th>Tier</th><th>Credit</th><th>Tags</th><th>Status</th><th></th></tr></thead>
+            <thead><tr><th>Order</th><th>Customer</th><th>Paid</th><th>Tier</th><th>Credit</th><th>Tags</th><th>Status</th><th></th></tr></thead>
             <tbody data-orders></tbody>
           </table>
         </div>
@@ -553,21 +583,21 @@
           <span class="who">Theme · 1 minute</span>
         </article>
         <article class="step">
-          <h3><span class="k">B</span>Add the credit ladder</h3>
-          <p>One snippet, <span class="path">phylum-credit-ladder.liquid</span>, is rendered in both the drawer and the cart page, next to the existing free-shipping bar. The tiers live in theme settings, so the team can change amounts in the Customizer without code.</p>
+          <h3><span class="k">B</span>Add the Black Friday credit bar</h3>
+          <p>One snippet, <span class="path">phylum-credit-ladder.liquid</span>, is rendered in both the drawer and the cart page. Tiers, dates and copy live in theme settings. The bar switches itself on for Nov 25 and off after Nov 30, so nobody has to remember.</p>
           <span class="who">Theme · we build it</span>
         </article>
         <article class="step">
           <h3><span class="k">C</span>A Flow workflow tags qualifying orders</h3>
           <div class="flow" data-flow></div>
-          <p style="margin-top:10px">A second small workflow watches refunds. If a return drops an order below its tier, it swaps <span class="tag tag--due">credit-due</span> for <span class="tag tag--review">credit-review</span>.</p>
+          <p style="margin-top:10px">A second small workflow watches refunds. If a return drops an order below its tier before Dec 1, it swaps <span class="tag tag--due">credit-due</span> for <span class="tag tag--review">credit-review</span>.</p>
           <span class="who">Shopify Flow · free, included</span>
         </article>
         <article class="step">
-          <h3><span class="k">D</span>Save the order view and issue credit</h3>
+          <h3><span class="k">D</span>On Dec 1, issue from one saved view</h3>
           <ol>
-            <li>In Orders, filter <span class="path">Tagged with: credit-due</span> and <span class="path">Fulfillment: Fulfilled</span>, then save the view as <em>Store credit due</em>.</li>
-            <li>Open an order › customer › <span class="path">Store credit › Issue credit</span>. Enter the amount from the tag, set a 90-day expiry, and tick <em>Notify customer</em>.</li>
+            <li>In Orders, filter <span class="path">Tagged with: credit-due</span> and save the view as <em>Store credit due</em>.</li>
+            <li>Open an order › customer › <span class="path">Store credit › Issue credit</span>. Enter the amount from the tag, leave the expiry empty (it never expires), and tick <em>Notify customer</em>.</li>
             <li>Replace the tag <span class="tag tag--due">credit-due</span> with <span class="tag tag--done">credit-issued</span>, and the order drops off the list.</li>
           </ol>
           <span class="who">Team · ~20 seconds per order</span>
@@ -577,43 +607,50 @@
 
     <section class="tv-sec" aria-labelledby="tvAuto">
       <header>
-        <h2 id="tvAuto"><span class="n">04</span>Later: hands-off</h2>
-        <p>When the team trusts the rules, Flow can issue the credit itself. Nobody needs to touch the list.</p>
+        <h2 id="tvAuto"><span class="n">04</span>Or: one scheduled run on Dec 1</h2>
+        <p>Instead of clicking through the list, Flow can issue every credit at 9am on Dec 1 by itself.</p>
       </header>
       <div class="steps">
         <article class="step">
-          <h3><span class="k">Flow</span>Wait, check, then credit automatically</h3>
-          <p>Add three steps to the same workflow: <em>Wait 14 days after fulfillment</em>, then confirm the order hasn't been refunded below its tier, then run a <em>Send Admin API request</em> action with Shopify's native store credit mutation:</p>
+          <h3><span class="k">Flow</span>Scheduled, then hands-off</h3>
+          <p><em>Scheduled time</em> trigger (Tue, Dec 1, 9am) › <em>Get order data</em> for <span class="path">tag:credit-due</span> › <em>For each</em> order › <em>Send Admin API request</em> with Shopify's native store credit mutation:</p>
 <pre class="code"><span class="c"># Flow › Send Admin API request › storeCreditAccountCredit</span>
 {
   "id": "{{ order.customer.id }}",
   "creditInput": {
-    "creditAmount": { "amount": "100.00", "currencyCode": "USD" },
-    "expiresAt": "<span class="c">{{ 90 days from today }}</span>",
+    "creditAmount": { "amount": "<span class="c">{{ 15 | 30 | 60 | 150 from the tag }}</span>", "currencyCode": "USD" },
     "notify": true
   }
-}</pre>
-          <p style="margin-top:10px">Then tag the order <span class="tag tag--done">credit-issued</span>. Shopify's own <em>Store credit issued</em> email goes out (edit it in <span class="path">Settings › Notifications</span>).</p>
+}
+<span class="c"># no expiresAt, so the credit never expires</span></pre>
+          <p style="margin-top:10px">Then swap the tag to <span class="tag tag--done">credit-issued</span>. Shopify's own <em>Store credit issued</em> email goes out (edit it in <span class="path">Settings › Notifications</span>). Test it on one staff order first.</p>
         </article>
         <article class="step">
-          <h3><span class="k">App</span>Or a turnkey loyalty app</h3>
-          <p>Apps like Rise.ai and Koin run tiered cashback on top of Shopify's native store credit, with expiry reminders and reporting. They're worth it if PHYLUM wants credit reminders by email or SMS. They're overkill if the goal is just this ladder.</p>
-          <p>Either way, the credit is <strong>native Shopify store credit</strong>. Customers see their balance in their account, and it applies at checkout as a payment method.</p>
+          <h3><span class="k">App</span>Or a turnkey app</h3>
+          <p>Apps like Rise.ai and Koin run spend-more campaigns on top of Shopify's native store credit, with their own reporting. For a single weekend they're more than PHYLUM needs.</p>
+          <p>Either way, the credit is <strong>native Shopify store credit</strong>. Customers see their balance in their account, and it applies at checkout and at the register as a payment method.</p>
         </article>
       </div>
     </section>
 
     <section class="tv-sec" aria-labelledby="tvRules">
       <header>
-        <h2 id="tvRules"><span class="n">05</span>Rules to decide before launch</h2>
+        <h2 id="tvRules"><span class="n">05</span>The rules</h2>
       </header>
+      <p class="tv-sub">Confirmed in the campaign</p>
       <div class="rules">
-        <div class="rule"><h3>What counts toward a tier</h3><p>Subtotal after discounts. Shipping, tax and gift cards don't count. That matches what the bar shows.</p></div>
-        <div class="rule"><h3>Highest tier only</h3><p>Tiers don't stack. A $760 order earns $250, not $25 + $100 + $250.</p></div>
-        <div class="rule"><h3>Issue after the return window</h3><p>Issuing 14 days after an order ships stops the spend-to-unlock-then-return trick. The bar says this up front.</p></div>
-        <div class="rule"><h3>Expiry</h3><p>Ninety days gives customers a reason to come back this season. Shopify uses up the credit that expires soonest first.</p></div>
-        <div class="rule"><h3>Customer accounts</h3><p>Store credit needs Shopify's newer customer accounts (passwordless email codes). Guests are fine: credit attaches to their email.</p></div>
-        <div class="rule"><h3>In store</h3><p>Shopify POS can also redeem native store credit, so a credit earned online can be spent on Palm Canyon Drive.</p></div>
+        <div class="rule"><h3>One credit per transaction</h3><p>The highest tier only. A $1,050 order gets $150, not $15 + $30 + $60 + $150.</p></div>
+        <div class="rule"><h3>On the amount paid</h3><p>Flow reads what the customer actually paid, after discounts.</p></div>
+        <div class="rule"><h3>Added Tuesday, Dec 1</h3><p>Every weekend credit lands on the same day, which keeps the team's work to one sitting.</p></div>
+        <div class="rule"><h3>Never expires</h3><p>Leave the expiry date empty when issuing. Customers can spend it whenever they like.</p></div>
+        <div class="rule"><h3>In store and online</h3><p>POS sales trigger the same Flow, and the register can redeem store credit, so it works on Palm Canyon Drive too.</p></div>
+        <div class="rule"><h3>Free shipping all weekend</h3><p>Online orders ship free Nov 25–30, whatever their size. That's a shipping discount, separate from the credit.</p></div>
+      </div>
+      <p class="tv-sub">Still to decide before Nov 25</p>
+      <div class="rules">
+        <div class="rule"><h3>Returns before Dec 1</h3><p>Should a return that drops an order below its tier lower the credit? The refund workflow flags these as <span class="tag tag--review">credit-review</span> either way.</p></div>
+        <div class="rule"><h3>Tax and gift cards</h3><p>Does "amount paid" include tax, and do gift card purchases count? We'd suggest no to both.</p></div>
+        <div class="rule"><h3>A customer on every POS sale</h3><p>Credit needs a customer with an email, so staff should attach one at the register for every qualifying sale.</p></div>
       </div>
     </section>
   </div>
@@ -720,28 +757,19 @@
 
   /* Tier ladders. Credit is the highest tier reached (no stacking). */
   const PRESETS = {
-    recommended: {
-      ship: 150,
+    bf: {
+      ship: 0, /* free shipping online all weekend */
       tiers: [
-        { at: 250, credit: 25, name: 'Tier 1' },
-        { at: 400, credit: 100, name: 'Tier 2' },
-        { at: 750, credit: 250, name: 'Tier 3' }
+        { at: 250, credit: 15, name: 'Tier 1' },
+        { at: 400, credit: 30, name: 'Tier 2' },
+        { at: 600, credit: 60, name: 'Tier 3' },
+        { at: 1000, credit: 150, name: 'Tier 4' }
       ],
-      note: 'Built on the brief ($100 at $400, $250 at $750) plus a $25 first tier at $250. That puts a reachable first win right after free shipping ($150). Most PHYLUM pieces cost $40 to $200, so one or two more items moves a typical cart up a step. The rate climbs from 10% to 25% to 33%, so each step feels worth chasing. What it really costs is the wholesale cost of what customers later spend the credit on, and only if they spend it.'
-    },
-    lean: {
-      ship: 150,
-      tiers: [
-        { at: 300, credit: 30, name: 'Tier 1' },
-        { at: 500, credit: 75, name: 'Tier 2' },
-        { at: 800, credit: 150, name: 'Tier 3' }
-      ],
-      note: 'Same shape with a gentler give-back (10%, 15%, 19%). Choose this if margins on throws, lighting and watches are tight, or to test the mechanic before going bigger. Store credit can be raised later. Lowering it after launch feels like a takeaway.'
+      note: 'The Black Friday Weekend ladder from the campaign: 6%, 7.5%, 10% and 15% back. The real cost is lower than face value, because credit is spent on products at retail price. It never expires, so plan for most of it to be redeemed over the coming months.'
     }
   };
-
-  const RETURN_DAYS = 14, EXPIRY_DAYS = 90;
-
+  const CAMPAIGN = { dates: 'Wed, Nov 25 – Mon, Nov 30', creditDay: 'Tuesday, Dec 1', creditDayShort: 'Tue, Dec 1' };
+  
   /* ------------------------------------------------------------
      State
      ------------------------------------------------------------ */
@@ -749,8 +777,7 @@
     get(k, d) { try { const v = localStorage.getItem('phylumCredit:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
     set(k, v) { try { localStorage.setItem('phylumCredit:' + k, JSON.stringify(v)); } catch (e) {} }
   };
-  let presetKey = store.get('preset', 'recommended');
-  if (!PRESETS[presetKey]) presetKey = 'recommended';
+  let presetKey = 'bf';
   let cart = store.get('cart', null) || STARTS.throw.map(l => ({ ...l }));
   cart = cart.filter(l => BY_ID[l.id]);
   let lastAdded = null;
@@ -788,36 +815,41 @@
   function buildRewards(m) {
     const pr = preset();
     const n = pr.tiers.length;
-    const spends = list(pr.tiers.map(t => fmt(t.at, false)));
-    const credits = list(pr.tiers.map(t => fmt(t.credit, false)));
     m.el.innerHTML = `
       <div class="rw" data-rw>
-        <p class="rw-eyebrow">PHYLUM Credit</p>
-        <p class="rw-head" data-head aria-live="polite"></p>
-        <div class="rw-track" data-track role="img">
-          <div class="rw-line"><span class="rw-dots"></span><span class="rw-prog" data-prog></span><span class="rw-sun is-off" data-sun></span></div>
-          <ol class="rw-stops">
-            ${pr.tiers.map((t, i) => `
-              <li class="rw-stop" style="--x:${((i + 1) / n) * 100}%" data-stop="${i}">
-                <span class="rw-tag">Your credit</span>
-                <span class="rw-node"></span>
-                <span class="rw-amt">${fmt(t.credit, false)}</span>
-                <span class="rw-at">at ${fmt(t.at, false)}</span>
-              </li>`).join('')}
-          </ol>
+        <div class="rw-band">
+          <span class="rw-band-sun" aria-hidden="true"></span>
+          <p class="rw-eyebrow">Black Friday Weekend</p>
+          <p class="rw-title">Spend more, get more.</p>
+          <p class="rw-dates"><span>${CAMPAIGN.dates}</span><span class="rw-where">In store &amp; online</span></p>
         </div>
-        <p class="rw-ship" data-ship><i></i><span></span></p>
-        <div class="rw-how">
-          <button type="button" class="rw-how-t" aria-expanded="false" data-how>How it works<span class="rw-ico" aria-hidden="true"></span></button>
-          <div class="rw-how-p"><div>
-            <ol class="rw-steps">
-              <li><span class="n">01</span><div><b>One order, one reward</b><p>The more you spend in a single order, the bigger your credit. Each reward replaces the one before it. They don't add up.</p>
-                <div class="rw-table" data-table>${pr.tiers.map((t, i) => `<div data-row="${i}"><span>Spend ${fmt(t.at, false)}</span><strong>${fmt(t.credit, false)} credit</strong></div>`).join('')}</div></div></li>
-              <li><span class="n">02</span><div><b>We add it after shipping</b><p>Your credit goes into your PHYLUM account ${RETURN_DAYS} days after your order ships. We'll email you when it's there.</p></div></li>
-              <li><span class="n">03</span><div><b>Spend it within ${EXPIRY_DAYS} days</b><p>Sign in at checkout and it comes off your total, online or in our Palm Springs store.</p></div></li>
+        <div class="rw-body">
+          <p class="rw-head" data-head aria-live="polite"></p>
+          <div class="rw-track" data-track role="img">
+            <div class="rw-line"><span class="rw-dots"></span><span class="rw-prog" data-prog></span><span class="rw-sun is-off" data-sun></span></div>
+            <ol class="rw-stops">
+              ${pr.tiers.map((t, i) => `
+                <li class="rw-stop" style="--x:${((i + 1) / n) * 100}%" data-stop="${i}">
+                  <span class="rw-tag">Your credit</span>
+                  <span class="rw-node"></span>
+                  <span class="rw-amt">${fmt(t.credit, false)}</span>
+                  <span class="rw-at"><span class="rw-at-w">at </span>${fmt(t.at, false)}</span>
+                </li>`).join('')}
             </ol>
-            <p class="rw-fine">Spend is counted before tax and shipping. If a return takes an order below its reward, the credit changes to match.</p>
-          </div></div>
+          </div>
+          <p class="rw-ship is-on"><i></i><span><b>Free shipping</b> online all weekend.</span></p>
+          <div class="rw-how">
+            <button type="button" class="rw-how-t" aria-expanded="false" data-how>How it works<span class="rw-ico" aria-hidden="true"></span></button>
+            <div class="rw-how-p"><div>
+              <ol class="rw-steps">
+                <li><span class="n">01</span><div><b>One order, one reward</b><p>The more you spend in a single transaction, the bigger your credit. Each reward replaces the one before it. They don't add up.</p>
+                  <div class="rw-table">${pr.tiers.map((t, i) => `<div data-row="${i}"><span>Spend ${fmt(t.at, false)}<em>This order</em></span><strong>Get ${fmt(t.credit, false)}</strong></div>`).join('')}</div></div></li>
+                <li><span class="n">02</span><div><b>Added on ${CAMPAIGN.creditDay}</b><p>Your credit goes into your PHYLUM account on ${CAMPAIGN.creditDay}. We'll email you when it's there.</p></div></li>
+                <li><span class="n">03</span><div><b>Yours to keep</b><p>It never expires. Spend it wherever and whenever you like, in store or at shopphylum.com. Just sign in at checkout.</p></div></li>
+              </ol>
+              <p class="rw-fine">One credit per transaction, on the amount paid. Valid ${CAMPAIGN.dates}, in store and at shopphylum.com.</p>
+            </div></div>
+          </div>
         </div>
       </div>`;
     m.shown = { tier: null };
@@ -835,7 +867,7 @@
     const next = pr.tiers[k + 1];
     if (k < 0) {
       if (s === 0) return ['Earn store credit', `on orders from ${fmt(next.at, false)}.`];
-      return [`Spend ${usd(next.at - s)} more`, `to earn ${fmt(next.credit, false)} in store credit.`];
+      return [`Spend ${usd(next.at - s)} more`, `to get ${fmt(next.credit, false)} in store credit.`];
     }
     const cur = fmt(pr.tiers[k].credit, false);
     if (next) return [`Your credit: ${cur}.`, `Add ${usd(next.at - s)} and it becomes ${fmt(next.credit, false)}.`];
@@ -852,6 +884,7 @@
     const sun = el.querySelector('[data-sun]');
     sun.style.left = (p * 100).toFixed(2) + '%';
     sun.style.rotate = Math.round(p * 270) + 'deg';
+    el.querySelector('.rw-band-sun').style.setProperty('--sunrot', Math.round(p * 40) + 'deg');
     sun.classList.toggle('is-off', p <= 0 || p >= 1);
     el.querySelector('[data-track]').setAttribute('aria-label',
       `${usd(s)} toward store credit rewards. ` + (k >= 0 ? `${fmt(pr.tiers[k].credit, false)} earned.` : 'No credit earned yet.'));
@@ -875,13 +908,6 @@
       head.innerHTML = html;
       if (animate) { head.classList.remove('is-in'); void head.offsetWidth; head.classList.add('is-in'); }
     }
-
-    const ship = el.querySelector('[data-ship]');
-    const shipOn = s >= pr.ship;
-    ship.classList.toggle('is-on', shipOn);
-    ship.querySelector('span').innerHTML = shipOn
-      ? '<b>Free U.S. shipping</b> is included.'
-      : `<b>${usd(pr.ship - s)}</b> away from free U.S. shipping.`;
 
     m.shown = { tier: k };
   }
@@ -953,7 +979,7 @@
     const kk = tierIndex(s);
     document.querySelectorAll('[data-credit-note]').forEach(el => {
       el.hidden = kk < 0;
-      if (kk >= 0) el.innerHTML = `<span>This order earns <b>${fmt(preset().tiers[kk].credit, false)} in PHYLUM credit</b>, added to your account ${RETURN_DAYS} days after it ships.</span>`;
+      if (kk >= 0) el.innerHTML = `<span>This order earns <b>${fmt(preset().tiers[kk].credit, false)} in PHYLUM credit</b>, added to your account on ${CAMPAIGN.creditDay}.</span>`;
     });
 
     const page = pickUpsells(s, 4);
@@ -1098,17 +1124,15 @@
      Team view
      ------------------------------------------------------------ */
   const ORDERS = [
-    { no: 1287, name: 'Maya R.', city: 'Palm Desert, CA', sub: 812, shipped: '2026-10-21', state: 'ready' },
-    { no: 1291, name: 'Theo L.', city: 'Los Angeles, CA', sub: 446.5, shipped: '2026-10-24', state: 'ready' },
-    { no: 1294, name: 'Priya S.', city: 'Portland, OR', sub: 268, shipped: '2026-10-25', state: 'ready' },
-    { no: 1279, name: 'Sam W.', city: 'Phoenix, AZ', sub: 310, was: 402, shipped: '2026-10-18', state: 'review' },
-    { no: 1302, name: 'Jordan K.', city: 'San Diego, CA', sub: 535, shipped: '2026-11-04', state: 'window' },
-    { no: 1305, name: 'Ana M.', city: 'Palm Springs, CA', sub: 760, shipped: null, state: 'unfulfilled' },
-    { no: 1266, name: 'Lena O.', city: 'Seattle, WA', sub: 418, shipped: '2026-10-09', state: 'issued', issued: '2026-10-23' }
+    { no: 1287, name: 'Maya R.', where: 'Online · Palm Desert, CA', sub: 1124, date: '2026-11-27', state: 'ready' },
+    { no: 1291, name: 'Theo L.', where: 'Online · Los Angeles, CA', sub: 446.5, date: '2026-11-28', state: 'ready' },
+    { no: 1302, name: 'Jordan K.', where: 'In store · Palm Springs', sub: 655, date: '2026-11-28', state: 'ready' },
+    { no: 1294, name: 'Priya S.', where: 'Online · Portland, OR', sub: 268, date: '2026-11-29', state: 'ready' },
+    { no: 1279, name: 'Sam W.', where: 'Online · Phoenix, AZ', sub: 380, was: 640, date: '2026-11-25', state: 'review' },
+    { no: 1305, name: 'Ana M.', where: 'In store · Palm Springs', sub: 780, date: '2026-11-30', state: 'ready' },
+    { no: 1266, name: 'Lena O.', where: 'Online · Seattle, WA', sub: 418, date: '2026-11-26', state: 'issued' }
   ];
-  const TODAY = new Date('2026-11-10T12:00:00');
   const dfmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  const addDays = (iso, n) => { const d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n); return d; };
 
   function orderRow(o) {
     const pr = preset();
@@ -1119,7 +1143,7 @@
     const amtTag = t ? `<span class="tag">credit-${credit}</span>` : '';
     if (o.state === 'issued') {
       tags = `<span class="tag tag--done">credit-issued</span>${amtTag}`;
-      status = `<span class="pill pill--done">Issued ${dfmt(new Date((o.issued || '2026-11-10') + 'T12:00:00'))}</span>`;
+      status = `<span class="pill pill--done">Issued Dec 1</span>`;
       act = `<button class="act act--quiet" disabled>Issued</button>`;
     } else if (o.state === 'review') {
       const wk = tierIndex(o.was, pr);
@@ -1127,22 +1151,14 @@
       status = `<span class="pill pill--review">Refund: ${fmt(o.was, false)} → ${fmt(o.sub, false)}</span>`;
       act = `<button class="act act--quiet" data-issue="${o.no}">${t ? `Issue ${fmt(credit, false)}` : 'Clear'}</button>`;
       if (wk >= 0 && t) status += `<br><small style="color:var(--ink-mute);font-size:12px">${pr.tiers[wk].name} → ${t.name}</small>`;
-    } else if (o.state === 'window') {
-      tags = `<span class="tag tag--due">credit-due</span>${amtTag}`;
-      status = `<span class="pill pill--wait">Return window · issue ${dfmt(addDays(o.shipped, RETURN_DAYS))}</span>`;
-      act = `<button class="act act--quiet" disabled>Wait</button>`;
-    } else if (o.state === 'unfulfilled') {
-      tags = `<span class="tag tag--due">credit-due</span>${amtTag}`;
-      status = `<span class="pill pill--wait">Not shipped yet</span>`;
-      act = `<button class="act act--quiet" disabled>Wait</button>`;
     } else {
       tags = `<span class="tag tag--due">credit-due</span>${amtTag}`;
-      status = `<span class="pill pill--ready">Ready · shipped ${dfmt(new Date(o.shipped + 'T12:00:00'))}</span>`;
+      status = `<span class="pill pill--ready">Ready · ordered ${dfmt(new Date(o.date + 'T12:00:00'))}</span>`;
       act = `<button class="act" data-issue="${o.no}">Issue ${fmt(credit, false)}</button>`;
     }
     return `<tr data-row="${o.no}">
       <td class="ord">#${o.no}</td>
-      <td class="cust">${o.name}<small>${o.city}</small></td>
+      <td class="cust">${o.name}<small>${o.where}</small></td>
       <td class="num">${fmt(o.sub)}</td>
       <td>${t ? t.name : '—'}</td>
       <td class="num">${t ? fmt(credit, false) : '—'}</td>
@@ -1154,34 +1170,33 @@
 
   function renderTeam() {
     const pr = preset();
-    document.querySelectorAll('[data-preset]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.preset === presetKey)));
     const sunSVG = '<span class="lad-sun" aria-hidden="true"></span>';
     document.querySelector('[data-ladder]').innerHTML =
-      `<div class="lad lad--ship"><h3>Free shipping</h3><span class="spend">Spend ${fmt(pr.ship, false)}</span><div class="get">✓<small>already live</small></div>
-        <dl><dt>Where</dt><dd>U.S. orders</dd><dt>Set in</dt><dd>Theme settings</dd></dl></div>` +
-      pr.tiers.map((t, i) => `<div class="lad">${i === pr.tiers.length - 1 ? sunSVG : ''}<h3>${t.name}</h3><span class="spend">Spend ${fmt(t.at, false)}</span>
+      `<div class="lad lad--ship"><h3>Free shipping</h3><span class="spend">Online, all weekend</span><div class="get">✓<small>any order</small></div>
+        <dl><dt>When</dt><dd>Nov 25–30</dd><dt>Set up as</dt><dd>Shipping discount</dd></dl></div>` +
+      pr.tiers.map((t, i) => `<div class="lad lad--t${i}"><h3>${t.name}</h3><span class="spend">Spend ${fmt(t.at, false)}</span>
         <div class="get">${fmt(t.credit, false)}<small>credit</small></div>
-        <dl><dt>Face value</dt><dd>${Math.round(t.credit / t.at * 100)}% of order</dd>
+        <dl><dt>Face value</dt><dd>${+(t.credit / t.at * 100).toFixed(1)}% of order</dd>
             <dt>Real cost*</dt><dd>≈ ${(t.credit * 0.5 / t.at * 100).toFixed(1)}%</dd>
             <dt>Tag</dt><dd><span class="tag">credit-${t.credit}</span></dd></dl></div>`).join('');
-    document.querySelector('[data-ladder-note]').innerHTML = pr.note + ' <br><small>*Assuming roughly 50% product margin and full redemption. Credit nobody spends costs nothing.</small>';
+    document.querySelector('[data-ladder-note]').innerHTML = pr.note + ' <br><small>*Assuming roughly 50% product margin and full redemption.</small>';
 
     document.querySelector('[data-orders]').innerHTML = ORDERS.map(orderRow).join('');
     const ready = ORDERS.filter(o => o.state === 'ready' || o.state === 'review');
     const readyAmt = ready.reduce((s, o) => { const k = tierIndex(o.sub); return s + (k >= 0 ? pr.tiers[k].credit : 0); }, 0);
-    const waiting = ORDERS.filter(o => o.state === 'window' || o.state === 'unfulfilled').length;
+    const review = ORDERS.filter(o => o.state === 'review').length;
     const issued = ORDERS.filter(o => o.state === 'issued');
     const issuedAmt = issued.reduce((s, o) => { const k = tierIndex(o.sub); return s + (k >= 0 ? pr.tiers[k].credit : 0); }, 0);
     document.querySelector('[data-stats]').innerHTML =
       `<span class="stat stat--due"><strong>${ready.length}</strong> ready to issue · ${fmt(readyAmt, false)}</span>
-       <span class="stat"><strong>${waiting}</strong> waiting on shipping or returns</span>
+       <span class="stat"><strong>${review}</strong> to review after a return</span>
        <span class="stat"><strong>${issued.length}</strong> issued · ${fmt(issuedAmt, false)}</span>`;
 
     const top = pr.tiers;
     document.querySelector('[data-flow]').innerHTML = `
-      <div class="fl"><span class="k k--t">Trigger</span><div>Order paid</div></div>
-      <div class="fl"><span class="k k--c">If</span><div>Subtotal after discounts ≥ ${fmt(top[2].at, false)} <small>otherwise ≥ ${fmt(top[1].at, false)}, otherwise ≥ ${fmt(top[0].at, false)}</small></div></div>
-      <div class="fl"><span class="k k--a">Then</span><div>Add order tags <span class="tag tag--due">credit-due</span> + <span class="tag">credit-${top[2].credit}</span> (or ${top[1].credit} / ${top[0].credit})<small>Optional: add a timeline note and email the team a daily digest</small></div></div>`;
+      <div class="fl"><span class="k k--t">Trigger</span><div>Order paid <small>Online and in-store (POS) orders</small></div></div>
+      <div class="fl"><span class="k k--c">If</span><div>Placed Nov 25–30 and amount paid ≥ ${fmt(top[3].at, false)} <small>otherwise ≥ ${fmt(top[2].at, false)}, ${fmt(top[1].at, false)} or ${fmt(top[0].at, false)}</small></div></div>
+      <div class="fl"><span class="k k--a">Then</span><div>Add order tags <span class="tag tag--due">credit-due</span> + <span class="tag">credit-${top[3].credit}</span> (or ${top[2].credit} / ${top[1].credit} / ${top[0].credit})<small>Optional: a timeline note on the order</small></div></div>`;
   }
 
   /* Issue dialog */
@@ -1190,12 +1205,11 @@
   function openModal(no) {
     const o = ORDERS.find(x => x.no === no);
     const k = tierIndex(o.sub);
-    if (k < 0) { o.state = 'issued'; o.issued = '2026-11-10'; renderTeam(); return; }
+    if (k < 0) { o.state = 'issued'; renderTeam(); return; }
     pending = o;
-    const exp = new Date(TODAY); exp.setDate(exp.getDate() + EXPIRY_DAYS);
     modal.querySelector('[data-im-crumb]').textContent = `Order #${o.no} › ${o.name} › Store credit`;
     modal.querySelector('[data-im-amt]').textContent = fmt(preset().tiers[k].credit) + ' USD';
-    modal.querySelector('[data-im-exp]').textContent = exp.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    modal.querySelector('[data-im-exp]').textContent = 'None (never expires)';
     modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false');
     setTimeout(() => modal.querySelector('[data-im-confirm]').focus(), 50);
   }
@@ -1204,7 +1218,7 @@
     if (e.target === modal || e.target.closest('[data-im-close]')) closeModal();
     if (e.target.closest('[data-im-confirm]') && pending) {
       const no = pending.no;
-      pending.state = 'issued'; pending.issued = '2026-11-10';
+      pending.state = 'issued';
       closeModal(); renderTeam();
       const row = document.querySelector(`[data-row="${no}"]`);
       if (row && !reduceMotion) row.animate([{ background: 'rgba(240,255,174,.9)' }, { background: 'transparent' }], { duration: 1400, easing: 'ease-out' });
@@ -1213,12 +1227,6 @@
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-issue]');
     if (b) openModal(+b.dataset.issue);
-    const ps = e.target.closest('[data-preset]');
-    if (ps) {
-      presetKey = ps.dataset.preset; store.set('preset', presetKey);
-      rewardMounts.forEach(buildRewards);
-      renderTeam(); render(false);
-    }
   });
 
   /* ------------------------------------------------------------
