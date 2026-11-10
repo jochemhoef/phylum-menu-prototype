@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart &amp; PHYLUM Credit | PHYLUM Prototype</title>
+<meta name="description" content="Prototype: a slide-in cart and a spend-more, earn-credit reward ladder for PHYLUM, plus how the team issues the credit in Shopify.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F1EEE4">
+<link rel="icon" href="assets/event/phylum-sun.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<style>
+  @font-face {
+    font-family: "GTAlpinaLight";
+    src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/GT-Alpina-Standard-Light.woff2?v=1752612418") format("woff2");
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "PPNeueMontreal";
+    src: url("https://cdn.shopify.com/s/files/1/0683/2196/8279/files/PPNeueMontreal-Medium.woff2?v=1751331964") format("woff2");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --paper: #F1EEE4;
+    --paper-deep: #E8E3D5;
+    --paper-soft: #F7F5EE;
+    --ink: #24211C;
+    --ink-soft: #5A554A;
+    --ink-mute: #807A6C;
+    --line: #CFC8B6;
+    --olive: #525638;
+    --sage: #7C8360;
+    --sage-deep: #5F6748;
+    --yellow: #E9AE3B;
+    --sun: #F2A900;
+    --clay: #C0662F;
+    --clay-deep: #A9531F;
+    --peach: #FFBFAC;
+    --lime: #F0FFAE;
+    --serif: "GTAlpinaLight", "Iowan Old Style", Palatino, Georgia, serif;
+    --sans: "PPNeueMontreal", "Helvetica Neue", Arial, sans-serif;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --gutter: clamp(16px, 4.5vw, 72px);
+  }
+
+  .cc-page { color-scheme: light; background: var(--paper); }
+  .cc-page .nav-version-switcher { display: none !important; }
+  body.chrome-loading .cc { visibility: hidden; }
+  .cc, .cd, .cc-foot, .cc-demo, .cc-modal { font-family: var(--sans); font-weight: 500; color: var(--ink); }
+  .cc *, .cd *, .cc-foot *, .cc-demo *, .cc-modal * { box-sizing: border-box; }
+  .cc img, .cd img { display: block; max-width: 100%; }
+  .cc button, .cd button, .cc-demo button, .cc-modal button { font: inherit; color: inherit; cursor: pointer; }
+  .cc :focus:not(:focus-visible), .cd :focus:not(:focus-visible) { outline: none; }
+  .cc :focus-visible, .cd :focus-visible, .cc-demo :focus-visible, .cc-modal :focus-visible { outline: 2px solid var(--clay); outline-offset: 2px; }
+  .money { font-family: var(--serif); font-weight: 300; font-variant-numeric: lining-nums tabular-nums; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 0; border-radius: 999px; text-decoration: none;
+    font-family: var(--sans); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0 28px; height: 52px; transition: transform .2s var(--ease), background-color .2s, box-shadow .2s;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn--yellow, .cc .btn--yellow { background: var(--yellow); color: #fff; }
+  .btn--yellow:hover, .cc .btn--yellow:hover { background: #DFA22D; }
+  .btn--clay, .cc .btn--clay, .cd .btn--clay { background: var(--clay); color: #fff; width: 100%; height: 58px; font-size: 16px; }
+  .btn--clay:hover, .cc .btn--clay:hover, .cd .btn--clay:hover { background: var(--clay-deep); }
+  .btn--ghost, .cc .btn--ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .btn--ghost:hover, .cc .btn--ghost:hover { background: var(--ink); color: var(--paper); }
+  .linkbtn { background: none; border: 0; padding: 0; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+  /* ---------- Cart page ---------- */
+  .cc { padding: clamp(36px, 7vw, 96px) var(--gutter) 40px; }
+  .cc-wrap {
+    max-width: 1320px; margin: 0 auto;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px); gap: clamp(32px, 4.5vw, 64px);
+    align-items: start;
+  }
+  .cc-head { display: flex; align-items: center; gap: 18px; padding-bottom: 36px; border-bottom: 2px solid var(--ink); }
+  .cc-head h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(44px, 5.4vw, 72px); line-height: 1; letter-spacing: -0.02em; margin: 0; color: var(--olive); }
+  .cc-head .cc-count { font-size: 17px; color: var(--ink-soft); align-self: flex-end; padding-bottom: 8px; }
+  .cc-head .btn { margin-left: auto; }
+
+  .lines { list-style: none; margin: 0; padding: 0; }
+  .ln {
+    display: grid; grid-template-columns: 112px minmax(0, 1fr) auto auto; gap: 8px 28px; align-items: center;
+    padding: 22px 0; border-bottom: 1px solid var(--line);
+  }
+  .lines--page .ln:last-child { border-bottom: 2px solid var(--ink); }
+  .ln-img { width: 112px; aspect-ratio: 1; border-radius: 6px; overflow: hidden; background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 14px -10px rgba(36,33,28,.35); }
+  .ln-img img { width: 100%; height: 100%; object-fit: cover; }
+  .ln-vendor { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 4px; }
+  .ln-title { font-size: 20px; margin: 0; line-height: 1.25; }
+  .ln-price { font-size: 22px; min-width: 96px; text-align: right; }
+  .ln-qtywrap { display: grid; justify-items: center; gap: 10px; }
+  .qty { display: inline-flex; border: 1px solid var(--line); background: var(--paper-soft); }
+  .qty button { width: 32px; height: 40px; background: none; border: 0; color: var(--ink-mute); font-size: 16px; }
+  .qty button:hover { color: var(--ink); background: var(--paper-deep); }
+  .qty output { width: 46px; display: grid; place-items: center; border-inline: 1px solid var(--line); font-family: var(--serif); font-weight: 300; font-size: 16px; }
+  .ln-remove { font-family: var(--serif); font-weight: 300; font-size: 15px; color: var(--ink-mute); }
+  .ln.is-new { animation: lnIn .7s var(--ease); }
+  @keyframes lnIn { from { opacity: 0; transform: translateY(-8px); background: rgba(242,169,0,.18); } to { opacity: 1; transform: none; background: transparent; } }
+
+  .cc-empty { padding: 56px 0; text-align: center; border-bottom: 2px solid var(--ink); }
+  .cc-empty p { font-family: var(--serif); font-weight: 300; font-size: 22px; margin: 0 0 18px; }
+
+  .cc-side { position: sticky; top: 110px; }
+  .cc-subtotal { display: flex; justify-content: space-between; align-items: baseline; padding: 28px 0 18px; border-bottom: 1px solid var(--ink); }
+  .cc-subtotal span { font-size: 14px; letter-spacing: .16em; text-transform: uppercase; }
+  .cc-subtotal strong { font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 3vw, 40px); }
+  .cc-acc { border: 0; padding: 0; margin: 0; }
+  .cc-acc details { border-bottom: 0; }
+  .cc-acc summary { list-style: none; display: flex; justify-content: space-between; padding: 22px 0 8px; font-size: 18px; cursor: pointer; }
+  .cc-acc summary::-webkit-details-marker { display: none; }
+  .cc-acc summary::after { content: "+"; font-family: var(--serif); font-size: 22px; line-height: 1; color: var(--ink-soft); }
+  .cc-acc details[open] summary::after { content: "–"; }
+  .cc-acc textarea { width: 100%; min-height: 80px; border: 1px solid var(--line); background: var(--paper-soft); padding: 10px; font: inherit; font-family: var(--serif); font-weight: 300; margin-top: 8px; }
+  .cc-checkout { margin-top: 34px; }
+  .cc-fine { text-align: center; font-family: var(--serif); font-weight: 300; font-size: 17px; color: var(--ink-soft); margin: 14px 0 0; }
+
+  /* ---------- Close-the-gap grid ---------- */
+  .gap { max-width: 1320px; margin: clamp(56px, 8vw, 104px) auto 0; }
+  .gap-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .gap-head h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(28px, 3.2vw, 42px); margin: 0; letter-spacing: -0.01em; }
+  .gap-head p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+  .pc { position: relative; display: flex; flex-direction: column; gap: 10px; }
+  .pc-img { position: relative; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: #fff; }
+  .pc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .pc:hover .pc-img img { transform: scale(1.04); }
+  .pc-chip {
+    position: absolute; left: 10px; top: 10px; z-index: 1;
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    padding: 6px 9px 5px; border-radius: 3px; background: var(--paper); color: var(--ink);
+  }
+  .pc-chip--unlock { background: var(--clay); color: #fff; }
+  .pc-chip--unlock::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sun); margin-right: 6px; vertical-align: 0; box-shadow: 0 0 0 2px rgba(255,255,255,.35); }
+  .pc-meta { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+  .pc-vendor { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 2px; }
+  .pc-title { font-size: 16px; margin: 0; line-height: 1.25; }
+  .pc-price { font-size: 18px; white-space: nowrap; }
+  .pc-add {
+    height: 42px; border-radius: 999px; border: 1px solid var(--ink); background: transparent;
+    font-size: 13px; letter-spacing: .08em; text-transform: uppercase; transition: background .2s, color .2s;
+  }
+  .pc-add:hover { background: var(--ink); color: var(--paper); }
+
+  /* ---------- Rewards module ---------- */
+  .rw {
+    --node: 38px;
+    position: relative; background: var(--paper-soft); border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px 20px 16px; overflow: hidden; isolation: isolate;
+  }
+  .rw::before { /* soft sun glow that warms as you climb */
+    content: ""; position: absolute; inset: auto -30% -60% auto; width: 80%; aspect-ratio: 1; border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,169,0,.28), rgba(242,169,0,0) 65%);
+    opacity: var(--glow, 0); transition: opacity 1.2s var(--ease); z-index: -1; pointer-events: none;
+  }
+  .rw-top { display: flex; gap: 14px; align-items: flex-start; justify-content: space-between; }
+  .rw-eyebrow { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage-deep); margin: 0 0 6px; display: flex; align-items: center; gap: 6px; }
+  .rw-eyebrow svg { width: 14px; height: 14px; }
+  .rw-msg { font-family: var(--serif); font-weight: 300; font-size: 19px; line-height: 1.3; margin: 0; min-height: 2.6em; text-wrap: balance; }
+  .rw-msg b { font-family: var(--sans); font-weight: 500; font-size: .92em; }
+  .rw-msg.is-pop { animation: msgPop .6s var(--ease); }
+  @keyframes msgPop { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: none; } }
+  .rw-earned {
+    flex: none; text-align: center; min-width: 86px; padding: 8px 10px 7px; border-radius: 10px;
+    background: var(--paper); border: 1px dashed var(--line); transition: background .5s, border-color .5s, color .5s;
+  }
+  .rw-earned.is-on { background: var(--olive); border-color: var(--olive); color: var(--paper); }
+  .rw-earned small { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+  .rw-earned strong { display: block; font-family: var(--serif); font-weight: 300; font-size: 26px; line-height: 1.1; }
+  .rw-earned.is-bump { animation: bump .6s var(--spring); }
+  @keyframes bump { 0% { transform: scale(1); } 40% { transform: scale(1.14) rotate(-2deg); } 100% { transform: scale(1); } }
+
+  .rw-track { position: relative; margin: 20px 0 0; padding: 0 calc(var(--node) / 2) 0; height: calc(var(--node) + 50px); }
+  .rw-rail {
+    position: absolute; left: calc(var(--node) / 2); right: calc(var(--node) / 2); top: calc(var(--node) / 2 - 4px);
+    height: 8px; border-radius: 99px; background: var(--paper-deep); box-shadow: inset 0 1px 2px rgba(36,33,28,.12);
+  }
+  .rw-fill {
+    position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(90deg, var(--sage) 0%, #A9A453 30%, var(--sun) 62%, var(--clay) 100%);
+    clip-path: inset(0 100% 0 0 round 99px);
+    transition: clip-path 1.1s var(--ease);
+    overflow: hidden;
+  }
+  .rw-fill::after { /* travelling glint */
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.55) 50%, transparent 60% 100%);
+    background-size: 220% 100%; animation: glint 2.8s linear infinite;
+  }
+  @keyframes glint { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+  .rw-rider {
+    position: absolute; top: 50%; left: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px;
+    transition: left 1.1s var(--ease); z-index: 2; pointer-events: none;
+    filter: drop-shadow(0 2px 4px rgba(192,102,47,.35));
+  }
+  .rw-rider svg { width: 100%; height: 100%; animation: spin 9s linear infinite; }
+  .rw-rider.is-hop { animation: hop .9s var(--ease); }
+  @keyframes hop { 0%,100% { transform: translateY(0); } 35% { transform: translateY(-9px) scale(1.12); } 60% { transform: translateY(0) scale(.96); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .rw-rider[hidden] { display: none; }
+
+  .rw-stops { list-style: none; margin: 0; padding: 0; position: absolute; left: calc(var(--node) / 2); right: calc(var(--node) / 2); top: 0; height: 100%; }
+  .rw-stop { position: absolute; top: 0; left: var(--x); transform: translateX(-50%); display: grid; justify-items: center; gap: 10px; width: calc(25% - 4px); min-width: 60px; }
+  .rw-stop:last-child { transform: translateX(calc(-100% + var(--node) / 2)); justify-items: end; }
+  .rw-stop:last-child .rw-lbl { text-align: right; }
+  .rw-node {
+    position: relative; width: var(--node); height: var(--node); display: grid; place-items: center;
+    border-radius: 50%; background: var(--paper); border: 1.5px solid var(--line); color: var(--ink-mute);
+    font-size: 11.5px; letter-spacing: -.01em; transition: background .5s var(--ease), border-color .5s, color .5s, transform .5s var(--spring);
+    z-index: 3;
+  }
+  .rw-node svg.rays { position: absolute; inset: -11px; width: calc(100% + 22px); height: calc(100% + 22px); opacity: 0; transform: scale(.4) rotate(-30deg); transition: opacity .5s, transform .8s var(--spring); pointer-events: none; }
+  .rw-node svg.rays line { stroke: var(--sun); stroke-width: 2.2; stroke-linecap: round; }
+  .rw-node .ico { width: 16px; height: 16px; }
+  .rw-stop.is-next .rw-node { border-color: var(--ink-soft); color: var(--ink); box-shadow: 0 0 0 4px rgba(242,169,0,.0); animation: nextPulse 2.4s ease-in-out infinite; }
+  @keyframes nextPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(242,169,0,.0); } 50% { box-shadow: 0 0 0 6px rgba(242,169,0,.22); } }
+  .rw-stop.is-on .rw-node { background: var(--sun); border-color: var(--sun); color: var(--ink); }
+  .rw-stop.is-on.is-ship .rw-node { background: var(--sage); border-color: var(--sage); color: #fff; }
+  .rw-stop.is-on .rw-node svg.rays { opacity: 1; transform: scale(1) rotate(0); }
+  .rw-stop.is-on .rw-node svg.rays g { transform-origin: 50% 50%; animation: spin 14s linear infinite; }
+  .rw-stop.is-on.is-ship .rw-node svg.rays { display: none; }
+  .rw-stop.is-burst .rw-node { animation: nodePop .8s var(--spring); }
+  @keyframes nodePop { 0% { transform: scale(.7); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
+  .rw-lbl { text-align: center; line-height: 1.15; max-width: 72px; }
+  .rw-lbl b { display: block; font-weight: 500; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+  .rw-lbl small { display: block; font-family: var(--serif); font-weight: 300; font-size: 13px; color: var(--ink-mute); }
+  .rw-stop.is-on .rw-lbl b { color: var(--ink); }
+
+  .rw-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 4px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 12px; color: var(--ink-mute); }
+  .rw-foot .linkbtn { color: var(--ink-soft); font-size: 12px; white-space: nowrap; }
+  .rw-how { display: none; font-family: var(--serif); font-weight: 300; font-size: 14px; color: var(--ink-soft); margin: 10px 0 0; line-height: 1.45; }
+  .rw.show-how .rw-how { display: block; }
+  .rw-how ul { margin: 6px 0 0; padding-left: 18px; }
+
+  .confetti { position: absolute; width: 7px; height: 11px; border-radius: 2px; pointer-events: none; z-index: 5; }
+
+  /* ---------- Drawer ---------- */
+  .cd-overlay { position: fixed; inset: 0; background: rgba(36,33,28,.38); backdrop-filter: blur(2px); opacity: 0; visibility: hidden; transition: opacity .45s var(--ease), visibility .45s; z-index: 900; }
+  .cd {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(460px, 100vw); background: var(--paper); z-index: 901;
+    display: flex; flex-direction: column; transform: translateX(104%); transition: transform .55s var(--ease); box-shadow: -24px 0 60px -30px rgba(36,33,28,.45);
+  }
+  body.cd-open .cd-overlay { opacity: 1; visibility: visible; }
+  body.cd-open .cd { transform: none; }
+  body.cd-open { overflow: hidden; }
+  .cd-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px 18px; border-bottom: 1px solid var(--line); }
+  .cd-head h2 { margin: 0; font-family: var(--sans); font-weight: 500; font-size: 24px; color: var(--olive); }
+  .cd-head h2 span { font-size: 15px; color: var(--ink-soft); margin-left: 6px; }
+  .cd-x { width: 40px; height: 40px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; }
+  .cd-x:hover { background: var(--paper-deep); }
+  .cd-x svg { width: 18px; height: 18px; }
+  .cd-body { flex: 1; overflow-y: auto; padding: 18px 24px 24px; overscroll-behavior: contain; }
+  .cd .rw { --node: 32px; padding: 16px 14px 12px; }
+  .cd .rw-msg { font-size: 17px; }
+  .cd .rw-earned { min-width: 74px; }
+  .cd .rw-earned strong { font-size: 22px; }
+  .cd .rw-node { font-size: 10.5px; }
+  .cd .ln { grid-template-columns: 76px minmax(0, 1fr) auto; grid-template-areas: "img info price" "img qty qty"; gap: 6px 14px; padding: 16px 0; }
+  .cd .ln-img { grid-area: img; width: 76px; }
+  .cd .ln-info { grid-area: info; }
+  .cd .ln-title { font-size: 16px; }
+  .cd .ln-price { grid-area: price; font-size: 17px; min-width: 0; align-self: start; }
+  .cd .ln-qtywrap { grid-area: qty; display: flex; align-items: center; justify-content: space-between; }
+  .cd .qty button { height: 34px; width: 30px; }
+  .cd .qty output { width: 38px; }
+  .cd .ln-remove { font-size: 14px; }
+  .cd-empty { text-align: center; padding: 36px 0 12px; font-family: var(--serif); font-weight: 300; font-size: 20px; }
+  .cd-up { margin-top: 22px; }
+  .cd-up h3 { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 12px; color: var(--ink-soft); font-weight: 500; }
+  .rail { display: grid; grid-auto-flow: column; grid-auto-columns: 148px; gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+  .rail .pc { scroll-snap-align: start; gap: 7px; }
+  .rail .pc-img { aspect-ratio: 1; }
+  .rail .pc-chip { font-size: 9.5px; left: 6px; top: 6px; padding: 5px 7px 4px; }
+  .rail .pc-title { font-size: 13.5px; }
+  .rail .pc-price { font-size: 15px; }
+  .rail .pc-add { height: 34px; font-size: 11px; }
+  .cd-foot { border-top: 1px solid var(--ink); padding: 16px 24px calc(18px + env(safe-area-inset-bottom)); background: var(--paper); }
+  .cd-sub { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .cd-sub span { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+  .cd-sub strong { font-family: var(--serif); font-weight: 300; font-size: 28px; }
+  .cd-note { font-family: var(--serif); font-weight: 300; font-size: 14px; color: var(--ink-soft); margin: 0 0 12px; }
+  .cd-foot .btn--clay { height: 54px; }
+  .cd-viewcart { display: block; text-align: center; margin-top: 12px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* Header bag badge */
+  .icon-btn[aria-label="Cart"] { position: relative; }
+  .bag-badge {
+    position: absolute; top: -2px; right: -5px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 99px;
+    background: var(--clay); color: #fff; font: 500 10.5px/18px var(--sans); text-align: center;
+  }
+  .bag-badge.is-bump { animation: bump .6s var(--spring); }
+
+  /* ---------- Team view ---------- */
+  .tv { max-width: 1240px; margin: 0 auto; }
+  .tv[hidden], .shop[hidden] { display: none; }
+  .tv-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: end; padding-bottom: 36px; border-bottom: 2px solid var(--ink); }
+  .tv-eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--sage-deep); margin: 0 0 14px; }
+  .tv-hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 4.6vw, 62px); line-height: 1.04; letter-spacing: -.015em; margin: 0; }
+  .tv-hero p { font-family: var(--serif); font-weight: 300; font-size: 19px; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+  .tv-sec { padding: clamp(40px, 5vw, 64px) 0; border-bottom: 1px solid var(--line); }
+  .tv-sec:last-child { border-bottom: 0; }
+  .tv-sec > header { display: flex; gap: 20px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; margin-bottom: 24px; }
+  .tv-sec h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(26px, 2.8vw, 36px); margin: 0; }
+  .tv-sec h2 .n { font-family: var(--sans); font-weight: 500; font-size: 13px; letter-spacing: .1em; color: var(--clay); vertical-align: middle; margin-right: 10px; }
+  .tv-sec > header p { margin: 0; max-width: 560px; color: var(--ink-soft); font-family: var(--serif); font-weight: 300; font-size: 17px; }
+
+  .seg { display: inline-flex; border: 1px solid var(--ink); border-radius: 99px; padding: 3px; background: var(--paper-soft); }
+  .seg button { border: 0; background: transparent; padding: 8px 16px; border-radius: 99px; font-size: 13px; letter-spacing: .04em; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+  .ladder { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .lad { border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: var(--paper-soft); position: relative; overflow: hidden; }
+  .lad h3 { margin: 0 0 2px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; }
+  .lad .spend { font-family: var(--serif); font-weight: 300; font-size: 15px; color: var(--ink-soft); }
+  .lad .get { font-family: var(--serif); font-weight: 300; font-size: 44px; line-height: 1; margin: 16px 0 6px; }
+  .lad .get small { font-family: var(--sans); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-left: 4px; }
+  .lad dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--ink-soft); }
+  .lad dd { margin: 0; text-align: right; color: var(--ink); }
+  .lad--ship { background: transparent; border-style: dashed; }
+  .lad-sun { position: absolute; right: -18px; top: -18px; width: 74px; height: 74px; opacity: .9; }
+  .tv-note { margin: 16px 0 0; font-family: var(--serif); font-weight: 300; font-size: 15px; color: var(--ink-soft); max-width: 860px; line-height: 1.5; }
+
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .stat { display: inline-flex; gap: 8px; align-items: baseline; padding: 8px 14px; border-radius: 99px; background: var(--paper-soft); border: 1px solid var(--line); font-size: 13px; }
+  .stat strong { font-family: var(--serif); font-weight: 300; font-size: 18px; }
+  .stat--due { background: var(--lime); border-color: #D6E59A; }
+  .admin { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #FBFAF6; }
+  .admin-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink-soft); flex-wrap: wrap; }
+  .admin-bar .view { padding: 6px 12px; border-radius: 8px; background: var(--paper-deep); color: var(--ink); }
+  .admin-bar .filter { margin-left: auto; font-family: ui-monospace, Menlo, monospace; font-size: 12px; background: var(--paper); border: 1px solid var(--line); padding: 5px 10px; border-radius: 6px; }
+  .admin-scroll { overflow-x: auto; }
+  .admin table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 820px; }
+  .admin th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-mute); padding: 10px 16px; border-bottom: 1px solid var(--line); }
+  .admin td { padding: 14px 16px; border-bottom: 1px solid var(--paper-deep); vertical-align: middle; }
+  .admin tr:last-child td { border-bottom: 0; }
+  .admin td.num { font-family: var(--serif); font-weight: 300; font-size: 16px; white-space: nowrap; }
+  .admin .ord { font-weight: 500; }
+  .admin .cust small { display: block; color: var(--ink-mute); font-size: 12px; }
+  .tag { display: inline-block; font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; padding: 3px 7px; border-radius: 5px; background: var(--paper-deep); margin: 2px 4px 2px 0; transition: background .4s, color .4s; }
+  .tag--due { background: #FCE6B8; }
+  .tag--done { background: #DCE5C9; }
+  .tag--review { background: #F8D2C2; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
+  .pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .pill--ready { background: #EEF6CF; color: #4E5A1E; }
+  .pill--wait { background: var(--paper-deep); color: var(--ink-soft); }
+  .pill--review { background: #FBE3D8; color: #9A4519; }
+  .pill--done { background: #E3E9D6; color: var(--sage-deep); }
+  .act { height: 34px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper) !important; font-size: 13px; white-space: nowrap; }
+  .act:hover { background: var(--olive); border-color: var(--olive); }
+  .act--quiet { background: transparent; color: var(--ink) !important; }
+  .act--quiet:hover { background: var(--paper-deep); border-color: var(--ink); }
+  .act[disabled] { opacity: .35; cursor: default; }
+  .admin-cap { margin: 10px 2px 0; font-size: 12.5px; color: var(--ink-mute); }
+
+  .steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .step { border: 1px solid var(--line); border-radius: 12px; padding: 22px; background: var(--paper-soft); }
+  .step h3 { margin: 0 0 6px; font-size: 18px; font-weight: 500; display: flex; gap: 10px; align-items: baseline; }
+  .step h3 .k { font-size: 12px; color: var(--clay); letter-spacing: .08em; }
+  .step p, .step li { font-family: var(--serif); font-weight: 300; font-size: 16px; line-height: 1.5; color: var(--ink-soft); }
+  .step p { margin: 0 0 10px; }
+  .step ol, .step ul { margin: 0; padding-left: 20px; }
+  .path { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; background: var(--paper); border: 1px solid var(--line); padding: 2px 6px; border-radius: 5px; color: var(--ink); white-space: nowrap; }
+  .step .who { display: inline-block; margin-top: 10px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--sage-deep); }
+
+  .flow { display: grid; gap: 0; margin-top: 4px; }
+  .fl { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px 0; position: relative; }
+  .fl + .fl::before { content: ""; position: absolute; left: 43px; top: -6px; height: 12px; border-left: 1px dashed var(--ink-mute); }
+  .fl .k { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; padding: 5px 0; border-radius: 6px; text-align: center; }
+  .fl .k--t { background: var(--olive); color: var(--paper); }
+  .fl .k--c { background: #FCE6B8; }
+  .fl .k--a { background: #DCE5C9; }
+  .fl div { font-size: 14.5px; line-height: 1.45; }
+  .fl div small { display: block; color: var(--ink-mute); font-size: 12.5px; }
+  .code { font-family: ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.55; background: var(--ink); color: #EDE9DD; border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin: 10px 0 0; white-space: pre; }
+  .code .c { color: #A5A08F; }
+
+  .rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+  .rule { padding: 18px 20px 18px 0; border-bottom: 1px solid var(--line); }
+  .rule h3 { margin: 0 0 6px; font-size: 15px; font-weight: 500; }
+  .rule p { margin: 0; font-family: var(--serif); font-weight: 300; font-size: 15.5px; line-height: 1.5; color: var(--ink-soft); }
+
+  /* Issue-credit modal (simplified admin dialog) */
+  .cc-modal { position: fixed; inset: 0; z-index: 950; display: grid; place-items: center; padding: 16px; background: rgba(36,33,28,.4); opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s; }
+  .cc-modal.is-open { opacity: 1; visibility: visible; }
+  .cc-modal .box { width: min(440px, 100%); background: #FBFAF6; border-radius: 14px; box-shadow: 0 30px 70px -20px rgba(0,0,0,.4); overflow: hidden; transform: translateY(10px) scale(.98); transition: transform .35s var(--ease); }
+  .cc-modal.is-open .box { transform: none; }
+  .cc-modal .bh { padding: 16px 20px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .cc-modal .bh h3 { margin: 0; font-size: 17px; font-weight: 500; }
+  .cc-modal .crumb { font-size: 12px; color: var(--ink-mute); padding: 12px 20px 0; }
+  .cc-modal .bb { padding: 14px 20px 18px; display: grid; gap: 14px; }
+  .cc-modal label { display: grid; gap: 6px; font-size: 13px; }
+  .cc-modal .fld { height: 40px; border: 1px solid var(--line); border-radius: 8px; padding: 0 12px; display: flex; align-items: center; background: #fff; font-family: var(--serif); font-weight: 300; font-size: 16px; }
+  .cc-modal .chk { display: flex; gap: 10px; align-items: center; font-size: 14px; }
+  .cc-modal .chk input { width: 16px; height: 16px; accent-color: var(--olive); }
+  .cc-modal .hint { font-size: 12.5px; color: var(--ink-mute); margin: -6px 0 0; }
+  .cc-modal .bf { padding: 14px 20px; border-top: 1px solid var(--line); display: flex; justify-content: flex-end; gap: 10px; }
+
+  /* ---------- Footer ---------- */
+  .cc-foot { background: var(--olive); color: var(--paper); padding: clamp(56px, 7vw, 96px) var(--gutter) 96px; margin-top: clamp(64px, 8vw, 120px); }
+  .cc-foot .in { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.4fr; gap: 32px; }
+  .cc-foot h4 { margin: 0 0 18px; font-size: 22px; font-weight: 500; }
+  .cc-foot address, .cc-foot p { font-style: normal; font-family: var(--serif); font-weight: 300; font-size: 20px; line-height: 1.5; margin: 0; }
+  .cc-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 20px; }
+  .cc-foot a { color: inherit; text-decoration: none; }
+
+  /* ---------- Prototype control pill ---------- */
+  .cc-demo {
+    position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 800;
+    display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 99px;
+    background: rgba(36,33,28,.92); color: var(--paper); box-shadow: 0 14px 40px -12px rgba(0,0,0,.5);
+    font-size: 13px; max-width: calc(100vw - 24px); backdrop-filter: blur(8px);
+  }
+  .cc-demo .tag-proto { padding: 0 10px 0 12px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; opacity: .7; white-space: nowrap; }
+  .cc-demo button, .cc-demo select { border: 0; background: transparent; color: var(--paper); padding: 9px 14px; border-radius: 99px; white-space: nowrap; font: inherit; }
+  .cc-demo button:hover { background: rgba(255,255,255,.1); }
+  .cc-demo button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+  .cc-demo select { background: rgba(255,255,255,.08); cursor: pointer; padding-right: 10px; }
+  .cc-demo select option { color: var(--ink); }
+  body.cd-open .cc-demo { z-index: 960; }
+
+  @media (max-width: 1080px) {
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid .pc:nth-child(n+4) { display: none; }
+    .ladder { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cc-foot .in { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
+    .cc-wrap { grid-template-columns: minmax(0, 1fr); }
+    .cc-side { position: static; }
+    .tv-hero { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .steps, .rules { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .cc { padding-top: 32px; }
+    .cc-head { flex-wrap: wrap; padding-bottom: 22px; gap: 10px 14px; }
+    .cc-head .btn { margin-left: 0; width: 100%; height: 46px; font-size: 13px; order: 3; }
+    .ln { grid-template-columns: 84px minmax(0, 1fr) auto; grid-template-areas: "img info price" "img qty qty"; gap: 8px 14px; }
+    .ln-img { grid-area: img; width: 84px; }
+    .ln-info { grid-area: info; }
+    .ln-title { font-size: 17px; }
+    .ln-price { grid-area: price; font-size: 18px; min-width: 0; align-self: start; }
+    .ln-qtywrap { grid-area: qty; display: flex; justify-content: space-between; align-items: center; }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .grid .pc:nth-child(n+3) { display: flex; }
+    .grid .pc:nth-child(n+5) { display: none; }
+    .pc-meta { flex-direction: column; gap: 4px; }
+    .rw { --node: 32px; padding: 16px 14px 12px; }
+    .rw-msg { font-size: 17px; }
+    body.cd-open .cc-demo { display: none; }
+    .rw-node { font-size: 10.5px; }
+    .ladder { grid-template-columns: minmax(0, 1fr); }
+    .cc-foot .in { grid-template-columns: minmax(0, 1fr); }
+    .cc-demo { left: 12px; right: 12px; transform: none; justify-content: space-between; flex-wrap: nowrap; overflow-x: auto; border-radius: 16px; }
+    .cc-demo .tag-proto { display: none; }
+    .cc-demo button, .cc-demo select { padding: 9px 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body class="cc-page">
+<div id="site-chrome"></div>
+
+<main class="cc" id="main">
+
+  <!-- ================= SHOPPER VIEW ================= -->
+  <div class="shop" id="shopView">
+    <div class="cc-wrap">
+      <section aria-labelledby="cartTitle">
+        <div class="cc-head">
+          <h1 id="cartTitle">Cart</h1>
+          <span class="cc-count" data-count-label>(1 item)</span>
+          <a class="btn btn--yellow" href="index.html">Continue shopping</a>
+        </div>
+        <ul class="lines lines--page" data-lines="page"></ul>
+        <div class="cc-empty" data-empty="page" hidden>
+          <p>Your cart is empty. The sun is still up, though.</p>
+          <a class="btn btn--ghost" href="#gap">See what's new</a>
+        </div>
+      </section>
+
+      <aside class="cc-side" aria-label="Order summary">
+        <div data-rewards="page"></div>
+        <div class="cc-subtotal"><span>Subtotal</span><strong data-subtotal>$0.00 USD</strong></div>
+        <div class="cc-acc">
+          <details><summary>Add order notes</summary><textarea aria-label="Order notes"></textarea></details>
+          <details><summary>Is this a gift? Add a note.</summary><textarea aria-label="Gift note"></textarea></details>
+        </div>
+        <button class="btn btn--clay cc-checkout" type="button" data-checkout>Checkout</button>
+        <p class="cc-fine">Shipping &amp; taxes calculated at checkout</p>
+      </aside>
+    </div>
+
+    <section class="gap" id="gap" aria-labelledby="gapTitle">
+      <div class="gap-head">
+        <h2 id="gapTitle" data-gap-title>Close the gap</h2>
+        <p data-gap-sub></p>
+      </div>
+      <div class="grid" data-upsell="page"></div>
+    </section>
+  </div>
+
+  <!-- ================= TEAM VIEW ================= -->
+  <div class="tv" id="teamView" hidden>
+    <header class="tv-hero">
+      <div>
+        <p class="tv-eyebrow">For the PHYLUM team</p>
+        <h1>Behind the cart: how PHYLUM credit gets issued</h1>
+      </div>
+      <p>Customers see a sunny progress bar. Your team sees one list in Shopify Orders that shows who has credit due, how much, and when it's safe to issue. Issuing takes about 20 seconds per order, and it can be automated later.</p>
+    </header>
+
+    <section class="tv-sec" aria-labelledby="tvLadder">
+      <header>
+        <h2 id="tvLadder"><span class="n">01</span>The ladder</h2>
+        <div class="seg" role="group" aria-label="Tier preset" data-preset-seg>
+          <button type="button" data-preset="recommended" aria-pressed="true">Recommended</button>
+          <button type="button" data-preset="lean" aria-pressed="false">Leaner margin</button>
+        </div>
+      </header>
+      <div class="ladder" data-ladder></div>
+      <p class="tv-note" data-ladder-note></p>
+    </section>
+
+    <section class="tv-sec" aria-labelledby="tvDue">
+      <header>
+        <h2 id="tvDue"><span class="n">02</span>The "Store credit due" list</h2>
+        <p>A saved view in Shopify Orders. Shopify Flow tags every qualifying order the moment it's paid, so the list fills itself. Try issuing one.</p>
+      </header>
+      <div class="stats" data-stats></div>
+      <div class="admin">
+        <div class="admin-bar">
+          <span>Orders</span><span aria-hidden="true">›</span><span class="view">Store credit due</span>
+          <span class="filter">tag:credit-due</span>
+        </div>
+        <div class="admin-scroll">
+          <table>
+            <thead><tr><th>Order</th><th>Customer</th><th>Subtotal</th><th>Tier</th><th>Credit</th><th>Tags</th><th>Status</th><th></th></tr></thead>
+            <tbody data-orders></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="admin-cap">Simplified mock of the Shopify Orders list. Order numbers and customers are made up.</p>
+    </section>
+
+    <section class="tv-sec" aria-labelledby="tvSetup">
+      <header>
+        <h2 id="tvSetup"><span class="n">03</span>Set up once</h2>
+        <p>Everything below is built into Shopify. There's no app subscription and no customer data leaves the store.</p>
+      </header>
+      <div class="steps">
+        <article class="step">
+          <h3><span class="k">A</span>Turn on the slide-in cart</h3>
+          <p>Palo Alto, your current theme, ships with a cart drawer. It's a single setting:</p>
+          <p><span class="path">Theme settings › Cart › Cart type › Drawer</span></p>
+          <p>The full cart page keeps working at <span class="path">/cart</span>, and the drawer links to it.</p>
+          <span class="who">Theme · 1 minute</span>
+        </article>
+        <article class="step">
+          <h3><span class="k">B</span>Add the credit ladder</h3>
+          <p>One snippet, <span class="path">phylum-credit-ladder.liquid</span>, is rendered in both the drawer and the cart page, next to the existing free-shipping bar. The tiers live in theme settings, so the team can change amounts in the Customizer without code.</p>
+          <span class="who">Theme · we build it</span>
+        </article>
+        <article class="step">
+          <h3><span class="k">C</span>A Flow workflow tags qualifying orders</h3>
+          <div class="flow" data-flow></div>
+          <p style="margin-top:10px">A second small workflow watches refunds. If a return drops an order below its tier, it swaps <span class="tag tag--due">credit-due</span> for <span class="tag tag--review">credit-review</span>.</p>
+          <span class="who">Shopify Flow · free, included</span>
+        </article>
+        <article class="step">
+          <h3><span class="k">D</span>Save the order view and issue credit</h3>
+          <ol>
+            <li>In Orders, filter <span class="path">Tagged with: credit-due</span> and <span class="path">Fulfillment: Fulfilled</span>, then save the view as <em>Store credit due</em>.</li>
+            <li>Open an order › customer › <span class="path">Store credit › Issue credit</span>. Enter the amount from the tag, set a 90-day expiry, and tick <em>Notify customer</em>.</li>
+            <li>Replace the tag <span class="tag tag--due">credit-due</span> with <span class="tag tag--done">credit-issued</span>, and the order drops off the list.</li>
+          </ol>
+          <span class="who">Team · ~20 seconds per order</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="tv-sec" aria-labelledby="tvAuto">
+      <header>
+        <h2 id="tvAuto"><span class="n">04</span>Later: hands-off</h2>
+        <p>When the team trusts the rules, Flow can issue the credit itself. Nobody needs to touch the list.</p>
+      </header>
+      <div class="steps">
+        <article class="step">
+          <h3><span class="k">Flow</span>Wait, check, then credit automatically</h3>
+          <p>Add three steps to the same workflow: <em>Wait 14 days after fulfillment</em>, then confirm the order hasn't been refunded below its tier, then run a <em>Send Admin API request</em> action with Shopify's native store credit mutation:</p>
+<pre class="code"><span class="c"># Flow › Send Admin API request › storeCreditAccountCredit</span>
+{
+  "id": "{{ order.customer.id }}",
+  "creditInput": {
+    "creditAmount": { "amount": "100.00", "currencyCode": "USD" },
+    "expiresAt": "<span class="c">{{ 90 days from today }}</span>",
+    "notify": true
+  }
+}</pre>
+          <p style="margin-top:10px">Then tag the order <span class="tag tag--done">credit-issued</span>. Shopify's own <em>Store credit issued</em> email goes out (edit it in <span class="path">Settings › Notifications</span>).</p>
+        </article>
+        <article class="step">
+          <h3><span class="k">App</span>Or a turnkey loyalty app</h3>
+          <p>Apps like Rise.ai and Koin run tiered cashback on top of Shopify's native store credit, with expiry reminders and reporting. They're worth it if PHYLUM wants credit reminders by email or SMS. They're overkill if the goal is just this ladder.</p>
+          <p>Either way, the credit is <strong>native Shopify store credit</strong>. Customers see their balance in their account, and it applies at checkout as a payment method.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="tv-sec" aria-labelledby="tvRules">
+      <header>
+        <h2 id="tvRules"><span class="n">05</span>Rules to decide before launch</h2>
+      </header>
+      <div class="rules">
+        <div class="rule"><h3>What counts toward a tier</h3><p>Subtotal after discounts. Shipping, tax and gift cards don't count. That matches what the bar shows.</p></div>
+        <div class="rule"><h3>Highest tier only</h3><p>Tiers don't stack. A $760 order earns $250, not $25 + $100 + $250.</p></div>
+        <div class="rule"><h3>Issue after the return window</h3><p>Issuing 14 days after an order ships stops the spend-to-unlock-then-return trick. The bar says this up front.</p></div>
+        <div class="rule"><h3>Expiry</h3><p>Ninety days gives customers a reason to come back this season. Shopify uses up the credit that expires soonest first.</p></div>
+        <div class="rule"><h3>Customer accounts</h3><p>Store credit needs Shopify's newer customer accounts (passwordless email codes). Guests are fine: credit attaches to their email.</p></div>
+        <div class="rule"><h3>In store</h3><p>Shopify POS can also redeem native store credit, so a credit earned online can be spent on Palm Canyon Drive.</p></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="cc-foot">
+  <div class="in">
+    <div><h4>PHYLUM</h4><address>901 N. Palm Canyon Dr.<br>Suite 101<br>Palm Springs, CA 92262<br>(760) 424-2110</address></div>
+    <ul><li><a href="#">Contact Us</a></li><li><a href="#">About</a></li><li><a href="#">Shop</a></li><li><a href="#">FAQs</a></li></ul>
+    <ul><li><a href="#">Returns &amp; Exchanges</a></li><li><a href="#">Shipping &amp; Delivery</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Privacy Policy</a></li></ul>
+    <div><h4>Join our Mailing List</h4><p>Be the first to know about new arrivals, special releases, and curated updates</p></div>
+  </div>
+</footer>
+
+<!-- ================= SLIDE-IN CART ================= -->
+<div class="cd-overlay" data-cd-close></div>
+<aside class="cd" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cdTitle" aria-hidden="true">
+  <div class="cd-head">
+    <h2 id="cdTitle">Your cart<span data-count-label>(1 item)</span></h2>
+    <button class="cd-x" type="button" data-cd-close aria-label="Close cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="cd-body">
+    <div data-rewards="drawer"></div>
+    <ul class="lines lines--drawer" data-lines="drawer"></ul>
+    <p class="cd-empty" data-empty="drawer" hidden>Your cart is empty.</p>
+    <div class="cd-up">
+      <h3 data-rail-title>Get there with</h3>
+      <div class="rail" data-upsell="drawer"></div>
+    </div>
+  </div>
+  <div class="cd-foot">
+    <div class="cd-sub"><span>Subtotal</span><strong data-subtotal>$0.00</strong></div>
+    <p class="cd-note">Shipping &amp; taxes calculated at checkout</p>
+    <button class="btn btn--clay" type="button" data-checkout>Checkout</button>
+    <a class="cd-viewcart" href="#" data-view-cart>View full cart</a>
+  </div>
+</aside>
+
+<!-- Issue-credit dialog (team view) -->
+<div class="cc-modal" id="issueModal" role="dialog" aria-modal="true" aria-labelledby="imTitle" aria-hidden="true">
+  <div class="box">
+    <div class="bh"><h3 id="imTitle">Issue store credit</h3><button class="cd-x" type="button" data-im-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
+    <p class="crumb" data-im-crumb></p>
+    <div class="bb">
+      <label>Amount<span class="fld" data-im-amt></span></label>
+      <label>Expiration date<span class="fld" data-im-exp></span></label>
+      <p class="hint">Pre-filled from the order's tag. The customer sees this balance in their account and at checkout.</p>
+      <label class="chk"><input type="checkbox" checked> Notify customer (Store credit issued email)</label>
+    </div>
+    <div class="bf"><button class="act act--quiet" type="button" data-im-close>Cancel</button><button class="act" type="button" data-im-confirm>Issue credit</button></div>
+  </div>
+</div>
+
+<!-- Prototype controls -->
+<div class="cc-demo" role="toolbar" aria-label="Prototype controls">
+  <span class="tag-proto">Prototype</span>
+  <button type="button" data-demo="drawer">Slide-in cart</button>
+  <button type="button" data-demo="shop" aria-pressed="true">Cart page</button>
+  <button type="button" data-demo="team" aria-pressed="false">Team view</button>
+  <select data-demo="start" aria-label="Start the demo cart with">
+    <option value="throw">Start: Cecil Throw</option>
+    <option value="basket">Start: small basket</option>
+    <option value="empty">Start: empty</option>
+  </select>
+</div>
+
+<script src="site-chrome.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------
+     Data: real PHYLUM products (public storefront, Nov 2026)
+     ------------------------------------------------------------ */
+  const CDN = 'https://cdn.shopify.com/s/files/1/0930/1491/7489/files/';
+  const P = [
+    ['cecil-throw', 'Cecil Throw', 'Wallace Sewell', 535, 'WallaceSewell_CecilThrow_1.webp?v=1777321843'],
+    ['latte-cup', 'Latte Cup', 'Mud Australia', 44, '56290bef8337363280e2364ee46232a659ccc267-5168x2907.jpg?v=1783088940'],
+    ['earth-candle', 'Earth Candle 180g', 'Homework', 56, 'homework_earth_candle_regular_002.png?v=1793217748'],
+    ['flow-spice-dish', 'Flow Spice Dish', 'Dinosaur Designs', 50, 'FlowSpice1001copy_fd205fa9-7094-405c-885e-b2523c4ee6b9.png?v=1783745844'],
+    ['flared-bowl', 'Flared Bowl Medium', 'Mud Australia', 58, '5ca5f4b03229b51b024895cea3d3b2663b79b02e-1200x1600.jpg?v=1782831830'],
+    ['cheese-knife', 'Stone Cheese Knife', 'Dinosaur Designs', 70, 'dinosaur_designs_KNFSTOCHE_stone_cheese_knife_cappuccino_001_50ce3daf-97c7-41be-8b54-69ef17312394.jpg?v=1783746512'],
+    ['koppel', 'Koppel Candle Holders, Set of 2', 'Georg Jensen', 110, '3586807_HK_CANDLEHOLDER_2_PCS_01.jpg?v=1792706510'],
+    ['rest-clock', 'Rest Alarm Clock, Natural', 'Lemnos', 125, 'e8f25b160a46f9b480b9646e1285a511c3c765e63c02c1410092de8266c785b2.jpg?v=1793490256'],
+    ['lakas', 'Lakas Necklace', 'So Niice', 135, 'lakas_necklace_2.jpg?v=1791047388'],
+    ['sahara-cushion', 'Sahara Stripe Cushion', 'Mungo', 145, 'Mungo_Sahara_Cushion_Desert_Storm-09908.webp?v=1794343993'],
+    ['kiln-03', 'No. 03 Kiln 18×24"', 'Forma Art Studio', 168, '647978f3c3c48bf9fd29fe16708d7c7aee1a8ad30cd030a17c38484d5f71d3a8.jpg?v=1791404853'],
+    ['teapot', 'Teapot 2-Cup', 'Mud Australia', 190, 'ced18fc4d095e0b425c3955c8c2e59b20294e8bc-5168x3448.jpg?v=1783101426'],
+    ['napkins', 'Tropical Fruit Dinner Napkin Set', 'Geometry', 34, '1ebe7750e4467e37163d943cb304815152a03a0b64e10010939908861d7fdaa8.jpg?v=1786837432'],
+    ['candel', 'Candél Lamp', 'Pablo Designs', 220, 'PabloDesignsCandelWhitesweepFrontViewSilverRGB_1024x1024_f67ae78e-5a6d-485f-9738-f1404ea585ba.jpg?v=1782959243'],
+    ['baker-oval', 'Baker Oval Large', 'Mud Australia', 245, '6259372a76bdcbaae3374e2fc152e267c7249fcd-2646x1187.jpg?v=1783046670'],
+    ['salad-bowl', 'Flow Salad Bowl', 'Dinosaur Designs', 310, 'dinosaur_designs_BWLFLOSAL_flow_salad_bowl_cappuccino_001.jpg?v=1783745629']
+  ].map(([id, title, vendor, price, file]) => ({ id, title, vendor, price, img: CDN + file + '&width=480' }));
+  const BY_ID = Object.fromEntries(P.map(p => [p.id, p]));
+
+  const STARTS = {
+    throw: [{ id: 'cecil-throw', qty: 1 }],
+    basket: [{ id: 'latte-cup', qty: 2 }, { id: 'earth-candle', qty: 1 }],
+    empty: []
+  };
+
+  /* Tier ladders. Credit is the highest tier reached (no stacking). */
+  const PRESETS = {
+    recommended: {
+      ship: 150,
+      tiers: [
+        { at: 250, credit: 25, name: 'Sunrise' },
+        { at: 400, credit: 100, name: 'High Noon' },
+        { at: 750, credit: 250, name: 'Golden Hour' }
+      ],
+      note: 'Built on the brief ($100 at $400, $250 at $750) plus a $25 Sunrise tier at $250. That puts a reachable first win right after free shipping ($150). Most PHYLUM pieces cost $40 to $200, so one or two more items moves a typical cart up a step. The rate climbs from 10% to 25% to 33%, so each step feels worth chasing. What it really costs is the wholesale cost of what customers later spend the credit on, and only if they spend it.'
+    },
+    lean: {
+      ship: 150,
+      tiers: [
+        { at: 300, credit: 30, name: 'Sunrise' },
+        { at: 500, credit: 75, name: 'High Noon' },
+        { at: 800, credit: 150, name: 'Golden Hour' }
+      ],
+      note: 'Same shape with a gentler give-back (10%, 15%, 19%). Choose this if margins on throws, lighting and watches are tight, or to test the mechanic before going bigger. Store credit can be raised later. Lowering it after launch feels like a takeaway.'
+    }
+  };
+
+  const RETURN_DAYS = 14, EXPIRY_DAYS = 90;
+
+  /* ------------------------------------------------------------
+     State
+     ------------------------------------------------------------ */
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('phylumCredit:' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem('phylumCredit:' + k, JSON.stringify(v)); } catch (e) {} }
+  };
+  let presetKey = store.get('preset', 'recommended');
+  if (!PRESETS[presetKey]) presetKey = 'recommended';
+  let cart = store.get('cart', null) || STARTS.throw.map(l => ({ ...l }));
+  cart = cart.filter(l => BY_ID[l.id]);
+  let lastAdded = null;
+
+  const preset = () => PRESETS[presetKey];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = (n, cents = true) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 });
+  const usd = n => fmt(n, n % 1 !== 0);
+  const subtotal = () => cart.reduce((s, l) => s + BY_ID[l.id].price * l.qty, 0);
+  const itemCount = () => cart.reduce((s, l) => s + l.qty, 0);
+
+  function tierIndex(s, pr = preset()) {
+    let k = -1;
+    pr.tiers.forEach((t, i) => { if (s >= t.at) k = i; });
+    return k;
+  }
+
+  /* Evenly spaced stops; progress interpolates within each segment */
+  function progress(s) {
+    const pr = preset();
+    const pts = [0, pr.ship, ...pr.tiers.map(t => t.at)];
+    const n = pts.length - 1;
+    if (s >= pts[n]) return 1;
+    for (let i = 0; i < n; i++) {
+      if (s < pts[i + 1]) return (i + (s - pts[i]) / (pts[i + 1] - pts[i])) / n;
+    }
+    return 1;
+  }
+
+  /* ------------------------------------------------------------
+     SVG helpers
+     ------------------------------------------------------------ */
+  const RAYS = (() => {
+    let l = '';
+    for (let i = 0; i < 12; i++) {
+      const a = (i / 12) * Math.PI * 2;
+      const r1 = 25, r2 = i % 2 ? 29 : 31;
+      l += `<line x1="${30 + Math.cos(a) * r1}" y1="${30 + Math.sin(a) * r1}" x2="${30 + Math.cos(a) * r2}" y2="${30 + Math.sin(a) * r2}"/>`;
+    }
+    return `<svg class="rays" viewBox="0 0 60 60" aria-hidden="true"><g>${l}</g></svg>`;
+  })();
+  const RIDER = (() => {
+    let l = '';
+    for (let i = 0; i < 10; i++) {
+      const a = (i / 10) * Math.PI * 2;
+      l += `<line x1="${20 + Math.cos(a) * 12}" y1="${20 + Math.sin(a) * 12}" x2="${20 + Math.cos(a) * 18}" y2="${20 + Math.sin(a) * 18}" stroke="#F2A900" stroke-width="3" stroke-linecap="round"/>`;
+    }
+    return `<svg viewBox="0 0 40 40" aria-hidden="true">${l}<circle cx="20" cy="20" r="9" fill="#F2A900" stroke="#fff" stroke-width="2"/></svg>`;
+  })();
+  const ICON_SHIP = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg>';
+  const ICON_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M5.3 18.7L7 17M17 7l1.7-1.7"/></svg>';
+
+  /* ------------------------------------------------------------
+     Rewards module (one per mount, updated in place)
+     ------------------------------------------------------------ */
+  const rewardMounts = [...document.querySelectorAll('[data-rewards]')].map(el => ({ el, shown: { tier: null, ship: null, earned: 0 } }));
+
+  function buildRewards(m) {
+    const pr = preset();
+    const stops = [{ at: pr.ship, ship: true }, ...pr.tiers];
+    const n = stops.length;
+    m.el.innerHTML = `
+      <div class="rw" data-rw>
+        <div class="rw-top">
+          <div>
+            <p class="rw-eyebrow">${ICON_SUN}PHYLUM credit</p>
+            <p class="rw-msg" data-msg aria-live="polite"></p>
+          </div>
+          <div class="rw-earned" data-earned-box><small>You earn</small><strong data-earned>$0</strong></div>
+        </div>
+        <div class="rw-track" role="img" data-track>
+          <div class="rw-rail"><div class="rw-fill" data-fill></div><div class="rw-rider" data-rider>${RIDER}</div></div>
+          <ol class="rw-stops">
+            ${stops.map((s, i) => `
+              <li class="rw-stop${s.ship ? ' is-ship' : ''}" style="--x:${((i + 1) / n) * 100}%" data-stop="${i}">
+                <span class="rw-node">${RAYS}${s.ship ? ICON_SHIP : '$' + s.credit}</span>
+                <span class="rw-lbl"><b>${s.ship ? 'Free ship' : s.name}</b><small>${fmt(s.at, false)}</small></span>
+              </li>`).join('')}
+          </ol>
+        </div>
+        <div class="rw-foot">
+          <span>Lands ${RETURN_DAYS} days after shipping · use within ${EXPIRY_DAYS} days</span>
+          <button type="button" class="linkbtn" data-how>How it works</button>
+        </div>
+        <div class="rw-how">
+          Spend more, earn store credit for your next visit:
+          <ul>${pr.tiers.map(t => `<li>Spend ${fmt(t.at, false)}, earn ${fmt(t.credit, false)} (${t.name})</li>`).join('')}</ul>
+          You get the highest tier you reach. Credit goes to your PHYLUM account ${RETURN_DAYS} days after your order ships, and you can spend it online or in store.
+        </div>
+      </div>`;
+    m.shown = { tier: null, ship: null, earned: 0 };
+    m.el.querySelector('[data-how]').addEventListener('click', e => {
+      const rw = m.el.querySelector('[data-rw]');
+      rw.classList.toggle('show-how');
+      e.currentTarget.textContent = rw.classList.contains('show-how') ? 'Hide' : 'How it works';
+    });
+  }
+
+  function messageFor(s) {
+    const pr = preset();
+    const k = tierIndex(s);
+    const next = pr.tiers[k + 1];
+    if (s === 0) return `Add <b>${fmt(pr.ship, false)}</b> for free U.S. shipping. Spend ${fmt(pr.tiers[0].at, false)} and you start earning store credit.`;
+    if (s < pr.ship) return `You're <b>${usd(pr.ship - s)}</b> from free U.S. shipping. At ${fmt(pr.tiers[0].at, false)}, you earn ${fmt(pr.tiers[0].credit, false)} in credit.`;
+    if (k < 0) return `Free shipping is on us. <b>${usd(next.at - s)}</b> more earns you <b>${fmt(next.credit, false)}</b> in credit.`;
+    if (next) return `<b>${fmt(pr.tiers[k].credit, false)} credit</b> unlocked. Add <b>${usd(next.at - s)}</b> to make it <b>${fmt(next.credit, false)}</b>.`;
+    return `${pr.tiers[k].name} reached. <b>${fmt(pr.tiers[k].credit, false)} in PHYLUM credit</b> is yours, plus free shipping.`;
+  }
+
+  function countUp(el, from, to) {
+    if (reduceMotion || from === to) { el.textContent = fmt(to, false); return; }
+    const t0 = performance.now(), dur = 900;
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(from + (to - from) * e), false);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  function burst(node) {
+    if (reduceMotion) return;
+    const rw = node.closest('.rw');
+    const r = rw.getBoundingClientRect(), nr = node.getBoundingClientRect();
+    const cx = nr.left - r.left + nr.width / 2, cy = nr.top - r.top + nr.height / 2;
+    const colors = ['#F2A900', '#C0662F', '#7C8360', '#FFBFAC', '#F0FFAE', '#525638'];
+    for (let i = 0; i < 22; i++) {
+      const c = document.createElement('i');
+      c.className = 'confetti';
+      c.style.left = cx + 'px'; c.style.top = cy + 'px';
+      c.style.background = colors[i % colors.length];
+      if (i % 3 === 0) { c.style.borderRadius = '50%'; c.style.width = c.style.height = '7px'; }
+      rw.appendChild(c);
+      const a = -Math.PI / 2 + (Math.random() - .5) * Math.PI * 1.5;
+      const d = 40 + Math.random() * 70;
+      const dx = Math.cos(a) * d, dy = Math.sin(a) * d;
+      c.animate([
+        { transform: 'translate(-50%,-50%) rotate(0) scale(1)', opacity: 1 },
+        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${Math.random() * 540}deg) scale(1)`, opacity: 1, offset: .55 },
+        { transform: `translate(calc(-50% + ${dx * 1.15}px), calc(-50% + ${dy + 60}px)) rotate(${Math.random() * 720}deg) scale(.6)`, opacity: 0 }
+      ], { duration: 1100 + Math.random() * 500, easing: 'cubic-bezier(.2,.7,.3,1)' }).onfinish = () => c.remove();
+    }
+  }
+
+  function updateRewards(m, s, animate) {
+    const pr = preset();
+    const k = tierIndex(s);
+    const shipOn = s >= pr.ship;
+    const credit = k >= 0 ? pr.tiers[k].credit : 0;
+    const p = progress(s);
+    const el = m.el;
+
+    const fill = el.querySelector('[data-fill]');
+    fill.style.clipPath = `inset(0 ${(100 - p * 100).toFixed(2)}% 0 0 round 99px)`;
+    const rider = el.querySelector('[data-rider]');
+    rider.style.left = (p * 100).toFixed(2) + '%';
+    rider.hidden = p <= 0 || p >= 1;
+    el.querySelector('[data-rw]').style.setProperty('--glow', String(Math.min(1, p * 1.1)));
+    el.querySelector('[data-track]').setAttribute('aria-label',
+      `Progress: ${usd(s)} of ${fmt(pr.tiers[pr.tiers.length - 1].at, false)}. ` + (k >= 0 ? `${fmt(credit, false)} credit unlocked.` : 'No credit unlocked yet.'));
+
+    const nextIdx = !shipOn ? 0 : (k + 2 <= pr.tiers.length ? k + 2 : -1);
+    el.querySelectorAll('[data-stop]').forEach(li => {
+      const i = +li.dataset.stop;
+      const on = i === 0 ? shipOn : (k >= i - 1);
+      const wasOn = li.classList.contains('is-on');
+      li.classList.toggle('is-on', on);
+      li.classList.toggle('is-next', i === nextIdx);
+      if (on && !wasOn && animate && m.shown.tier !== null) {
+        li.classList.remove('is-burst'); void li.offsetWidth; li.classList.add('is-burst');
+        setTimeout(() => burst(li.querySelector('.rw-node')), 420);
+      }
+    });
+
+    const msg = el.querySelector('[data-msg]');
+    const html = messageFor(s);
+    if (msg.innerHTML !== html) {
+      msg.innerHTML = html;
+      if (animate) { msg.classList.remove('is-pop'); void msg.offsetWidth; msg.classList.add('is-pop'); }
+    }
+
+    const box = el.querySelector('[data-earned-box]');
+    box.classList.toggle('is-on', credit > 0);
+    const earnedEl = el.querySelector('[data-earned]');
+    if (credit !== m.shown.earned) {
+      if (animate) {
+        setTimeout(() => countUp(earnedEl, m.shown.earnedFrom ?? 0, credit), 380);
+        if (credit > m.shown.earned) { box.classList.remove('is-bump'); void box.offsetWidth; setTimeout(() => box.classList.add('is-bump'), 380); }
+      } else earnedEl.textContent = fmt(credit, false);
+    } else if (!animate) earnedEl.textContent = fmt(credit, false);
+
+    if (animate && p > 0 && p < 1) { rider.classList.remove('is-hop'); void rider.offsetWidth; rider.classList.add('is-hop'); }
+    m.shown = { tier: k, ship: shipOn, earned: credit, earnedFrom: credit };
+  }
+
+  /* ------------------------------------------------------------
+     Lines + upsells
+     ------------------------------------------------------------ */
+  function lineHTML(l) {
+    const p = BY_ID[l.id];
+    return `<li class="ln${l.id === lastAdded ? ' is-new' : ''}" data-id="${p.id}">
+      <div class="ln-img"><img src="${p.img}" alt="" loading="lazy" width="240" height="240"></div>
+      <div class="ln-info"><p class="ln-vendor">${p.vendor}</p><p class="ln-title">${p.title}</p></div>
+      <span class="ln-price money">${fmt(p.price * l.qty)}</span>
+      <div class="ln-qtywrap">
+        <div class="qty" role="group" aria-label="Quantity for ${p.title}">
+          <button type="button" data-qty="-1" aria-label="Decrease">−</button>
+          <output aria-live="polite">${l.qty}</output>
+          <button type="button" data-qty="1" aria-label="Increase">+</button>
+        </div>
+        <button type="button" class="linkbtn ln-remove" data-remove>Remove</button>
+      </div>
+    </li>`;
+  }
+
+  function pickUpsells(s, max, short) {
+    const pr = preset();
+    const k = tierIndex(s);
+    const inCart = new Set(cart.map(l => l.id));
+    const pool = P.filter(p => !inCart.has(p.id) && p.price < 400);
+    const target = s < pr.ship && k < 0 ? null : pr.tiers[k + 1];
+    const goal = target ? target.at : (s < pr.ship ? pr.ship : null);
+    if (!goal) return { items: pool.sort((a, b) => b.price - a.price).slice(0, max).map(p => ({ p })), target: null, gap: 0 };
+    const gap = goal - s;
+    const over = pool.filter(p => p.price >= gap).sort((a, b) => a.price - b.price);
+    const under = pool.filter(p => p.price < gap).sort((a, b) => b.price - a.price);
+    const items = [...over, ...under].slice(0, max).map(p => ({
+      p,
+      chip: p.price >= gap
+        ? (target ? `Unlocks ${fmt(target.credit, false)}${short ? '' : ' credit'}` : (short ? 'Free shipping' : 'Unlocks free shipping'))
+        : `${usd(p.price)} closer`,
+      unlock: p.price >= gap
+    }));
+    return { items, target, gap };
+  }
+
+  function cardHTML({ p, chip, unlock }) {
+    return `<article class="pc">
+      <div class="pc-img">${chip ? `<span class="pc-chip${unlock ? ' pc-chip--unlock' : ''}">${chip}</span>` : ''}<img src="${p.img}" alt="${p.title} by ${p.vendor}" loading="lazy" width="480" height="600"></div>
+      <div class="pc-meta"><div><p class="pc-vendor">${p.vendor}</p><p class="pc-title">${p.title}</p></div><span class="pc-price money">${fmt(p.price, false)}</span></div>
+      <button type="button" class="pc-add" data-add="${p.id}">Add to cart</button>
+    </article>`;
+  }
+
+  /* ------------------------------------------------------------
+     Render
+     ------------------------------------------------------------ */
+  function render(animate) {
+    const s = subtotal();
+    const n = itemCount();
+    document.querySelectorAll('[data-count-label]').forEach(el => { el.textContent = `(${n} item${n === 1 ? '' : 's'})`; });
+    document.querySelectorAll('[data-subtotal]').forEach(el => {
+      el.textContent = fmt(s) + (el.closest('.cc-subtotal') ? ' USD' : '');
+    });
+    document.querySelectorAll('[data-lines]').forEach(ul => { ul.innerHTML = cart.map(lineHTML).join(''); });
+    document.querySelectorAll('[data-empty]').forEach(el => { el.hidden = cart.length > 0; });
+    document.querySelectorAll('[data-checkout]').forEach(b => { b.disabled = cart.length === 0; b.style.opacity = cart.length ? '' : '.5'; });
+
+    rewardMounts.forEach(m => updateRewards(m, s, animate));
+
+    const page = pickUpsells(s, 4);
+    const rail = pickUpsells(s, 8, true);
+    document.querySelector('[data-upsell="page"]').innerHTML = page.items.map(cardHTML).join('');
+    document.querySelector('[data-upsell="drawer"]').innerHTML = rail.items.map(cardHTML).join('');
+    const gt = document.querySelector('[data-gap-title]'), gs = document.querySelector('[data-gap-sub]');
+    const rt = document.querySelector('[data-rail-title]');
+    if (page.target) {
+      gt.textContent = `${usd(page.gap)} from ${fmt(page.target.credit, false)} in credit`;
+      gs.textContent = `Pieces that get you to ${page.target.name}. Credit lands ${RETURN_DAYS} days after shipping.`;
+      rt.textContent = `${usd(rail.gap)} to ${fmt(rail.target.credit, false)} credit. Get there with:`;
+    } else if (s < preset().ship) {
+      gt.textContent = `${usd(page.gap)} from free shipping`;
+      gs.textContent = 'A few small things our regulars love.';
+      rt.textContent = 'Get there with';
+    } else {
+      gt.textContent = 'You might also love';
+      gs.textContent = 'You hit the top tier. These are just good.';
+      rt.textContent = 'You might also love';
+    }
+
+    updateBadge(n, animate);
+    store.set('cart', cart);
+    lastAdded = null;
+  }
+
+  /* ------------------------------------------------------------
+     Cart actions
+     ------------------------------------------------------------ */
+  function add(id) {
+    const l = cart.find(x => x.id === id);
+    if (l) l.qty++; else cart.push({ id, qty: 1 });
+    lastAdded = id;
+    const wasOpen = document.body.classList.contains('cd-open');
+    openDrawer();
+    setTimeout(() => render(true), wasOpen ? 0 : 420);
+  }
+  document.addEventListener('click', e => {
+    const addBtn = e.target.closest('[data-add]');
+    if (addBtn) { add(addBtn.dataset.add); return; }
+    const q = e.target.closest('[data-qty]');
+    if (q) {
+      const id = q.closest('.ln').dataset.id;
+      const l = cart.find(x => x.id === id);
+      l.qty += +q.dataset.qty;
+      if (l.qty <= 0) cart = cart.filter(x => x !== l);
+      render(true); return;
+    }
+    const rm = e.target.closest('[data-remove]');
+    if (rm) { const id = rm.closest('.ln').dataset.id; cart = cart.filter(x => x.id !== id); render(true); return; }
+    if (e.target.closest('.icon-btn[aria-label="Cart"]')) { e.preventDefault(); openDrawer(); return; }
+    if (e.target.closest('[data-cd-close]')) { closeDrawer(); return; }
+    if (e.target.closest('[data-view-cart]')) { e.preventDefault(); closeDrawer(); setView('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (e.target.closest('[data-checkout]')) { flashCheckout(e.target.closest('[data-checkout]')); }
+  });
+
+  function flashCheckout(btn) {
+    const k = tierIndex(subtotal());
+    const t = btn.textContent;
+    btn.textContent = k >= 0 ? `Prototype: ${fmt(preset().tiers[k].credit, false)} credit tagged on this order` : 'Prototype: checkout goes here';
+    setTimeout(() => { btn.textContent = t; }, 2200);
+  }
+
+  /* ------------------------------------------------------------
+     Drawer
+     ------------------------------------------------------------ */
+  const drawer = document.getElementById('cartDrawer');
+  let lastFocus = null;
+  function openDrawer() {
+    if (document.body.classList.contains('cd-open')) return;
+    lastFocus = document.activeElement;
+    document.body.classList.add('cd-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    setTimeout(() => drawer.querySelector('.cd-x').focus({ preventScroll: true }), 60);
+    setDemoPressed();
+  }
+  function closeDrawer() {
+    document.body.classList.remove('cd-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    setDemoPressed();
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { if (modal.classList.contains('is-open')) closeModal(); else if (document.body.classList.contains('cd-open')) closeDrawer(); }
+    if (e.key === 'Tab' && document.body.classList.contains('cd-open') && !modal.classList.contains('is-open')) {
+      const f = [...drawer.querySelectorAll('button, a[href], textarea, select')].filter(x => !x.disabled && x.offsetParent !== null);
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+
+  /* Header bag badge (the header is injected by site-chrome.js) */
+  let badgeN = -1;
+  function updateBadge(n, animate) {
+    const btn = document.querySelector('#site-chrome .icon-btn[aria-label="Cart"]');
+    if (!btn) return;
+    let b = btn.querySelector('.bag-badge');
+    if (!b) { b = document.createElement('span'); b.className = 'bag-badge'; btn.appendChild(b); }
+    b.textContent = n; b.hidden = n === 0;
+    if (animate && n > badgeN && badgeN >= 0) { b.classList.remove('is-bump'); void b.offsetWidth; b.classList.add('is-bump'); }
+    badgeN = n;
+  }
+  new MutationObserver((_, obs) => {
+    if (document.querySelector('#site-chrome .icon-btn[aria-label="Cart"]')) { updateBadge(itemCount(), false); obs.disconnect(); }
+  }).observe(document.getElementById('site-chrome'), { childList: true, subtree: true });
+
+  /* ------------------------------------------------------------
+     Views + demo controls
+     ------------------------------------------------------------ */
+  let view = 'shop';
+  function setView(v) {
+    view = v;
+    document.getElementById('shopView').hidden = v !== 'shop';
+    document.getElementById('teamView').hidden = v !== 'team';
+    setDemoPressed();
+    const h = v === 'team' ? '#team' : '';
+    if (location.hash !== h) history.replaceState(null, '', location.pathname + location.search + h);
+  }
+  function setDemoPressed() {
+    const open = document.body.classList.contains('cd-open');
+    document.querySelector('[data-demo="drawer"]').setAttribute('aria-pressed', String(open));
+    document.querySelector('[data-demo="shop"]').setAttribute('aria-pressed', String(!open && view === 'shop'));
+    document.querySelector('[data-demo="team"]').setAttribute('aria-pressed', String(!open && view === 'team'));
+  }
+  document.querySelector('[data-demo="drawer"]').addEventListener('click', () => {
+    if (document.body.classList.contains('cd-open')) closeDrawer(); else { if (view !== 'shop') setView('shop'); openDrawer(); }
+  });
+  document.querySelector('[data-demo="shop"]').addEventListener('click', () => { closeDrawer(); setView('shop'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  document.querySelector('[data-demo="team"]').addEventListener('click', () => { closeDrawer(); setView('team'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  const startSel = document.querySelector('[data-demo="start"]');
+  startSel.value = store.get('start', 'throw');
+  startSel.addEventListener('change', () => {
+    store.set('start', startSel.value);
+    cart = STARTS[startSel.value].map(l => ({ ...l }));
+    rewardMounts.forEach(m => { m.shown.tier = null; m.shown.earned = 0; m.shown.earnedFrom = 0; });
+    render(false);
+  });
+
+  /* ------------------------------------------------------------
+     Team view
+     ------------------------------------------------------------ */
+  const ORDERS = [
+    { no: 1287, name: 'Maya R.', city: 'Palm Desert, CA', sub: 812, shipped: '2026-10-21', state: 'ready' },
+    { no: 1291, name: 'Theo L.', city: 'Los Angeles, CA', sub: 446.5, shipped: '2026-10-24', state: 'ready' },
+    { no: 1294, name: 'Priya S.', city: 'Portland, OR', sub: 268, shipped: '2026-10-25', state: 'ready' },
+    { no: 1279, name: 'Sam W.', city: 'Phoenix, AZ', sub: 310, was: 402, shipped: '2026-10-18', state: 'review' },
+    { no: 1302, name: 'Jordan K.', city: 'San Diego, CA', sub: 535, shipped: '2026-11-04', state: 'window' },
+    { no: 1305, name: 'Ana M.', city: 'Palm Springs, CA', sub: 760, shipped: null, state: 'unfulfilled' },
+    { no: 1266, name: 'Lena O.', city: 'Seattle, WA', sub: 418, shipped: '2026-10-09', state: 'issued', issued: '2026-10-23' }
+  ];
+  const TODAY = new Date('2026-11-10T12:00:00');
+  const dfmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const addDays = (iso, n) => { const d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n); return d; };
+
+  function orderRow(o) {
+    const pr = preset();
+    const k = tierIndex(o.sub, pr);
+    const t = k >= 0 ? pr.tiers[k] : null;
+    const credit = t ? t.credit : 0;
+    let tags = '', status = '', act = '';
+    const amtTag = t ? `<span class="tag">credit-${credit}</span>` : '';
+    if (o.state === 'issued') {
+      tags = `<span class="tag tag--done">credit-issued</span>${amtTag}`;
+      status = `<span class="pill pill--done">Issued ${dfmt(new Date((o.issued || '2026-11-10') + 'T12:00:00'))}</span>`;
+      act = `<button class="act act--quiet" disabled>Issued</button>`;
+    } else if (o.state === 'review') {
+      const wk = tierIndex(o.was, pr);
+      tags = `<span class="tag tag--review">credit-review</span>${amtTag}`;
+      status = `<span class="pill pill--review">Refund: ${fmt(o.was, false)} → ${fmt(o.sub, false)}</span>`;
+      act = `<button class="act act--quiet" data-issue="${o.no}">${t ? `Issue ${fmt(credit, false)}` : 'Clear'}</button>`;
+      if (wk >= 0 && t) status += `<br><small style="color:var(--ink-mute);font-size:12px">${pr.tiers[wk].name} → ${t.name}</small>`;
+    } else if (o.state === 'window') {
+      tags = `<span class="tag tag--due">credit-due</span>${amtTag}`;
+      status = `<span class="pill pill--wait">Return window · issue ${dfmt(addDays(o.shipped, RETURN_DAYS))}</span>`;
+      act = `<button class="act act--quiet" disabled>Wait</button>`;
+    } else if (o.state === 'unfulfilled') {
+      tags = `<span class="tag tag--due">credit-due</span>${amtTag}`;
+      status = `<span class="pill pill--wait">Not shipped yet</span>`;
+      act = `<button class="act act--quiet" disabled>Wait</button>`;
+    } else {
+      tags = `<span class="tag tag--due">credit-due</span>${amtTag}`;
+      status = `<span class="pill pill--ready">Ready · shipped ${dfmt(new Date(o.shipped + 'T12:00:00'))}</span>`;
+      act = `<button class="act" data-issue="${o.no}">Issue ${fmt(credit, false)}</button>`;
+    }
+    return `<tr data-row="${o.no}">
+      <td class="ord">#${o.no}</td>
+      <td class="cust">${o.name}<small>${o.city}</small></td>
+      <td class="num">${fmt(o.sub)}</td>
+      <td>${t ? t.name : '—'}</td>
+      <td class="num">${t ? fmt(credit, false) : '—'}</td>
+      <td>${tags}</td>
+      <td>${status}</td>
+      <td>${act}</td>
+    </tr>`;
+  }
+
+  function renderTeam() {
+    const pr = preset();
+    document.querySelectorAll('[data-preset]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.preset === presetKey)));
+    const sunSVG = '<svg class="lad-sun" viewBox="0 0 60 60" aria-hidden="true"><g stroke="#F2A900" stroke-width="2.4" stroke-linecap="round">' +
+      Array.from({ length: 12 }, (_, i) => { const a = i / 12 * Math.PI * 2; return `<line x1="${30 + Math.cos(a) * 20}" y1="${30 + Math.sin(a) * 20}" x2="${30 + Math.cos(a) * 27}" y2="${30 + Math.sin(a) * 27}"/>`; }).join('') +
+      '</g><circle cx="30" cy="30" r="14" fill="#F2A900"/></svg>';
+    document.querySelector('[data-ladder]').innerHTML =
+      `<div class="lad lad--ship"><h3>Free shipping</h3><span class="spend">Spend ${fmt(pr.ship, false)}</span><div class="get">✓<small>already live</small></div>
+        <dl><dt>Where</dt><dd>U.S. orders</dd><dt>Set in</dt><dd>Theme settings</dd></dl></div>` +
+      pr.tiers.map((t, i) => `<div class="lad">${i === pr.tiers.length - 1 ? sunSVG : ''}<h3>${t.name}</h3><span class="spend">Spend ${fmt(t.at, false)}</span>
+        <div class="get">${fmt(t.credit, false)}<small>credit</small></div>
+        <dl><dt>Face value</dt><dd>${Math.round(t.credit / t.at * 100)}% of order</dd>
+            <dt>Real cost*</dt><dd>≈ ${(t.credit * 0.5 / t.at * 100).toFixed(1)}%</dd>
+            <dt>Tag</dt><dd><span class="tag">credit-${t.credit}</span></dd></dl></div>`).join('');
+    document.querySelector('[data-ladder-note]').innerHTML = pr.note + ' <br><small>*Assuming roughly 50% product margin and full redemption. Credit nobody spends costs nothing.</small>';
+
+    document.querySelector('[data-orders]').innerHTML = ORDERS.map(orderRow).join('');
+    const ready = ORDERS.filter(o => o.state === 'ready' || o.state === 'review');
+    const readyAmt = ready.reduce((s, o) => { const k = tierIndex(o.sub); return s + (k >= 0 ? pr.tiers[k].credit : 0); }, 0);
+    const waiting = ORDERS.filter(o => o.state === 'window' || o.state === 'unfulfilled').length;
+    const issued = ORDERS.filter(o => o.state === 'issued');
+    const issuedAmt = issued.reduce((s, o) => { const k = tierIndex(o.sub); return s + (k >= 0 ? pr.tiers[k].credit : 0); }, 0);
+    document.querySelector('[data-stats]').innerHTML =
+      `<span class="stat stat--due"><strong>${ready.length}</strong> ready to issue · ${fmt(readyAmt, false)}</span>
+       <span class="stat"><strong>${waiting}</strong> waiting on shipping or returns</span>
+       <span class="stat"><strong>${issued.length}</strong> issued · ${fmt(issuedAmt, false)}</span>`;
+
+    const top = pr.tiers;
+    document.querySelector('[data-flow]').innerHTML = `
+      <div class="fl"><span class="k k--t">Trigger</span><div>Order paid</div></div>
+      <div class="fl"><span class="k k--c">If</span><div>Subtotal after discounts ≥ ${fmt(top[2].at, false)} <small>otherwise ≥ ${fmt(top[1].at, false)}, otherwise ≥ ${fmt(top[0].at, false)}</small></div></div>
+      <div class="fl"><span class="k k--a">Then</span><div>Add order tags <span class="tag tag--due">credit-due</span> + <span class="tag">credit-${top[2].credit}</span> (or ${top[1].credit} / ${top[0].credit})<small>Optional: add a timeline note and email the team a daily digest</small></div></div>`;
+  }
+
+  /* Issue dialog */
+  const modal = document.getElementById('issueModal');
+  let pending = null;
+  function openModal(no) {
+    const o = ORDERS.find(x => x.no === no);
+    const k = tierIndex(o.sub);
+    if (k < 0) { o.state = 'issued'; o.issued = '2026-11-10'; renderTeam(); return; }
+    pending = o;
+    const exp = new Date(TODAY); exp.setDate(exp.getDate() + EXPIRY_DAYS);
+    modal.querySelector('[data-im-crumb]').textContent = `Order #${o.no} › ${o.name} › Store credit`;
+    modal.querySelector('[data-im-amt]').textContent = fmt(preset().tiers[k].credit) + ' USD';
+    modal.querySelector('[data-im-exp]').textContent = exp.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false');
+    setTimeout(() => modal.querySelector('[data-im-confirm]').focus(), 50);
+  }
+  function closeModal() { modal.classList.remove('is-open'); modal.setAttribute('aria-hidden', 'true'); pending = null; }
+  modal.addEventListener('click', e => {
+    if (e.target === modal || e.target.closest('[data-im-close]')) closeModal();
+    if (e.target.closest('[data-im-confirm]') && pending) {
+      const no = pending.no;
+      pending.state = 'issued'; pending.issued = '2026-11-10';
+      closeModal(); renderTeam();
+      const row = document.querySelector(`[data-row="${no}"]`);
+      if (row && !reduceMotion) row.animate([{ background: 'rgba(240,255,174,.9)' }, { background: 'transparent' }], { duration: 1400, easing: 'ease-out' });
+    }
+  });
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-issue]');
+    if (b) openModal(+b.dataset.issue);
+    const ps = e.target.closest('[data-preset]');
+    if (ps) {
+      presetKey = ps.dataset.preset; store.set('preset', presetKey);
+      rewardMounts.forEach(buildRewards);
+      renderTeam(); render(false);
+    }
+  });
+
+  /* ------------------------------------------------------------
+     Boot
+     ------------------------------------------------------------ */
+  rewardMounts.forEach(buildRewards);
+  renderTeam();
+  render(false);
+  if (location.hash === '#team') setView('team');
+  if (location.hash === '#drawer') { setView('shop'); setTimeout(openDrawer, 300); }
+})();
+</script>
+</body>
+</html>
