@@ -47,6 +47,8 @@
   }
 
   .cc-page { color-scheme: light; background: var(--paper); }
+  /* overflow-x:hidden on body (from the shared header) turns body into the scroll container and breaks position:sticky. clip does not. */
+  body.cc-page { overflow-x: clip; overflow-y: visible; }
   .cc-page .nav-version-switcher { display: none !important; }
   body.chrome-loading .cc { visibility: hidden; }
   .cc, .cd, .cc-foot, .cc-demo, .cc-modal { font-family: var(--sans); font-weight: 500; color: var(--ink); }
@@ -54,7 +56,11 @@
   .cc img, .cd img { display: block; max-width: 100%; }
   .cc button, .cd button, .cc-demo button, .cc-modal button { font: inherit; color: inherit; cursor: pointer; }
   .cc :focus:not(:focus-visible), .cd :focus:not(:focus-visible), .cc-demo :focus:not(:focus-visible), .cc-modal :focus:not(:focus-visible) { outline: none; }
-  .cc :focus-visible, .cd :focus-visible, .cc-modal :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .cc :focus-visible, .cd :focus-visible, .cc-modal :focus-visible {
+    outline: 2px solid var(--ink); outline-offset: 2px;
+    scroll-margin-top: calc(var(--nav-h, 78px) + 24px);
+    scroll-margin-bottom: 96px;
+  }
   .cc-demo :focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
   html { scroll-padding-top: calc(var(--nav-h, 78px) + 12px); scroll-padding-bottom: 88px; }
   /* Every dollar amount on the shopper cart uses this token. */
@@ -62,11 +68,15 @@
     font-family: var(--font-money);
     font-weight: 500;
     font-style: normal;
-    font-variant-numeric: lining-nums tabular-nums;
-    font-feature-settings: "tnum" 1, "lnum" 1;
-    letter-spacing: 0;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: "lnum", "pnum";
+    letter-spacing: -0.01em;
     font-synthesis: none;
     white-space: nowrap;
+  }
+  .money--tab {
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum", "tnum";
   }
 
   /* ---------- Buttons ---------- */
@@ -79,6 +89,10 @@
   .btn:active { transform: scale(.98); }
   .btn--yellow, .cc .btn--yellow { background: var(--yellow); color: var(--ink); }
   .btn--yellow:hover, .cc .btn--yellow:hover { background: #DFA22D; color: var(--ink); }
+  .cc-head .btn--yellow, .cc-head .btn--yellow:hover {
+    background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink);
+  }
+  .cc-head .btn--yellow:hover { background: var(--ink); color: var(--paper); }
   .btn--clay, .cc .btn--clay, .cd .btn--clay {
     background: var(--clay); color: #fff; width: 100%; min-height: 52px; height: auto;
     padding: 14px 28px; font-size: 16px; line-height: 1.25; text-align: center; white-space: normal;
@@ -117,7 +131,11 @@
   .qty button { width: 32px; height: 40px; background: none; border: 0; color: var(--ink-mute); font-size: 16px; }
   .qty button:hover { color: var(--ink); background: var(--paper-deep); }
   .qty output { width: 46px; display: grid; place-items: center; border-inline: 1px solid var(--line); font-family: var(--serif); font-weight: 300; font-size: 16px; }
-  .ln-remove { font-family: var(--serif); font-weight: 300; font-size: 15px; color: var(--ink-mute); }
+  .ln-remove {
+    font-family: var(--serif); font-weight: 300; font-size: 15px; color: var(--ink-mute);
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 24px; min-width: 24px; padding: 4px 2px;
+  }
   .ln.is-new { animation: lnIn .7s var(--ease); }
   @keyframes lnIn { from { opacity: 0; transform: translateY(-8px); background: rgba(242,169,0,.18); } to { opacity: 1; transform: none; background: transparent; } }
 
@@ -138,6 +156,7 @@
     border-radius: 15px;
     box-shadow: 0 1px 0 rgba(36, 33, 28, .04), 0 12px 28px -18px rgba(36, 33, 28, .35);
   }
+  .cc-summary.is-static { position: static; top: auto; }
   .cc-summary-title {
     margin: 0 0 16px;
     font-family: var(--sans);
@@ -169,7 +188,9 @@
     letter-spacing: .14em;
     text-transform: uppercase;
   }
-  .cc-total .money { margin-left: auto; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; text-align: right; }
+  .cc-total-amt { margin-left: auto; display: inline-flex; align-items: baseline; gap: 6px; }
+  .cc-total .money { margin-left: 0; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; text-align: right; }
+  .cc-ccy { font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.06em; line-height: 1; color: var(--ink-soft); }
   .cc-acc { border: 0; padding: 0; margin: 8px 0 0; border-top: 1px solid var(--line); }
   .cc-acc details { border-bottom: 0; }
   .cc-acc details + details { border-top: 1px solid var(--line); }
@@ -180,6 +201,7 @@
   .cc-acc textarea { width: 100%; min-height: 80px; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 12px; font: inherit; margin: 0 0 12px; }
   .cc-summary .cc-checkout { margin-top: 16px; }
   .cc-fine { text-align: center; font-family: var(--serif); font-weight: 300; font-size: 15px; line-height: 1.4; color: var(--ink-soft); margin: 8px 0 0; }
+  .cc-dock { display: none; }
 
   /* ---------- Close-the-gap grid ---------- */
   .gap { max-width: 1320px; margin: clamp(56px, 8vw, 104px) auto 0; }
@@ -266,7 +288,7 @@
   @keyframes rwRing { from { opacity: .9; transform: scale(1); } to { opacity: 0; transform: scale(3.2); } }
   .rw-amt { font-size: 22px; line-height: 1.1; letter-spacing: -.02em; color: #5E564E; transition: color .8s var(--ease); }
   .rw-at { margin-top: 7px; font-size: 12px; line-height: 1.2; letter-spacing: .12em; text-transform: uppercase; color: #5C534C; white-space: nowrap; }
-  .rw-at .money { letter-spacing: 0; text-transform: none; }
+  .rw-at .money { text-transform: none; }
   .rw-stop.is-on .rw-amt { color: #9A4510; }
   .rw-stop.is-next .rw-amt { color: var(--espresso); }
   /* Passed rewards are replaced, not added: a quiet filled dot and a struck amount */
@@ -311,7 +333,7 @@
   .rw-fine { padding: 14px 0 20px; margin-top: 12px; border-top: 1px solid var(--hair); font-size: 12.5px; }
 
   /* Credit note beside the subtotal */
-  .credit-note { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 16px; padding: 12px 14px; border-radius: 10px; background: rgba(242, 169, 0, .14); border: 1px solid rgba(226, 168, 32, .45); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 14px; line-height: 1.45; color: #3E2B30; }
+  .credit-note { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 16px; padding: 12px 14px; border-radius: 10px; background: rgba(242, 169, 0, .14); border: 1px solid rgba(226, 168, 32, .45); font-family: var(--sans); font-weight: 500; font-size: 14px; line-height: 1.45; color: #3E2B30; }
   .cd-foot .credit-note { margin: 0 0 8px; padding: 10px 12px; }
   .credit-note::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--sun); margin-top: 6px; }
   .credit-note b { font-weight: 500; color: #3E2B30; }
@@ -354,13 +376,17 @@
   .rail .pc-title { font-size: 13.5px; }
   .rail .pc-price { font-size: 15px; }
   .rail .pc-add { height: 34px; font-size: 11px; }
-  .cd-foot { border-top: 1px solid var(--ink); padding: 16px 24px calc(18px + env(safe-area-inset-bottom)); background: var(--paper); }
+  .cd-foot { display: flex; flex-direction: column; align-items: stretch; border-top: 1px solid var(--ink); padding: 16px 24px calc(18px + env(safe-area-inset-bottom)); background: var(--paper); }
   .cd-sub { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
   .cd-sub span { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
   .cd-sub strong { font-size: 28px; line-height: 1.15; }
   .cd-note { font-family: var(--serif); font-weight: 300; font-size: 14px; color: var(--ink-soft); margin: 0 0 12px; }
   .cd-foot .btn--clay { height: 54px; }
-  .cd-viewcart { display: block; text-align: center; margin-top: 12px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+  .cd-viewcart {
+    display: inline-flex; align-self: center; align-items: center; justify-content: center;
+    min-height: 24px; min-width: 24px; padding: 6px 8px; margin-top: 12px;
+    font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft);
+  }
 
   /* Header bag badge */
   .icon-btn[aria-label="Cart"] { position: relative; }
@@ -518,6 +544,20 @@
     .cc-wrap { grid-template-columns: minmax(0, 1fr); }
     .cc-side { align-self: start; }
     .cc-summary { position: static; top: auto; }
+    .cc-dock {
+      position: sticky; bottom: 0; z-index: 20;
+      display: flex; align-items: center; gap: 16px;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: #F7F6F0;
+      border-top: 1px solid rgba(62, 43, 48, .16);
+    }
+    .cc-dock-total { display: flex; flex-direction: column; gap: 2px; margin: 0; min-width: 0; }
+    .cc-dock-total span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+    .cc-dock .money { font-size: 18px; letter-spacing: -0.02em; line-height: 1.1; }
+    .cc-dock .btn--clay { width: auto; flex: 1 1 auto; min-height: 48px; padding: 12px 20px; }
+    /* Room so the rewards block can scroll clear of the stuck bar before the column ends. */
+    .cc-side { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+    .cc-foot { padding-bottom: calc(112px + env(safe-area-inset-bottom)); }
     .tv-hero { grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .steps, .rules { grid-template-columns: minmax(0, 1fr); }
   }
@@ -540,6 +580,7 @@
     .cc-foot .in { grid-template-columns: minmax(0, 1fr); }
     .cc-summary { padding: 16px; }
     .cc-total .money { font-size: 26px; }
+    .rw-amt { font-size: 18px; }
     .rw-band, .rw-body { padding-left: 20px; padding-right: 20px; }
     .rw-head { font-size: 22px; }
     .cc-demo { left: 12px; right: 12px; transform: none; justify-content: space-between; flex-wrap: nowrap; overflow-x: auto; border-radius: 16px; }
@@ -576,14 +617,17 @@
       </section>
 
       <div class="cc-side">
-        <div data-rewards="page"></div>
+        <div class="cc-dock">
+          <p class="cc-dock-total"><span>Total</span><strong class="money" data-subtotal>$0.00</strong></p>
+          <button class="btn btn--clay" type="button" data-checkout>Checkout</button>
+        </div>
         <aside class="cc-summary" aria-labelledby="summaryTitle">
           <h2 id="summaryTitle" class="cc-summary-title">Order summary</h2>
           <p class="credit-note" data-credit-note hidden></p>
           <div class="cc-rows">
             <div class="cc-row"><span>Subtotal</span><span class="money" data-subtotal data-usd>$0.00 USD</span></div>
           </div>
-          <div class="cc-total"><span>Total</span><strong class="money" data-subtotal data-usd>$0.00 USD</strong></div>
+          <div class="cc-total"><span>Total</span><span class="cc-total-amt"><strong class="money" data-subtotal>$0.00</strong><span class="cc-ccy">USD</span></span></div>
           <button class="btn btn--clay cc-checkout" type="button" data-checkout>Checkout</button>
           <p class="cc-fine">Shipping &amp; taxes calculated at checkout</p>
           <div class="cc-acc">
@@ -591,6 +635,7 @@
             <details><summary>Is this a gift? Add a note.</summary><textarea aria-label="Gift note"></textarea></details>
           </div>
         </aside>
+        <div data-rewards="page"></div>
       </div>
     </div>
 
@@ -918,7 +963,7 @@
             <div class="rw-how-p"><div>
               <ol class="rw-steps">
                 <li><span class="n">01</span><div><b>One order, one reward</b><p>The more you spend in a single transaction, the bigger your credit. Each reward replaces the one before it. They don't add up.</p>
-                  <div class="rw-table">${pr.tiers.map((t, i) => `<div data-row="${i}"><span>Spend <span class="money">${fmt(t.at, false)}</span><em>This order</em></span><strong>Get <span class="money">${fmt(t.credit, false)}</span></strong></div>`).join('')}</div></div></li>
+                  <div class="rw-table">${pr.tiers.map((t, i) => `<div data-row="${i}"><span>Spend <span class="money money--tab">${fmt(t.at, false)}</span><em>This order</em></span><strong>Get <span class="money money--tab">${fmt(t.credit, false)}</span></strong></div>`).join('')}</div></div></li>
                 <li><span class="n">02</span><div><b>Added on ${CAMPAIGN.creditDay}</b><p>Your credit goes into your PHYLUM account on ${CAMPAIGN.creditDay}. We'll email you when it's there.</p></div></li>
                 <li><span class="n">03</span><div><b>Yours to keep</b><p>It never expires. Spend it wherever and whenever you like, in store or at shopphylum.com. Just sign in at checkout.</p></div></li>
               </ol>
@@ -1080,6 +1125,17 @@
     updateBadge(n, animate);
     store.set('cart', cart);
     lastAdded = null;
+    syncSummaryStick();
+  }
+
+  /* Drop sticky when the card, the nav, and a 16px gap no longer fit. */
+  function syncSummaryStick() {
+    const summary = document.querySelector('.cc-summary');
+    if (!summary) return;
+    const nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 78;
+    const narrow = window.matchMedia('(max-width: 900px)').matches;
+    const tooTall = summary.offsetHeight + nav + 16 > window.innerHeight;
+    summary.classList.toggle('is-static', narrow || tooTall);
   }
 
   /* ------------------------------------------------------------
@@ -1310,6 +1366,9 @@
   rewardMounts.forEach(buildRewards);
   renderTeam();
   render(false);
+  const summaryEl = document.querySelector('.cc-summary');
+  if (summaryEl) summaryEl.addEventListener('toggle', syncSummaryStick, true);
+  window.addEventListener('resize', syncSummaryStick);
   if (location.hash === '#team') setView('team');
   if (location.hash === '#drawer') { setView('shop'); setTimeout(openDrawer, 300); }
 })();
