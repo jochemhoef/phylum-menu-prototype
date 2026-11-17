@@ -105,18 +105,56 @@
 
   /* ---------- Cart page ---------- */
   .cc { padding: clamp(36px, 7vw, 96px) var(--gutter) 40px; }
+  .cc-hero { max-width: 1320px; margin: 0 auto 28px; }
+  .cc-hero-inner {
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: minmax(220px, 1.05fr) minmax(0, 1.35fr);
+    min-height: 128px; background: #3E2B30; color: #EEEEE5; border-radius: 15px;
+  }
+  .cc-hero-sun {
+    position: absolute; right: -70px; top: -80px; width: 200px; aspect-ratio: 1; background: #E8AE3B;
+    -webkit-mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+    mask: url("assets/event/phylum-sun.svg") center / contain no-repeat;
+    pointer-events: none;
+  }
+  .cc-hero-copy { padding: 18px 8px 18px 28px; display: flex; flex-direction: column; justify-content: center; }
+  .cc-hero-kicker { margin: 0 0 6px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #E8AE3B; }
+  .cc-hero-title { margin: 0; font-weight: 500; font-size: 28px; line-height: 1.05; letter-spacing: -0.035em; color: #EEEEE5; }
+  .cc-hero-dates { margin: 8px 0 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 12.5px; color: rgba(238, 238, 229, .72); }
+  .cc-hero-how {
+    align-self: flex-start; margin-top: 8px; border: 0; background: none; padding: 0 2px;
+    color: rgba(238, 238, 229, .72); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400;
+    font-size: 11px; letter-spacing: .16em; text-transform: uppercase; min-height: 24px;
+  }
+  .cc-hero-how:focus-visible { outline-color: #EEEEE5; }
+  .cc-hero-aside { position: relative; z-index: 1; padding: 16px 96px 16px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .cc-hero-offer { margin: 0; font-weight: 500; font-size: 18px; line-height: 1.2; letter-spacing: -0.025em; color: #EEEEE5; }
+  .cc-hero-offer .rw-s, .cc-hero-offer .rw-f { display: block; font-family: var(--sans); font-weight: 500; }
+  .cc-hero-track { position: relative; height: 34px; margin-top: 12px; }
+  .cc-hero-line { position: absolute; left: 0; right: 4px; top: 3.5px; height: 2px; background: rgba(232, 174, 59, .4); }
+  .cc-hero-line > span { display: block; height: 100%; background: #E8AE3B; transform-origin: left center; transform: scaleX(0); }
+  .cc-hero-stops { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0 4px 0 0; }
+  .cc-hero-stops li { position: absolute; top: 0; left: var(--x); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; }
+  .cc-hero-stops li:last-child { transform: translateX(-100%); align-items: flex-end; }
+  .cc-hero-node { width: 9px; height: 9px; border-radius: 50%; background: #3E2B30; box-shadow: inset 0 0 0 2px #E8AE3B; }
+  .cc-hero-stops .is-on .cc-hero-node { background: #E8AE3B; box-shadow: 0 0 0 2px #3E2B30, 0 0 0 4px #E8AE3B; }
+  .cc-hero-amt { margin-top: 6px; font-size: 11px; line-height: 1; color: #EEEEE5; font-variant-numeric: lining-nums proportional-nums; }
+  .cc-hero-panel {
+    --espresso: #3E2B30; --terra: #CC6118; --ink2: #6A5D5F; --hair: rgba(62, 43, 48, .16);
+    margin-top: 12px; padding: 8px 28px 4px; background: #F7F6F0; color: #3E2B30;
+    border: 1px solid rgba(62, 43, 48, .16); border-radius: 15px;
+  }
+  .cc-hero-panel[hidden] { display: none; }
   .cc-wrap {
     max-width: 1320px; margin: 0 auto;
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
-    grid-template-rows: auto 1fr;
-    column-gap: clamp(32px, 4.5vw, 64px); row-gap: 20px;
+    grid-template-rows: 1fr;
+    column-gap: clamp(32px, 4.5vw, 64px);
     align-items: start;
   }
-  .cc-main { grid-column: 1; grid-row: 1 / span 2; min-width: 0; }
-  .cc-promo { grid-column: 2; grid-row: 1; min-width: 0; }
-  /* Fills the row under the promo. The summary pins inside it and cannot cover the card above. */
+  .cc-main { grid-column: 1; grid-row: 1; min-width: 0; }
   .cc-summary-stick {
-    grid-column: 2; grid-row: 2; align-self: stretch; height: 100%; min-width: 0;
+    grid-column: 2; grid-row: 1; align-self: stretch; height: 100%; min-width: 0;
     position: static;
     display: flex; flex-direction: column; gap: 20px;
   }
@@ -570,30 +608,51 @@
   }
   @media (max-width: 900px) {
     .cc-wrap { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
-    .cc-main, .cc-promo, .cc-summary-stick { grid-column: 1; grid-row: auto; }
+    .cc-main, .cc-summary-stick { grid-column: 1; grid-row: auto; }
     .cc-summary-stick { align-self: start; height: auto; }
     .cc-summary-stick, .cc-summary { position: static; top: auto; }
+    .cc-hero { margin-bottom: 20px; }
+    .cc-hero-inner { grid-template-columns: 1fr; min-height: 0; }
+    .cc-hero-copy { padding: 12px 20px 0; }
+    .cc-hero-kicker { margin-bottom: 4px; }
+    .cc-hero-title { font-size: 24px; }
+    .cc-hero-dates { margin-top: 4px; }
+    .cc-hero-how { margin-top: 2px; }
+    .cc-hero-aside { padding: 4px 20px 8px; }
+    .cc-hero-track { margin-top: 8px; height: 28px; }
+    .cc-hero-sun { width: 150px; right: -56px; top: -64px; }
     .cc-dock {
       position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
-      display: flex; align-items: center; gap: 16px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
       padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
       background: #F7F6F0;
       border-top: 1px solid rgba(62, 43, 48, .16);
     }
     .cc-summary .cc-checkout { display: none; }
+    .cc-dock-prog { flex: 1 0 100%; display: flex; flex-direction: column; gap: 8px; }
+    .cc-dock-prog .rw-f { margin: 0; font-family: var(--font-money); font-weight: 500; font-size: 13px; line-height: 1.25; letter-spacing: -0.01em; }
+    .cc-dock-bar { height: 3px; border-radius: 99px; background: rgba(62, 43, 48, .16); overflow: hidden; }
+    .cc-dock-bar > span { display: block; height: 100%; background: #CC6118; transform-origin: left center; transform: scaleX(0); }
     .cc-dock-total { display: flex; flex-direction: column; gap: 2px; margin: 0; min-width: 0; }
     .cc-dock-total span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
     .cc-dock .money { font-size: 18px; letter-spacing: -0.02em; line-height: 1.1; }
     .cc-dock .btn--clay { width: auto; flex: 1 1 auto; min-height: 48px; padding: 12px 20px; }
-    .cc-promo { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
-    .cc-foot { padding-bottom: calc(220px + env(safe-area-inset-bottom)); }
-    .cc-foot a { scroll-margin-bottom: calc(220px + env(safe-area-inset-bottom)); }
-    html { scroll-padding-bottom: calc(220px + env(safe-area-inset-bottom)); }
-    .cc :focus-visible, .cd :focus-visible { scroll-margin-bottom: calc(220px + env(safe-area-inset-bottom)); }
+    .cc-foot { padding-bottom: calc(262px + env(safe-area-inset-bottom)); }
+    .cc-foot a { scroll-margin-bottom: calc(262px + env(safe-area-inset-bottom)); }
+    html { scroll-padding-bottom: calc(262px + env(safe-area-inset-bottom)); }
+    .cc :focus-visible, .cd :focus-visible { scroll-margin-bottom: calc(262px + env(safe-area-inset-bottom)); }
     /* Prototype controls sit above the fixed checkout bar so they don't cover it. */
-    .cc-demo { bottom: 86px; }
+    .cc-demo { bottom: 124px; }
     .tv-hero { grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .steps, .rules { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (min-width: 700px) and (max-width: 900px) {
+    .cc-hero-copy { padding-top: 8px; }
+    .cc-hero-kicker { margin-bottom: 2px; }
+    .cc-hero-dates { margin-top: 2px; }
+    .cc-hero-how { margin-top: 0; }
+    .cc-hero-aside { padding-top: 2px; padding-bottom: 6px; }
+    .cc-hero-track { margin-top: 4px; }
   }
   @media (max-width: 400px) {
     .cd-body { --cd-pad: 20px; }
@@ -639,6 +698,7 @@
 
   <!-- ================= SHOPPER VIEW ================= -->
   <div class="shop" id="shopView">
+    <section class="cc-hero" data-rewards="hero" aria-label="Black Friday Weekend"></section>
     <div class="cc-wrap">
       <section class="cc-main" aria-labelledby="cartTitle">
         <div class="cc-head">
@@ -653,9 +713,12 @@
         </div>
       </section>
 
-      <div class="cc-promo" data-rewards="page"></div>
       <div class="cc-summary-stick">
         <div class="cc-dock">
+          <div class="cc-dock-prog">
+            <p class="rw-f" data-dock-line></p>
+            <div class="cc-dock-bar" aria-hidden="true"><span data-dock-prog></span></div>
+          </div>
           <p class="cc-dock-total"><span>Total</span><strong class="money" data-subtotal>$0.00</strong></p>
           <button class="btn btn--clay" type="button" data-checkout>Checkout</button>
         </div>
@@ -971,6 +1034,7 @@
   const list = arr => arr.length > 1 ? arr.slice(0, -1).join(', ') + ' or ' + arr[arr.length - 1] : arr[0];
 
   function buildRewards(m) {
+    if (m.el.dataset.rewards === 'hero') { buildHero(m); return; }
     const pr = preset();
     const n = pr.tiers.length;
     m.el.innerHTML = `
@@ -1018,6 +1082,75 @@
     });
   }
 
+  function buildHero(m) {
+    const pr = preset();
+    const n = pr.tiers.length;
+    m.el.innerHTML = `
+      <div class="cc-hero-inner">
+        <span class="cc-hero-sun" aria-hidden="true"></span>
+        <div class="cc-hero-copy">
+          <p class="cc-hero-kicker">Black Friday Weekend</p>
+          <p class="cc-hero-title">Spend more, get more.</p>
+          <p class="cc-hero-dates">${CAMPAIGN.dates} · In store &amp; online</p>
+          <button type="button" class="cc-hero-how" aria-expanded="false" aria-controls="cc-hero-panel">How it works</button>
+        </div>
+        <div class="cc-hero-aside">
+          <p class="cc-hero-offer" data-head aria-live="polite"></p>
+          <div class="cc-hero-track" data-track role="img">
+            <div class="cc-hero-line"><span data-hero-prog></span></div>
+            <ol class="cc-hero-stops">
+              ${pr.tiers.map((t, i) => `<li data-hero-stop="${i}" style="--x:${((i + 1) / n) * 100}%"><span class="cc-hero-node"></span><span class="cc-hero-amt money">${fmt(t.credit, false)}</span></li>`).join('')}
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="cc-hero-panel" id="cc-hero-panel" hidden>
+        <ol class="rw-steps">
+          <li><span class="n">01</span><div><b>One order, one reward</b><p>The more you spend in a single transaction, the bigger your credit. Each reward replaces the one before it. They don't add up.</p>
+            <div class="rw-table">${pr.tiers.map((t, i) => `<div data-row="${i}"><span>Spend <span class="money money--tab">${fmt(t.at, false)}</span><em>This order</em></span><strong>Get <span class="money money--tab">${fmt(t.credit, false)}</span></strong></div>`).join('')}</div></div></li>
+          <li><span class="n">02</span><div><b>Added on ${CAMPAIGN.creditDay}</b><p>Your credit goes into your PHYLUM account on ${CAMPAIGN.creditDay}. We'll email you when it's there.</p></div></li>
+          <li><span class="n">03</span><div><b>Yours to keep</b><p>It never expires. Spend it wherever and whenever you like, in store or at shopphylum.com. Just sign in at checkout.</p></div></li>
+        </ol>
+        <p class="rw-fine">One credit per transaction, on the amount paid. Valid ${CAMPAIGN.dates}, in store and at shopphylum.com.</p>
+      </div>`;
+    m.shown = { tier: null };
+    const btn = m.el.querySelector('.cc-hero-how');
+    const panel = m.el.querySelector('#cc-hero-panel');
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+    });
+  }
+
+  function updateHero(m, s, animate) {
+    const pr = preset();
+    const k = tierIndex(s);
+    const p = progress(s);
+    const el = m.el;
+    const head = el.querySelector('[data-head]');
+    const [a, b] = headFor(s);
+    const html = `<span class="rw-s">${a}</span><span class="rw-f">${b}</span>`;
+    if (head.innerHTML !== html) {
+      head.innerHTML = html;
+      if (animate) { head.classList.remove('is-in'); void head.offsetWidth; head.classList.add('is-in'); }
+    }
+    el.querySelector('[data-track]').setAttribute('aria-label',
+      `${usd(s)} toward store credit rewards. ` + (k >= 0 ? `${fmt(pr.tiers[k].credit, false)} earned.` : 'No credit earned yet.'));
+    el.querySelector('[data-hero-prog]').style.transform = `scaleX(${p.toFixed(4)})`;
+    el.querySelectorAll('[data-hero-stop]').forEach(li => {
+      const i = +li.dataset.heroStop;
+      li.classList.toggle('is-on', i === k);
+      li.classList.toggle('is-past', i < k);
+    });
+    el.querySelectorAll('[data-row]').forEach(r => r.classList.toggle('is-cur', +r.dataset.row === k));
+    const dockLine = document.querySelector('[data-dock-line]');
+    if (dockLine && dockLine.innerHTML !== b) dockLine.innerHTML = b;
+    const dockProg = document.querySelector('[data-dock-prog]');
+    if (dockProg) dockProg.style.transform = `scaleX(${p.toFixed(4)})`;
+    m.shown = { tier: k };
+  }
+
   /* Progress headline. Both lines use the sans money stack so dollar amounts stay tabular. */
   function headFor(s) {
     const pr = preset();
@@ -1033,6 +1166,7 @@
   }
 
   function updateRewards(m, s, animate) {
+    if (m.el.dataset.rewards === 'hero') { updateHero(m, s, animate); return; }
     const pr = preset();
     const k = tierIndex(s);
     const p = progress(s);
