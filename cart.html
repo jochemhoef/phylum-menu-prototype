@@ -411,13 +411,14 @@
     .cc-hero-panel .rw-steps li:first-child > div { display: contents; }
     .cc-hero-panel .rw-steps li:first-child > div > b,
     .cc-hero-panel .rw-steps li:first-child > div > p { grid-column: 2; }
-    .cc-hero-panel .rw-table { grid-column: 1 / -1; overflow: visible; }
+    .cc-hero-panel .rw-table { grid-column: 1 / -1; }
     .cc-hero-panel .rw-table div { padding: 12px 14px; gap: 8px; }
     .cc-hero-panel .rw-table span,
     .cc-hero-panel .rw-table strong { white-space: nowrap; flex: none; }
     .cc-hero-panel .rw-table em { white-space: nowrap; font-size: 10px; letter-spacing: .08em; padding: 3px 8px; }
-    .cc-hero-panel .rw-table .is-cur { position: relative; z-index: 1; margin-top: 11px; outline: 2px solid #3E2B30; outline-offset: -2px; }
-    .cc-hero-panel .rw-table .is-cur em { position: absolute; top: 0; left: 12px; transform: translateY(-50%); }
+    .cc-hero-panel .rw-table .is-cur { align-items: end; padding: 9px 14px 12px; outline: 2px solid #3E2B30; outline-offset: -2px; }
+    .cc-hero-panel .rw-table .is-cur > span { display: grid; grid-template-columns: auto auto; justify-content: start; column-gap: .3em; row-gap: 6px; }
+    .cc-hero-panel .rw-table .is-cur em { grid-column: 1 / -1; grid-row: 1; justify-self: start; }
   }
 
   /* Credit note beside the subtotal */
