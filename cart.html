@@ -934,6 +934,7 @@
     set(k, v) { try { localStorage.setItem('phylumCredit:' + k, JSON.stringify(v)); } catch (e) {} }
   };
   let presetKey = 'bf';
+  let railCredit = null;
   let cart = store.get('cart', null) || STARTS.throw.map(l => ({ ...l }));
   cart = cart.filter(l => BY_ID[l.id]);
   let lastAdded = null;
@@ -1118,6 +1119,18 @@
     </article>`;
   }
 
+  /* Long form stays one line. If it overflows the drawer, use the shorter line. */
+  function fitRailEyebrow() {
+    const rt = document.querySelector('[data-rail-title]');
+    if (!rt || !railCredit) return;
+    const { gap, credit } = railCredit;
+    const away = `${moneyHTML(gap)} away from ${moneyHTML(credit, false)} in credit`;
+    const add = `Add ${moneyHTML(gap)}, get ${moneyHTML(credit, false)} credit`;
+    rt.style.whiteSpace = 'nowrap';
+    rt.innerHTML = away;
+    if (rt.scrollWidth > rt.clientWidth + 1) rt.innerHTML = add;
+  }
+
   /* ------------------------------------------------------------
      Render
      ------------------------------------------------------------ */
@@ -1148,14 +1161,19 @@
     if (page.target) {
       gt.innerHTML = `<span class="money">${usd(page.gap)}</span> from <span class="money">${fmt(page.target.credit, false)}</span> in credit`;
       gs.innerHTML = `Marked pieces take this order to <span class="money">${fmt(page.target.credit, false)}</span> on their own.`;
-      rt.innerHTML = `<span class="money">${usd(rail.gap)}</span> from <span class="money">${fmt(rail.target.credit, false)}</span> in credit`;
+      railCredit = { gap: rail.gap, credit: rail.target.credit };
+      fitRailEyebrow();
     } else if (s < preset().ship) {
       gt.innerHTML = `<span class="money">${usd(page.gap)}</span> from free shipping`;
       gs.textContent = 'A few small things our regulars love.';
+      railCredit = null;
+      rt.style.whiteSpace = '';
       rt.textContent = 'Get there with';
     } else {
       gt.textContent = 'You might also love';
       gs.textContent = 'This order already earns our highest reward.';
+      railCredit = null;
+      rt.style.whiteSpace = '';
       rt.textContent = 'You might also love';
     }
 
@@ -1414,7 +1432,7 @@
   render(false);
   const summaryEl = document.querySelector('.cc-summary');
   if (summaryEl) summaryEl.addEventListener('toggle', syncSummaryStick, true);
-  window.addEventListener('resize', syncSummaryStick);
+  window.addEventListener('resize', () => { syncSummaryStick(); fitRailEyebrow(); });
   if (location.hash === '#team') setView('team');
   if (location.hash === '#drawer') { setView('shop'); setTimeout(openDrawer, 300); }
 })();
