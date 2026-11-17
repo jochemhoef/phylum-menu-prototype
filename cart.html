@@ -108,18 +108,18 @@
   .cc-wrap {
     max-width: 1320px; margin: 0 auto;
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto 1fr;
     column-gap: clamp(32px, 4.5vw, 64px); row-gap: 20px;
     align-items: start;
   }
   .cc-main { grid-column: 1; grid-row: 1 / span 2; min-width: 0; }
-  /* Fills the first row, which ends 20px above the promo, so the summary can pin without covering it. */
+  .cc-promo { grid-column: 2; grid-row: 1; min-width: 0; }
+  /* Fills the row under the promo. The summary pins inside it and cannot cover the card above. */
   .cc-summary-stick {
-    grid-column: 2; grid-row: 1; align-self: stretch; height: 100%; min-width: 0;
+    grid-column: 2; grid-row: 2; align-self: stretch; height: 100%; min-width: 0;
     position: static;
     display: flex; flex-direction: column; gap: 20px;
   }
-  .cc-promo { grid-column: 2; grid-row: 2; min-width: 0; }
   .cc-head { display: flex; align-items: center; gap: 18px; padding-bottom: 36px; border-bottom: 2px solid var(--ink); }
   .cc-head h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(44px, 5.4vw, 72px); line-height: 1; letter-spacing: -0.02em; margin: 0; color: var(--olive); }
   .cc-head .cc-count { font-size: 17px; color: var(--ink-soft); align-self: flex-end; padding-bottom: 8px; }
@@ -367,7 +367,7 @@
   .cd-x { width: 40px; height: 40px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; }
   .cd-x:hover { background: var(--paper-deep); }
   .cd-x svg { width: 18px; height: 18px; }
-  .cd-body { flex: 1; overflow-y: auto; padding: 18px 24px 24px; overscroll-behavior: contain; }
+  .cd-body { --cd-pad: 24px; flex: 1; overflow-x: hidden; overflow-y: auto; padding: 18px var(--cd-pad) 8px; overscroll-behavior: contain; }
   .cd .rw-band, .cd .rw-body { padding-left: 22px; padding-right: 22px; }
   .cd .rw-head { font-size: 22px; }
   .cd .ln { grid-template-columns: 76px minmax(0, 1fr) auto; grid-template-areas: "img info price" "img qty qty"; gap: 6px 14px; padding: 16px 0; }
@@ -380,15 +380,30 @@
   .cd .qty output { width: 38px; }
   .cd .ln-remove { font-size: 14px; }
   .cd-empty { text-align: center; padding: 36px 0 12px; font-family: var(--serif); font-weight: 300; font-size: 20px; }
-  .cd-up { margin-top: 22px; }
-  .cd-up h3 { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 12px; color: var(--ink-soft); font-weight: 500; }
-  .rail { display: grid; grid-auto-flow: column; grid-auto-columns: 148px; gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
-  .rail .pc { scroll-snap-align: start; gap: 7px; }
-  .rail .pc-img { aspect-ratio: 1; }
-  .rail .pc-chip { font-size: 9px; left: 6px; top: 6px; padding: 6px 8px; gap: 5px; }
-  .rail .pc-title { font-size: 13.5px; }
-  .rail .pc-price { font-size: 15px; }
-  .rail .pc-add { height: 34px; font-size: 11px; }
+  .cd-up { margin-top: 28px; margin-bottom: 20px; }
+  .cd-up h3 { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 14px; color: var(--ink-soft); font-weight: 500; line-height: 1.4; }
+  .rail {
+    display: flex; gap: 16px; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--cd-pad);
+    padding: 6px var(--cd-pad) 12px; margin-inline: calc(var(--cd-pad) * -1);
+    scrollbar-width: thin;
+  }
+  .rail .pc {
+    flex: 0 0 calc(100% - 64px); scroll-snap-align: start; align-self: stretch;
+    display: flex; flex-direction: column; height: auto; min-width: 0; gap: 0;
+  }
+  .rail .pc-img { aspect-ratio: 1; margin-bottom: 12px; }
+  .rail .pc-chip { font-size: 9px; left: 8px; top: 8px; padding: 6px 8px; gap: 5px; max-width: calc(100% - 16px); }
+  .rail .pc-meta { display: flex; flex-direction: column; align-items: stretch; gap: 6px; min-width: 0; margin-bottom: 16px; }
+  .rail .pc-meta > div { min-width: 0; }
+  .rail .pc-vendor { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rail .pc-title {
+    font-size: 14px; line-height: 1.3; min-height: calc(1.3em * 2);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .rail .pc-price { display: block; margin-top: 6px; font-size: 15px; }
+  .rail .pc-add { margin-top: auto; min-height: 44px; height: 44px; padding: 0 12px; font-size: 12px; }
+  .rail .pc-add:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
   .cd-foot { display: flex; flex-direction: column; align-items: stretch; border-top: 1px solid var(--ink); padding: 16px 24px calc(18px + env(safe-area-inset-bottom)); background: var(--paper); }
   .cd-sub { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
   .cd-sub span { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
@@ -555,7 +570,7 @@
   }
   @media (max-width: 900px) {
     .cc-wrap { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
-    .cc-main, .cc-summary-stick, .cc-promo { grid-column: 1; grid-row: auto; }
+    .cc-main, .cc-promo, .cc-summary-stick { grid-column: 1; grid-row: auto; }
     .cc-summary-stick { align-self: start; height: auto; }
     .cc-summary-stick, .cc-summary { position: static; top: auto; }
     .cc-dock {
@@ -635,6 +650,7 @@
         </div>
       </section>
 
+      <div class="cc-promo" data-rewards="page"></div>
       <div class="cc-summary-stick">
         <div class="cc-dock">
           <p class="cc-dock-total"><span>Total</span><strong class="money" data-subtotal>$0.00</strong></p>
@@ -655,7 +671,6 @@
           </div>
         </aside>
       </div>
-      <div class="cc-promo" data-rewards="page"></div>
     </div>
 
     <section class="gap" id="gap" aria-labelledby="gapTitle">
