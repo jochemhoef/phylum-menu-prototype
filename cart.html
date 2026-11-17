@@ -135,7 +135,7 @@
   .cc-hero-aside { position: relative; z-index: 1; padding: 16px 154px 16px 12px; display: flex; flex-direction: column; justify-content: center; }
   .cc-hero-offer { margin: 0; font-weight: 500; font-size: 18px; line-height: 1.2; letter-spacing: -0.025em; color: #EEEEE5; }
   .cc-hero-offer .rw-s, .cc-hero-offer .rw-f { display: block; font-family: var(--sans); font-weight: 500; }
-  .cc-hero-offer .money { font-size: 20px; font-weight: 600; font-synthesis: weight; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum", "tnum"; }
+  .cc-hero-offer .money { font-size: 20px; font-weight: 500; font-synthesis: none; font-variant-numeric: lining-nums proportional-nums; font-feature-settings: "lnum", "pnum"; letter-spacing: -0.01em; color: #fff; }
   .cc-hero-track { position: relative; height: 42px; margin-top: 12px; }
   .cc-hero-line { position: absolute; left: 0; right: 4px; top: 3.5px; height: 2px; background: rgba(232, 174, 59, .4); }
   .cc-hero-line > span { display: block; height: 100%; background: #E8AE3B; transform-origin: left center; transform: scaleX(0); }
@@ -144,26 +144,22 @@
   .cc-hero-stops li:last-child { transform: translateX(-100%); align-items: flex-end; }
   .cc-hero-node { width: 9px; height: 9px; border-radius: 50%; background: #3E2B30; box-shadow: inset 0 0 0 2px #E8AE3B; }
   .cc-hero-stops .is-on .cc-hero-node { background: #E8AE3B; box-shadow: 0 0 0 2px #3E2B30, 0 0 0 4px #E8AE3B; }
-  .cc-hero-amt { margin-top: 8px; font-size: 18px; line-height: 1; color: #EEEEE5; font-weight: 600; font-synthesis: weight; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum", "tnum"; }
+  .cc-hero-amt { margin-top: 8px; font-size: 18px; line-height: 1; color: #EEEEE5; font-weight: 500; font-synthesis: none; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum", "tnum"; }
   .cc-hero-stops .is-on .cc-hero-amt { color: #fff; text-decoration: none; }
-  .cc-hero-stops .is-past .cc-hero-amt {
-    color: rgba(238, 238, 229, .55); font-weight: 500;
-    text-decoration-line: line-through; text-decoration-thickness: 2px; text-decoration-color: rgba(238, 238, 229, .72);
-  }
+  .cc-hero-stops .is-past .cc-hero-amt { color: rgba(238, 238, 229, .62); font-weight: 500; text-decoration-line: line-through; text-decoration-thickness: 0.11em; text-decoration-color: rgba(238, 238, 229, .72); }
   .cc-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   .cc-hero-panel {
     --espresso: #3E2B30; --terra: #CC6118; --ink2: #6A5D5F; --hair: rgba(62, 43, 48, .16);
-    display: grid; grid-template-rows: 0fr; margin-top: 0;
-    opacity: 0; transform: translateY(-4px); visibility: hidden;
-    background: #F7F6F0; color: #3E2B30;
-    border: 1px solid rgba(62, 43, 48, .16); border-radius: 15px;
+    display: grid; grid-template-rows: 0fr; margin-top: 0; background: none; border: 0;
+    opacity: 0; transform: translateY(-4px); visibility: hidden; color: #3E2B30;
     transition: grid-template-rows 240ms ease-out, opacity 240ms ease-out, transform 240ms ease-out, margin-top 240ms ease-out, visibility 0s linear 240ms;
   }
   .cc-hero-panel.is-open {
     grid-template-rows: 1fr; margin-top: 12px; opacity: 1; transform: translateY(0); visibility: visible;
     transition: grid-template-rows 240ms ease-out, opacity 240ms ease-out, transform 240ms ease-out, margin-top 240ms ease-out, visibility 0s linear 0s;
   }
-  .cc-hero-panel-in { position: relative; overflow: hidden; min-height: 0; padding: 8px 56px 4px 28px; }
+  .cc-hero-panel-in { overflow: hidden; min-height: 0; padding: 0; }
+  .cc-hero-panel-pad { position: relative; padding: 8px 56px 4px 28px; background: #F7F6F0; border: 1px solid rgba(62, 43, 48, .16); border-radius: 15px; }
   .cc-hero-x {
     position: absolute; top: 4px; right: 4px; z-index: 1;
     width: 44px; height: 44px; display: grid; place-items: center;
@@ -1134,6 +1130,7 @@
       </div>
       <div class="cc-hero-panel" id="cc-hero-panel" aria-hidden="true">
         <div class="cc-hero-panel-in">
+        <div class="cc-hero-panel-pad">
         <button type="button" class="cc-hero-x" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
         <ol class="rw-steps">
           <li><span class="n">01</span><div><b>One order, one reward</b><p>The more you spend in a single transaction, the bigger your credit. Each reward replaces the one before it. They don't add up.</p>
@@ -1142,6 +1139,7 @@
           <li><span class="n">03</span><div><b>Yours to keep</b><p>It never expires. Spend it wherever and whenever you like, in store or at shopphylum.com. Just sign in at checkout.</p></div></li>
         </ol>
         <p class="rw-fine">One credit per transaction, on the amount paid. Valid ${CAMPAIGN.dates}, in store and at shopphylum.com.</p>
+        </div>
         </div>
       </div>`;
     m.shown = { tier: null };
