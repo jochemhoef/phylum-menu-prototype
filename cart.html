@@ -108,13 +108,14 @@
   .cc-wrap {
     max-width: 1320px; margin: 0 auto;
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+    grid-template-rows: 1fr auto;
     column-gap: clamp(32px, 4.5vw, 64px); row-gap: 20px;
     align-items: start;
   }
   .cc-main { grid-column: 1; grid-row: 1 / span 2; min-width: 0; }
-  /* This box ends before the promo, so a sticky summary cannot paint over it. */
+  /* Fills the first row, which ends 20px above the promo, so the summary can pin without covering it. */
   .cc-summary-stick {
-    grid-column: 2; grid-row: 1; align-self: start; min-width: 0;
+    grid-column: 2; grid-row: 1; align-self: stretch; height: 100%; min-width: 0;
     position: static;
     display: flex; flex-direction: column; gap: 20px;
   }
@@ -154,6 +155,7 @@
   .cc-summary {
     position: sticky;
     top: 16px;
+    align-self: start;
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -552,8 +554,9 @@
     .cc-foot .in { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 900px) {
-    .cc-wrap { grid-template-columns: minmax(0, 1fr); }
+    .cc-wrap { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
     .cc-main, .cc-summary-stick, .cc-promo { grid-column: 1; grid-row: auto; }
+    .cc-summary-stick { align-self: start; height: auto; }
     .cc-summary-stick, .cc-summary { position: static; top: auto; }
     .cc-dock {
       position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
@@ -568,8 +571,10 @@
     .cc-dock .money { font-size: 18px; letter-spacing: -0.02em; line-height: 1.1; }
     .cc-dock .btn--clay { width: auto; flex: 1 1 auto; min-height: 48px; padding: 12px 20px; }
     .cc-promo { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
-    .cc-foot { padding-bottom: calc(160px + env(safe-area-inset-bottom)); }
-    .cc :focus-visible, .cd :focus-visible { scroll-margin-bottom: calc(160px + env(safe-area-inset-bottom)); }
+    .cc-foot { padding-bottom: calc(220px + env(safe-area-inset-bottom)); }
+    .cc-foot a { scroll-margin-bottom: calc(220px + env(safe-area-inset-bottom)); }
+    html { scroll-padding-bottom: calc(220px + env(safe-area-inset-bottom)); }
+    .cc :focus-visible, .cd :focus-visible { scroll-margin-bottom: calc(220px + env(safe-area-inset-bottom)); }
     /* Prototype controls sit above the fixed checkout bar so they don't cover it. */
     .cc-demo { bottom: 86px; }
     .tv-hero { grid-template-columns: minmax(0, 1fr); gap: 18px; }
