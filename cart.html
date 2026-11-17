@@ -107,9 +107,18 @@
   .cc { padding: clamp(36px, 7vw, 96px) var(--gutter) 40px; }
   .cc-wrap {
     max-width: 1320px; margin: 0 auto;
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px); gap: clamp(32px, 4.5vw, 64px);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+    column-gap: clamp(32px, 4.5vw, 64px); row-gap: 20px;
     align-items: start;
   }
+  .cc-main { grid-column: 1; grid-row: 1 / span 2; min-width: 0; }
+  /* This box ends before the promo, so a sticky summary cannot paint over it. */
+  .cc-summary-stick {
+    grid-column: 2; grid-row: 1; align-self: start; min-width: 0;
+    position: static;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .cc-promo { grid-column: 2; grid-row: 2; min-width: 0; }
   .cc-head { display: flex; align-items: center; gap: 18px; padding-bottom: 36px; border-bottom: 2px solid var(--ink); }
   .cc-head h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(44px, 5.4vw, 72px); line-height: 1; letter-spacing: -0.02em; margin: 0; color: var(--olive); }
   .cc-head .cc-count { font-size: 17px; color: var(--ink-soft); align-self: flex-end; padding-bottom: 8px; }
@@ -142,7 +151,6 @@
   .cc-empty { padding: 56px 0; text-align: center; border-bottom: 2px solid var(--ink); }
   .cc-empty p { font-family: var(--serif); font-weight: 300; font-size: 22px; margin: 0 0 18px; }
 
-  .cc-side { display: flex; flex-direction: column; gap: 20px; align-self: stretch; min-width: 0; }
   .cc-summary {
     position: sticky;
     top: 16px;
@@ -545,8 +553,8 @@
   }
   @media (max-width: 900px) {
     .cc-wrap { grid-template-columns: minmax(0, 1fr); }
-    .cc-side { align-self: start; }
-    .cc-summary { position: static; top: auto; }
+    .cc-main, .cc-summary-stick, .cc-promo { grid-column: 1; grid-row: auto; }
+    .cc-summary-stick, .cc-summary { position: static; top: auto; }
     .cc-dock {
       position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
       display: flex; align-items: center; gap: 16px;
@@ -559,7 +567,7 @@
     .cc-dock-total span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
     .cc-dock .money { font-size: 18px; letter-spacing: -0.02em; line-height: 1.1; }
     .cc-dock .btn--clay { width: auto; flex: 1 1 auto; min-height: 48px; padding: 12px 20px; }
-    .cc-side { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+    .cc-promo { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
     .cc-foot { padding-bottom: calc(160px + env(safe-area-inset-bottom)); }
     .cc :focus-visible, .cd :focus-visible { scroll-margin-bottom: calc(160px + env(safe-area-inset-bottom)); }
     /* Prototype controls sit above the fixed checkout bar so they don't cover it. */
@@ -594,7 +602,7 @@
     .cc-demo button, .cc-demo select { padding: 9px 10px; }
   }
   @media (max-height: 720px) {
-    .cc-summary { position: static; top: auto; }
+    .cc-summary-stick, .cc-summary { position: static; top: auto; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -609,7 +617,7 @@
   <!-- ================= SHOPPER VIEW ================= -->
   <div class="shop" id="shopView">
     <div class="cc-wrap">
-      <section aria-labelledby="cartTitle">
+      <section class="cc-main" aria-labelledby="cartTitle">
         <div class="cc-head">
           <h1 id="cartTitle">Cart</h1>
           <span class="cc-count" data-count-label>(1 item)</span>
@@ -622,7 +630,7 @@
         </div>
       </section>
 
-      <div class="cc-side">
+      <div class="cc-summary-stick">
         <div class="cc-dock">
           <p class="cc-dock-total"><span>Total</span><strong class="money" data-subtotal>$0.00</strong></p>
           <button class="btn btn--clay" type="button" data-checkout>Checkout</button>
@@ -641,8 +649,8 @@
             <details><summary>Is this a gift? Add a note.</summary><textarea aria-label="Gift note"></textarea></details>
           </div>
         </aside>
-        <div data-rewards="page"></div>
       </div>
+      <div class="cc-promo" data-rewards="page"></div>
     </div>
 
     <section class="gap" id="gap" aria-labelledby="gapTitle">
@@ -1134,7 +1142,7 @@
     syncSummaryStick();
   }
 
-  /* Drop sticky when the card plus its 16px offset no longer fits. The header scrolls away. */
+  /* Drop sticky when the summary plus its 16px offset no longer fits. */
   function syncSummaryStick() {
     const summary = document.querySelector('.cc-summary');
     if (!summary) return;
