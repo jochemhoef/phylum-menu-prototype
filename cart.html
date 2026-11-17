@@ -123,16 +123,20 @@
   .cc-hero-title { margin: 0; font-weight: 500; font-size: 28px; line-height: 1.05; letter-spacing: -0.035em; color: #EEEEE5; }
   .cc-hero-dates { margin: 8px 0 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 400; font-size: 12.5px; color: rgba(238, 238, 229, .72); }
   .cc button.cc-hero-how {
+    display: inline-flex; align-items: center; gap: 6px;
     font: 400 11px/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: .16em; text-transform: uppercase; color: rgba(238, 238, 229, .72);
+    text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
     padding: 0 2px; min-height: 24px; border: 0; background: none;
     align-self: flex-start; margin-top: 8px;
   }
-  .cc-hero-how:focus-visible { outline-color: #EEEEE5; }
-  .cc-hero-aside { position: relative; z-index: 1; padding: 16px 96px 16px 12px; display: flex; flex-direction: column; justify-content: center; }
+  .cc button.cc-hero-how:hover { color: #EEEEE5; }
+  .cc-hero-how:focus-visible { outline: 2px solid #EEEEE5; outline-offset: 3px; }
+  .cc-hero-aside { position: relative; z-index: 1; padding: 16px 154px 16px 12px; display: flex; flex-direction: column; justify-content: center; }
   .cc-hero-offer { margin: 0; font-weight: 500; font-size: 18px; line-height: 1.2; letter-spacing: -0.025em; color: #EEEEE5; }
   .cc-hero-offer .rw-s, .cc-hero-offer .rw-f { display: block; font-family: var(--sans); font-weight: 500; }
-  .cc-hero-track { position: relative; height: 34px; margin-top: 12px; }
+  .cc-hero-offer .money { font-size: 20px; font-weight: 600; font-synthesis: weight; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum", "tnum"; }
+  .cc-hero-track { position: relative; height: 42px; margin-top: 12px; }
   .cc-hero-line { position: absolute; left: 0; right: 4px; top: 3.5px; height: 2px; background: rgba(232, 174, 59, .4); }
   .cc-hero-line > span { display: block; height: 100%; background: #E8AE3B; transform-origin: left center; transform: scaleX(0); }
   .cc-hero-stops { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0 4px 0 0; }
@@ -140,13 +144,28 @@
   .cc-hero-stops li:last-child { transform: translateX(-100%); align-items: flex-end; }
   .cc-hero-node { width: 9px; height: 9px; border-radius: 50%; background: #3E2B30; box-shadow: inset 0 0 0 2px #E8AE3B; }
   .cc-hero-stops .is-on .cc-hero-node { background: #E8AE3B; box-shadow: 0 0 0 2px #3E2B30, 0 0 0 4px #E8AE3B; }
-  .cc-hero-amt { margin-top: 6px; font-size: 11px; line-height: 1; color: #EEEEE5; font-variant-numeric: lining-nums proportional-nums; }
+  .cc-hero-amt { margin-top: 8px; font-size: 18px; line-height: 1; color: #EEEEE5; font-weight: 600; font-synthesis: weight; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum", "tnum"; }
   .cc-hero-panel {
     --espresso: #3E2B30; --terra: #CC6118; --ink2: #6A5D5F; --hair: rgba(62, 43, 48, .16);
-    margin-top: 12px; padding: 8px 28px 4px; background: #F7F6F0; color: #3E2B30;
+    display: grid; grid-template-rows: 0fr; margin-top: 0;
+    opacity: 0; transform: translateY(-4px); visibility: hidden;
+    background: #F7F6F0; color: #3E2B30;
     border: 1px solid rgba(62, 43, 48, .16); border-radius: 15px;
+    transition: grid-template-rows 240ms ease-out, opacity 240ms ease-out, transform 240ms ease-out, margin-top 240ms ease-out, visibility 0s linear 240ms;
   }
-  .cc-hero-panel[hidden] { display: none; }
+  .cc-hero-panel.is-open {
+    grid-template-rows: 1fr; margin-top: 12px; opacity: 1; transform: translateY(0); visibility: visible;
+    transition: grid-template-rows 240ms ease-out, opacity 240ms ease-out, transform 240ms ease-out, margin-top 240ms ease-out, visibility 0s linear 0s;
+  }
+  .cc-hero-panel-in { position: relative; overflow: hidden; min-height: 0; padding: 8px 56px 4px 28px; }
+  .cc-hero-x {
+    position: absolute; top: 4px; right: 4px; z-index: 1;
+    width: 44px; height: 44px; display: grid; place-items: center;
+    border: 0; border-radius: 50%; background: transparent; color: #3E2B30; cursor: pointer;
+  }
+  .cc-hero-x svg { width: 16px; height: 16px; }
+  .cc-hero-chevron { width: 12px; height: 12px; flex: none; transition: transform 240ms ease-out; }
+  .cc-hero-how[aria-expanded="true"] .cc-hero-chevron { transform: rotate(180deg); }
   .cc-wrap {
     max-width: 1320px; margin: 0 auto;
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
@@ -387,6 +406,8 @@
 
   /* Credit note beside the subtotal */
   .credit-note { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 16px; padding: 12px 14px; border-radius: 10px; background: rgba(242, 169, 0, .14); border: 1px solid rgba(226, 168, 32, .45); font-family: var(--sans); font-weight: 500; font-size: 14px; line-height: 1.45; color: #3E2B30; }
+  .cc-summary .credit-note { background: var(--paper-deep); border: 0; }
+  .cc-summary .credit-note::before { content: none; }
   .cd-foot .credit-note { margin: 0 0 8px; padding: 10px 12px; }
   .credit-note::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--sun); margin-top: 6px; }
   .credit-note b { font-weight: 500; color: #3E2B30; }
@@ -621,7 +642,9 @@
     .cc-hero-title { font-size: 24px; }
     .cc-hero-dates { margin-top: 8px; }
     .cc-hero-aside { order: 2; padding: 10px 20px 0; }
-    .cc-hero-track { margin-top: 10px; height: 28px; }
+    .cc-hero-track { margin-top: 14px; height: 34px; }
+    .cc-hero-amt { font-size: 13px; margin-top: 6px; }
+    .cc-hero-offer .money { font-size: 17px; }
     .cc-hero-how, .cc button.cc-hero-how { order: 3; align-self: flex-start; margin: 10px 20px 14px; }
     .cc-hero-sun { width: 150px; right: -56px; top: -64px; }
     .cc-dock {
@@ -632,7 +655,7 @@
       border-top: 1px solid rgba(62, 43, 48, .16);
     }
     .cc-summary .cc-checkout { display: none; }
-    .cc-dock-prog { flex: 1 0 100%; display: flex; flex-direction: column; gap: 8px; }
+    .cc-dock-prog { flex: 1 0 100%; display: flex; flex-direction: column; gap: 14px; }
     .cc-dock-prog .rw-f { margin: 0; font-family: var(--sans); font-weight: 500; font-size: 13px; line-height: 1.25; letter-spacing: -0.01em; }
     .cc-dock-bar { height: 3px; border-radius: 99px; background: rgba(62, 43, 48, .16); overflow: hidden; }
     .cc-dock-bar > span { display: block; height: 100%; background: #CC6118; transform-origin: left center; transform: scaleX(0); }
@@ -994,6 +1017,7 @@
   };
   let presetKey = 'bf';
   let railCredit = null;
+  let closeHeroPanel = () => {};
   let cart = store.get('cart', null) || STARTS.throw.map(l => ({ ...l }));
   cart = cart.filter(l => BY_ID[l.id]);
   let lastAdded = null;
@@ -1090,7 +1114,7 @@
             <p class="cc-hero-title">Spend more, get more.</p>
             <p class="cc-hero-dates">${CAMPAIGN.dates} · In store &amp; online</p>
           </div>
-          <button type="button" class="cc-hero-how" aria-expanded="false" aria-controls="cc-hero-panel">How it works</button>
+          <button type="button" class="cc-hero-how" aria-expanded="false" aria-controls="cc-hero-panel">How it works<svg class="cc-hero-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.2 4.2 6 8l3.8-3.8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>
         <div class="cc-hero-aside">
           <p class="cc-hero-offer" data-head aria-live="polite"></p>
@@ -1102,7 +1126,9 @@
           </div>
         </div>
       </div>
-      <div class="cc-hero-panel" id="cc-hero-panel" hidden>
+      <div class="cc-hero-panel" id="cc-hero-panel" aria-hidden="true">
+        <div class="cc-hero-panel-in">
+        <button type="button" class="cc-hero-x" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
         <ol class="rw-steps">
           <li><span class="n">01</span><div><b>One order, one reward</b><p>The more you spend in a single transaction, the bigger your credit. Each reward replaces the one before it. They don't add up.</p>
             <div class="rw-table">${pr.tiers.map((t, i) => `<div data-row="${i}"><span>Spend <span class="money money--tab">${fmt(t.at, false)}</span><em>This order</em></span><strong>Get <span class="money money--tab">${fmt(t.credit, false)}</span></strong></div>`).join('')}</div></div></li>
@@ -1110,15 +1136,22 @@
           <li><span class="n">03</span><div><b>Yours to keep</b><p>It never expires. Spend it wherever and whenever you like, in store or at shopphylum.com. Just sign in at checkout.</p></div></li>
         </ol>
         <p class="rw-fine">One credit per transaction, on the amount paid. Valid ${CAMPAIGN.dates}, in store and at shopphylum.com.</p>
+        </div>
       </div>`;
     m.shown = { tier: null };
     const btn = m.el.querySelector('.cc-hero-how');
     const panel = m.el.querySelector('#cc-hero-panel');
-    btn.addEventListener('click', () => {
-      const open = btn.getAttribute('aria-expanded') !== 'true';
+    const setOpen = (open, returnFocus) => {
       btn.setAttribute('aria-expanded', String(open));
-      panel.hidden = !open;
-    });
+      panel.classList.toggle('is-open', open);
+      panel.setAttribute('aria-hidden', String(!open));
+      panel.inert = !open;
+      if (!open && returnFocus) btn.focus();
+    };
+    panel.inert = true;
+    btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true', false));
+    panel.querySelector('.cc-hero-x').addEventListener('click', () => setOpen(false, true));
+    closeHeroPanel = () => setOpen(false, true);
   }
 
   function updateHero(m, s, animate) {
@@ -1389,7 +1422,7 @@
     setDemoPressed();
   }
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { if (modal.classList.contains('is-open')) closeModal(); else if (document.body.classList.contains('cd-open')) closeDrawer(); }
+    if (e.key === 'Escape') { if (modal.classList.contains('is-open')) closeModal(); else if (document.body.classList.contains('cd-open')) closeDrawer(); else if (document.querySelector('.cc-hero-panel.is-open')) closeHeroPanel(); }
     if (e.key === 'Tab' && document.body.classList.contains('cd-open') && !modal.classList.contains('is-open')) {
       const f = [...drawer.querySelectorAll('button, a[href], textarea, select')].filter(x => !x.disabled && x.offsetParent !== null);
       if (!f.length) return;
