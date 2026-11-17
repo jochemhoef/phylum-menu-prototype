@@ -145,6 +145,12 @@
   .cc-hero-node { width: 9px; height: 9px; border-radius: 50%; background: #3E2B30; box-shadow: inset 0 0 0 2px #E8AE3B; }
   .cc-hero-stops .is-on .cc-hero-node { background: #E8AE3B; box-shadow: 0 0 0 2px #3E2B30, 0 0 0 4px #E8AE3B; }
   .cc-hero-amt { margin-top: 8px; font-size: 18px; line-height: 1; color: #EEEEE5; font-weight: 600; font-synthesis: weight; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum", "tnum"; }
+  .cc-hero-stops .is-on .cc-hero-amt { color: #fff; text-decoration: none; }
+  .cc-hero-stops .is-past .cc-hero-amt {
+    color: rgba(238, 238, 229, .55); font-weight: 500;
+    text-decoration-line: line-through; text-decoration-thickness: 2px; text-decoration-color: rgba(238, 238, 229, .72);
+  }
+  .cc-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   .cc-hero-panel {
     --espresso: #3E2B30; --terra: #CC6118; --ink2: #6A5D5F; --hair: rgba(62, 43, 48, .16);
     display: grid; grid-template-rows: 0fr; margin-top: 0;
@@ -1118,7 +1124,7 @@
         </div>
         <div class="cc-hero-aside">
           <p class="cc-hero-offer" data-head aria-live="polite"></p>
-          <div class="cc-hero-track" data-track role="img">
+          <div class="cc-hero-track" data-track role="group">
             <div class="cc-hero-line"><span data-hero-prog></span></div>
             <ol class="cc-hero-stops">
               ${pr.tiers.map((t, i) => `<li data-hero-stop="${i}" style="--x:${((i + 1) / n) * 100}%"><span class="cc-hero-node"></span><span class="cc-hero-amt money">${fmt(t.credit, false)}</span></li>`).join('')}
@@ -1166,13 +1172,23 @@
       head.innerHTML = html;
       if (animate) { head.classList.remove('is-in'); void head.offsetWidth; head.classList.add('is-in'); }
     }
+    const passed = k > 0 ? pr.tiers.slice(0, k).map(t => fmt(t.credit, false)).join(' and ') : '';
     el.querySelector('[data-track]').setAttribute('aria-label',
-      `${usd(s)} toward store credit rewards. ` + (k >= 0 ? `${fmt(pr.tiers[k].credit, false)} earned.` : 'No credit earned yet.'));
+      `${usd(s)} toward store credit rewards. ` + (k >= 0 ? `${fmt(pr.tiers[k].credit, false)} earned.` : 'No credit earned yet.') + (passed ? ` ${passed} replaced.` : ''));
     el.querySelector('[data-hero-prog]').style.transform = `scaleX(${p.toFixed(4)})`;
     el.querySelectorAll('[data-hero-stop]').forEach(li => {
       const i = +li.dataset.heroStop;
+      const past = i < k;
       li.classList.toggle('is-on', i === k);
-      li.classList.toggle('is-past', i < k);
+      li.classList.toggle('is-past', past);
+      const amt = li.querySelector('.cc-hero-amt');
+      let sr = amt.querySelector('.cc-sr');
+      if (past && !sr) {
+        sr = document.createElement('span');
+        sr.className = 'cc-sr';
+        sr.textContent = ', replaced';
+        amt.appendChild(sr);
+      } else if (!past && sr) sr.remove();
     });
     el.querySelectorAll('[data-row]').forEach(r => r.classList.toggle('is-cur', +r.dataset.row === k));
     const dockLine = document.querySelector('[data-dock-line]');
