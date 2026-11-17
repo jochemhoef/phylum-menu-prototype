@@ -208,6 +208,22 @@
   .rv-arrow { display: inline-block; transition: transform 0.5s var(--ease); }
   .rv-btn:hover .rv-arrow, .rv-link:hover .rv-arrow, .rv-card-link:hover .rv-arrow { transform: translateX(5px); }
   .rv-btn--sun { --bg: var(--sun); --fg: var(--espresso); --bg-h: var(--linen); --fg-h: var(--espresso); }
+  /* Teal on aqua: the hanging gift-tag colorway from registry v1. */
+  .rv-btn--aqua {
+    --bg: var(--aqua);
+    --fg: var(--teal);
+    --bg-h: color-mix(in srgb, var(--aqua) 86%, var(--teal));
+    --fg-h: var(--teal);
+  }
+  .rv-btn--aqua:active { --bg-h: color-mix(in srgb, var(--aqua) 74%, var(--teal)); }
+  .rv .rv-btn--aqua:active { color: var(--fg-h); border-color: var(--bg-h); }
+  .rv-btn--aqua:active::before { transform: translateY(0); }
+  /* Two-tone ring: teal against the light button and bright sky, linen against the dark photo. */
+  .rv .rv-btn--aqua:focus-visible {
+    outline: 2px solid var(--linen);
+    outline-offset: 4px;
+    box-shadow: 0 0 0 2px var(--teal);
+  }
   .rv-btn--light { --bg: transparent; --fg: var(--linen); --bd: rgba(238, 238, 229, 0.55); --bg-h: var(--linen); --fg-h: var(--espresso); }
   .rv-btn--full { width: 100%; }
   .rv-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -285,7 +301,15 @@
       linear-gradient(0deg, rgba(38, 36, 24, 0.55) 0%, rgba(38, 36, 24, 0) 45%);
   }
   .rv-hero-inner { position: relative; }
-  .rv-hero .rv-eyebrow { color: var(--sun); }
+  /* Aqua type on the dusk photo misses 4.5:1, so the small eyebrow uses the aqua pill. */
+  .rv-hero .rv-eyebrow {
+    display: inline-block;
+    width: fit-content;
+    padding: 7px 12px 6px;
+    border-radius: 999px;
+    background: var(--aqua);
+    color: var(--teal);
+  }
   .rv-h1 {
     font-size: clamp(56px, 7.6vw, 136px);
     line-height: 0.9;
@@ -1041,7 +1065,7 @@
       </h1>
       <p class="rv-hero-sub rv-hero-fade" style="--d: 1s">A registry of fewer, better pieces, chosen together and made for the home you’re building. Worth carrying to every home after this one.</p>
       <div class="rv-ctas rv-hero-fade" style="--d: 1.15s">
-        <a class="rv-btn rv-btn--sun" href="tel:+17604242110">Call or text (760) 424-2110</a>
+        <a class="rv-btn rv-btn--aqua" href="tel:+17604242110">Call or text (760) 424-2110</a>
         <a class="rv-btn rv-btn--light" href="#consult">Book a consultation <span class="rv-arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -1284,7 +1308,7 @@
       <h2 class="rv-h2" id="close-title"><span class="rv-s">The registry begins</span> with a conversation.</h2>
       <p data-reveal style="--d: 0.2s">One call, and the rest is our pleasure. Every gift ships free and arrives beautifully wrapped.</p>
       <div class="rv-ctas" data-reveal style="--d: 0.3s">
-        <a class="rv-btn rv-btn--sun" href="tel:+17604242110">Call or text (760) 424-2110</a>
+        <a class="rv-btn rv-btn--aqua" href="tel:+17604242110">Call or text (760) 424-2110</a>
         <a class="rv-btn rv-btn--light" href="#consult">Book a consultation <span class="rv-arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
