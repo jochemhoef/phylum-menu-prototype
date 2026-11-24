@@ -426,24 +426,24 @@
     clip-path: inset(100% 0 0 0 round 20px);
     transition: clip-path 0.7s var(--ease);
   }
-  .gg-index-row:hover, .gg-index-row:focus-visible { color: var(--linen); }
-  .gg-index-row:hover::before, .gg-index-row:focus-visible::before { clip-path: inset(0 0 0 0 round 20px); }
+  .gg-index-row.is-active, .gg-index-row:focus-visible { color: var(--linen); }
+  .gg-index-row.is-active::before, .gg-index-row:focus-visible::before { clip-path: inset(0 0 0 0 round 20px); }
   .gg-index-row:focus-visible { outline-offset: 2px; }
   .gg-index-n { font-size: 12px; letter-spacing: 0.2em; color: var(--ink-soft); transition: color 0.5s var(--ease); }
-  .gg-index-row:hover .gg-index-n { color: inherit; }
+  .gg-index-row.is-active .gg-index-n { color: inherit; }
   .gg-index-mark { width: 52px; aspect-ratio: 1; }
   /* The shape that shares the row's fill colour turns linen, so the mark never vanishes into it. */
   .gg-index-mark [fill] { transition: fill 0.5s var(--ease); }
-  .gg-index-row--t1:is(:hover, :focus-visible) .gg-index-mark [fill="var(--teal)"],
-  .gg-index-row--t2:is(:hover, :focus-visible) .gg-index-mark [fill="var(--terracotta)"],
-  .gg-index-row--t3:is(:hover, :focus-visible) .gg-index-mark [fill="var(--olive)"] { fill: var(--linen); }
-  .gg-index-row--t4:is(:hover, :focus-visible) .gg-index-mark [fill="var(--sun)"] { fill: var(--aqua); }
+  .gg-index-row--t1:is(.is-active, :focus-visible) .gg-index-mark [fill="var(--teal)"],
+  .gg-index-row--t2:is(.is-active, :focus-visible) .gg-index-mark [fill="var(--terracotta)"],
+  .gg-index-row--t3:is(.is-active, :focus-visible) .gg-index-mark [fill="var(--olive)"] { fill: var(--linen); }
+  .gg-index-row--t4:is(.is-active, :focus-visible) .gg-index-mark [fill="var(--sun)"] { fill: var(--aqua); }
   .gg-index-mark svg, .gg-tier-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
   .gg-index-name { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 3.6vw, 60px); line-height: 1; letter-spacing: -0.035em; transition: color 0.5s var(--ease); }
-  .gg-index-row:hover .gg-index-name { color: var(--ta); }
+  .gg-index-row.is-active .gg-index-name { color: var(--ta); }
   .gg-index-price { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; }
   .gg-index-line { font-family: var(--body); font-size: 15px; line-height: 1.5; color: var(--ink-soft); transition: color 0.5s var(--ease); }
-  .gg-index-row:hover .gg-index-line { color: rgba(238, 238, 229, 0.82); }
+  .gg-index-row.is-active .gg-index-line { color: rgba(238, 238, 229, 0.82); }
   .gg-index-thumbs { display: flex; }
   .gg-index-thumbs img {
     width: 52px; height: 52px; margin-left: -14px; border-radius: 50%;
@@ -452,9 +452,9 @@
     transition: transform 0.7s var(--ease), box-shadow 0.5s var(--ease);
   }
   .gg-index-thumbs img:first-child { margin-left: 0; }
-  .gg-index-row:hover .gg-index-thumbs img { box-shadow: 0 0 0 3px var(--tc); }
-  .gg-index-row:hover .gg-index-thumbs img:nth-child(1) { transform: translateX(-10px); }
-  .gg-index-row:hover .gg-index-thumbs img:nth-child(3) { transform: translateX(10px); }
+  .gg-index-row.is-active .gg-index-thumbs img { box-shadow: 0 0 0 3px var(--tc); }
+  .gg-index-row.is-active .gg-index-thumbs img:nth-child(1) { transform: translateX(-10px); }
+  .gg-index-row.is-active .gg-index-thumbs img:nth-child(3) { transform: translateX(10px); }
   .gg-index-go {
     width: 48px; height: 48px; border-radius: 50%;
     display: grid; place-items: center;
@@ -462,8 +462,8 @@
     transition: background-color 0.5s var(--ease), border-color 0.5s var(--ease), color 0.5s var(--ease);
   }
   .gg-index-go svg { width: 18px; rotate: 90deg; transition: translate 0.5s var(--ease); }
-  .gg-index-row:hover .gg-index-go { background: var(--ta); border-color: var(--ta); color: var(--tc); }
-  .gg-index-row:hover .gg-index-go svg { translate: 0 3px; }
+  .gg-index-row.is-active .gg-index-go { background: var(--ta); border-color: var(--ta); color: var(--tc); }
+  .gg-index-row.is-active .gg-index-go svg { translate: 0 3px; }
 
   /* =========================================================
      4–7. TIERS
@@ -973,7 +973,7 @@
     .gg-index-mark { grid-row: 1 / 3; width: 40px; }
     .gg-index-name { grid-column: 2; }
     .gg-index-price { grid-column: 2; grid-row: 2; font-size: 11px; color: var(--ink-soft); }
-    .gg-index-row:hover .gg-index-price { color: inherit; }
+    .gg-index-row.is-active .gg-index-price { color: inherit; }
     .gg-index-go { grid-column: 3; grid-row: 1 / 3; width: 40px; height: 40px; }
     .gg-rates div { grid-template-columns: 1fr; gap: 6px; }
     .gg-faq-a > * { padding-right: 0; }
@@ -1377,7 +1377,7 @@
       </header>
       <ol class="gg-index-list">
         <li data-reveal style="--d: 0.06s">
-          <a class="gg-index-row gg-index-row--t1" href="#thoughtful">
+          <a class="gg-index-row gg-index-row--t1 is-active" href="#thoughtful">
             <span class="gg-index-n">01</span>
             <span class="gg-index-mark"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="var(--teal)"/><circle cx="50" cy="50" r="20" fill="var(--citrus)"/></svg></span>
             <span class="gg-index-name">Thoughtful</span>
@@ -2178,6 +2178,14 @@
     }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
     setTimeout(ready, 2600);
   } else ready();
+
+  /* ---------- Budget index: one row always highlighted, starting with the first ---------- */
+  var indexRows = Array.prototype.slice.call(document.querySelectorAll('.gg-index-row'));
+  indexRows.forEach(function (row) {
+    function activate() { indexRows.forEach(function (r) { r.classList.toggle('is-active', r === row); }); }
+    row.addEventListener('mouseenter', activate);
+    row.addEventListener('focus', activate);
+  });
 
   /* ---------- Rails: arrows and progress ---------- */
   /* Where an arrow should land: always on a card's left edge, at the rail's snap line.
