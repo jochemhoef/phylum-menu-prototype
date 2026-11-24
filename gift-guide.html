@@ -378,13 +378,13 @@
      2. PERKS TICKER
      ========================================================= */
   .gg-ticker { overflow: hidden; background: var(--espresso); color: var(--linen); }
-  .gg-tick-track { display: flex; width: max-content; padding: 22px 0; }
+  .gg-tick-track { display: flex; width: max-content; padding: 28px 0; }
   .gg-tick-run { display: flex; align-items: center; flex-shrink: 0; }
   .js-motion .gg-tick-track { animation: gg-tick 60s linear infinite; }
   .gg-ticker:hover .gg-tick-track { animation-play-state: paused; }
   @keyframes gg-tick { to { transform: translateX(-50%); } }
-  .gg-tick-item { font-family: var(--sans); font-weight: 500; font-size: clamp(16px, 1.3vw, 19px); letter-spacing: -0.01em; white-space: nowrap; padding: 0 clamp(28px, 3vw, 48px); }
-  .gg-tick-sun { width: 16px; aspect-ratio: 1; flex-shrink: 0; background: var(--sun); -webkit-mask: var(--sun-vector) center / contain no-repeat; mask: var(--sun-vector) center / contain no-repeat; }
+  .gg-tick-item { font-family: var(--sans); font-weight: 500; font-size: clamp(20px, 1.9vw, 28px); letter-spacing: -0.015em; white-space: nowrap; padding: 0 clamp(28px, 3vw, 48px); }
+  .gg-tick-sun { width: 20px; aspect-ratio: 1; flex-shrink: 0; background: var(--sun); -webkit-mask: var(--sun-vector) center / contain no-repeat; mask: var(--sun-vector) center / contain no-repeat; }
 
   /* =========================================================
      3. SHOP BY BUDGET: an editorial index of the four tiers
@@ -476,13 +476,12 @@
   .gg-tier--t4 {
     background: var(--espresso);
     color: var(--linen);
-    --chip: var(--sun); --chip-fg: var(--espresso);
+    --chip: var(--aqua); --chip-fg: var(--espresso);
     --pbg: var(--aqua); --pfg: var(--espresso); --pac: var(--terracotta);
-   
     --soft: rgba(238, 238, 229, 0.72);
     --line: rgba(238, 238, 229, 0.3);
   }
-  .gg-tier--t4 .gg-eyebrow { color: var(--sun); }
+  .gg-tier--t4 .gg-eyebrow { color: var(--aqua); }
   .gg-tier--t4 .gg-lede { color: var(--soft); }
   .gg-tier--t4 .gg-btn--sun { min-height: 50px; padding: 14px 26px; }
 
@@ -1310,7 +1309,7 @@
   <section class="gg-hero" aria-labelledby="gg-title">
     <div class="gg-wrap gg-hero-grid">
       <div class="gg-hero-copy">
-        <p class="gg-eyebrow gg-hero-fade" style="--d: 0.35s">The Holiday Gift Guide <span class="gg-dot" aria-hidden="true"></span> 2026</p>
+        <p class="gg-eyebrow gg-hero-fade" style="--d: 0.35s">The Holiday Gift Guide 2026</p>
         <h1 class="gg-h1" id="gg-title">
           <span class="gg-line gg-s"><span style="--i: 0">Go ahead.</span></span>
           <span class="gg-line"><span style="--i: 1">Overdo it.</span></span>
