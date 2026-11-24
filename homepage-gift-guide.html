@@ -213,7 +213,8 @@
   .hgg-arrow { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--tfg) 35%, transparent); background: transparent; cursor: pointer; transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease); }
   .hgg-arrow svg { width: 14px; height: 14px; }
   .hgg-arrow:hover { background: var(--tfg); color: var(--tcard); border-color: var(--tfg); }
-  .hgg-arrow:focus-visible { outline: 2px solid var(--tfg); outline-offset: 2px; }
+  .hgg-arrow:focus { outline: none; }
+  .hgg-arrow:focus-visible { border-color: var(--tfg); background: color-mix(in srgb, var(--tfg) 16%, transparent); }
   .hgg-set-body { transition: opacity 0.35s var(--ease); }
   .hgg-set.is-swapping .hgg-set-imgs, .hgg-set.is-swapping .hgg-set-list, .hgg-set.is-swapping .hgg-set-title { opacity: 0; }
   .hgg-set-imgs, .hgg-set-list, .hgg-set-title { transition: opacity 0.3s var(--ease); }
@@ -267,7 +268,8 @@
     transition: border-color 0.35s var(--ease);
   }
   .hgg-var select:hover { border-color: var(--tfg); }
-  .hgg-var select:focus-visible { outline: 2px solid var(--tfg); outline-offset: 2px; }
+  /* A quiet focus: the pill's own border firms up and fills a touch, no extra ring. */
+  .hgg-var select:focus, .hgg-var select:focus-visible { outline: none; border-color: var(--tfg); background: color-mix(in srgb, var(--tfg) 16%, transparent); }
   .hgg-var option { color: #3E2B30; background: #fff; }
   .hgg-var::after { content: ""; position: absolute; right: 10px; top: 50%; width: 5px; height: 5px; margin-top: -4px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; rotate: 45deg; pointer-events: none; }
   .hgg-set-tile.is-swapping img { opacity: 0; }
@@ -713,12 +715,40 @@
       });
       update();
     }
+    /* Set changes: preload the next set's photos, ease the current set out a few pixels in the
+       direction of travel, then bring the new one in with a light stagger. */
+    var moving = card.querySelectorAll('[data-set-title], [data-set-imgs], [data-set-list], .hgg-set-foot');
+    var token = 0;
+    var pendingOuts = [];   /* every fade-out still holding its end state */
+    function preload(s) {
+      return Promise.race([
+        Promise.all(s.items.map(function (i) {
+          return new Promise(function (res) { var im = new Image(); im.onload = im.onerror = res; im.src = i.img; });
+        })),
+        new Promise(function (res) { setTimeout(res, 600); })
+      ]);
+    }
     function step(d) {
       idx = (idx + d + sets.length) % sets.length;
-      if (!motion) { paint(); return; }
-      clearTimeout(swapTimer);
-      card.classList.add('is-swapping');
-      swapTimer = setTimeout(function () { paint(); card.classList.remove('is-swapping'); }, 260);
+      if (!motion || !card.animate) { paint(); return; }
+      var my = ++token;
+      var shift = 16 * d;
+      Array.prototype.forEach.call(moving, function (el) {
+        var a = el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(' + (-shift) + 'px)' }],
+          { duration: 220, easing: 'cubic-bezier(0.4, 0, 1, 1)', fill: 'forwards' });
+        pendingOuts.push(a);
+      });
+      Promise.all([preload(sets[idx]), new Promise(function (res) { setTimeout(res, 220); })]).then(function () {
+        if (my !== token) return;
+        paint();
+        Array.prototype.forEach.call(moving, function (el, k) {
+          el.animate([{ opacity: 0, transform: 'translateX(' + shift + 'px)' }, { opacity: 1, transform: 'none' }],
+            { duration: 620, delay: k * 45, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'backwards' });
+        });
+        /* Clear every fade-out, including ones left by clicks this one overtook. */
+        pendingOuts.forEach(function (a) { a.cancel(); });
+        pendingOuts = [];
+      });
     }
     card.querySelectorAll('[data-set-step]').forEach(function (b) {
       b.addEventListener('click', function () { step(Number(b.dataset.setStep)); });
