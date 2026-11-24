@@ -185,14 +185,14 @@
     padding: 0 clamp(16px, 1.4vw, 22px) clamp(16px, 1.4vw, 22px);
     border-radius: 999px 999px 14px 14px;
     border: 1px solid color-mix(in srgb, var(--tfg) 35%, transparent);
-    text-align: left;
+    text-align: center;
     /* No colour transition here: ink follows the stage's own fade, so nothing lags behind it. */
     transition: background-color 0.5s var(--ease), border-color 0.5s var(--ease);
   }
   .hgg-more-n { font-family: var(--serif); font-weight: 300; font-size: clamp(56px, 5vw, 88px); line-height: 0.82; letter-spacing: -0.045em; color: var(--tac); transition: color 0.5s var(--ease); }
   .hgg-more-t { margin-top: 10px; font-size: clamp(16px, 1.3vw, 20px); line-height: 1.2; letter-spacing: -0.01em; text-wrap: balance; }
   .hgg-more-go {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; justify-content: center; align-items: center; gap: 10px;
     margin-top: clamp(14px, 1.4vw, 20px); padding-top: 12px;
     border-top: 1px solid color-mix(in srgb, currentColor 35%, transparent);
     font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
