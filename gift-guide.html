@@ -513,7 +513,7 @@
     min-height: 42px;
     padding: 0 15px;
     border-radius: 999px;
-    border: 1px solid var(--line);
+    border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
     background: transparent;
     font-family: var(--sans);
     font-weight: 500;
@@ -638,8 +638,8 @@
     padding-inline: var(--pp);
     scroll-padding-inline: var(--pp);
   }
-  .gg-pairs .gg-progress { background: color-mix(in srgb, var(--pfg) 28%, transparent); }
-  .gg-pairs .gg-progress span { background: var(--pfg); }
+  /* Set panels go without the progress line; the arrows and the peeking card carry it. */
+  .gg-pairs .gg-progress { display: none; }
 
   .gg-set { flex: 0 0 auto; width: min(var(--sw), 84vw); scroll-snap-align: start; display: flex; --sw: 600px; }
   .gg-set[style*="--n: 2"] { --sw: 440px; }
