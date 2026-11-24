@@ -237,15 +237,20 @@
   .js-motion .gg-unveil.is-in img { clip-path: inset(0 0 0 0); transform: scale(1.04); }
 
   /* =========================================================
-     1. HERO: copy on linen, an arched window of hanging ornaments
+     1. HERO: copy on linen, ornaments hanging from the nav, a landscape on the horizon
      ========================================================= */
-  .gg-hero { position: relative; padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 6vw, 96px); }
+  .gg-hero {
+    --hero-pt: clamp(40px, 5vw, 72px);
+    position: relative;
+    padding: var(--hero-pt) 0 0;
+  }
   .gg-hero-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     gap: clamp(40px, 6vw, 112px);
     align-items: center;
-    min-height: clamp(600px, calc(100svh - var(--nav-h, 78px) - 120px), 880px);
+    min-height: clamp(500px, calc(100svh - var(--nav-h, 78px) - var(--hero-pt) - min(22vw, 320px) - 70px), 760px);
+    padding-bottom: clamp(32px, 4vw, 56px);
   }
   .gg-hero .gg-eyebrow { color: var(--terracotta); }
   .gg-h1 {
@@ -277,50 +282,20 @@
   }
   .is-ready .gg-hero-fade { opacity: 1; transform: none; }
 
-  /* The window: an olive arch, a sun rising inside it, three ornaments on threads. */
+  /* Ornaments hang on threads from the underside of the nav bar. Thread lengths are in
+     column-height units (cqh), so they land in the same place at any size. */
   .gg-window {
     position: relative;
-    isolation: isolate;
     justify-self: end;
+    align-self: stretch;
     width: 100%;
     max-width: 640px;
-    aspect-ratio: 5 / 6;
-    border-radius: 999px 999px var(--radius) var(--radius);
-    background: var(--olive);
-    overflow: hidden;
+    min-height: 520px;
+    margin-top: calc(var(--hero-pt) * -1);
+    container-type: size;
+    /* Clip only the top edge, so ornaments drop in from under the nav but tags can hang free. */
+    clip-path: inset(0 -50% -50% -50%);
   }
-  .js-motion .gg-window { clip-path: inset(100% 0 0 0 round 999px 999px var(--radius) var(--radius)); transition: clip-path 1.6s var(--ease-io) 0.25s; }
-  .js-motion.is-ready .gg-window { clip-path: inset(0 0 0 0 round 999px 999px var(--radius) var(--radius)); }
-  .gg-window-sun {
-    position: absolute;
-    z-index: -1;
-    left: 50%;
-    bottom: 0;
-    width: 112%;
-    aspect-ratio: 1;
-    margin-left: -56%;
-    translate: 0 60%;
-    background: var(--sun);
-    -webkit-mask: var(--sun-vector) center / contain no-repeat;
-            mask: var(--sun-vector) center / contain no-repeat;
-    rotate: var(--rot, 0deg);
-  }
-  .js-motion .gg-window-sun { translate: 0 92%; transition: translate 2.2s var(--ease) 0.7s; }
-  .js-motion.is-ready .gg-window-sun { translate: 0 60%; }
-
-  /* Sparkles: tiny four-point stars that breathe. */
-  .gg-spark {
-    position: absolute;
-    width: 14px;
-    aspect-ratio: 1;
-    background: var(--citrus);
-    clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
-    animation: gg-twinkle 5.5s var(--ease-io) infinite;
-  }
-  .gg-spark--1 { left: 16%; top: 54%; }
-  .gg-spark--2 { left: 84%; top: 30%; width: 10px; animation-delay: -2s; }
-  .gg-spark--3 { left: 30%; top: 30%; width: 9px; animation-delay: -3.6s; background: var(--apricot); }
-  @keyframes gg-twinkle { 0%, 100% { opacity: 0.25; scale: 0.7; } 50% { opacity: 1; scale: 1; } }
 
   .gg-orn {
     --c: var(--citrus);
@@ -335,11 +310,13 @@
     transform-origin: 50% 0;
     animation: gg-sway var(--sway, 7s) ease-in-out var(--sway-d, 0s) infinite alternate;
   }
-  .gg-orn--a { --w: 41%; left: 27%; --c: var(--citrus); --sway: 7.5s; }
-  .gg-orn--b { --w: 27%; left: 58%; --c: var(--aqua); --sway: 6.2s; --sway-d: -2.4s; }
-  .gg-orn--c { --w: 33%; left: 79%; --c: var(--apricot); --sway: 8.4s; --sway-d: -4.1s; }
+  .gg-orn--a { --w: 41%; left: 26%; --c: var(--citrus); --sway: 7.5s; --drop-d: 0.45s; }
+  .gg-orn--b { --w: 27%; left: 58%; --c: var(--aqua); --sway: 6.2s; --sway-d: -2.4s; --drop-d: 0.6s; }
+  .gg-orn--c { --w: 33%; left: 80%; --c: var(--apricot); --sway: 8.4s; --sway-d: -4.1s; --drop-d: 0.75s; }
+  .js-motion .gg-orn { translate: 0 calc(-100% - 24px); transition: translate 1.9s var(--ease) var(--drop-d, 0.5s); }
+  .js-motion.is-ready .gg-orn { translate: 0 0; }
   @keyframes gg-sway { from { rotate: -1.6deg; } to { rotate: 1.6deg; } }
-  .gg-orn-thread { display: block; width: 1px; background: rgba(238, 238, 229, 0.55); }
+  .gg-orn-thread { display: block; width: 1px; background: rgba(62, 43, 48, 0.32); }
   .gg-orn-cap { display: block; width: 18%; height: 14px; margin-bottom: -2px; border-radius: 4px 4px 0 0; background: var(--c); }
   .gg-orn-disc {
     position: relative;
@@ -350,7 +327,7 @@
     border: clamp(6px, 1vw, 12px) solid var(--c);
     background: #fff;
     overflow: hidden;
-    box-shadow: 0 38px 60px -34px rgba(20, 18, 10, 0.6);
+    box-shadow: 0 34px 54px -32px rgba(62, 43, 48, 0.42);
     transition: transform 0.9s var(--ease);
   }
   .gg-orn-disc img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
@@ -359,8 +336,8 @@
     margin-top: 14px;
     padding: 8px 14px 7px;
     border-radius: 999px;
-    background: var(--linen);
-    color: var(--espresso);
+    background: var(--espresso);
+    color: var(--linen);
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -369,16 +346,29 @@
     translate: 0 -6px;
     transition: opacity 0.5s var(--ease), translate 0.6s var(--ease);
   }
-  .gg-orn-tag em { font-style: normal; font-family: var(--serif); font-weight: 300; font-size: 14px; letter-spacing: 0; text-transform: none; margin-left: 6px; color: var(--terracotta); }
+  .gg-orn-tag em { font-style: normal; font-family: var(--serif); font-weight: 300; font-size: 14px; letter-spacing: 0; text-transform: none; margin-left: 6px; color: var(--apricot); }
   .gg-orn:hover .gg-orn-tag, .gg-orn:focus-visible .gg-orn-tag { opacity: 1; translate: 0 0; }
   .gg-orn:focus-visible { outline: none; }
-  .gg-orn:focus-visible .gg-orn-disc { outline: 2px solid var(--linen); outline-offset: 4px; }
-  /* Thread lengths are in window-height units (cqh), so ornaments hang in the same place at any size. */
-  .gg-window { container-type: size; }
+  .gg-orn:focus-visible .gg-orn-disc { outline: 2px solid var(--espresso); outline-offset: 4px; }
   .gg-orn-thread { height: var(--drop-px, 0px); }
-  .gg-orn--a .gg-orn-thread { --drop-px: 22cqh; }
-  .gg-orn--b .gg-orn-thread { --drop-px: 9cqh; }
-  .gg-orn--c .gg-orn-thread { --drop-px: 36cqh; }
+  .gg-orn--a .gg-orn-thread { --drop-px: 24cqh; }
+  .gg-orn--b .gg-orn-thread { --drop-px: 8cqh; }
+  .gg-orn--c .gg-orn-thread { --drop-px: 40cqh; }
+
+  /* The horizon: firs, palms and lollipop trees on colour blocks. The ticker below is its ground. */
+  .gg-scape { position: relative; }
+  .gg-scape-svg { display: block; width: 100%; height: auto; aspect-ratio: 1440 / 320; min-height: 168px; max-height: 360px; }
+  .gg-scape-el { transform-box: fill-box; transform-origin: 50% 100%; }
+  .js-motion .gg-scape-el { scale: 1 0; transition: scale 1.3s var(--ease) calc(0.7s + var(--i) * 55ms); }
+  .js-motion.is-ready .gg-scape-el { scale: 1 1; }
+  .gg-scape-motif { transform-box: fill-box; transform-origin: 50% 50%; }
+  .js-motion .gg-scape-motif { scale: 0; transition: scale 1.1s var(--ease) calc(0.5s + var(--i) * 90ms); }
+  .js-motion.is-ready .gg-scape-motif { scale: 1; }
+  .js-motion .gg-frond { animation: gg-frond var(--sw, 6s) ease-in-out infinite alternate; }
+  @keyframes gg-frond { from { rotate: -3deg; } to { rotate: 3deg; } }
+  .gg-star { transform-box: fill-box; transform-origin: 50% 50%; }
+  .js-motion .gg-star { animation: gg-star 3.2s ease-in-out infinite alternate; }
+  @keyframes gg-star { from { scale: 0.82; } to { scale: 1.12; } }
 
   /* =========================================================
      2. PERKS TICKER
@@ -396,7 +386,7 @@
      3. SHOP BY BUDGET: an editorial index of the four tiers
      ========================================================= */
   .gg-index { padding: var(--pad) 0 calc(var(--pad) * 0.25); }
-  .gg-index-list { border-top: 1px solid var(--hair-strong); }
+  .gg-index-list { display: grid; gap: 6px; }
   .gg-index-row {
     --tc: var(--teal);
     --ta: var(--citrus);
@@ -406,8 +396,8 @@
     grid-template-columns: 56px 64px minmax(0, 1.2fr) minmax(0, 0.7fr) minmax(0, 1.1fr) auto 48px;
     align-items: center;
     gap: clamp(16px, 2vw, 32px);
-    padding: clamp(22px, 2.2vw, 32px) clamp(8px, 1vw, 16px);
-    border-bottom: 1px solid var(--hair-strong);
+    padding: clamp(20px, 2vw, 30px) clamp(18px, 2vw, 32px);
+    border-radius: 20px;
     text-decoration: none;
     transition: color 0.5s var(--ease);
     overflow: hidden;
@@ -421,16 +411,21 @@
     z-index: -1;
     inset: 0;
     background: var(--tc);
-    transform: scaleY(0);
-    transform-origin: 50% 100%;
-    transition: transform 0.7s var(--ease);
+    border-radius: inherit;
+    clip-path: inset(100% 0 0 0 round 20px);
+    transition: clip-path 0.7s var(--ease);
   }
   .gg-index-row:hover, .gg-index-row:focus-visible { color: var(--linen); }
-  .gg-index-row:hover::before, .gg-index-row:focus-visible::before { transform: scaleY(1); }
-  .gg-index-row:focus-visible { outline-offset: -2px; }
+  .gg-index-row:hover::before, .gg-index-row:focus-visible::before { clip-path: inset(0 0 0 0 round 20px); }
+  .gg-index-row:focus-visible { outline-offset: 2px; }
   .gg-index-n { font-size: 12px; letter-spacing: 0.2em; color: var(--ink-soft); transition: color 0.5s var(--ease); }
   .gg-index-row:hover .gg-index-n { color: inherit; }
   .gg-index-mark { width: 52px; aspect-ratio: 1; }
+  /* The shape that shares the row's fill colour turns linen, so the mark never vanishes into it. */
+  .gg-index-mark [fill] { transition: fill 0.5s var(--ease); }
+  .gg-index-row--t1:is(:hover, :focus-visible) .gg-index-mark [fill="var(--teal)"],
+  .gg-index-row--t2:is(:hover, :focus-visible) .gg-index-mark [fill="var(--terracotta)"],
+  .gg-index-row--t3:is(:hover, :focus-visible) .gg-index-mark [fill="var(--olive)"] { fill: var(--linen); }
   .gg-index-mark svg, .gg-tier-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
   .gg-index-name { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 3.6vw, 60px); line-height: 1; letter-spacing: -0.035em; transition: color 0.5s var(--ease); }
   .gg-index-row:hover .gg-index-name { color: var(--ta); }
@@ -472,13 +467,13 @@
     scroll-margin-top: var(--nav-h, 78px);
     background: var(--linen);
   }
-  .gg-tier--t2 { background: var(--light); --chip: var(--terracotta); --pbg: var(--aqua); --pfg: var(--espresso); --pac: var(--terracotta); }
+  .gg-tier--t2 { background: var(--light); --chip: var(--terracotta); --pbg: var(--terracotta); --pfg: var(--linen); --pac: var(--citrus); }
   .gg-tier--t3 { --chip: var(--olive); --pbg: var(--olive); --pfg: var(--linen); --pac: var(--apricot); }
   .gg-tier--t4 {
     background: var(--espresso);
     color: var(--linen);
     --chip: var(--sun); --chip-fg: var(--espresso);
-    --pbg: var(--sun); --pfg: var(--espresso); --pac: var(--espresso);
+    --pbg: var(--aqua); --pfg: var(--espresso); --pac: var(--terracotta);
    
     --soft: rgba(238, 238, 229, 0.72);
     --line: rgba(238, 238, 229, 0.3);
@@ -913,8 +908,8 @@
     .gg-dates { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 960px) {
-    .gg-hero-grid { grid-template-columns: 1fr; min-height: 0; gap: 48px; }
-    .gg-window { justify-self: center; max-width: 560px; }
+    .gg-hero-grid { grid-template-columns: 1fr; min-height: 0; gap: 28px; }
+    .gg-window { order: -1; justify-self: center; align-self: start; max-width: 560px; min-height: 0; height: clamp(340px, 88vw, 540px); }
     .gg-item { flex-basis: calc((100% - var(--gap)) / 2.3); }
     .gg-pairs-head { grid-template-columns: minmax(0, 1fr) auto; }
     .gg-pairs-note { grid-column: 1 / -1; grid-row: 2; }
@@ -953,7 +948,7 @@
     .gg-set[style*="--n: 2"] { width: 74vw; }
     .gg-dates { grid-template-columns: 1fr; }
     .gg-date { min-height: 0; }
-    .gg-index-row { grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 4px 16px; padding: 22px 0; }
+    .gg-index-row { grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 4px 16px; padding: 20px 16px; border-radius: 16px; }
     .gg-index-n { display: none; }
     .gg-index-mark { grid-row: 1 / 3; width: 40px; }
     .gg-index-name { grid-column: 2; }
@@ -991,9 +986,9 @@
      SHOPPABLE SETS: pick pieces, choose a colour, add in one go
      ========================================================= */
   .gg-tier { --add-h: var(--citrus); --add-hf: var(--teal); }
-  .gg-tier--t2 { --add-h: var(--terracotta); --add-hf: var(--linen); }
+  .gg-tier--t2 { --add-h: var(--citrus); --add-hf: var(--espresso); }
   .gg-tier--t3 { --add-h: var(--apricot); --add-hf: var(--espresso); }
-  .gg-tier--t4 { --add-h: var(--linen); --add-hf: var(--espresso); }
+  .gg-tier--t4 { --add-h: var(--terracotta); --add-hf: var(--linen); }
 
   .gg .gg-tile { position: relative; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; background: color-mix(in srgb, var(--pbg) 16%, var(--light)); }
   .gg .gg-tile > a { display: block; height: 100%; }
@@ -1324,10 +1319,6 @@
       </div>
 
       <div class="gg-window" aria-label="This season’s ornaments">
-        <div class="gg-window-sun" data-spin="0.04" aria-hidden="true"></div>
-        <span class="gg-spark gg-spark--1" aria-hidden="true"></span>
-        <span class="gg-spark gg-spark--2" aria-hidden="true"></span>
-        <span class="gg-spark gg-spark--3" aria-hidden="true"></span>
         <a class="gg-orn gg-orn--a" href="https://shopphylum.com/products/bernadotte-kettle">
           <span class="gg-orn-thread" aria-hidden="true"></span>
           <span class="gg-orn-cap" aria-hidden="true"></span>
@@ -1348,6 +1339,7 @@
         </a>
       </div>
     </div>
+    <div class="gg-scape"><svg class="gg-scape-svg" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><rect x="0" y="220" width="240.5" height="100" fill="var(--teal)"/><g class="gg-scape-motif" style="--i:0"><circle cx="120.0" cy="270" r="34" fill="var(--citrus)"/></g><rect x="240" y="220" width="240.5" height="100" fill="var(--sun)"/><g class="gg-scape-motif" style="--i:1"><path d="M260,320 A100,100 0 0 1 460,320 Z" fill="var(--terracotta)"/></g><rect x="480" y="220" width="240.5" height="100" fill="var(--olive)"/><g class="gg-scape-motif" style="--i:2"><polygon points="544,320 656,320 600.0,238" fill="var(--apricot)"/></g><rect x="720" y="220" width="240.5" height="100" fill="var(--apricot)"/><g class="gg-scape-motif" style="--i:3"><path d="M720,220 h100 a100,100 0 0 1 -100,100 Z" fill="var(--olive)"/><circle cx="868.8000000000001" cy="270" r="30" fill="var(--terracotta)"/></g><rect x="960" y="220" width="240.5" height="100" fill="var(--espresso)"/><g class="gg-scape-motif" style="--i:4"><rect x="1046.0" y="236" width="68" height="68" rx="6" fill="var(--sun)"/></g><rect x="1200" y="220" width="240.5" height="100" fill="var(--terracotta)"/><g class="gg-scape-motif" style="--i:5"><path d="M1250,220 A70,70 0 0 0 1390,220 Z" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:0"><rect x="51.4" y="207.0" width="9.2" height="13" fill="var(--espresso)"/><polygon points="56.0,90.0 70.2,132.5 64.5,132.5 91.4,208.0 20.6,208.0 47.5,132.5 41.8,132.5" fill="var(--teal)"/><polygon class="gg-star" points="56.0,79.0 58.4,84.7 64.6,85.2 59.9,89.3 61.3,95.3 56.0,92.0 50.7,95.3 52.1,89.3 47.4,85.2 53.6,84.7" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:1"><rect x="145" y="80" width="6" height="140" fill="var(--espresso)"/><g class="gg-frond" style="transform-origin:148px 80px;--sw:6s"><path d="M148,80 Q202.2,71.2 209.2,120.2 Q177.8,85.2 148,80 Z" fill="var(--apricot)"/><path d="M148,80 Q93.8,71.2 86.8,120.2 Q118.2,85.2 148,80 Z" fill="var(--apricot)"/><path d="M148,80 Q170.8,39.8 204.0,67.8 Q174.2,71.2 148,80 Z" fill="var(--terracotta)"/><path d="M148,80 Q125.2,39.8 92.0,67.8 Q121.8,71.2 148,80 Z" fill="var(--terracotta)"/></g></g><g class="gg-scape-el" style="--i:2"><rect x="229.5" y="128" width="5" height="92" fill="var(--espresso)"/><circle cx="232" cy="128" r="26" fill="var(--terracotta)"/><circle cx="232" cy="128" r="11.4" fill="var(--apricot)"/></g><g class="gg-scape-el" style="--i:3"><rect x="312.1" y="207.0" width="11.7" height="13" fill="var(--espresso)"/><polygon points="318.0,58.0 336.0,112.0 328.8,112.0 363.0,208.0 273.0,208.0 307.2,112.0 300.0,112.0" fill="var(--olive)"/><polygon class="gg-star" points="318.0,47.0 320.4,52.7 326.6,53.2 321.9,57.3 323.3,63.3 318.0,60.0 312.7,63.3 314.1,57.3 309.4,53.2 315.6,52.7" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:4"><rect x="403.5" y="102" width="5" height="118" fill="var(--espresso)"/><circle cx="406" cy="102" r="30" fill="var(--teal)"/><circle cx="406" cy="102" r="13.2" fill="var(--aqua)"/></g><g class="gg-scape-el" style="--i:5"><rect x="489" y="92" width="6" height="128" fill="var(--espresso)"/><g class="gg-frond" style="transform-origin:492px 92px;--sw:7s"><path d="M492,92 Q541.6,84.0 548.0,128.8 Q519.2,96.8 492,92 Z" fill="var(--olive)"/><path d="M492,92 Q442.4,84.0 436.0,128.8 Q464.8,96.8 492,92 Z" fill="var(--olive)"/><path d="M492,92 Q512.8,55.2 543.2,80.8 Q516.0,84.0 492,92 Z" fill="var(--citrus)"/><path d="M492,92 Q471.2,55.2 440.8,80.8 Q468.0,84.0 492,92 Z" fill="var(--citrus)"/></g></g><g class="gg-scape-el" style="--i:6"><rect x="573.5" y="207.0" width="9.0" height="13" fill="var(--espresso)"/><polygon points="578.0,104.0 590.5,141.4 585.5,141.4 609.2,208.0 546.8,208.0 570.5,141.4 565.5,141.4" fill="var(--sage)"/><polygon class="gg-star" points="578.0,93.0 580.4,98.7 586.6,99.2 581.9,103.3 583.3,109.3 578.0,106.0 572.7,109.3 574.1,103.3 569.4,99.2 575.6,98.7" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:7"><rect x="653.5" y="136" width="5" height="84" fill="var(--espresso)"/><circle cx="656" cy="136" r="25" fill="var(--sun)"/><circle cx="656" cy="136" r="11.0" fill="var(--terracotta)"/></g><g class="gg-scape-el" style="--i:8"><rect x="737.9" y="207.0" width="12.2" height="13" fill="var(--espresso)"/><polygon points="744.0,52.0 762.7,108.2 755.2,108.2 790.8,208.0 697.2,208.0 732.8,108.2 725.3,108.2" fill="var(--terracotta)"/><polygon class="gg-star" points="744.0,41.0 746.4,46.7 752.6,47.2 747.9,51.3 749.3,57.3 744.0,54.0 738.7,57.3 740.1,51.3 735.4,47.2 741.6,46.7" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:9"><rect x="833.5" y="112" width="5" height="108" fill="var(--espresso)"/><circle cx="836" cy="112" r="27" fill="var(--olive)"/><circle cx="836" cy="112" r="11.9" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:10"><rect x="919" y="70" width="6" height="150" fill="var(--espresso)"/><g class="gg-frond" style="transform-origin:922px 70px;--sw:6s"><path d="M922,70 Q980.1,60.6 987.6,113.1 Q953.9,75.6 922,70 Z" fill="var(--terracotta)"/><path d="M922,70 Q863.9,60.6 856.4,113.1 Q890.1,75.6 922,70 Z" fill="var(--terracotta)"/><path d="M922,70 Q946.4,26.9 982.0,56.9 Q950.1,60.6 922,70 Z" fill="var(--apricot)"/><path d="M922,70 Q897.6,26.9 862.0,56.9 Q893.9,60.6 922,70 Z" fill="var(--apricot)"/></g></g><g class="gg-scape-el" style="--i:11"><rect x="1005.5" y="207.0" width="9.0" height="13" fill="var(--espresso)"/><polygon points="1010.0,96.0 1023.4,136.3 1018.1,136.3 1043.6,208.0 976.4,208.0 1001.9,136.3 996.6,136.3" fill="var(--aqua)"/><polygon class="gg-star" points="1010.0,85.0 1012.4,90.7 1018.6,91.2 1013.9,95.3 1015.3,101.3 1010.0,98.0 1004.7,101.3 1006.1,95.3 1001.4,91.2 1007.6,90.7" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:12"><rect x="1091.5" y="124" width="5" height="96" fill="var(--espresso)"/><circle cx="1094" cy="124" r="26" fill="var(--teal)"/><circle cx="1094" cy="124" r="11.4" fill="var(--aqua)"/></g><g class="gg-scape-el" style="--i:13"><rect x="1174.5" y="207.0" width="10.9" height="13" fill="var(--espresso)"/><polygon points="1180.0,68.0 1196.8,118.4 1190.1,118.4 1222.0,208.0 1138.0,208.0 1169.9,118.4 1163.2,118.4" fill="var(--sage)"/><polygon class="gg-star" points="1180.0,57.0 1182.4,62.7 1188.6,63.2 1183.9,67.3 1185.3,73.3 1180.0,70.0 1174.7,73.3 1176.1,67.3 1171.4,63.2 1177.6,62.7" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:14"><rect x="1257.5" y="207.0" width="9.0" height="13" fill="var(--espresso)"/><polygon points="1262.0,106.0 1274.2,142.7 1269.3,142.7 1292.6,208.0 1231.4,208.0 1254.7,142.7 1249.8,142.7" fill="var(--terracotta)"/><polygon class="gg-star" points="1262.0,95.0 1264.4,100.7 1270.6,101.2 1265.9,105.3 1267.3,111.3 1262.0,108.0 1256.7,111.3 1258.1,105.3 1253.4,101.2 1259.6,100.7" fill="var(--sun)"/></g><g class="gg-scape-el" style="--i:15"><rect x="1347" y="92" width="6" height="128" fill="var(--espresso)"/><g class="gg-frond" style="transform-origin:1350px 92px;--sw:5s"><path d="M1350,92 Q1399.6,84.0 1406.0,128.8 Q1377.2,96.8 1350,92 Z" fill="var(--sun)"/><path d="M1350,92 Q1300.4,84.0 1294.0,128.8 Q1322.8,96.8 1350,92 Z" fill="var(--sun)"/><path d="M1350,92 Q1370.8,55.2 1401.2,80.8 Q1374.0,84.0 1350,92 Z" fill="var(--terracotta)"/><path d="M1350,92 Q1329.2,55.2 1298.8,80.8 Q1326.0,84.0 1350,92 Z" fill="var(--terracotta)"/></g></g></svg></div>
   </section>
 
   <!-- 2. PERKS TICKER -->
