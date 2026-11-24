@@ -465,7 +465,6 @@
     /* Per-tier colour: chip/progress accent, pairing panel ground, its text and its headline accent. */
     --chip: var(--teal); --chip-fg: var(--linen);
     --pbg: var(--teal); --pfg: var(--linen); --pac: var(--citrus);
-    --setac: var(--teal);
     --soft: var(--ink-soft);
     --line: var(--hair-strong);
     position: relative;
@@ -473,14 +472,14 @@
     scroll-margin-top: var(--nav-h, 78px);
     background: var(--linen);
   }
-  .gg-tier--t2 { background: var(--light); --chip: var(--terracotta); --pbg: var(--aqua); --pfg: var(--espresso); --pac: var(--terracotta); --setac: var(--terracotta); }
-  .gg-tier--t3 { --chip: var(--olive); --pbg: var(--olive); --pfg: var(--linen); --pac: var(--apricot); --setac: var(--olive); }
+  .gg-tier--t2 { background: var(--light); --chip: var(--terracotta); --pbg: var(--aqua); --pfg: var(--espresso); --pac: var(--terracotta); }
+  .gg-tier--t3 { --chip: var(--olive); --pbg: var(--olive); --pfg: var(--linen); --pac: var(--apricot); }
   .gg-tier--t4 {
     background: var(--espresso);
     color: var(--linen);
     --chip: var(--sun); --chip-fg: var(--espresso);
     --pbg: var(--sun); --pfg: var(--espresso); --pac: var(--espresso);
-    --setac: var(--terracotta);
+   
     --soft: rgba(238, 238, 229, 0.72);
     --line: rgba(238, 238, 229, 0.3);
   }
@@ -502,12 +501,7 @@
   .gg-tier-aside .gg-lede { max-width: none; }
 
   /* Who's it for? */
-  .gg-filter {
-    padding: 22px 0 24px;
-    margin-bottom: clamp(40px, 4vw, 56px);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
+  .gg-filter { margin-bottom: clamp(40px, 4vw, 56px); }
   .gg-filter-top { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 16px; }
   .gg-filter-label { font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--soft); }
   .gg-chips { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -646,26 +640,29 @@
     flex-direction: column;
     padding: clamp(18px, 1.8vw, 28px);
     border-radius: 12px;
-    background: var(--light);
-    color: var(--espresso);
+    /* A shade deeper than its panel, so the cards sit in the colour rather than on top of it. */
+    --card: color-mix(in srgb, var(--pbg) 88%, var(--espresso));
+    background: var(--card);
+    color: var(--pfg);
   }
   .gg-set-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 20px; }
   .gg-set-title { font-family: var(--serif) !important; font-weight: 300 !important; font-size: clamp(26px, 2.2vw, 34px); line-height: 1.05; letter-spacing: -0.03em !important; }
-  .gg-set-count { flex-shrink: 0; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+  .gg-set-count { flex-shrink: 0; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.72; }
   .gg-set-imgs { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 10px; margin-bottom: 22px; }
-  .gg-set-imgs a { display: block; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; background: #fff; }
-  .gg-set-imgs img { width: 100%; height: 100%; object-fit: cover; transition: scale 1.1s var(--ease); }
+  .gg-set-imgs a { display: block; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; background: color-mix(in srgb, var(--pbg) 16%, var(--light)); }
+  /* Multiply drops the photos' white backdrops into the tinted tile. */
+  .gg-set-imgs img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; transition: scale 1.1s var(--ease); }
   .gg-set-imgs a:hover img { scale: 1.05; }
   .gg-set-list { margin-bottom: auto !important; }
-  .gg-set-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-top: 1px solid var(--hair); }
+  .gg-set-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-top: 1px solid color-mix(in srgb, currentColor 22%, transparent); }
   .gg-set-list a { display: flex; flex-direction: column; gap: 3px; text-decoration: none; min-width: 0; }
   .gg-set-name-i { font-size: 15px; line-height: 1.35; letter-spacing: -0.005em; background: linear-gradient(currentColor, currentColor) left 100% / 0% 1px no-repeat; transition: background-size 0.6s var(--ease); width: fit-content; }
   .gg-set-list a:hover .gg-set-name-i { background-size: 100% 1px; }
-  .gg-set-brand { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
+  .gg-set-brand { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.72; }
   .gg-set-price { flex-shrink: 0; font-family: var(--serif); font-weight: 300; font-size: 18px; letter-spacing: -0.01em; }
-  .gg-set-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--espresso); }
+  .gg-set-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 8px; padding-top: 16px; border-top: 1px solid currentColor; }
   .gg-set-foot span:first-child { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
-  .gg-set-total { font-family: var(--serif); font-weight: 300; font-size: clamp(32px, 2.6vw, 40px); line-height: 1; letter-spacing: -0.03em; color: var(--setac); }
+  .gg-set-total { font-family: var(--serif); font-weight: 300; font-size: clamp(32px, 2.6vw, 40px); line-height: 1; letter-spacing: -0.03em; color: var(--pac); }
 
   /* =========================================================
      8. GIFT WRAP
@@ -833,7 +830,8 @@
      11. CLOSE
      ========================================================= */
   .gg-close { position: relative; isolation: isolate; overflow: hidden; padding: clamp(88px, 11vw, 156px) 0 0; background: var(--espresso); color: var(--linen); text-align: center; }
-  .gg-close .gg-eyebrow { justify-content: center; color: var(--sun); }
+  .gg-close .gg-eyebrow { justify-content: center; color: var(--apricot); }
+  .gg-close .gg-btn--sun { --bg: var(--apricot); }
   .gg-close .gg-h2 { max-width: 11em; margin: 0 auto 32px; font-size: clamp(64px, 8.6vw, 156px); line-height: 0.88; letter-spacing: -0.04em; }
   .gg-close .gg-h2 .gg-s { font-size: 0.86em; }
   .gg-close p:not(.gg-eyebrow) { max-width: 30em; margin: 0 auto 48px; font-size: clamp(17px, 1.3vw, 19px); line-height: 1.6; color: rgba(238, 238, 229, 0.82); }
@@ -842,7 +840,7 @@
     --size: min(1180px, 128vw);
     width: var(--size); aspect-ratio: 1;
     margin: clamp(56px, 6vw, 96px) auto calc(var(--size) * -0.56);
-    background: var(--sun);
+    background: var(--apricot);
     -webkit-mask: var(--sun-vector) center / contain no-repeat;
             mask: var(--sun-vector) center / contain no-repeat;
     animation: gg-spin 120s linear infinite;
