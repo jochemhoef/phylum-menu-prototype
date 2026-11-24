@@ -46,6 +46,7 @@
     --espresso: #3E2B30;
     --linen: #EEEEE5;
     --light: #F7F6F0;
+    --crisp: #FBFAF7;
     --sun: #F2A900;
     --terracotta: #CC6118;
     --apricot: #FFBFAC;
@@ -245,9 +246,13 @@
   /* =========================================================
      1. HERO: copy on linen, ornaments hanging from the nav, a landscape on the horizon
      ========================================================= */
+  /* The shared nav (from site-chrome) drops its rule and shares the hero's crisp white,
+     so the ornaments hang from one clean surface. */
+  .header { border-bottom: 0; background: var(--crisp, #FBFAF7); }
   .gg-hero {
     --hero-pt: clamp(40px, 5vw, 72px);
     position: relative;
+    background: var(--crisp);
     padding: var(--hero-pt) 0 0;
   }
   .gg-hero-grid {
