@@ -653,6 +653,9 @@
     background: var(--card);
     color: var(--pfg);
   }
+  /* On the aqua panel the cards go lighter than the panel instead of deeper. */
+  .gg-tier--t4 .gg-set-card { --card: color-mix(in srgb, var(--aqua) 45%, var(--light)); }
+  .gg .gg-tier--t4 .gg-tile { background: color-mix(in srgb, var(--aqua) 10%, #fff); }
   .gg-set-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 20px; }
   .gg-set-title { font-family: var(--serif) !important; font-weight: 300 !important; font-size: clamp(26px, 2.2vw, 34px); line-height: 1.05; letter-spacing: -0.03em !important; }
   .gg-set-count { flex-shrink: 0; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.72; }
@@ -746,7 +749,7 @@
   }
   .gg-date--teal { --dbg: var(--teal); --dfg: var(--linen); --dac: var(--citrus); }
   .gg-date--olive { --dbg: var(--olive); --dfg: var(--linen); --dac: var(--apricot); }
-  .gg-date--espresso { --dbg: var(--espresso); --dfg: var(--linen); --dac: var(--sun); }
+  .gg-date--espresso { --dbg: var(--espresso); --dfg: var(--linen); --dac: var(--aqua); }
   .gg-date-k { grid-row: 1; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; }
   .gg-date-v { grid-row: 2; align-self: end; margin: 40px 0 16px !important; font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 4.6vw, 76px); line-height: 0.95; letter-spacing: -0.04em; color: var(--dac); }
   .gg-date-p { grid-row: 3; align-self: start; font-family: var(--body); font-size: 15px; line-height: 1.6; opacity: 0.9; }
