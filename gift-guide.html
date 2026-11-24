@@ -204,6 +204,10 @@
   .gg-btn--sun { --bg: var(--sun); --fg: var(--espresso); --bg-h: var(--linen); --fg-h: var(--espresso); }
   .gg-btn--citrus { --bg: var(--citrus); --fg: var(--teal); --bg-h: var(--linen); --fg-h: var(--teal); }
   .gg-btn--light { --bg: transparent; --fg: var(--linen); --bd: rgba(238, 238, 229, 0.55); --bg-h: var(--linen); --fg-h: var(--espresso); }
+  .gg-btn--terra { --bg: var(--terracotta); --fg: var(--linen); --bg-h: var(--espresso); --fg-h: var(--linen); }
+  /* Tier CTAs wear the same fill as that tier's selected filter pill. */
+  .gg-btn--tier { --bg: var(--chip); --fg: var(--chip-fg); --bg-h: var(--espresso); --fg-h: var(--linen); min-height: 50px; padding: 14px 26px; }
+  .gg-tier--t4 .gg-btn--tier { --bg-h: var(--linen); --fg-h: var(--espresso); }
   .gg-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 
   .gg-link {
@@ -1313,7 +1317,7 @@
         </h1>
         <p class="gg-hero-sub gg-hero-fade" style="--d: 0.95s">A gift guide for people who think presents should be wrapped like a secret and opened like a standing ovation. Gathered from Palm Springs to Copenhagen and Helsinki to Sydney. Wrapped by us, on the house.</p>
         <div class="gg-ctas gg-hero-fade" style="--d: 1.1s">
-          <a class="gg-btn" href="#guide">Start indulging <span class="gg-arrow" aria-hidden="true">→</span></a>
+          <a class="gg-btn gg-btn--terra" href="#guide">Start indulging <span class="gg-arrow" aria-hidden="true">→</span></a>
           <a class="gg-btn gg-btn--ghost" href="https://shopphylum.com/collections/gifts">All gifts</a>
         </div>
       </div>
@@ -1413,7 +1417,7 @@
         </div>
         <div class="gg-tier-aside" data-reveal style="--d: 0.15s">
           <p class="gg-lede">Small in price, large in personality. Stocking stuffers, host gifts, and the coworker you secretly like best.</p>
-          <a class="gg-btn gg-btn--ink" href="https://shopphylum.com/collections/gifts-under-100">Shop under $100 <span class="gg-arrow" aria-hidden="true">→</span></a>
+          <a class="gg-btn gg-btn--tier" href="https://shopphylum.com/collections/gifts-under-100">Shop under $100 <span class="gg-arrow" aria-hidden="true">→</span></a>
         </div>
       </header>
 
@@ -1547,7 +1551,7 @@
         </div>
         <div class="gg-tier-aside" data-reveal style="--d: 0.15s">
           <p class="gg-lede">The ones they open first, then insist on passing around the room.</p>
-          <a class="gg-btn gg-btn--ink" href="https://shopphylum.com/collections/gifts-under-250">Shop under $250 <span class="gg-arrow" aria-hidden="true">→</span></a>
+          <a class="gg-btn gg-btn--tier" href="https://shopphylum.com/collections/gifts-under-250">Shop under $250 <span class="gg-arrow" aria-hidden="true">→</span></a>
         </div>
       </header>
 
@@ -1681,7 +1685,7 @@
         </div>
         <div class="gg-tier-aside" data-reveal style="--d: 0.15s">
           <p class="gg-lede">Heirlooms in training. Built to last for decades and be talked about for at least as long.</p>
-          <a class="gg-btn gg-btn--ink" href="https://shopphylum.com/collections/gifts-under-500">Shop under $500 <span class="gg-arrow" aria-hidden="true">→</span></a>
+          <a class="gg-btn gg-btn--tier" href="https://shopphylum.com/collections/gifts-under-500">Shop under $500 <span class="gg-arrow" aria-hidden="true">→</span></a>
         </div>
       </header>
 
@@ -1815,7 +1819,7 @@
         </div>
         <div class="gg-tier-aside" data-reveal style="--d: 0.15s">
           <p class="gg-lede">For the person who has everything. Except for this.</p>
-          <a class="gg-btn gg-btn--sun" href="https://shopphylum.com/collections/gifts">Shop all gifts <span class="gg-arrow" aria-hidden="true">→</span></a>
+          <a class="gg-btn gg-btn--tier" href="https://shopphylum.com/collections/gifts">Shop all gifts <span class="gg-arrow" aria-hidden="true">→</span></a>
         </div>
       </header>
 
