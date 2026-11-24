@@ -474,12 +474,15 @@
   .gg-tier--t2 { background: var(--light); --chip: var(--terracotta); --pbg: var(--terracotta); --pfg: var(--linen); --pac: var(--citrus); }
   .gg-tier--t3 { --chip: var(--olive); --pbg: var(--olive); --pfg: var(--linen); --pac: var(--apricot); }
   .gg-tier--t4 {
-    background: var(--espresso);
-    color: var(--linen);
+    /* Shares the gift wrap section's warm-up (see GIFT WRAP), so the two blend as one surface. */
+    --wt: 0;
+    --wf: 0;
+    background: var(--wrap-bg);
+    color: var(--wrap-fg);
     --chip: var(--aqua); --chip-fg: var(--espresso);
     --pbg: var(--aqua); --pfg: var(--espresso); --pac: var(--teal);
-    --soft: rgba(238, 238, 229, 0.72);
-    --line: rgba(238, 238, 229, 0.3);
+    --soft: color-mix(in srgb, var(--wrap-fg) 72%, transparent);
+    --line: color-mix(in srgb, var(--wrap-fg) 30%, transparent);
   }
   .gg-tier--t4 .gg-eyebrow { color: var(--aqua); }
   .gg-tier--t4 .gg-lede { color: var(--soft); }
@@ -673,19 +676,21 @@
      is light enough, so it is never mid-tone on mid-tone. Without motion it is simply apricot. */
   @property --wt { syntax: '<number>'; inherits: true; initial-value: 1; }
   @property --wf { syntax: '<number>'; inherits: true; initial-value: 1; }
+  .gg-tier--t4, .gg-wrapup {
+    --wrap-bg: color-mix(in srgb, var(--apricot) calc(var(--wt) * 100%), var(--espresso));
+    --wrap-fg: color-mix(in srgb, var(--espresso) calc(var(--wf) * 100%), var(--linen));
+  }
   .gg-wrapup {
     --wt: 1;
     --wf: 1;
-    --wrap-bg: color-mix(in srgb, var(--apricot) calc(var(--wt) * 100%), var(--espresso));
-    --wrap-fg: color-mix(in srgb, var(--espresso) calc(var(--wf) * 100%), var(--linen));
     position: relative;
     padding: var(--pad) 0;
     background: var(--wrap-bg);
     color: var(--wrap-fg);
     overflow: hidden;
   }
-  .js-motion .gg-wrapup { --wt: 0; --wf: 0; transition: --wf 0.7s var(--ease); }
-  .js-motion .gg-wrapup.is-warm { --wf: 1; }
+  .js-motion .gg-tier--t4, .js-motion .gg-wrapup { --wt: 0; --wf: 0; transition: --wf 0.7s var(--ease); }
+  .js-motion .gg-tier--t4.is-warm, .js-motion .gg-wrapup.is-warm { --wf: 1; }
 
   .gg-wrapup-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(56px, 8vw, 140px); align-items: center; }
   .gg-wrapup-media { position: relative; padding: 0 12% 12% 0; }
@@ -2300,6 +2305,7 @@
   var ind = dock && dock.querySelector('.gg-dock-ind');
   var tiers = Array.prototype.slice.call(document.querySelectorAll('[data-tier]'));
   var firstTier = tiers[0], wrapSec = document.getElementById('gift-wrap');
+  var warmEls = [document.getElementById('exceptional'), wrapSec].filter(Boolean);
   var activeId = null, ticking = false;
 
   function setActive(id) {
@@ -2336,20 +2342,18 @@
       });
     }
     if (wrapSec && motion) {
+      /* Exceptional and gift wrap warm together, so there is never an edge between them. */
+      var warmK = null;
       var w = wrapSec.getBoundingClientRect();
       if (w.top < vh * 1.2 && w.bottom > -vh * 0.2) {
         /* 0 while the top edge is low on screen, 1 once it reaches the upper third; smoothstep eased. */
         var k = Math.min(1, Math.max(0, (vh * 0.85 - w.top) / (vh * 0.55)));
-        k = k * k * (3 - 2 * k);
-        wrapSec.style.setProperty('--wt', k.toFixed(3));
-        wrapSec.classList.toggle('is-warm', k >= 0.55);
-      } else if (w.bottom <= -vh * 0.2) {
-        wrapSec.style.setProperty('--wt', '1');
-        wrapSec.classList.add('is-warm');
-      } else {
-        wrapSec.style.setProperty('--wt', '0');
-        wrapSec.classList.remove('is-warm');
-      }
+        warmK = k * k * (3 - 2 * k);
+      } else warmK = w.bottom <= -vh * 0.2 ? 1 : 0;
+      warmEls.forEach(function (el) {
+        el.style.setProperty('--wt', warmK.toFixed(3));
+        el.classList.toggle('is-warm', warmK >= 0.55);
+      });
     }
     if (dock && firstTier && wrapSec) {
       var show = firstTier.getBoundingClientRect().top < vh * 0.6 && wrapSec.getBoundingClientRect().top > vh * 0.7;
