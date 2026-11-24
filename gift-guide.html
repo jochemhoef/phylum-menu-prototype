@@ -477,7 +477,7 @@
     background: var(--espresso);
     color: var(--linen);
     --chip: var(--aqua); --chip-fg: var(--espresso);
-    --pbg: var(--aqua); --pfg: var(--espresso); --pac: var(--terracotta);
+    --pbg: var(--aqua); --pfg: var(--espresso); --pac: var(--teal);
     --soft: rgba(238, 238, 229, 0.72);
     --line: rgba(238, 238, 229, 0.3);
   }
@@ -725,27 +725,37 @@
     rotate: var(--rot, 0deg);
     pointer-events: none;
   }
-  .gg-dates { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 20px); margin-bottom: var(--pad) !important; }
+  /* Each card spans four shared rows (label, heading, copy, footer) via subgrid, so headings sit
+     on one bottom line and the copy starts on one top line across the set. */
+  .gg-dates {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: auto minmax(clamp(120px, 11vw, 170px), auto) auto auto;
+    gap: clamp(12px, 1.4vw, 20px);
+    margin-bottom: var(--pad) !important;
+  }
   .gg-date {
     --dbg: var(--sun); --dfg: var(--espresso); --dac: var(--espresso);
-    display: flex;
-    flex-direction: column;
-    min-height: clamp(300px, 24vw, 360px);
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+    row-gap: 0;
     padding: clamp(24px, 2.4vw, 36px);
     border-radius: var(--radius);
     background: var(--dbg);
     color: var(--dfg);
-    transition: transform 0.9s var(--ease), box-shadow 0.9s var(--ease), opacity 0.6s var(--ease);
+    transition: opacity 0.6s var(--ease);
   }
-  .gg-date:hover { transform: translateY(-6px); box-shadow: 0 34px 60px -38px rgba(62, 43, 48, 0.55); }
   .gg-date--teal { --dbg: var(--teal); --dfg: var(--linen); --dac: var(--citrus); }
   .gg-date--olive { --dbg: var(--olive); --dfg: var(--linen); --dac: var(--apricot); }
   .gg-date--espresso { --dbg: var(--espresso); --dfg: var(--linen); --dac: var(--sun); }
-  .gg-date-k { font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: auto !important; }
-  .gg-date-v { margin: 48px 0 16px !important; font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 4.6vw, 76px); line-height: 0.95; letter-spacing: -0.04em; color: var(--dac); }
-  .gg-date-p { font-family: var(--body); font-size: 15px; line-height: 1.6; opacity: 0.9; }
+  .gg-date-k { grid-row: 1; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .gg-date-v { grid-row: 2; align-self: end; margin: 40px 0 16px !important; font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 4.6vw, 76px); line-height: 0.95; letter-spacing: -0.04em; color: var(--dac); }
+  .gg-date-p { grid-row: 3; align-self: start; font-family: var(--body); font-size: 15px; line-height: 1.6; opacity: 0.9; }
   .gg-date-left, .gg-date-go {
-    align-self: flex-start;
+    grid-row: 4;
+    align-self: center;
+    justify-self: start;
     margin-top: 22px !important;
     padding: 8px 13px 7px;
     border-radius: 999px;
@@ -756,6 +766,8 @@
     text-decoration: none;
     white-space: nowrap;
   }
+  /* Days left is information, not a control: plain text on the content edge. */
+  .gg-date-left { padding: 0; border: 0; border-radius: 0; opacity: 0.85; }
   .gg-date-left:empty { display: none; }
   .gg-date-go { display: inline-flex; gap: 8px; color: var(--dac) !important; border-color: currentColor; transition: background-color 0.45s var(--ease), color 0.45s var(--ease); }
   .gg-date-go:hover { background: var(--dac); color: var(--dbg) !important; border-color: var(--dac); }
@@ -950,7 +962,7 @@
     .gg-set-count { order: -1; }
     .gg-set[style*="--n: 2"] { width: 74vw; }
     .gg-dates { grid-template-columns: 1fr; }
-    .gg-date { min-height: 0; }
+    .gg-dates { grid-auto-rows: auto minmax(96px, auto) auto auto; }
     .gg-index-row { grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 4px 16px; padding: 20px 16px; border-radius: 16px; }
     .gg-index-n { display: none; }
     .gg-index-mark { grid-row: 1 / 3; width: 40px; }
@@ -991,7 +1003,7 @@
   .gg-tier { --add-h: var(--citrus); --add-hf: var(--teal); }
   .gg-tier--t2 { --add-h: var(--citrus); --add-hf: var(--espresso); }
   .gg-tier--t3 { --add-h: var(--apricot); --add-hf: var(--espresso); }
-  .gg-tier--t4 { --add-h: var(--terracotta); --add-hf: var(--linen); }
+  .gg-tier--t4 { --add-h: var(--teal); --add-hf: var(--linen); }
 
   .gg .gg-tile { position: relative; aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; background: color-mix(in srgb, var(--pbg) 16%, var(--light)); }
   .gg .gg-tile > a { display: block; height: 100%; }
