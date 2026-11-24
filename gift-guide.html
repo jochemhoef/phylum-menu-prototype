@@ -664,25 +664,10 @@
      ========================================================= */
   .gg-wrapup {
     position: relative;
-    padding: clamp(180px, 17vw, 240px) 0 var(--pad);
+    padding: var(--pad) 0;
     background: var(--apricot);
     overflow: hidden;
   }
-  .gg-garland { position: absolute; left: 0; right: 0; top: 0; height: 200px; pointer-events: none; }
-  .gg-garland svg { position: absolute; inset: 0 0 auto; width: 100%; height: 70px; overflow: visible; }
-  .gg-garland path { fill: none; stroke: var(--espresso); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
-  .gg-bauble {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: var(--size);
-    margin-left: calc(var(--size) / -2);
-    transform-origin: 50% 0;
-    animation: gg-sway 6s ease-in-out var(--sway-d, 0s) infinite alternate;
-  }
-  .gg-bauble::before { content: ""; width: 1px; height: var(--drop); background: var(--espresso); }
-  .gg-bauble i { display: block; width: 100%; aspect-ratio: 1; margin-top: -4px; background: var(--c); -webkit-mask: var(--sun-vector) center / contain no-repeat; mask: var(--sun-vector) center / contain no-repeat; }
 
   .gg-wrapup-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(56px, 8vw, 140px); align-items: center; }
   .gg-wrapup-media { position: relative; padding: 0 12% 12% 0; }
@@ -713,18 +698,7 @@
   /* =========================================================
      9. ASK AWAY: deadlines and FAQ
      ========================================================= */
-  .gg-faq { position: relative; isolation: isolate; overflow: clip; padding: var(--pad) 0; background: #F2F1EA; --faq-sun: min(640px, 44vw); padding-bottom: calc(var(--pad) + var(--faq-sun) * 0.12); }
-  .gg-faq-sun {
-    position: absolute; z-index: -1;
-    left: clamp(0px, 1.5vw, 24px);
-    bottom: calc(var(--faq-sun) * -0.5);
-    width: var(--faq-sun); aspect-ratio: 1;
-    background: var(--sun);
-    -webkit-mask: var(--sun-vector) center / contain no-repeat;
-            mask: var(--sun-vector) center / contain no-repeat;
-    rotate: var(--rot, 0deg);
-    pointer-events: none;
-  }
+  .gg-faq { position: relative; isolation: isolate; overflow: clip; padding: var(--pad) 0; background: #F2F1EA; }
   /* Each card spans four shared rows (label, heading, copy, footer) via subgrid, so headings sit
      on one bottom line and the copy starts on one top line across the set. */
   .gg-dates {
@@ -775,11 +749,10 @@
 
   .gg-faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(48px, 6vw, 112px); align-items: start; }
   .gg-faq-head { position: sticky; top: calc(var(--nav-h, 78px) + 32px); }
-  .gg-faq-title { font-family: var(--serif) !important; font-weight: 300 !important; font-size: clamp(36px, 3.4vw, 56px); line-height: 1; letter-spacing: -0.035em !important; margin-bottom: 32px !important; }
+  .gg-faq-title { font-family: var(--serif) !important; font-weight: 300 !important; font-size: clamp(44px, 5.4vw, 92px); line-height: 0.95; letter-spacing: -0.035em !important; margin-bottom: 32px !important; }
   .gg-faq-talk { font-size: 15px; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
   .gg-faq-talk .gg-link { color: var(--espresso); }
   .gg-faq details { border-bottom: 1px solid var(--hair); }
-  .gg-faq details:first-child { border-top: 1px solid var(--hair); }
   .gg-faq summary {
     display: flex; justify-content: space-between; align-items: center; gap: 24px;
     padding: 28px 0;
@@ -937,8 +910,6 @@
     .gg-head--split, .gg-tier-head, .gg-wrapup-grid, .gg-faq-grid { grid-template-columns: 1fr; }
     .gg-head--split .gg-lede, .gg-tier-aside { justify-self: start; }
     .gg-faq-head { position: static; }
-    .gg-faq { --faq-sun: 78vw; padding-bottom: calc(var(--pad) * 0.6 + 39vw); }
-    .gg-faq-sun { left: auto; right: 0; }
     .gg-wrapup-media { max-width: 520px; }
     .gg-visit-wrap { margin-top: -96px; }
     .gg-visit-photo { height: clamp(360px, 80vw, 560px); }
@@ -1961,10 +1932,6 @@
 
   <!-- 8. GIFT WRAP -->
   <section class="gg-wrapup" id="gift-wrap" aria-labelledby="wrap-title">
-    <div class="gg-garland" aria-hidden="true">
-      <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0 8 Q360 60 720 8 Q1080 60 1440 8"/></svg>
-      <span class="gg-bauble" style="left: 5%; top: 17px; --drop: 18px; --size: 60px; --c: var(--sun); --sway-d: 0.00s"><i></i></span><span class="gg-bauble gg-hide-sm" style="left: 14%; top: 29px; --drop: 34px; --size: 44px; --c: var(--teal); --sway-d: 5.27s"><i></i></span><span class="gg-bauble" style="left: 23%; top: 34px; --drop: 12px; --size: 52px; --c: var(--terracotta); --sway-d: 4.54s"><i></i></span><span class="gg-bauble gg-hide-sm" style="left: 33%; top: 31px; --drop: 28px; --size: 38px; --c: var(--olive); --sway-d: 3.81s"><i></i></span><span class="gg-bauble" style="left: 44%; top: 19px; --drop: 10px; --size: 58px; --c: var(--espresso); --sway-d: 3.08s"><i></i></span><span class="gg-bauble gg-hide-sm" style="left: 56%; top: 19px; --drop: 26px; --size: 46px; --c: var(--sun); --sway-d: 2.35s"><i></i></span><span class="gg-bauble" style="left: 66%; top: 31px; --drop: 14px; --size: 40px; --c: var(--teal); --sway-d: 1.62s"><i></i></span><span class="gg-bauble gg-hide-sm" style="left: 77%; top: 34px; --drop: 30px; --size: 56px; --c: var(--terracotta); --sway-d: 0.89s"><i></i></span><span class="gg-bauble" style="left: 87%; top: 28px; --drop: 12px; --size: 36px; --c: var(--olive); --sway-d: 0.16s"><i></i></span><span class="gg-bauble gg-hide-sm" style="left: 95%; top: 17px; --drop: 22px; --size: 50px; --c: var(--sun); --sway-d: 5.43s"><i></i></span>
-    </div>
     <div class="gg-wrap gg-wrapup-grid">
       <div class="gg-wrapup-media">
         <figure class="gg-arch gg-unveil" data-reveal-img>
@@ -1990,7 +1957,6 @@
 
   <!-- 9. ASK AWAY: DEADLINES + FAQ -->
   <section class="gg-faq" id="faq" aria-labelledby="faq-title">
-    <div class="gg-faq-sun" data-spin="-0.03" aria-hidden="true"></div>
     <div class="gg-wrap">
       <header class="gg-head gg-head--split">
         <div>
@@ -2105,7 +2071,7 @@
   <section class="gg-close" aria-labelledby="close-title">
     <div class="gg-wrap">
       <p class="gg-eyebrow">Happy holidays from Palm Springs</p>
-      <h2 class="gg-h2" id="close-title"><span class="gg-s">Your list?</span> Sorted.</h2>
+      <h2 class="gg-h2" id="close-title"><span class="gg-s">Joy to the</span> whole list.</h2>
       <p data-reveal style="--d: 0.2s">Gifts at every price, chosen by people who love this part of the job. Every one of them wrapped by us, on the house.</p>
       <div class="gg-ctas" data-reveal style="--d: 0.3s">
         <a class="gg-btn gg-btn--sun" href="https://shopphylum.com/collections/gifts">Shop all gifts <span class="gg-arrow" aria-hidden="true">→</span></a>
