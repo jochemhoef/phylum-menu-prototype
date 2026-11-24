@@ -128,6 +128,8 @@
     line-height: 1;
     margin-bottom: 0.04em;
   }
+  /* A sans question mark inside a serif line. */
+  .gg-q { font-family: var(--sans); font-weight: 500; font-size: 0.94em; letter-spacing: 0; }
   .gg-h3 { font-size: clamp(20px, 1.6vw, 24px); line-height: 1.2; }
 
   .gg-eyebrow {
@@ -2067,7 +2069,7 @@
     </figure>
     <div class="gg-wrap gg-visit-wrap">
       <div class="gg-visit-card">
-        <h2 class="gg-h2" id="visit-title"><span class="gg-s">Rather do this</span> in person?</h2>
+        <h2 class="gg-h2" id="visit-title"><span class="gg-s">Rather do this</span> in person<span class="gg-q">?</span></h2>
         <p class="gg-visit-lede" data-reveal style="--d: 0.1s">We’ll help you choose, then wrap it while you browse a little longer.</p>
         <div class="gg-visit-meta" data-reveal style="--d: 0.15s">
           <div>
@@ -2168,13 +2170,52 @@
   } else ready();
 
   /* ---------- Rails: arrows and progress ---------- */
-  function railStep(rail) {
-    var first = rail.querySelector(':scope > li:not([hidden])');
-    var gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
-    var w = first ? first.getBoundingClientRect().width + gap : 300;
-    return Math.max(w, Math.floor(rail.clientWidth / w) * w);
+  /* Where an arrow should land: always on a card's left edge, at the rail's snap line.
+     Next brings the first card that isn't fully in view to the front; back pages by one
+     view's width, again landing on a card edge. Works for any mix of card widths. */
+  function railTarget(rail, dir) {
+    var cs = getComputedStyle(rail);
+    var padL = parseFloat(cs.scrollPaddingLeft) || 0;
+    var padR = parseFloat(cs.scrollPaddingRight) || 0;
+    var box = rail.getBoundingClientRect();
+    var viewL = rail.scrollLeft + padL;
+    var viewR = rail.scrollLeft + rail.clientWidth - padR;
+    var cards = Array.prototype.filter.call(rail.children, function (c) { return !c.hidden; }).map(function (c) {
+      var r = c.getBoundingClientRect();
+      return { x: r.left - box.left + rail.scrollLeft, w: r.width };
+    });
+    var hit = null;
+    if (rail.closest('.gg-pairs')) {
+      /* Set panels step one card at a time, so the next set always lands on the left edge. */
+      hit = dir > 0
+        ? cards.filter(function (c) { return c.x > viewL + 2; })[0]
+        : cards.filter(function (c) { return c.x < viewL - 2; }).pop();
+      return hit ? Math.max(0, hit.x - padL) : (dir > 0 ? rail.scrollWidth : 0);
+    }
+    if (dir > 0) {
+      hit = cards.filter(function (c) { return c.x > viewL + 2 && c.x + c.w > viewR + 2; })[0];
+      if (!hit) return rail.scrollWidth;
+    } else {
+      var before = cards.filter(function (c) { return c.x < viewL - 2; });
+      hit = before.filter(function (c) { return c.x >= viewL - (viewR - viewL) - 2; })[0] || before[before.length - 1];
+      if (!hit) return 0;
+    }
+    return Math.max(0, hit.x - padL);
+  }
+  /* Give a set rail just enough trailing room for its last card to reach the snap line too. */
+  function padEnd(rail) {
+    if (!rail.closest('.gg-pairs')) return;
+    var cards = Array.prototype.filter.call(rail.children, function (c) { return !c.hidden; });
+    var last = cards[cards.length - 1];
+    if (!last) return;
+    var cs = getComputedStyle(rail);
+    var padL = parseFloat(cs.scrollPaddingLeft) || 0;
+    var base = parseFloat(cs.scrollPaddingRight) || 0;
+    var px = Math.ceil(Math.max(base, rail.clientWidth - padL - last.getBoundingClientRect().width)) + 'px';
+    if (rail.style.paddingRight !== px) rail.style.paddingRight = px;
   }
   function updateRail(rail) {
+    padEnd(rail);
     var max = rail.scrollWidth - rail.clientWidth;
     var bar = document.querySelector('[data-progress="' + rail.id + '"]');
     var track = bar && bar.parentNode;
@@ -2205,7 +2246,7 @@
   document.querySelectorAll('[data-scroll]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var rail = document.getElementById(btn.dataset.scroll);
-      if (rail) rail.scrollBy({ left: Number(btn.dataset.dir) * railStep(rail), behavior: motion ? 'smooth' : 'auto' });
+      if (rail) rail.scrollTo({ left: railTarget(rail, Number(btn.dataset.dir)), behavior: motion ? 'smooth' : 'auto' });
     });
   });
 
