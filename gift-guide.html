@@ -410,7 +410,7 @@
   }
   .gg-index-row--t2 { --tc: var(--terracotta); --ta: var(--linen); }
   .gg-index-row--t3 { --tc: var(--olive); --ta: var(--apricot); }
-  .gg-index-row--t4 { --tc: var(--espresso); --ta: var(--sun); }
+  .gg-index-row--t4 { --tc: var(--espresso); --ta: var(--aqua); }
   .gg-index-row::before {
     content: "";
     position: absolute;
@@ -432,6 +432,7 @@
   .gg-index-row--t1:is(:hover, :focus-visible) .gg-index-mark [fill="var(--teal)"],
   .gg-index-row--t2:is(:hover, :focus-visible) .gg-index-mark [fill="var(--terracotta)"],
   .gg-index-row--t3:is(:hover, :focus-visible) .gg-index-mark [fill="var(--olive)"] { fill: var(--linen); }
+  .gg-index-row--t4:is(:hover, :focus-visible) .gg-index-mark [fill="var(--sun)"] { fill: var(--aqua); }
   .gg-index-mark svg, .gg-tier-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
   .gg-index-name { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 3.6vw, 60px); line-height: 1; letter-spacing: -0.035em; transition: color 0.5s var(--ease); }
   .gg-index-row:hover .gg-index-name { color: var(--ta); }
