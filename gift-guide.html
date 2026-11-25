@@ -1077,7 +1077,8 @@
     transition: border-color 0.35s var(--ease), background-color 0.35s var(--ease);
   }
   .gg .gg-var select:hover { border-color: currentColor; }
-  .gg .gg-var select:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+  /* A quiet focus: the pill's own border firms up and fills a touch, no extra ring. */
+  .gg .gg-var select:focus, .gg .gg-var select:focus-visible { outline: none; border-color: currentColor; background: color-mix(in srgb, currentColor 16%, transparent); }
   .gg .gg-var option { color: #3E2B30; background: #fff; }
   .gg .gg-var::after {
     content: ""; position: absolute; right: 13px; top: 50%;
